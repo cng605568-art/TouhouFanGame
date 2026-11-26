@@ -1,0 +1,30 @@
+# Ren'Py compiled / cached files
+*.rpyc
+*.rpymc
+*.rpyb
+game/cache/
+game/saves/
+game/tl/None/
+log.txt
+errors.txt
+traceback.txt
+files.txt
+dialogue.tab
+
+# Build output
+dists/
+*-dists/
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.swp
+.vscode/
+.idea/
