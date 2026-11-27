@@ -23,7 +23,9 @@ The character sprites are photographs of the official Fumo plushies by Gift. The
 
 Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (CC0).
 
-Cirno's theme is "Beloved Tomboyish Girl" by +TEK, an arrangement of ZUN's "おてんば恋娘" from the album Story of Modulated Frequency, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). It was cut to loop seamlessly, loudness-normalised and re-encoded.
+Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). Each was cut to loop seamlessly, loudness-normalised and re-encoded.
+  Title: "Scarlet Beyond a Crimson Dream", from Embodiment of Frequency Modulation.
+  Cirno's theme: "Beloved Tomboyish Girl" (おてんば恋娘), from Story of Modulated Frequency.
 
 Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
 

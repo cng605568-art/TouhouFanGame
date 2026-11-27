@@ -120,16 +120,49 @@ def find_repeat(mono, usable_end):
 
 
 def refine_lag(mono, lag_s, start_s, end_s):
-    """Sample-accurate lag: the median of cross-correlation peaks along the span."""
+    """
+    Sample-accurate lag. Checks windows along the span and keeps the lag where
+    the two passes match best; the passes can differ in places (a varied
+    melody, a new drum fill), so a strong match anywhere wins over the median.
+    """
     lag0 = int(round(lag_s * SR))
-    search = int(0.02 * SR)
+    search = int(0.03 * SR)
     picks = []
-    for t in np.linspace(start_s + 1, end_s - 2, 6):
-        a = mono[int(t * SR):int(t * SR) + SR]
-        b = mono[int(t * SR) + lag0 - search:int(t * SR) + lag0 + search + SR]
+    for t in np.linspace(start_s + 0.5, end_s - 1.5, 24):
+        a = mono[int(t * SR):int(t * SR) + SR // 2]
+        b = mono[int(t * SR) + lag0 - search:int(t * SR) + lag0 + search + SR // 2]
+        if len(b) < len(a) + 2 * search:
+            continue
         corr = np.correlate(b, a, mode="valid")
-        picks.append(lag0 - search + int(np.argmax(corr)))
-    return int(np.median(picks))
+        energy = np.sqrt(np.convolve(b ** 2, np.ones(len(a)), mode="valid")) * np.linalg.norm(a) + 1e-12
+        k = int(np.argmax(corr / energy))
+        picks.append((float(corr[k] / energy[k]), lag0 - search + k))
+    best = max(c for c, _ in picks)
+    close = [lag for c, lag in picks if c > best - 0.02]
+    return int(np.median(close)), best
+
+
+def matching_run(mono, lag, start_s, end_s, need=3.0, threshold=0.9):
+    """
+    The first stretch of at least `need` seconds where the second pass matches
+    the first sample for sample (waveform correlation above `threshold`).
+    Returns (start, end) in seconds, or None.
+    """
+    step = 0.25
+    run = None
+    t = start_s
+    while t + step <= end_s:
+        a = mono[int(t * SR):int((t + step) * SR)]
+        b = mono[int(t * SR) + lag:int((t + step) * SR) + lag]
+        c = float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-12))
+        if c > threshold:
+            run = (run[0], t + step) if run else (t, t + step)
+            if run[1] - run[0] >= need:
+                return run
+        else:
+            run = None
+        t += step
+    return None
 
 
 def snap_to_onset(mono, t, reach=0.35):
@@ -189,13 +222,19 @@ def main():
             typical = np.median(levels)
             usable_end = (np.nonzero(levels > typical / 2)[0][-1] + 1) * 0.5
             lag_s, rep_start, rep_end, score = find_repeat(mono, usable_end)
-            lag = refine_lag(mono, lag_s, rep_start, rep_end)
-            loop_start = snap_to_onset(mono, rep_start + 1.0)
+            lag, wave = refine_lag(mono, lag_s, rep_start, rep_end)
+            # Loop inside a stretch where the passes match exactly, so the
+            # crossfade blends two copies of the same audio.
+            run = matching_run(mono, lag, rep_start, usable_end - lag / SR)
+            if run is None:
+                print("warning: the two passes never match exactly; the loop relies on the crossfade")
+                run = (rep_start, rep_start + 2.0)
+            loop_start = snap_to_onset(mono, run[0] + args.xfade + 0.5, reach=0.3)
             loop_end = loop_start + lag
             if loop_end > usable_end * SR:
                 raise SystemExit("the repeat runs into the fade; use --loop START END")
-            print("repeat every {:.4f}s (match {:.2f}), holding from {:.0f}s to {:.0f}s".format(
-                lag / SR, score, rep_start, rep_end + lag / SR))
+            print("repeat every {:.4f}s (spectral match {:.2f}, waveform {:.2f}); exact from {:.1f}s".format(
+                lag / SR, score, wave, run[0]))
         audio = bake_loop(audio, loop_start, loop_end, args.xfade)
         loop_note = loop_start / SR
     else:

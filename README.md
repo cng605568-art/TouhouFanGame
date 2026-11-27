@@ -71,9 +71,9 @@ The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* an
 
 ## Music
 
-Each witness has a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. It starts with the witness's testimony, carries through the cross-examination and cuts out when the objection lands. Its title card slides in at the bottom right, the way a Touhou stage names its BGM.
+The title screen and each witness have a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. A witness theme starts with the witness's testimony, carries through the cross-examination and cuts out when the objection lands. Its title card slides in at the bottom right, the way a Touhou stage names its BGM.
 
-Cirno testifies to *Beloved Tomboyish Girl*, +TEK's chiptune arrangement of ZUN's おてんば恋娘, released under CC BY 4.0. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
+The title screen plays +TEK's *Scarlet Beyond a Crimson Dream*, and Cirno testifies to his *Beloved Tomboyish Girl*, a chiptune arrangement of ZUN's おてんば恋娘. Both are released under CC BY 4.0. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
 
 To add or swap a theme, run `python tools/build_music.py track.flac <name> --find-loop`. Arrangements usually play the tune twice and then fade out. The tool finds where the second pass begins, cuts the file there and crossfades the cut, so the theme loops seamlessly for as long as the cross-examination lasts. It also matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM` with the loop start the tool prints. Without `--find-loop` it just trims the silence and fades the tail.
 
@@ -82,7 +82,7 @@ To add or swap a theme, run `python tools/build_music.py track.flac <name> --fin
 ```
 game/
   options.rpy      config, build settings
-  audio.rpy        sound effect slots, text blips, witness themes
+  audio.rpy        sound effect slots, text blips, music
   gui.rpy          palette, fonts, CourtPanel (sharp gold/crimson frames)
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
@@ -91,7 +91,7 @@ game/
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
   audio/sfx/       sound effects (CC0)
-  audio/music/     witness themes (fan arrangements, see CREDITS.txt there)
+  audio/music/     title and witness themes (fan arrangements, see CREDITS.txt there)
 tools/
   make_art.py      regenerates every SVG and icon
   fumo_sprite.py   photo -> cut-out, relit sprite PNG
@@ -110,6 +110,7 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
 - Sound effects: Warsong's [Petaldust and Nostalgiac Blues sound packs](https://warsong.pages.dev/tags/touhou/) (CC0)
+- Title theme: [*Scarlet Beyond a Crimson Dream*](https://plustek.bandcamp.com/track/scarlet-beyond-a-crimson-dream) by +TEK, from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of music by ZUN (Team Shanghai Alice).
 - Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
 - Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 

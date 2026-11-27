@@ -27,12 +27,15 @@
 ##
 ## Music
 ## -----
-## Witness themes live in game/audio/music/ and are listed in BGM below. A
-## theme starts when its witness takes the stand to testify, carries through
-## the cross-examination, and is cut when the right objection lands. As in a
-## Touhou stage, the title slides in at the bottom right whenever a theme
-## starts. tools/build_music.py prepares a downloaded track; a missing file is
-## skipped silently, like a missing sound effect.
+## Every piece lives in game/audio/music/ and is listed in BGM below.
+##
+## The title theme plays on the main menu and stops when a trial begins.
+## A witness theme starts when its witness takes the stand to testify, carries
+## through the cross-examination, and is cut when the right objection lands.
+## As in a Touhou stage, a title card slides in at the bottom right whenever a
+## witness theme starts. tools/build_music.py prepares a downloaded track and
+## finds its loop; a missing file is skipped silently, like a missing sound
+## effect.
 ################################################################################
 
 init -1 python:
@@ -115,7 +118,15 @@ init -1 python:
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             # From tools/build_music.py --find-loop: the file stops where the
             # tune starts its second pass, and play loops back to here.
-            loop=3.875488,
+            loop=4.389705,
+        ),
+        # Main menu. Never announced with a title card; credited in About.
+        "title": Theme(
+            "title_theme",
+            "Scarlet Beyond a Crimson Dream",
+            u"",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=26.264989,
         ),
     }
 
@@ -138,3 +149,8 @@ init -1 python:
         """Stops whatever theme is playing."""
         renpy.music.stop("music", fadeout=fadeout)
         renpy.hide_screen("bgm_title")
+
+
+## The title screen theme, from BGM above.
+define config.main_menu_music = BGM["title"].filename
+define config.main_menu_music_fadein = 1.5

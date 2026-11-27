@@ -1,5 +1,5 @@
-Witness themes
-==============
+Music
+=====
 
 cirno_theme.ogg
     "Beloved Tomboyish Girl" by +TEK
@@ -8,7 +8,8 @@ cirno_theme.ogg
     License: Creative Commons Attribution 4.0 International (CC BY 4.0)
     https://creativecommons.org/licenses/by/4.0/
     Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
-    so it loops seamlessly (the repeat and fade-out are not included),
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included),
     leading silence trimmed, loudness-normalised to -17 LUFS and re-encoded
     as Ogg Vorbis from the FLAC download (tools/build_music.py).
 
@@ -16,3 +17,17 @@ cirno_theme.ogg
     (Team Shanghai Alice) for Touhou Koumakyou ~ the Embodiment of Scarlet
     Devil. Used in this free, non-commercial fan game under the Touhou
     Project fan-work guidelines. No audio is taken from the official games.
+
+title_theme.ogg (main menu)
+    "Scarlet Beyond a Crimson Dream" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/scarlet-beyond-a-crimson-dream
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of music by ZUN (Team Shanghai Alice). Used in this free,
+    non-commercial fan game under the Touhou Project fan-work guidelines.
