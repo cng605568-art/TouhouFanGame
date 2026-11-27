@@ -4,7 +4,7 @@ An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts 
 
 **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. Find the flaw.
 
-The character sprites are photos of the official Fumo plushies. Every other visual is code: hand-written SVG shapes and Ren'Py styles. No AI-generated art.
+The character sprites are photos of the official Fumo plushies, cut out with the open BiRefNet segmentation model and relit to match the courtroom. Every other visual is code: hand-written SVG shapes and Ren'Py styles. Nothing is AI-generated art.
 
 ## Play
 
@@ -47,15 +47,21 @@ Or just open the folder as a project in the Ren'Py launcher.
 
 ## Character sprites
 
-Every character is a single static sprite: `game/images/eiki_fumo.png` and `game/images/cirno_fumo.png`, transparent PNGs cropped to the plush. Any size works. Each one is scaled into the same 480×500 slot with its feet at the bottom, so staging and animations keep working. Delete a PNG and the game falls back to its SVG placeholder of the same name.
+Every character is one static sprite, `game/images/<name>_fumo.png`, made from a plush photo in `art_src/`. Each sprite is scaled into the same 480×500 slot with its feet at the bottom, so any photo size works with the staging and animations.
 
-To add a fumo from a photo (for a new case, say), cut it out with:
+**To add or replace a fumo:**
 
-```
-pip install opencv-python-headless pymatting pillow
-python tools/cut_fumo.py photo.jpg game/images/reimu_fumo.png           # plain or gradient backdrop
-python tools/cut_fumo.py photo.jpg game/images/reimu_fumo.png --white   # pure white studio backdrop
-```
+1. Put the photo in `art_src/`, named after the character, e.g. `art_src/reimu_fumo.jpg`. A plain or white backdrop works best.
+2. Commit and push. The **Make fumo sprites** workflow runs on its own. You can also start it from **Actions → Make fumo sprites → Run workflow**.
+3. Within a few minutes it commits `game/images/reimu_fumo.png`, plus a before/after preview in `art_src/previews/`. Pull to get them.
+
+What the workflow does (`tools/fumo_sprite.py`):
+
+- removes the background with BiRefNet, which only decides which pixels are plush and draws nothing;
+- cleans the edges with alpha matting and strips backdrop colour out of edge pixels, so nothing grey or white fringes the plush;
+- relights the plush for the courtroom: dimmer studio highlights, crimson-warm colour balance, red bounce light, a gold rim light from the mirror halo, and shading toward the cushion.
+
+To skip the AI model, run it with `--model classic` (GrabCut or white-backdrop flood fill). If you delete a sprite PNG, the game falls back to the SVG placeholder of the same name.
 
 ## Repository layout
 
@@ -66,12 +72,13 @@ game/
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
   script.rpy       Case 01
-  images/          fumo sprites (PNG, with SVG fallbacks), background, gavel, scales
+  images/          fumo sprites (PNG, with SVG fallbacks), shadow, background, gavel, scales
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
 tools/
   make_art.py      regenerates every SVG and icon
-  cut_fumo.py      cuts a plush out of a photo into a sprite PNG
+  fumo_sprite.py   photo -> cut-out, relit sprite PNG
+art_src/           plush photos the sprites are made from, plus previews
   build_fonts.py   rebuilds the font subsets
 ```
 
@@ -82,6 +89,8 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 **Touhou Project** and all of its characters are the property of **Team Shanghai Alice (ZUN)**. *Fumo Court* is an unofficial, non-commercial fan work. It is not affiliated with, endorsed by, or produced by Team Shanghai Alice. Please support the official games.
 
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
+
+- Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)
 - Font: [Shippori Mincho B1](https://github.com/fontdasu/ShipporiMincho) by FONTDASU, SIL Open Font License 1.1 (`game/fonts/OFL.txt`)

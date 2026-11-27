@@ -1,0 +1,89 @@
+# Turns plush photos in art_src/ into lit, transparent sprites in game/images/.
+#
+#   1. Add or replace a photo named <character>_fumo.jpg (or .png / .webp) in art_src/
+#      and push it. This workflow runs on its own.
+#   2. Or: Actions tab > "Make fumo sprites" > Run workflow (pick a model if you like).
+#
+# It commits game/images/<character>_fumo.png plus a before/after preview in
+# art_src/previews/. Pull afterwards so your copy has the new sprites.
+
+name: Make fumo sprites
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Background removal model
+        type: choice
+        default: birefnet-general
+        options:
+          - birefnet-general
+          - birefnet-general-lite
+          - isnet-general-use
+          - classic
+  push:
+    branches:
+      - main
+    paths:
+      - "art_src/*.jpg"
+      - "art_src/*.jpeg"
+      - "art_src/*.png"
+      - "art_src/*.webp"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fumo-sprites
+  cancel-in-progress: false
+
+jobs:
+  sprites:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      MODEL: ${{ inputs.model || 'birefnet-general' }}
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Restore cached model
+        uses: actions/cache@v4
+        with:
+          path: ~/.rembg
+          key: rembg-${{ env.MODEL }}-v1
+
+      - name: Install tools
+        run: pip install --quiet "rembg[cpu]" pymatting opencv-python-headless pillow
+
+      - name: Cut out and light every photo
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          photos=(art_src/*.jpg art_src/*.jpeg art_src/*.png art_src/*.webp)
+          if [ ${#photos[@]} -eq 0 ]; then echo "No photos in art_src/"; exit 0; fi
+          for photo in "${photos[@]}"; do
+            name="$(basename "${photo%.*}")"
+            python tools/fumo_sprite.py "$photo" "game/images/${name}.png" \
+              --model "$MODEL" --preview "art_src/previews/${name}.jpg" 2>&1 | grep -v -i -E "cholesky|discard_threshold|PERFORMANCE WARNING|Try decreasing|^$" || true
+            test -f "game/images/${name}.png"
+          done
+
+      - name: Commit sprites
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add game/images/*_fumo.png art_src/previews
+          if git diff --cached --quiet; then
+            echo "Sprites unchanged."
+            exit 0
+          fi
+          git commit -m "Update fumo sprites from art_src/ (${MODEL})"
+          git pull --rebase --quiet
+          git push

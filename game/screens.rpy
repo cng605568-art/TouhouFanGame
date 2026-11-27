@@ -928,7 +928,9 @@ screen main_menu():
     add "bg_courtroom"
     add Solid("#0D02064D")
 
-    ## Flanking fumos.
+    ## Flanking fumos, grounded with soft shadows.
+    add "fumo_shadow" xcenter 330 ycenter 1034 zoom 0.9
+    add "fumo_shadow" xcenter 1590 ycenter 1034 zoom 0.9
     add "eiki_fumo":
         xcenter 330 yanchor 1.0 ypos 1040
         at title_bob(0.0)

@@ -64,6 +64,9 @@ define FUMO_SLOT_W = 480
 define FUMO_SLOT_H = 500
 define FUMO_CENTER_LIFT = -250
 
+## Contact shadow under a fumo, on the cushion.
+define FUMO_SHADOW_Y = 590
+
 
 ################################################################################
 ## CourtPanel

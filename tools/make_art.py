@@ -880,6 +880,18 @@ def make_divider():
     write(os.path.join(GUI, "divider.svg"), svg(W, H, body, "gold divider"))
 
 
+def make_fumo_shadow():
+    """Soft contact shadow that sits on the cushion under a fumo."""
+    W, H = 380, 70
+    body = "\n".join([
+        "<defs>",
+        rad("sh", [(0, "#000000", 0.72), (0.55, "#000000", 0.42), (1, "#000000", 0)]),
+        "</defs>",
+        '<ellipse cx="190" cy="35" rx="188" ry="33" fill="url(#sh)"/>',
+    ])
+    write(os.path.join(IMAGES, "fumo_shadow.svg"), svg(W, H, body, "fumo contact shadow"))
+
+
 def make_slider_thumb():
     body = '<path d="M17 2 L32 17 L17 32 L2 17 Z" fill="%s" stroke="%s" stroke-width="2.5"/><path d="M17 11 L23 17 L17 23 L11 17 Z" fill="%s"/>' % (GOLD_HI, LINE, CRIMSON)
     write(os.path.join(GUI, "slider_thumb.svg"), svg(34, 34, body, "slider thumb"))
@@ -1012,6 +1024,7 @@ if __name__ == "__main__":
     make_corner()
     make_divider()
     make_slider_thumb()
+    make_fumo_shadow()
     make_fallacy_icons()
     make_ctc()
     make_icons()

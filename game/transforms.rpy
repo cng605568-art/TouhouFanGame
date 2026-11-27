@@ -35,6 +35,16 @@ transform stand_pos:
     xpos 960 xanchor 0.5
     ypos STAND_Y yanchor 0.0
 
+## The soft contact shadow under the fumo. It stays put when the fumo hops.
+transform shadow_pos:
+    xpos 960 xanchor 0.5
+    ypos FUMO_SHADOW_Y yanchor 0.5
+    alpha 1.0 zoom 1.0
+
+## The shadow shrinks away as the fumo leaves the stand.
+transform shadow_gone:
+    easein 0.18 alpha 0.0 zoom 0.6
+
 ## A fumo sitting on the stand's cushion, breathing very slightly.
 transform on_stand:
     subpixel True
@@ -68,11 +78,15 @@ transform fumo_talk:
         ease 1.4 yzoom 1.0
         repeat
 
-## Caught in a lie: rapid horizontal shake while lurching toward the camera.
+## Caught in a lie: white hit-flash, rapid horizontal shake, and a lurch
+## toward the camera.
 transform fumo_shock:
     subpixel True
     xoffset 0 yoffset 0 rotate None xzoom 1.0 yzoom 1.0
     zoom 1.0
+    parallel:
+        matrixcolor BrightnessMatrix(0.6)
+        linear 0.22 matrixcolor BrightnessMatrix(0.0)
     parallel:
         easeout 0.07 zoom 1.12
         easein 0.30 zoom 1.06

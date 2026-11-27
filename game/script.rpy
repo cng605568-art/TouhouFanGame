@@ -8,9 +8,10 @@
 ################################################################################
 
 ## Each fumo is one static sprite in a fixed 480x500 slot, feet at the bottom.
-## To use real art, drop eiki_fumo.png / cirno_fumo.png (any size) into
-## game/images/ next to the SVGs: PNG or WebP wins over the SVG automatically
-## and is scaled to fit the slot, so staging and animations keep working.
+## eiki_fumo.png / cirno_fumo.png are made from the photos in art_src/ by
+## tools/fumo_sprite.py (the "Make fumo sprites" workflow runs it). A PNG or
+## WebP wins over the SVG placeholder of the same name and is scaled to fit
+## the slot, so staging and animations keep working with any image size.
 
 init -1 python:
 
@@ -25,8 +26,19 @@ init -1 python:
             xysize=(480, 500),
             )
 
-    renpy.image("eiki_fumo", fumo_sprite("eiki_fumo"))
-    renpy.image("cirno_fumo", fumo_sprite("cirno_fumo"))
+    # Every images/<name>_fumo.* becomes the image <name>_fumo, in its slot.
+    # New characters from art_src/ work with `show reimu_fumo at on_stand`.
+    def register_fumo_sprites():
+        import os
+        names = set()
+        for fn in renpy.list_files():
+            base, ext = os.path.splitext(os.path.basename(fn))
+            if fn.startswith("images/") and base.endswith("_fumo") and ext.lower() in (".png", ".webp", ".svg"):
+                names.add(base.lower())
+        for name in sorted(names):
+            renpy.image(name, fumo_sprite(name))
+
+    register_fumo_sprites()
 
 
 ################################################################################
@@ -89,6 +101,7 @@ define you = Character("Junior Judge",
 label shot_eiki(trans=whip_right):
     scene bg_courtroom
     show judge_bench at stand_pos
+    show fumo_shadow at shadow_pos
     show eiki_fumo at on_stand
     with trans
     return
@@ -96,6 +109,7 @@ label shot_eiki(trans=whip_right):
 label shot_cirno(trans=whip_left):
     scene bg_courtroom
     show witness_stand at stand_pos
+    show fumo_shadow at shadow_pos
     show cirno_fumo at on_stand
     with trans
     return
@@ -313,6 +327,7 @@ label case1_breakthrough:
     window hide
     call shot_cirno
     show cirno_fumo at fumo_yeet
+    show fumo_shadow at shadow_gone
     pause 1.15
     hide cirno_fumo
 
