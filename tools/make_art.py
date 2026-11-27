@@ -937,7 +937,7 @@ def make_icons():
 
 
 def make_fallacy_icons():
-    """Line icons for the three fallacy cards, crimson ink on parchment."""
+    """Line icons for the fallacy cards, crimson ink on parchment."""
     W = H = 160
     ink = CRIMSON
     sw = 7
@@ -969,7 +969,56 @@ def make_fallacy_icons():
         '<path d="M120 112 L140 112 M126 100 L142 100" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round" stroke-opacity="0.6"/>' % ink,
     ])
 
-    for name, body, label in (("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"), ("slippery_slope", ss, "slippery slope")):
+    def bust(cx):
+        return "\n".join([
+            '<circle cx="%d" cy="70" r="17" fill="%s" stroke="%s" stroke-width="%d"/>' % (cx, GOLD, ink, sw - 2),
+            '<path d="M%d 136 Q%d 98 %d 98 Q%d 98 %d 136 Z" fill="%s" stroke="%s" stroke-width="%d" stroke-linejoin="round"/>'
+            % (cx - 32, cx - 30, cx, cx + 30, cx + 32, GOLD, ink, sw - 2),
+        ])
+
+    def dashed(points, dash=9, gap=7):
+        """A dashed polyline drawn as separate segments (no stroke-dasharray)."""
+        segs = []
+        for (x0, y0), (x1, y1) in zip(points, points[1:]):
+            length = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+            t = 0.0
+            while t < length:
+                t1 = min(t + dash, length)
+                a = (x0 + (x1 - x0) * t / length, y0 + (y1 - y0) * t / length)
+                b = (x0 + (x1 - x0) * t1 / length, y0 + (y1 - y0) * t1 / length)
+                segs.append("M%.1f %.1f L%.1f %.1f" % (a[0], a[1], b[0], b[1]))
+                t += dash + gap
+        return '<path d="%s" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round"/>' % (" ".join(segs), VERMILION)
+
+    # Tu Quoque: two figures, each pointing back at the other.
+    tq = "\n".join([
+        bust(42), bust(118),
+        '<path d="M40 30 L118 30 M106 20 L118 30 L106 40" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' % VERMILION,
+        '<path d="M120 48 L42 48 M54 38 L42 48 L54 58" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' % VERMILION,
+    ])
+
+    # False Dilemma: two doors on offer, and the third one nobody mentioned.
+    def door(x0, x1):
+        xm = (x0 + x1) / 2.0
+        return ('<path d="M%d 136 L%d 66 Q%.1f 34 %d 66 L%d 136 Z" fill="%s" stroke="%s" stroke-width="%d" stroke-linejoin="round"/>'
+                '<circle cx="%d" cy="104" r="4" fill="%s"/>' % (x0, x0, xm, x1, x1, GOLD, ink, sw - 2, x1 - 9, ink))
+    arch = [(126 - 20 * math.cos(math.pi * i / 12), 66 - 30 * math.sin(math.pi * i / 12)) for i in range(1, 12)]
+    ghost = [(106, 136), (106, 66)] + arch + [(146, 66), (146, 136), (106, 136)]
+    fd = "\n".join([door(14, 54), door(60, 100), dashed(ghost, dash=8, gap=6)])
+
+    # Appeal to Authority: a crown, and under it a check mark nobody verified.
+    aa = "\n".join([
+        '<path d="M28 92 L36 40 L58 68 L80 30 L102 68 L124 40 L132 92 Z" fill="%s" stroke="%s" stroke-width="%d" stroke-linejoin="round"/>' % (GOLD, ink, sw - 2),
+        '<rect x="28" y="92" width="104" height="16" fill="%s" stroke="%s" stroke-width="%d" stroke-linejoin="round"/>' % (GOLD, ink, sw - 2),
+        '<circle cx="80" cy="30" r="6" fill="%s" stroke="%s" stroke-width="3"/>' % (VERMILION, ink),
+        '<circle cx="36" cy="40" r="5" fill="%s" stroke="%s" stroke-width="3"/>' % (VERMILION, ink),
+        '<circle cx="124" cy="40" r="5" fill="%s" stroke="%s" stroke-width="3"/>' % (VERMILION, ink),
+        dashed([(56, 128), (72, 146), (106, 116)], dash=10, gap=6),
+    ])
+
+    for name, body, label in (("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"),
+                              ("slippery_slope", ss, "slippery slope"), ("tu_quoque", tq, "tu quoque"),
+                              ("false_dilemma", fd, "false dilemma"), ("appeal_to_authority", aa, "appeal to authority")):
         write(os.path.join(GUI, "fallacy_%s.svg" % name), svg(W, H, body, "fallacy icon: " + label))
 
 

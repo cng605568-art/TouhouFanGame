@@ -665,7 +665,7 @@ screen verdict_stamp(word, jp):
             align (0.5, 0.5)
             spacing -8
             text jp style "stamp_jp"
-            text word style "stamp_word"
+            text word style "stamp_word" size (78 if len(word) <= 7 else 58)
 
 style stamp_word is default:
     font FONT_HEAD
@@ -716,8 +716,9 @@ style card_tagline is default:
     xalign 0.5
 
 
-## Case closed: summary of the fallacy learned. Returns when dismissed.
-screen case_closed(fallacy):
+## Case closed: summary of the fallacy learned. Returns "next" to go straight
+## on to `next_case` (a Case, or None after the last one) or "title".
+screen case_closed(fallacy, next_case=None):
     zorder 95
     modal True
     on "show" action Function(sfx, "case_closed")
@@ -759,10 +760,16 @@ screen case_closed(fallacy):
                     for i in range(SPIRIT_MAX):
                         add ("gui/magatama_full.svg" if i < spirit else "gui/magatama_empty.svg")
 
-        textbutton _("Return to Title"):
-            style "menu_plaque"
+        hbox:
             xalign 0.5
-            action Return()
+            spacing 36
+            if next_case is not None:
+                textbutton _("Next Case"):
+                    style "menu_plaque"
+                    action Return("next")
+            textbutton _("Return to Title"):
+                style "menu_plaque"
+                action Return("title")
 
 style closed_title is default:
     font FONT_HEAD
@@ -1000,7 +1007,8 @@ screen main_menu():
     add "eiki_fumo":
         xcenter 330 yanchor 1.0 ypos 1040
         at title_bob(0.0)
-    add "cirno_fumo":
+    ## Whoever testifies next waits on the right.
+    add title_witness():
         xcenter 1590 yanchor 1.0 ypos 1040
         at title_bob(0.45)
 
@@ -1019,7 +1027,7 @@ screen main_menu():
         xalign 0.5 ypos 566
         spacing 10
 
-        textbutton _("Begin Trial") action Start()
+        textbutton _("Begin Trial") action BeginTrial()
         textbutton _("Continue") action ShowMenu("load")
         textbutton _("Settings") action ShowMenu("preferences")
         textbutton _("Controls") action ShowMenu("controls")
@@ -1082,7 +1090,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
             spacing 12
 
             if main_menu:
-                textbutton _("Begin Trial") action Start()
+                textbutton _("Begin Trial") action BeginTrial()
             else:
                 textbutton _("History") action ShowMenu("history")
                 textbutton _("Save") action ShowMenu("save")

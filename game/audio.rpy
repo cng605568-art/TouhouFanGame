@@ -120,6 +120,24 @@ init -1 python:
             # tune starts its second pass, and play loops back to here.
             loop=4.389705,
         ),
+        "marisa": Theme(
+            "marisa_theme",
+            "Love-coloured Master Spark",
+            u"恋色マスタースパーク",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+        ),
+        "sakuya": Theme(
+            "sakuya_theme",
+            "Lunar Clock ~ Luna Dial",
+            u"月時計 ～ ルナ・ダイアル",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+        ),
+        "reisen": Theme(
+            "reisen_theme",
+            "Lunatic Eyes ~ Invisible Full Moon",
+            u"狂気の瞳",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+        ),
         # Main menu. Never announced with a title card; credited in About.
         "title": Theme(
             "title_theme",

@@ -2,7 +2,14 @@
 
 An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts Gensokyo's residents (as deadpan fumo plushies) on trial for petty crimes. You're her junior judge: press testimony, spot the **logical fallacy**, and object.
 
-**Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. Find the flaw.
+Four cases, played in order. Each witness hides one fallacy in their testimony:
+
+- **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. *False Cause.*
+- **Case 02: The Long-Term Loan.** Marisa "borrowed" forty-seven grimoires, and besides, Reimu pockets her own donation box. *Tu Quoque.*
+- **Case 03: The Vanished Pudding.** Sakuya is sure the gatekeeper ate the pudding, because the only other suspect would never. *False Dilemma.*
+- **Case 04: The Lunar Prescription.** Reisen's tonic makes villagers hear colours, but Master Eirin says it's safe. *Appeal to Authority.*
+
+CASE CLOSED leads straight into the next trial, and the fumo on the right of the title screen is always whoever testifies next. Once you've closed a case, Begin Trial opens the Docket, where closed cases can be replayed.
 
 The character sprites are photos of the official Fumo plushies, cut out with the open BiRefNet segmentation model and relit to match the courtroom. Every other visual is code: hand-written SVG shapes and Ren'Py styles. Nothing is AI-generated art.
 
@@ -86,7 +93,9 @@ game/
   gui.rpy          palette, fonts, CourtPanel (sharp gold/crimson frames)
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
-  script.rpy       Case 01
+  script.rpy       cast, camera shots, fallacy cards, Case 01
+  case02-04.rpy    Cases 02 to 04
+  docket.rpy       case list, progress, the Docket screen
   images/          fumo sprites (PNG, with SVG fallbacks), shadow, background, gavel, scales
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
@@ -101,7 +110,7 @@ tools/
 art_src/           plush photos the sprites are made from, plus previews
 ```
 
-To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script.rpy` is the template), then `call cross_examination("your_testimony")`.
+To add a case: put the witness's fumo photo in `art_src/`, copy `case02.rpy` as a template (testimony, presses, the case labels), and add a `Case(...)` to `CASES` in `docket.rpy`. A new fallacy needs a `Fallacy(...)` in `script.rpy` and an icon from `tools/make_art.py`.
 
 ## Credits and disclaimer
 

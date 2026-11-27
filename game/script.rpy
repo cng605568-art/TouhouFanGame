@@ -1,5 +1,8 @@
 ################################################################################
-## script.rpy - Case 01: Cirno's Frosty Fallacy.
+## script.rpy - cast, camera shots, fallacies, and Case 01.
+##
+## Cases 02-04 live in case02.rpy, case03.rpy and case04.rpy; the list of
+## cases and the Docket are in docket.rpy.
 ################################################################################
 
 
@@ -8,7 +11,7 @@
 ################################################################################
 
 ## Each fumo is one static sprite in a fixed 480x500 slot, feet at the bottom.
-## eiki_fumo.png / cirno_fumo.png are made from the photos in art_src/ by
+## The <name>_fumo.png sprites are made from the photos in art_src/ by
 ## tools/fumo_sprite.py (the "Make fumo sprites" workflow runs it). A PNG or
 ## WebP wins over the SVG placeholder of the same name and is scaled to fit
 ## the slot, so staging and animations keep working with any image size.
@@ -79,8 +82,26 @@ define cirno = Character("Cirno",
     callback=FumoHop("cirno_fumo"),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
+define marisa = Character("Marisa",
+    image="marisa_fumo",
+    callback=FumoHop("marisa_fumo"),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define sakuya = Character("Sakuya",
+    image="sakuya_fumo",
+    callback=FumoHop("sakuya_fumo"),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define reisen = Character("Reisen",
+    image="reisen_fumo",
+    callback=FumoHop("reisen_fumo"),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
 ## Testimony is written in red ink.
 define cirno_t = Character(kind=cirno, what_color="#7A1C2A", what_size=40)
+define marisa_t = Character(kind=marisa, what_color="#7A1C2A", what_size=40)
+define sakuya_t = Character(kind=sakuya, what_color="#7A1C2A", what_size=40)
+define reisen_t = Character(kind=reisen, what_color="#7A1C2A", what_size=40)
 
 define komachi = Character("Komachi",
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
@@ -106,12 +127,30 @@ label shot_eiki(trans=whip_right):
     with trans
     return
 
-label shot_cirno(trans=whip_left):
+## Witness stand. Each witness has a one-line shot so testimony data can name
+## it ("shot_marisa") and the engine can cut back to it after a press.
+label shot_witness(fumo, trans=whip_left):
     scene bg_courtroom
     show witness_stand at stand_pos
     show fumo_shadow at shadow_pos
-    show cirno_fumo at on_stand
+    $ renpy.show(fumo, at_list=[ on_stand ])
     with trans
+    return
+
+label shot_cirno(trans=whip_left):
+    call shot_witness("cirno_fumo", trans)
+    return
+
+label shot_marisa(trans=whip_left):
+    call shot_witness("marisa_fumo", trans)
+    return
+
+label shot_sakuya(trans=whip_left):
+    call shot_witness("sakuya_fumo", trans)
+    return
+
+label shot_reisen(trans=whip_left):
+    call shot_witness("reisen_fumo", trans)
     return
 
 
@@ -139,6 +178,27 @@ define fallacy_slippery_slope = Fallacy(
     _("(Chain of Doom)"),
     _("Insisting one small step must snowball into disaster, with no proof."),
     "gui/fallacy_slippery_slope.svg")
+
+define fallacy_tu_quoque = Fallacy(
+    "tu_quoque",
+    _("Tu Quoque"),
+    _("(You Too!)"),
+    _("Excusing a wrong by pointing out that someone else does it too."),
+    "gui/fallacy_tu_quoque.svg")
+
+define fallacy_false_dilemma = Fallacy(
+    "false_dilemma",
+    _("False Dilemma"),
+    _("(Only Two Doors)"),
+    _("Offering two options as the only ones, when others exist."),
+    "gui/fallacy_false_dilemma.svg")
+
+define fallacy_appeal_to_authority = Fallacy(
+    "appeal_to_authority",
+    _("Appeal to Authority"),
+    _("(Because They Said So)"),
+    _("Treating a famous name as proof instead of checking the evidence."),
+    "gui/fallacy_appeal_to_authority.svg")
 
 define testimony_cirno = Testimony(
     title=_("The Frog Incident"),
@@ -200,25 +260,12 @@ label press_cirno_3:
 ################################################################################
 
 label start:
-    $ bgm_stop(1.0)
     jump case1
 
 
 label case1:
 
-    $ spirit_reset()
-    $ case_number = _("CASE 01")
-    $ case_title = _("Cirno's Frosty Fallacy")
-
-    scene black
-    show screen case_card(_("CASE 01"), _("Cirno's Frosty Fallacy"), _("The Ministry of Right and Wrong v. One Ice Fairy"))
-    with Dissolve(0.6)
-    pause 2.4
-
-    call shot_eiki(None)
-    hide screen case_card
-    show screen court_hud
-    with Dissolve(0.6)
+    call open_case("case1")
 
     show gavel at gavel_slam
     $ sfx("gavel")
@@ -346,10 +393,5 @@ label case1_breakthrough:
     komachi "She's escorted. Very far."
     eiki "Court is adjourned. Adequate work, Junior Judge."
 
-    $ persistent.fallacies_learned.add("false_cause")
-
-    hide screen court_hud
-    with Dissolve(0.3)
-    call screen case_closed(fallacy_false_cause)
-
+    call close_case("case1", fallacy_false_cause)
     return
