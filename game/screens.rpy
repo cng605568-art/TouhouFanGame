@@ -183,6 +183,7 @@ label court_penalty(tm_name, line):
     with red_flash
     $ renpy.say(tm.judge_character, line)
     $ spirit_lose()
+    $ sfx("penalty")
     with hpunch
     pause 0.7
     $ renpy.block_rollback()
@@ -290,6 +291,7 @@ style court_tag_text is default:
 ## Full-width title ribbon: "WITNESS TESTIMONY", "CROSS-EXAMINATION".
 screen court_title(caption, jp, subtitle):
     zorder 70
+    on "show" action Function(sfx, "banner")
     frame at banner_sweep:
         style "court_title"
         vbox:
@@ -364,6 +366,8 @@ screen cross_exam(tm_name):
         idle "gui/nav_prev_idle.svg"
         hover "gui/nav_prev_hover.svg"
         xpos BOX_X - 96 ypos BOX_Y + (BOX_H - 76) // 2
+        hover_sound SFX_HOVER
+        activate_sound SFX_NAV
         action SetVariable("xexam_index", (xexam_index - 1) % count)
         alt _("Previous statement")
 
@@ -371,16 +375,18 @@ screen cross_exam(tm_name):
         idle "gui/nav_next_idle.svg"
         hover "gui/nav_next_hover.svg"
         xpos BOX_X + BOX_W + 20 ypos BOX_Y + (BOX_H - 76) // 2
+        hover_sound SFX_HOVER
+        activate_sound SFX_NAV
         action SetVariable("xexam_index", (xexam_index + 1) % count)
         alt _("Next statement")
 
     ## Plaques.
     use cross_exam_plaques
 
-    key "K_LEFT" action SetVariable("xexam_index", (xexam_index - 1) % count)
-    key "K_RIGHT" action SetVariable("xexam_index", (xexam_index + 1) % count)
-    key "K_p" action Return(("press", xexam_index))
-    key "K_o" action Return(("object", xexam_index))
+    key "K_LEFT" action [ SetVariable("xexam_index", (xexam_index - 1) % count), Function(sfx, "nav") ]
+    key "K_RIGHT" action [ SetVariable("xexam_index", (xexam_index + 1) % count), Function(sfx, "nav") ]
+    key "K_p" action [ Function(sfx, "ui_confirm"), Return(("press", xexam_index)) ]
+    key "K_o" action [ Function(sfx, "ui_confirm"), Return(("object", xexam_index)) ]
 
 screen cross_exam_plaques():
     fixed:
@@ -416,6 +422,8 @@ style plaque_button is default:
     xysize (460, 130)
     ypos PLAQUE_Y - 6
     padding (0, 0)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
 
 style plaque_press_text is default:
     font FONT_HEAD
@@ -508,10 +516,11 @@ screen fallacy_pick(tm_name, index):
     textbutton _("Withdraw"):
         style "menu_plaque"
         xalign 0.5 ypos 900
+        activate_sound SFX_CANCEL
         action Return(None)
         at modal_fade
 
-    key "game_menu" action Return(None)
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
 
 style fallacy_quote is default:
     xalign 0.5
@@ -527,6 +536,8 @@ style fallacy_quote_text is default:
 
 style fallacy_card is default:
     xysize (500, 540)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
     background ParchmentPanel(corner_size=36)
     hover_background ParchmentPanel(corner_size=36, edge=GOLD_HI, inner=VERMILION)
     padding (30, 30, 30, 30)
@@ -559,6 +570,7 @@ style fallacy_blurb is default:
 ## OBJECTION! / HOLD IT! bubble over speed lines.
 screen court_shout(kind):
     zorder 80
+    on "show" action Function(sfx, "shout_" + kind)
 
     if kind == "hold":
         $ main = _("HOLD IT!")
@@ -596,6 +608,7 @@ style shout_sub is default:
 ## Verdict stamp.
 screen verdict_stamp(word, jp):
     zorder 85
+    on "show" action Function(sfx, "stamp")
     add Solid("#0A0205B3") at modal_fade
     fixed at stamp_slam:
         xysize (600, 320)
@@ -659,6 +672,7 @@ style card_tagline is default:
 screen case_closed(fallacy):
     zorder 95
     modal True
+    on "show" action Function(sfx, "case_closed")
 
     add "bg_courtroom"
     add Solid("#12030AE0")
@@ -744,6 +758,7 @@ style closed_blurb is default:
 screen mistrial_screen():
     zorder 95
     modal True
+    on "show" action Function(sfx, "mistrial")
 
     add "bg_courtroom"
     add Solid("#0A0205E6")
@@ -889,6 +904,7 @@ default quick_menu = True
 
 style quick_button is default:
     padding (10, 6)
+    activate_sound SFX_CONFIRM
 
 style quick_button_text is default:
     font FONT_HEAD
@@ -908,6 +924,8 @@ style menu_plaque is default:
     selected_background CourtPanel(fill=INDIGO, edge=GOLD, edge_w=3, rule=GOLD, rule_inset=8, rule_w=1, shadow=6)
     insensitive_background CourtPanel(fill=CRIMSON_DEEP, edge=GOLD_LO, edge_w=3, shadow=6)
     padding (24, 0)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
 
 style menu_plaque_text is default:
     font FONT_HEAD
@@ -1033,7 +1051,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                 textbutton _("Quit") action Quit(confirm=not main_menu)
 
             null height 24
-            textbutton _("Return") action Return()
+            textbutton _("Return") action Return() activate_sound SFX_CANCEL
 
     ## Title.
     vbox:
@@ -1221,6 +1239,8 @@ style slot_page_name is default:
 
 style slot_button is default:
     xsize 400 ysize 300
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
     background CourtPanel(fill=PARCHMENT_SHADE, edge=GOLD_LO, edge_w=2, shadow=4)
     hover_background CourtPanel(fill="#FFF8E6", edge=GOLD, edge_w=4, inner=CRIMSON, inner_w=2, shadow=4)
     padding (8, 8, 8, 10)
@@ -1243,6 +1263,7 @@ style slot_empty is default:
 
 style page_button is default:
     xysize (54, 50)
+    activate_sound SFX_CONFIRM
     background CourtPanel(fill=CRIMSON, edge=GOLD, edge_w=2, shadow=3)
     hover_background CourtPanel(fill=GOLD, edge=GOLD_HI, edge_w=2, shadow=3)
     selected_background CourtPanel(fill=INDIGO, edge=GOLD_HI, edge_w=2, shadow=3)
@@ -1283,13 +1304,25 @@ screen preferences():
                     use pref_option(_("After Choices"), Preference("after choices", "toggle"))
                     use pref_option(_("Transitions"), InvertSelected(Preference("transitions", "toggle")))
 
-            vbox:
-                spacing 18
-                text _("TEXT SPEED") style "cm_heading"
-                bar value Preference("text speed") style "slider"
-                null height 12
-                text _("AUTO-FORWARD TIME") style "cm_heading"
-                bar value Preference("auto-forward time") style "slider"
+            hbox:
+                spacing 90
+
+                vbox:
+                    spacing 18
+                    text _("TEXT SPEED") style "cm_heading"
+                    bar value Preference("text speed") style "slider"
+                    null height 12
+                    text _("AUTO-FORWARD TIME") style "cm_heading"
+                    bar value Preference("auto-forward time") style "slider"
+
+                vbox:
+                    spacing 18
+                    text _("SOUND EFFECTS") style "cm_heading"
+                    bar value Preference("sound volume") style "slider" xsize 440
+                    null height 12
+                    vbox:
+                        style_prefix "pref"
+                        use pref_option(_("Mute All"), Preference("all mute", "toggle"))
 
 ## A settings toggle: a diamond that fills in when selected, then the label.
 screen pref_option(caption, action):
@@ -1306,6 +1339,8 @@ style pref_vbox is default:
 
 style pref_button is default:
     padding (4, 6, 12, 6)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
 
 style pref_button_text is default:
     font FONT_HEAD

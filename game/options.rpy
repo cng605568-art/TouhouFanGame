@@ -33,10 +33,11 @@ define build.name = "FumoCourt"
 
 ## Audio #######################################################################
 
-## This build ships without sound, so the mixer settings stay hidden.
-define config.has_sound = False
+## Sound effects only (see audio.rpy); no music or voice yet.
+define config.has_sound = True
 define config.has_music = False
 define config.has_voice = False
+define config.default_sfx_volume = 0.8
 
 
 ## Transitions ##################################################################

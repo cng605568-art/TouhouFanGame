@@ -220,6 +220,7 @@ label case1:
     with Dissolve(0.6)
 
     show gavel at gavel_slam
+    $ sfx("gavel")
     with vpunch
     eiki "Order. The Higan Court of Logic is now in session."
     hide gavel
@@ -286,11 +287,13 @@ label case1_cross:
 
 label case1_breakthrough:
 
+    $ sfx("breakthrough")
     with flash
     you "Plenty of frogs freeze in winter and thaw in spring. They manage it without you."
     you "The ice didn't save them. The noon sun thawed them. You just happened to be first."
 
     show cirno_fumo at fumo_shock
+    $ sfx("shock")
     with vpunch
     cirno "B-but the ice came first! First means it did it!"
 
@@ -303,6 +306,7 @@ label case1_breakthrough:
     with Dissolve(0.4)
 
     show gavel at gavel_slam
+    $ sfx("gavel")
     with vpunch
     eiki "Defendant Cirno. This court finds you..."
     hide gavel
@@ -328,6 +332,7 @@ label case1_breakthrough:
     call shot_cirno
     show cirno_fumo at fumo_yeet
     show fumo_shadow at shadow_gone
+    $ sfx("yeet")
     pause 1.15
     hide cirno_fumo
 
