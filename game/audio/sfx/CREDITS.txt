@@ -21,6 +21,8 @@ into which slot:
   breakthrough     success             (Petaldust)
   shock            cirnobullet         (Nostalgiac Blues)
   yeet             faraway             (Nostalgiac Blues)
-  case_closed      good bloopy         (Nostalgiac Blues)
+  case_closed      HeadCup + hurteffect + success (low and high)
+                   + reconfirm + progress, retuned into one A-major chord,
+                   with a synthetic hall reverb
   mistrial         unexpectedoutcome   (Petaldust)
   blip             goodblip, repeated  (Nostalgiac Blues)
