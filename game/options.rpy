@@ -21,6 +21,8 @@ Touhou Project and all of its characters belong to Team Shanghai Alice (ZUN). Th
 
 The character sprites are photographs of the official Fumo plushies by Gift. Their backgrounds were removed with the open BiRefNet segmentation model and they were relit to match the courtroom. Everything else is hand-written vector code: plain SVG shapes and Ren'Py styles. Nothing in the game is AI-generated art.
 
+Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (CC0).
+
 Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
 
 Built with Ren'Py.

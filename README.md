@@ -63,11 +63,18 @@ What the workflow does (`tools/fumo_sprite.py`):
 
 To skip the AI model, run it with `--model classic` (GrabCut or white-backdrop flood fill). If you delete a sprite PNG, the game falls back to the SVG placeholder of the same name.
 
+## Sound effects
+
+Every sound is named after the moment it plays at (`gavel.ogg`, `shout_objection.ogg`, `penalty.ogg`...) and lives in `game/audio/sfx/`. To change one, replace that file. A missing file is skipped silently. The full list of slots is at the top of `game/audio.rpy`.
+
+The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* and *Nostalgiac Blues*. `game/audio/sfx/CREDITS.txt` lists which pack sound went where, and `tools/build_sfx.py` rebuilds them from the unzipped packs.
+
 ## Repository layout
 
 ```
 game/
   options.rpy      config, build settings
+  audio.rpy        sound effect slots, text blips
   gui.rpy          palette, fonts, CourtPanel (sharp gold/crimson frames)
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
@@ -75,9 +82,11 @@ game/
   images/          fumo sprites (PNG, with SVG fallbacks), shadow, background, gavel, scales
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
+  audio/sfx/       sound effects (CC0)
 tools/
   make_art.py      regenerates every SVG and icon
   fumo_sprite.py   photo -> cut-out, relit sprite PNG
+  build_sfx.py     CC0 sound packs -> game/audio/sfx/
 art_src/           plush photos the sprites are made from, plus previews
   build_fonts.py   rebuilds the font subsets
 ```
@@ -90,6 +99,7 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
+- Sound effects: Warsong's [Petaldust and Nostalgiac Blues sound packs](https://warsong.pages.dev/tags/touhou/) (CC0)
 - Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)

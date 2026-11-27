@@ -1,0 +1,26 @@
+Fumo Court sound effects
+========================
+
+All sounds here are built from Warsong's sound packs for the Touhou fan games
+"Petaldust" and "Nostalgiac Blues", released under Creative Commons Zero
+(public domain): https://warsong.pages.dev/tags/touhou/
+
+tools/build_sfx.py rebuilds these files from the packs. Which pack sound went
+into which slot:
+
+  ui_hover         goodblip            (Nostalgiac Blues)
+  ui_confirm       healthrestore       (Nostalgiac Blues)
+  ui_cancel        badblip             (Nostalgiac Blues)
+  nav              clothC              (Petaldust)
+  shout_objection  big damage + slashC (Nostalgiac Blues + Petaldust)
+  shout_hold       destroyed + slashB  (Nostalgiac Blues + Petaldust)
+  gavel            HeadCup + hurteffect
+  stamp            hurteffect + landingsound
+  banner           badbell             (Petaldust)
+  penalty          breakeffect         (Nostalgiac Blues)
+  breakthrough     success             (Petaldust)
+  shock            cirnobullet         (Nostalgiac Blues)
+  yeet             faraway             (Nostalgiac Blues)
+  case_closed      good bloopy         (Nostalgiac Blues)
+  mistrial         unexpectedoutcome   (Petaldust)
+  blip             goodblip, repeated  (Nostalgiac Blues)
