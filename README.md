@@ -69,12 +69,20 @@ Every sound is named after the moment it plays at (`gavel.ogg`, `shout_objection
 
 The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* and *Nostalgiac Blues*. `game/audio/sfx/CREDITS.txt` lists which pack sound went where, and `tools/build_sfx.py` rebuilds them from the unzipped packs.
 
+## Music
+
+Each witness has a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. It starts with the witness's testimony, carries through the cross-examination and cuts out when the objection lands. Its title card slides in at the bottom right, the way a Touhou stage names its BGM.
+
+Cirno testifies to *Beloved Tomboyish Girl*, +TEK's chiptune arrangement of ZUN's おてんば恋娘, released under CC BY 4.0. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
+
+To add or swap a theme, run `python tools/build_music.py track.mp3 <name>`. It trims the silence, fades the tail for a clean loop, matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM`.
+
 ## Repository layout
 
 ```
 game/
   options.rpy      config, build settings
-  audio.rpy        sound effect slots, text blips
+  audio.rpy        sound effect slots, text blips, witness themes
   gui.rpy          palette, fonts, CourtPanel (sharp gold/crimson frames)
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
@@ -83,12 +91,14 @@ game/
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
   audio/sfx/       sound effects (CC0)
+  audio/music/     witness themes (fan arrangements, see CREDITS.txt there)
 tools/
   make_art.py      regenerates every SVG and icon
   fumo_sprite.py   photo -> cut-out, relit sprite PNG
   build_sfx.py     CC0 sound packs -> game/audio/sfx/
-art_src/           plush photos the sprites are made from, plus previews
+  build_music.py   downloaded track -> trimmed, normalised .ogg
   build_fonts.py   rebuilds the font subsets
+art_src/           plush photos the sprites are made from, plus previews
 ```
 
 To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script.rpy` is the template), then `call cross_examination("your_testimony")`.
@@ -100,6 +110,7 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
 - Sound effects: Warsong's [Petaldust and Nostalgiac Blues sound packs](https://warsong.pages.dev/tags/touhou/) (CC0)
+- Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Trimmed, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
 - Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)

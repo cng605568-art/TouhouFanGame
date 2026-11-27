@@ -1,0 +1,16 @@
+Witness themes
+==============
+
+cirno_theme.ogg
+    "Beloved Tomboyish Girl" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/beloved-tomboyish-girl
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: silence trimmed, tail faded for looping, loudness-normalised
+    to -17 LUFS and re-encoded as Ogg Vorbis (tools/build_music.py).
+
+    Arrangement of "おてんば恋娘" (Tomboyish Girl in Love), composed by ZUN
+    (Team Shanghai Alice) for Touhou Koumakyou ~ the Embodiment of Scarlet
+    Devil. Used in this free, non-commercial fan game under the Touhou
+    Project fan-work guidelines. No audio is taken from the official games.
