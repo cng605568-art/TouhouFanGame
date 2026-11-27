@@ -23,7 +23,7 @@ The character sprites are photographs of the official Fumo plushies by Gift. The
 
 Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (CC0).
 
-Cirno's theme is "Beloved Tomboyish Girl" by +TEK, an arrangement of ZUN's "おてんば恋娘" from the album Story of Modulated Frequency, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). It was trimmed, loudness-normalised and re-encoded.
+Cirno's theme is "Beloved Tomboyish Girl" by +TEK, an arrangement of ZUN's "おてんば恋娘" from the album Story of Modulated Frequency, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). It was cut to loop seamlessly, loudness-normalised and re-encoded.
 
 Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
 

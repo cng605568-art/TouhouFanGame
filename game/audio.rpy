@@ -89,17 +89,21 @@ init -1 python:
     class Theme(object):
         """A piece of music and the credit line shown when it starts."""
 
-        def __init__(self, name, title, original, credit):
+        def __init__(self, name, title, original, credit, loop=None):
             self.name = name            # file stem in game/audio/music/
             self.title = title          # shown in the title card
-            self.original = original    # ZUN's title, shown under it
+            self.original = original    # ZUN's title, shown beside it
             self.credit = credit
+            self.loop = loop            # seconds to loop back to, after the intro
 
         @property
         def filename(self):
+            """What to play, with the loop point, or None if the file is missing."""
             for ext in (".ogg", ".opus", ".mp3", ".flac", ".wav"):
                 filename = MUSIC_DIR + self.name + ext
                 if renpy.loadable(filename):
+                    if self.loop is not None:
+                        filename = "<loop {:.6f}>{}".format(self.loop, filename)
                     return filename
             return None
 
@@ -109,6 +113,9 @@ init -1 python:
             "Beloved Tomboyish Girl",
             u"おてんば恋娘",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            # From tools/build_music.py --find-loop: the file stops where the
+            # tune starts its second pass, and play loops back to here.
+            loop=3.875488,
         ),
     }
 

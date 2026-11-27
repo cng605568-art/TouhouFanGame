@@ -7,8 +7,10 @@ cirno_theme.ogg
     https://plustek.bandcamp.com/track/beloved-tomboyish-girl
     License: Creative Commons Attribution 4.0 International (CC BY 4.0)
     https://creativecommons.org/licenses/by/4.0/
-    Changes: silence trimmed, tail faded for looping, loudness-normalised
-    to -17 LUFS and re-encoded as Ogg Vorbis (tools/build_music.py).
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the repeat and fade-out are not included),
+    leading silence trimmed, loudness-normalised to -17 LUFS and re-encoded
+    as Ogg Vorbis from the FLAC download (tools/build_music.py).
 
     Arrangement of "おてんば恋娘" (Tomboyish Girl in Love), composed by ZUN
     (Team Shanghai Alice) for Touhou Koumakyou ~ the Embodiment of Scarlet

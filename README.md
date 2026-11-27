@@ -75,7 +75,7 @@ Each witness has a theme in `game/audio/music/`, listed in the `BGM` table in `g
 
 Cirno testifies to *Beloved Tomboyish Girl*, +TEK's chiptune arrangement of ZUN's おてんば恋娘, released under CC BY 4.0. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
 
-To add or swap a theme, run `python tools/build_music.py track.mp3 <name>`. It trims the silence, fades the tail for a clean loop, matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM`.
+To add or swap a theme, run `python tools/build_music.py track.flac <name> --find-loop`. Arrangements usually play the tune twice and then fade out. The tool finds where the second pass begins, cuts the file there and crossfades the cut, so the theme loops seamlessly for as long as the cross-examination lasts. It also matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM` with the loop start the tool prints. Without `--find-loop` it just trims the silence and fades the tail.
 
 ## Repository layout
 
@@ -96,7 +96,7 @@ tools/
   make_art.py      regenerates every SVG and icon
   fumo_sprite.py   photo -> cut-out, relit sprite PNG
   build_sfx.py     CC0 sound packs -> game/audio/sfx/
-  build_music.py   downloaded track -> trimmed, normalised .ogg
+  build_music.py   downloaded track -> seamless loop, normalised .ogg
   build_fonts.py   rebuilds the font subsets
 art_src/           plush photos the sprites are made from, plus previews
 ```
@@ -110,7 +110,7 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
 - Sound effects: Warsong's [Petaldust and Nostalgiac Blues sound packs](https://warsong.pages.dev/tags/touhou/) (CC0)
-- Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Trimmed, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
+- Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
 - Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)
