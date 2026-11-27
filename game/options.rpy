@@ -19,7 +19,7 @@ Fumo Court: Shiki Eiki's Logic Trials is a free, non-commercial fan game.
 
 Touhou Project and all of its characters belong to Team Shanghai Alice (ZUN). This game is an unofficial fan work. It is not affiliated with, endorsed by, or produced by Team Shanghai Alice. Please support the official games.
 
-All art in this build is hand-written vector code: plain SVG shapes and Ren'Py styles. No AI-generated art.
+The character sprites are photographs of the official Fumo plushies by Gift, cut out with classical image processing. Everything else is hand-written vector code: plain SVG shapes and Ren'Py styles. No AI-generated art.
 
 Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
 

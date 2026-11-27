@@ -4,7 +4,7 @@ An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts 
 
 **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. Find the flaw.
 
-All visuals are code: hand-written SVG shapes and Ren'Py styles. No AI-generated art.
+The character sprites are photos of the official Fumo plushies. Every other visual is code: hand-written SVG shapes and Ren'Py styles. No AI-generated art.
 
 ## Play
 
@@ -45,9 +45,17 @@ renpy.sh launcher web_build path/to/TouhouFanGame
 
 Or just open the folder as a project in the Ren'Py launcher.
 
-## Swapping in real art
+## Character sprites
 
-Every character is a single static sprite. Drop `eiki_fumo.png` or `cirno_fumo.png` (any size, transparent background, feet at the bottom) into `game/images/`. A PNG takes priority over the SVG placeholder automatically and is scaled into the same 480×500 slot, so staging and animations keep working.
+Every character is a single static sprite: `game/images/eiki_fumo.png` and `game/images/cirno_fumo.png`, transparent PNGs cropped to the plush. Any size works. Each one is scaled into the same 480×500 slot with its feet at the bottom, so staging and animations keep working. Delete a PNG and the game falls back to its SVG placeholder of the same name.
+
+To add a fumo from a photo (for a new case, say), cut it out with:
+
+```
+pip install opencv-python-headless pymatting pillow
+python tools/cut_fumo.py photo.jpg game/images/reimu_fumo.png           # plain or gradient backdrop
+python tools/cut_fumo.py photo.jpg game/images/reimu_fumo.png --white   # pure white studio backdrop
+```
 
 ## Repository layout
 
@@ -58,11 +66,12 @@ game/
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
   screens.rpy      courtroom HUD, cross-examination engine, menus
   script.rpy       Case 01
-  images/          SVG sprites, background, gavel, scales
+  images/          fumo sprites (PNG, with SVG fallbacks), background, gavel, scales
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
 tools/
   make_art.py      regenerates every SVG and icon
+  cut_fumo.py      cuts a plush out of a photo into a sprite PNG
   build_fonts.py   rebuilds the font subsets
 ```
 
@@ -72,7 +81,7 @@ To add a case, write a new `Testimony(...)` in a script file (Case 01 in `script
 
 **Touhou Project** and all of its characters are the property of **Team Shanghai Alice (ZUN)**. *Fumo Court* is an unofficial, non-commercial fan work. It is not affiliated with, endorsed by, or produced by Team Shanghai Alice. Please support the official games.
 
-Fumo is a plush line produced by Gift. This project is not affiliated with Gift.
+Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)
 - Font: [Shippori Mincho B1](https://github.com/fontdasu/ShipporiMincho) by FONTDASU, SIL Open Font License 1.1 (`game/fonts/OFL.txt`)
