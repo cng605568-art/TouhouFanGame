@@ -885,9 +885,11 @@ def make_fumo_shadow():
     W, H = 380, 70
     body = "\n".join([
         "<defs>",
-        rad("sh", [(0, "#000000", 0.72), (0.55, "#000000", 0.42), (1, "#000000", 0)]),
+        rad("sh", [(0, "#000000", 0.78), (0.5, "#000000", 0.45), (1, "#000000", 0)]),
         "</defs>",
-        '<ellipse cx="190" cy="35" rx="188" ry="33" fill="url(#sh)"/>',
+        # NanoSVG keeps bounding-box radial gradients circular, so draw a
+        # circle and squash the whole group into an ellipse instead.
+        '<g transform="scale(1 0.18)"><circle cx="190" cy="194.44" r="188" fill="url(#sh)"/></g>',
     ])
     write(os.path.join(IMAGES, "fumo_shadow.svg"), svg(W, H, body, "fumo contact shadow"))
 
