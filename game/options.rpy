@@ -35,11 +35,12 @@ define build.name = "FumoCourt"
 
 ## Audio #######################################################################
 
-## Sound effects only (see audio.rpy); no music or voice yet.
+## Sound effects and witness themes (see audio.rpy); no voice acting.
 define config.has_sound = True
-define config.has_music = False
+define config.has_music = True
 define config.has_voice = False
 define config.default_sfx_volume = 0.8
+define config.default_music_volume = 0.65
 
 
 ## Transitions ##################################################################

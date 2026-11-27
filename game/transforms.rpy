@@ -225,6 +225,16 @@ transform banner_sweep:
     xoffset -1300 alpha 0.0
     easeout 0.28 xoffset 0 alpha 1.0
 
+## Music title card: waits for the testimony banner to clear, slides in from
+## the right, and drifts out when hidden.
+transform bgm_card(delay=0.0):
+    on show:
+        xoffset 60 alpha 0.0
+        pause delay
+        easeout 0.45 xoffset 0 alpha 1.0
+    on hide:
+        easein 0.6 xoffset 30 alpha 0.0
+
 ## Testimony statements slide up when they change (used with showif).
 transform statement_in:
     on appear, show:

@@ -1,6 +1,8 @@
 ################################################################################
-## audio.rpy - sound effects.
+## audio.rpy - sound effects and music.
 ##
+## Sound effects
+## -------------
 ## Each sound is named after the moment it plays at and lives in
 ## game/audio/sfx/ as <name>.ogg (or .opus / .wav / .mp3). To change a sound,
 ## replace that one file. A missing file is skipped silently, so the game also
@@ -22,6 +24,15 @@
 ##   case_closed   CASE CLOSED
 ##   mistrial      spirit runs out
 ##   blip          text blip, looped while dialogue types out
+##
+## Music
+## -----
+## Witness themes live in game/audio/music/ and are listed in BGM below. A
+## theme starts when its witness takes the stand to testify, carries through
+## the cross-examination, and is cut when the right objection lands. As in a
+## Touhou stage, the title slides in at the bottom right whenever a theme
+## starts. tools/build_music.py prepares a downloaded track; a missing file is
+## skipped silently, like a missing sound effect.
 ################################################################################
 
 init -1 python:
@@ -69,3 +80,54 @@ init -1 python:
     SFX_CONFIRM = sfx_file("ui_confirm")
     SFX_CANCEL = sfx_file("ui_cancel")
     SFX_NAV = sfx_file("nav")
+
+
+    ## Music ###################################################################
+
+    MUSIC_DIR = "audio/music/"
+
+    class Theme(object):
+        """A piece of music and the credit line shown when it starts."""
+
+        def __init__(self, name, title, original, credit):
+            self.name = name            # file stem in game/audio/music/
+            self.title = title          # shown in the title card
+            self.original = original    # ZUN's title, shown under it
+            self.credit = credit
+
+        @property
+        def filename(self):
+            for ext in (".ogg", ".opus", ".mp3", ".flac", ".wav"):
+                filename = MUSIC_DIR + self.name + ext
+                if renpy.loadable(filename):
+                    return filename
+            return None
+
+    BGM = {
+        "cirno": Theme(
+            "cirno_theme",
+            "Beloved Tomboyish Girl",
+            u"おてんば恋娘",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+        ),
+    }
+
+    def bgm(name, fadein=1.0, card_delay=1.9):
+        """
+        Starts a theme, unless it is already playing. The title card waits
+        `card_delay` seconds so it lands after the banner that opens a
+        testimony or cross-examination.
+        """
+        theme = BGM[name]
+        filename = theme.filename
+        if filename is None:
+            return
+        if renpy.music.get_playing("music") == filename:
+            return
+        renpy.music.play(filename, channel="music", loop=True, fadein=fadein)
+        renpy.show_screen("bgm_title", theme, card_delay)
+
+    def bgm_stop(fadeout=0.5):
+        """Stops whatever theme is playing."""
+        renpy.music.stop("music", fadeout=fadeout)
+        renpy.hide_screen("bgm_title")

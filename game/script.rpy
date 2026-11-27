@@ -251,6 +251,7 @@ label case1:
     ## Testimony.
     window hide
     call shot_cirno
+    $ bgm("cirno")
     show screen court_title(_("WITNESS TESTIMONY"), "証言", _("The Frog Incident"))
     with Dissolve(0.2)
     pause 1.6
@@ -274,6 +275,7 @@ label case1:
 label case1_cross:
 
     call shot_cirno
+    $ bgm("cirno")
     call cross_examination("testimony_cirno")
 
     if _return == "mistrial":
@@ -287,6 +289,7 @@ label case1_cross:
 
 label case1_breakthrough:
 
+    $ bgm_stop(0.15)
     $ sfx("breakthrough")
     with flash
     you "Plenty of frogs freeze in winter and thaw in spring. They manage it without you."

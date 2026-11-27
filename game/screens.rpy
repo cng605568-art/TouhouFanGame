@@ -192,6 +192,7 @@ label court_penalty(tm_name, line):
 
 ## Game over. Returns to the caller to retry, or restarts to the title.
 label mistrial:
+    $ bgm_stop(1.2)
     hide screen court_hud
     call screen mistrial_screen
     if _return == "retry":
@@ -286,6 +287,53 @@ style court_tag_text is default:
     size 28
     color GOLD_HI
     kerning 5
+
+
+## Music title card, bottom right above the dialogue box, the way a Touhou
+## stage names its BGM. Shown by bgm() in audio.rpy.
+screen bgm_title(theme, delay=0.0):
+    zorder 45
+    frame at bgm_card(delay):
+        style "bgm_card"
+        hbox:
+            spacing 18
+            text u"♪" style "bgm_note"
+            vbox:
+                spacing 4
+                hbox:
+                    spacing 16
+                    text theme.title style "bgm_name"
+                    text theme.original style "bgm_original" yalign 0.5
+                text theme.credit style "bgm_credit"
+    timer (delay + 5.5) action Hide("bgm_title")
+
+style bgm_card is default:
+    xanchor 1.0 xpos (BOX_X + BOX_W - 40)
+    yanchor 1.0 ypos (BOX_Y - 22)
+    background IndigoPanel(rule=GOLD_LO, rule_inset=7, rule_w=1, shadow=4)
+    padding (26, 12, 32, 14)
+
+style bgm_note is default:
+    font FONT_BODY
+    size 44
+    color GOLD
+    yalign 0.5
+
+style bgm_name is default:
+    font FONT_HEAD
+    size 28
+    color PARCHMENT
+
+style bgm_original is default:
+    font FONT_BODY
+    size 22
+    color GOLD_HI
+
+style bgm_credit is default:
+    font FONT_BODY
+    size 19
+    color GOLD
+    kerning 1
 
 
 ## Full-width title ribbon: "WITNESS TESTIMONY", "CROSS-EXAMINATION".
@@ -1317,6 +1365,9 @@ screen preferences():
 
                 vbox:
                     spacing 18
+                    text _("MUSIC") style "cm_heading"
+                    bar value Preference("music volume") style "slider" xsize 440
+                    null height 12
                     text _("SOUND EFFECTS") style "cm_heading"
                     bar value Preference("sound volume") style "slider" xsize 440
                     null height 12
