@@ -285,6 +285,7 @@ label cross_examination(tm_name):
             if xexam_new and xexam_new not in xexam_revealed:
                 $ xexam_revealed.add(xexam_new)
                 call expression tm.witness_shot
+                $ bgm("pursuit", fadein=0.2, card_delay=1.7, fadeout=0.3)
                 call testimony_updated(tm.title)
                 $ xexam_vis = tm.visible(xexam_revealed)
                 $ xexam_index = [ tm.statements[i].key for i in xexam_vis ].index(xexam_new)
@@ -333,6 +334,7 @@ label cross_examination(tm_name):
 ## "proved", "wrong" (penalty given) or "withdrawn".
 label prove_it(tm_name):
     $ tm = testimony(tm_name)
+    $ bgm("pursuit", fadein=0.2, card_delay=0.6, fadeout=0.3)
     call expression tm.judge_shot
     $ renpy.say(tm.judge_character, _("A fair objection. Now prove it. What in the Court Record backs you up?"))
     call screen evidence_pick(tm_name)

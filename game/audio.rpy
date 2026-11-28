@@ -33,8 +33,10 @@
 ## Every piece lives in game/audio/music/ and is listed in BGM below.
 ##
 ## The title theme plays on the main menu and stops when a trial begins.
-## A witness theme starts when its witness takes the stand to testify, carries
-## through the cross-examination, and is cut when the right objection lands.
+## A witness theme starts when its witness takes the stand to testify and
+## carries through the cross-examination. When the witness is cornered (a
+## press brings out a new statement, or the right fallacy needs its proof) the
+## pursuit theme takes over, and the music is cut when the case breaks open.
 ## As in a Touhou stage, a title card slides in at the bottom right whenever a
 ## witness theme starts. tools/build_music.py prepares a downloaded track and
 ## finds its loop; a missing file is skipped silently, like a missing sound
@@ -159,6 +161,17 @@ init -1 python:
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             loop=10.839796,
         ),
+        # The pursuit: takes over from the witness theme when the witness is
+        # cornered (court.rpy). No clean second pass in this arrangement, so
+        # the loop points were set by hand where a passage repeats 68.9 s
+        # later (build_music.py --loop 47.224694 116.127914 --xfade 0.2).
+        "pursuit": Theme(
+            "pursuit_theme",
+            "U.N. Owen Was Her?",
+            u"U.N.オーエンは彼女なのか？",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=47.224694,
+        ),
         # Main menu. Never announced with a title card; credited in About.
         "title": Theme(
             "title_theme",
@@ -169,7 +182,7 @@ init -1 python:
         ),
     }
 
-    def bgm(name, fadein=1.0, card_delay=1.9):
+    def bgm(name, fadein=1.0, card_delay=1.9, fadeout=None):
         """
         Starts a theme, unless it is already playing. The title card waits
         `card_delay` seconds so it lands after the banner that opens a
@@ -181,7 +194,7 @@ init -1 python:
             return
         if renpy.music.get_playing("music") == filename:
             return
-        renpy.music.play(filename, channel="music", loop=True, fadein=fadein)
+        renpy.music.play(filename, channel="music", loop=True, fadein=fadein, fadeout=fadeout)
         renpy.show_screen("bgm_title", theme, card_delay)
 
     def bgm_stop(fadeout=0.5):

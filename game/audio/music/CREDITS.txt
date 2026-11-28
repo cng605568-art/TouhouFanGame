@@ -76,3 +76,18 @@ reisen_theme.ogg (Case 04, Reisen)
     Arrangement of "狂気の瞳 ～ Invisible Full Moon" by ZUN (Team Shanghai Alice). Used in this
     free, non-commercial fan game under the Touhou Project fan-work
     guidelines. No audio is taken from the official games.
+
+pursuit_theme.ogg (the pursuit, when a witness is cornered)
+    "U.N. Owen Was Her S" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/u-n-owen-was-her-s
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut at 1:56 and looped back to 0:47, where a passage repeats,
+    with a 0.2 s crossfade at the cut (the rest of the track is not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "U.N.オーエンは彼女なのか？" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
