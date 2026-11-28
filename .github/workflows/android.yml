@@ -127,6 +127,18 @@ jobs:
           mv "$apk" "dists/FumoCourt-${{ steps.meta.outputs.version }}-android.apk"
           ls -la dists
 
+      - name: Check the APK
+        run: |
+          set -euo pipefail
+          apk="dists/FumoCourt-${{ steps.meta.outputs.version }}-android.apk"
+          echo "Signed by:"
+          keytool -printcert -jarfile "$apk" | grep -E "Owner|Valid" | head -n 2
+          unzip -Z1 "$apk" > apk-files.txt
+          grep -c "^assets/" apk-files.txt
+          grep -E "mipmap.*icon|presplash" apk-files.txt | head -n 8 || true
+          aapt="$(ls "${ANDROID_HOME}"/build-tools/*/aapt2 | tail -n 1)"
+          "$aapt" dump badging "$apk" | grep -E "^package|^application-label|launchable|sdkVersion" || true
+
       - name: Upload build log on failure
         if: failure()
         uses: actions/upload-artifact@v4
