@@ -2,25 +2,28 @@
 
 An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts Gensokyo's residents (as deadpan fumo plushies) on trial for petty crimes. You're her junior judge: press testimony, spot the **logical fallacy**, and object.
 
-Nine cases, played in order. Each witness hides one fallacy in their testimony:
+Eleven cases, played in order. Each witness hides a fallacy in their testimony:
 
 - **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. *False Cause.*
 - **Case 02: The Long-Term Loan.** Marisa "borrowed" forty-seven grimoires, and besides, Reimu pockets her own donation box. *Tu Quoque.*
 - **Case 03: The Vanished Pudding.** Sakuya is sure the gatekeeper ate the pudding, because the only other suspect would never. *False Dilemma.*
 - **Case 04: The Lunar Prescription.** Reisen's tonic makes villagers hear colours, but Master Eirin says it's safe. *Appeal to Authority.*
 - **Case 05: The Unappealable Verdict.** The pudding from Case 03 turns up frozen at Misty Lake, and a judge can't hear her own appeal. You take the bench; Eiki takes the stand. *Circular Reasoning.*
-- **Case 06: The Open Gate.** The mistress's parasol is gone, and Meiling knows the thief didn't use her gate: Marisa came in by a window once, so every thief does. *Hasty Generalization.*
-- **Case 07: Strings Attached.** Alice tied Marisa to a tree over an insult Marisa never actually said. *Straw Man.*
-- **Case 08: Fifty Satisfied Customers.** Reimu's lucky charms must work, because fifty villagers bought one. *Bandwagon.*
-- **Case 09: The Five Impossible Chores.** Reisen finished all five of Kaguya's chores, so now there's a sixth: the moon. *Moving the Goalposts.* Someone with a thousand-year grudge has been waiting for Kaguya to lose.
+- **Case 06: The Open Gate.** The mistress's parasol is gone, and Meiling knows the thief didn't use her gate: Marisa came in by a window once, so every thief does. She dozes off on the stand, and talks in her sleep. *Hasty Generalization.*
+- **Case 07: Strings Attached.** Alice tied Marisa to a tree. Her first excuse attacks Marisa; when her doll lawyer makes her quote Marisa instead, she misquotes her. *Ad Hominem, then Straw Man.*
+- **Case 08: Fifty Satisfied Customers.** Reimu's lucky charms must work, because fifty villagers bought one. She'll slip you a charm to restore a magatama, if you're willing to give up an S rank. *Bandwagon.*
+- **Case 09: The Five Impossible Chores.** Reisen finished all five of Kaguya's chores, so now there's a sixth: the moon. Kaguya's testimony rewrites itself every time you press her. *Moving the Goalposts.* Someone with a thousand-year grudge has been waiting for Kaguya to lose.
+- **Case 10: Back by Dinner.** A short trial. Mokou dodges the kidnapping charge by bringing up a thousand-year-old feud, but the question she dodged has a surprising answer. *Red Herring.*
+- **Case 11: The Scoop.** Aya's newspaper says the Higan Court convicts everyone, so you take the bench and Eiki sits with the defendants. A fast-talking first testimony, a recess where Komachi investigates, and a headline that only prints the verdicts it likes. *Bandwagon, then Cherry Picking.*
 
 How a trial works:
 
-- **Press** every statement. Some presses make the witness add a new statement (TESTIMONY UPDATED), and the flaw is often the one they didn't want to say.
-- **Object** with the fallacy card that names the flaw. On Normal and up, Eiki then asks you to **prove it** with an item from the **Court Record** (TAKE THAT!).
+- **Press** statements. Some presses make the witness add a new statement (TESTIMONY UPDATED). The flaw might be in the opening testimony, behind a press, or at the end of a chain of them, and some added statements are traps: they sound like a fallacy, but the reasoning is sound.
+- **Object** with the fallacy card that names the flaw. On Normal and up you then **prove it**: present an item from the **Court Record** (TAKE THAT!), point at the exact line in it, present two items together, or pick the one example that breaks the witness's rule.
 - Wrong objections cost a magatama of spirit. Run out and it's a mistrial.
+- Not every verdict is GUILTY. Sometimes the witness was the accuser, and once a bad argument turns out to have a true conclusion.
 - **Difficulty**, chosen on the Docket: *Easy* (seven magatama, the case's three cards, no proof), *Normal* (five, every fallacy met so far), *Hard* (four, a 30-second card timer) and *Lunatic* (three, fifteen seconds, every card from the start). Each case is ranked S to C by how many mistakes you made, and the Docket keeps your best.
-- When a witness is cornered the pursuit theme kicks in, and each one breaks down in their own way.
+- When a witness is cornered their case's own pursuit theme kicks in, and each one breaks down in their own way.
 
 CASE CLOSED leads straight into the next trial, and the fumo on the right of the title screen is always whoever testifies next. Begin Trial opens the Docket, where you pick a difficulty and replay closed cases.
 
@@ -118,7 +121,7 @@ game/
   reactions.rpy    witness breakdowns, react() emotes and pose photos
   screens.rpy      courtroom HUD, cross-examination, fallacy and evidence picks, menus
   script.rpy       cast, camera shots, fallacy cards, Case 01
-  case02-09.rpy    Cases 02 to 09
+  case02-11.rpy    Cases 02 to 11
   docket.rpy       case list, progress, the Docket screen
   compendium.rpy   the Compendium of fallacies and practice mode
   translations.rpy language switching; the translations are in tl/japanese and tl/schinese
