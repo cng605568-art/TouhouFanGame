@@ -373,7 +373,10 @@ testcase cases:
     "False Dilemma"
     move (40, 540)
     click pos (40, 540) until move (0.5, 0.5) pattern "Mansion Roster"
-    pause 0.4
+    pause 0.6
+    $ shot("c03_evidence")
+    $ print("FOCUS", [ (f.widget._tts_all()[:24], f.x, f.y, f.w, f.h) for f in renpy.display.focus.focus_list ])
+    $ print("MOUSE", renpy.test.testmouse.mouse_pos, renpy.get_mouse_pos())
     "Mansion Roster"
     move (40, 540)
     pause 0.4
