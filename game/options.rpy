@@ -19,9 +19,9 @@ Fumo Court: Shiki Eiki's Logic Trials is a free, non-commercial fan game.
 
 Touhou Project and all of its characters belong to Team Shanghai Alice (ZUN). This game is an unofficial fan work. It is not affiliated with, endorsed by, or produced by Team Shanghai Alice. Please support the official games.
 
-The character sprites are photographs of the official Fumo plushies by Gift. Their backgrounds were removed with the open BiRefNet segmentation model and they were relit to match the courtroom. Everything else is hand-written vector code: plain SVG shapes and Ren'Py styles. Nothing in the game is AI-generated art.
+The character sprites are photographs of the official Fumo plushies by Gift. Their backgrounds were removed with the open BiRefNet segmentation model and they were relit to match the courtroom. The sparks, fire and smoke in the fight are from Kenney's Particle Pack (CC0). Everything else is hand-written vector code: plain SVG shapes and Ren'Py styles. Nothing in the game is AI-generated art.
 
-Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (CC0).
+Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (CC0). The fight also uses CC0 sounds from OpenGameArt by qubodup and rubberduck.
 
 Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). Each was cut to loop seamlessly, loudness-normalised and re-encoded.
   Title: "Scarlet Beyond a Crimson Dream", from Embodiment of Frequency Modulation.

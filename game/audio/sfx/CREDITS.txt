@@ -40,3 +40,20 @@ into which slot:
   break_mokou      destroyed (slowed) + slashC + big damage  (Nostalgiac Blues + Petaldust)
   break_aya        HybridFoley + bulletpuff + clothA/C, pitched up (Petaldust + Nostalgiac Blues)
   blip_hi/up/dn/lo/deep  goodblip at each speaker's pitch (Nostalgiac Blues)
+
+The fight in Case 09 (fight_*) also uses CC0 (public domain) sounds from
+OpenGameArt.org:
+  "Punch" by qubodup                        opengameart.org/content/punch
+  "Swish - bamboo stick weapon swhoshes" by qubodup   opengameart.org/node/2242
+  "Wind, hit, time morph" by qubodup        opengameart.org/content/wind-hit-time-morph
+  "Synthesized explosion" by qubodup        opengameart.org/content/synthesized-explosion
+  "25 CC0 bang / firework SFX" by rubberduck  opengameart.org/node/92774
+
+  fight_cutin   megaswosh1 + megaswosh2 + destroyed + bang_03
+  fight_land    synthetic_explosion_1 + Punch02 + cannon_02 + HeadCup
+  fight_vs      bang_09 + swosh-03 + error resonance + megaswosh2 (slowed)
+  fight_rush    Punch01-05 and swosh-01/04/07/09, in a run of seven, + bang_04
+  fight_slowmo  slomo1 + megaswosh1 (slowed)
+  fight_final   synthetic_explosion_1 + cannon_02 + Punch03 + bang_06
+                + big damage + fw_06
+  fight_dash    megaswosh2 + swosh-03/05 + bang_01

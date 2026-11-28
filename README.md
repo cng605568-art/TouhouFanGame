@@ -100,6 +100,8 @@ Every sound is named after the moment it plays at (`gavel.ogg`, `shout_objection
 
 The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* and *Nostalgiac Blues*. `game/audio/sfx/CREDITS.txt` lists which pack sound went where, and `tools/build_sfx.py` rebuilds them from the unzipped packs.
 
+The fight in Case 09 adds CC0 sounds from OpenGameArt (qubodup's punches, swooshes, wind/time-morph hits and synthesized explosion; rubberduck's bangs), and its sparks, fire and smoke are sprites from Kenney's CC0 Particle Pack. `game/gui/vfx/CREDITS.txt` covers the sprites and `tools/make_vfx.py` rebuilds them.
+
 ## Music
 
 The title screen and each witness have a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. A witness theme starts with the witness's testimony and carries through the cross-examination; when the witness is cornered the pursuit theme takes over, and the music cuts out when the case breaks open. Each title card slides in at the bottom right, the way a Touhou stage names its BGM.
@@ -152,6 +154,8 @@ To add a case: put the witness's fumo photo in `art_src/`, copy `case02.rpy` as 
 Fumo is a plush line produced by Gift. The sprite photos show Gift's official plushies. This project is not affiliated with Gift.
 
 - Sound effects: Warsong's [Petaldust and Nostalgiac Blues sound packs](https://warsong.pages.dev/tags/touhou/) (CC0)
+- Fight sounds (Case 09), CC0 from OpenGameArt: [Punch](https://opengameart.org/content/punch), [Swish - bamboo stick weapon swhoshes](https://opengameart.org/node/2242), [Wind, hit, time morph](https://opengameart.org/content/wind-hit-time-morph) and [Synthesized explosion](https://opengameart.org/content/synthesized-explosion) by qubodup; [25 CC0 bang / firework SFX](https://opengameart.org/node/92774) by rubberduck
+- Fight sparks, fire and smoke: [Particle Pack](https://kenney.nl/assets/particle-pack) by Kenney (CC0)
 - Title theme: [*Scarlet Beyond a Crimson Dream*](https://plustek.bandcamp.com/track/scarlet-beyond-a-crimson-dream) by +TEK, from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of music by ZUN (Team Shanghai Alice).
 - Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
 - Marisa's theme: [*Love-coloured Master Spark*](https://plustek.bandcamp.com/track/love-coloured-master-spark), Sakuya's theme: [*Lunar Clock ~ Luna Dial*](https://plustek.bandcamp.com/track/lunar-clock-luna-dial) and Reisen's theme: [*Lunatic Eyes ~ Invisible Full Moon*](https://plustek.bandcamp.com/track/lunatic-eyes-invisible-full-moon), all by +TEK from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangements of ZUN's 恋色マスタースパーク, 月時計 ～ ルナ・ダイアル and 狂気の瞳 ～ Invisible Full Moon.

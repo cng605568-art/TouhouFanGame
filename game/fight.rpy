@@ -625,7 +625,7 @@ screen fight_dash_fx():
 label mokou_entrance:
     $ fumo_freeze = { "mokou_fumo", "kaguya_fumo" }
     $ sfx("fight_cutin")
-    show screen fight_cutin("mokou", _("FUJIWARA NO MOKOU"), "藤原妹紅、参上！")
+    show screen fight_cutin("mokou", _("FUJIWARA NO MOKOU"), _("藤原妹紅、参上！"))
     pause 1.15
     show mokou_fumo at mokou_land
     pause 0.16
