@@ -95,7 +95,7 @@ for k, (t, fn) in enumerate(ev):
     chains.append(f)
     labels.append("[s%d]" % k)
     print("  %6.2fs  %s" % (start, fn))
-chains.append("%samix=inputs=%d:normalize=0:duration=first,alimiter=limit=0.97[a]" % ("".join(labels), len(labels)))
+chains.append("%samix=inputs=%d:normalize=0:duration=first,loudnorm=I=-16:TP=-1.5:LRA=14,aresample=48000[a]" % ("".join(labels), len(labels)))
 
 subprocess.run(
     ["ffmpeg", "-v", "error", "-y"] + inputs +
