@@ -277,7 +277,7 @@ label practice_done:
 
 ## Saves from before the Compendium only knew the fallacy each case taught:
 ## give them the other cards of every case they've closed too.
-init 999 python:
+init 997 python:  # 999 with this file's init offset of 2
     for _case in CASES:
         if _case.key in persistent.cases_cleared:
             persistent.fallacies_learned.add(_case.fallacy)
