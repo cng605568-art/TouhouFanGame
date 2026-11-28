@@ -485,6 +485,14 @@ testcase cases:
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c06_dozing")
+    $ renpy.change_language("japanese")
+    pause 0.4
+    $ shot("c06_dozing_ja")
+    $ renpy.change_language("schinese")
+    pause 0.4
+    $ shot("c06_dozing_zh")
+    $ renpy.change_language(None)
+    pause 0.3
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
@@ -862,6 +870,14 @@ testcase cases:
     click pos (40, 540)
     pause 0.9
     $ shot("c11_point")
+    $ renpy.change_language("japanese")
+    pause 0.4
+    $ shot("c11_point_ja")
+    $ renpy.change_language("schinese")
+    pause 0.4
+    $ shot("c11_point_zh")
+    $ renpy.change_language(None)
+    pause 0.3
     "Meiling, not guilty"
     move (40, 540)
     pause 0.4
