@@ -28,6 +28,9 @@ Download the latest build from [Releases](../../releases):
 
 - **`FumoCourt-x.y.z-win.zip`**: unzip it, then run `FumoCourt.exe`.
 - **`FumoCourt-x.y.z-web.zip`**: an HTML5 build. Upload it to itch.io as an HTML game, or unzip it and serve the folder over HTTP. Opening `index.html` straight from disk won't work.
+- **`FumoCourt-x.y.z-android.apk`**: for Android phones and tablets. Open it on the device and allow installing from your browser or file manager.
+
+The game is in English, Japanese (日本語) and Simplified Chinese (简体中文); switch under **Settings → Language**.
 
 | Action | Mouse | Keyboard |
 |---|---|---|
@@ -51,7 +54,11 @@ Builds run automatically on GitHub Actions (`.github/workflows/build.yml`).
    ```
 3. The workflow downloads Ren'Py 8.3.7, lints the game, and attaches the Windows and web zips to a new GitHub Release.
 
-**For a test build without a release:** go to **Actions → Build & Release → Run workflow**. The zips show up as a downloadable artifact on the run page.
+**For a test build without a release:** go to **Actions → Build & Release → Run workflow**. The zips show up as a downloadable artifact on the run page. **Actions → Android → Run workflow** does the same for the APK.
+
+**Android** (`.github/workflows/android.yml`) uses Ren'Py's RAPT with the runner's Android SDK and Java 21, and reads its settings from `.android.json` (package name, orientation) and the launcher icon from `android-icon_foreground.png` / `android-icon_background.png`. To sign every APK with the same key, so that a new version installs over the old one, run `sh tools/make_keystore.sh` once and save the printed text as a repository secret named `ANDROID_KEYSTORE` (Settings → Secrets and variables → Actions). Keep the `.keystore` file somewhere safe and never commit it. Without the secret each build is signed with a one-off key, and updating means uninstalling first.
+
+**itch.io:** `itch/page.md` has the page text and project settings, `itch/cover.png` the cover and `itch/screenshots/` the screenshots. To upload tagged builds automatically, add a `BUTLER_API_KEY` secret (from itch.io → Settings → API keys) and an `ITCH_GAME` repository variable such as `yourname/fumo-court`; the workflows then push the Windows, web and Android builds to the `windows`, `html5` and `android` channels.
 
 **To build locally**, use the [Ren'Py 8.3.7 SDK](https://www.renpy.org/release/8.3.7) plus its web support package:
 
@@ -88,9 +95,9 @@ The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* an
 
 ## Music
 
-The title screen and each witness have a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. A witness theme starts with the witness's testimony, carries through the cross-examination and cuts out when the objection lands. Its title card slides in at the bottom right, the way a Touhou stage names its BGM.
+The title screen and each witness have a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. A witness theme starts with the witness's testimony and carries through the cross-examination; when the witness is cornered the pursuit theme takes over, and the music cuts out when the case breaks open. Each title card slides in at the bottom right, the way a Touhou stage names its BGM.
 
-Every piece is a chiptune arrangement by +TEK, released under CC BY 4.0: *Scarlet Beyond a Crimson Dream* on the title screen, then *Beloved Tomboyish Girl* (Cirno), *Love-coloured Master Spark* (Marisa), *Lunar Clock ~ Luna Dial* (Sakuya) and *Lunatic Eyes ~ Invisible Full Moon* (Reisen), with *U.N. Owen Was Her S* as the pursuit theme that takes over when a witness is cornered. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
+Every piece is a chiptune arrangement by +TEK, released under CC BY 4.0: *Scarlet Beyond a Crimson Dream* on the title screen, then *Beloved Tomboyish Girl* (Cirno), *Love-coloured Master Spark* (Marisa), *Lunar Clock ~ Luna Dial* (Sakuya) and *Lunatic Eyes ~ Invisible Full Moon* (Reisen) and *Reach for the Moon, Immortal Smoke* (Eiki, Case 05), with *U.N. Owen Was Her S* as the pursuit theme. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
 
 To add or swap a theme, run `python tools/build_music.py track.flac <name> --find-loop`. Arrangements usually play the tune twice and then fade out. The tool finds where the second pass begins, cuts the file there and crossfades the cut, so the theme loops seamlessly for as long as the cross-examination lasts. It also matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM` with the loop start the tool prints. Without `--find-loop` it just trims the silence and fades the tail.
 
@@ -99,13 +106,18 @@ To add or swap a theme, run `python tools/build_music.py track.flac <name> --fin
 ```
 game/
   options.rpy      config, build settings
-  audio.rpy        sound effect slots, text blips, music
+  audio.rpy        sound effect slots, per-speaker text blips, music
   gui.rpy          palette, fonts, CourtPanel (sharp gold/crimson frames)
   transforms.rpy   fumo_talk, fumo_shock, fumo_yeet, eiki_lecture, effects
-  screens.rpy      courtroom HUD, cross-examination engine, menus
+  court.rpy        the trial engine: testimony, presses, hidden statements,
+                   the Court Record, difficulty, spirit and ranks
+  reactions.rpy    witness breakdowns, react() emotes and pose photos
+  screens.rpy      courtroom HUD, cross-examination, fallacy and evidence picks, menus
   script.rpy       cast, camera shots, fallacy cards, Case 01
-  case02-04.rpy    Cases 02 to 04
+  case02-05.rpy    Cases 02 to 05
   docket.rpy       case list, progress, the Docket screen
+  compendium.rpy   the Compendium of fallacies and practice mode
+  translations.rpy language switching; the translations are in tl/japanese and tl/schinese
   images/          fumo sprites (PNG, with SVG fallbacks), shadow, background, gavel, scales
   gui/             SVG UI pieces, window icon
   fonts/           Shippori Mincho B1 subsets (SIL OFL 1.1)
@@ -120,7 +132,11 @@ tools/
 art_src/           plush photos the sprites are made from, plus previews
 ```
 
-To add a case: put the witness's fumo photo in `art_src/`, copy `case02.rpy` as a template (testimony, presses, the case labels), and add a `Case(...)` to `CASES` in `docket.rpy`. A new fallacy needs a `Fallacy(...)` in `script.rpy` and an icon from `tools/make_art.py`.
+To add a case: put the witness's fumo photo in `art_src/`, copy `case02.rpy` as a template (evidence, testimony, presses, the case labels), and add a `Case(...)` to `CASES` in `docket.rpy`. In a `Statement`, `reveals="key"` makes pressing it add the hidden statement with that `key`; `proof` names the Court Record item that proves the objection. A new fallacy needs a `Fallacy(...)` in `script.rpy`, an icon from `tools/make_art.py`, a tip and practice lines in `compendium.rpy`, and a place in `FALLACY_ORDER` in `court.rpy`.
+
+**Pose photos.** `react("cirno", "smug")` makes a fumo react with a little move and an emote. To give a character a real pose instead, add a photo named `art_src/cirno_fumo_smug.jpg` (or `_nervous`, `_angry`, `_shock`, `_gloom`); the sprite workflow turns it into `game/images/cirno_fumo_smug.png` with the same lighting, and the game uses it automatically.
+
+**Translations.** Run `renpy.sh path/to/TouhouFanGame translate <language>` to add or update the files in `game/tl/<language>/`, translate the `new` lines, then run `tools/build_fonts.py` so the font subsets include every character used.
 
 ## Credits and disclaimer
 
@@ -132,8 +148,9 @@ Fumo is a plush line produced by Gift. The sprite photos show Gift's official pl
 - Title theme: [*Scarlet Beyond a Crimson Dream*](https://plustek.bandcamp.com/track/scarlet-beyond-a-crimson-dream) by +TEK, from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of music by ZUN (Team Shanghai Alice).
 - Cirno's theme: [*Beloved Tomboyish Girl*](https://plustek.bandcamp.com/track/beloved-tomboyish-girl) by +TEK, from *Story of Modulated Frequency* (2017), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of おてんば恋娘 by ZUN (Team Shanghai Alice).
 - Marisa's theme: [*Love-coloured Master Spark*](https://plustek.bandcamp.com/track/love-coloured-master-spark), Sakuya's theme: [*Lunar Clock ~ Luna Dial*](https://plustek.bandcamp.com/track/lunar-clock-luna-dial) and Reisen's theme: [*Lunatic Eyes ~ Invisible Full Moon*](https://plustek.bandcamp.com/track/lunatic-eyes-invisible-full-moon), all by +TEK from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangements of ZUN's 恋色マスタースパーク, 月時計 ～ ルナ・ダイアル and 狂気の瞳 ～ Invisible Full Moon.
+- Eiki's theme (Case 05): [*Reach for the Moon, Immortal Smoke*](https://plustek.bandcamp.com/track/reach-for-the-moon-immortal-smoke) by +TEK, from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cut to loop seamlessly, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of 月まで届け、不死の煙 by ZUN (Team Shanghai Alice).
 - Pursuit theme: [*U.N. Owen Was Her S*](https://plustek.bandcamp.com/track/u-n-owen-was-her-s) by +TEK, from *Embodiment of Frequency Modulation* (2024), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Looped by hand at a repeated passage, loudness-normalised and re-encoded as Ogg Vorbis. Arrangement of U.N.オーエンは彼女なのか？ by ZUN (Team Shanghai Alice).
 - Background removal: [BiRefNet](https://github.com/ZhengPeng7/BiRefNet) (MIT) via [rembg](https://github.com/danielgatis/rembg)
 
 - Engine: [Ren'Py](https://www.renpy.org) (MIT and other licenses)
-- Font: [Shippori Mincho B1](https://github.com/fontdasu/ShipporiMincho) by FONTDASU, SIL Open Font License 1.1 (`game/fonts/OFL.txt`)
+- Fonts: [Shippori Mincho B1](https://github.com/fontdasu/ShipporiMincho) by FONTDASU and [Noto Serif SC](https://fonts.google.com/noto/specimen/Noto+Serif+SC) by Google, SIL Open Font License 1.1 (`game/fonts/OFL.txt`, `game/fonts/OFL-NotoSerifSC.txt`)
