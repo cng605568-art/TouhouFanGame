@@ -395,7 +395,7 @@ screen fallacy_pick(tm_name, index):
         ## A bigger deck: smaller cards in a grid.
         vpgrid:
             cols (3 if len(cards) <= 6 else 4)
-            xalign 0.5 ypos 300
+            xalign 0.5 ypos 285
             spacing 26
             for n, card in enumerate(cards):
                 button:
@@ -412,7 +412,7 @@ screen fallacy_pick(tm_name, index):
                                 xalign 0.5
                                 text card.name style "fallacy_name" size 30
                                 text card.alias style "fallacy_alias" size 20
-                        add SVG(card.icon, 0.62) xalign 0.5
+                        add SVG(card.icon, 0.5) xalign 0.5
                         text card.blurb style "fallacy_blurb" size 21 xsize 344 line_spacing 2
 
     use pick_timer
@@ -462,7 +462,7 @@ style fallacy_card is default:
     padding (30, 30, 30, 30)
 
 style fallacy_card_small is fallacy_card:
-    xysize (400, 320)
+    xysize (400, 330)
     padding (22, 22, 22, 18)
     background ParchmentPanel(corner_size=28)
     hover_background ParchmentPanel(corner_size=28, edge=GOLD_HI, inner=VERMILION)

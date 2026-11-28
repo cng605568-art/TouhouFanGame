@@ -201,7 +201,7 @@ screen practice_pick(question, number):
 
     vpgrid:
         cols cols
-        xalign 0.5 ypos 270
+        xalign 0.5 ypos 285
         spacing 22
         for n, card in enumerate(deck):
             button:
@@ -218,7 +218,7 @@ screen practice_pick(question, number):
                             xalign 0.5
                             text card.name style "fallacy_name" size 30
                             text card.alias style "fallacy_alias" size 20
-                    add SVG(card.icon, 0.62) xalign 0.5
+                    add SVG(card.icon, 0.5) xalign 0.5
                     text card.blurb style "fallacy_blurb" size 21 xsize 344 line_spacing 2
 
     textbutton _("Stop practice"):
