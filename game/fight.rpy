@@ -98,13 +98,13 @@ transform impact_cam:
     u_cut 0.32 u_impact 1.0
     u_ink (0.03, 0.02, 0.04, 1.0) u_paper (1.0, 0.97, 0.92, 1.0)
     xoffset 26 yoffset -16
-    pause 0.05
+    pause 0.07
     u_ink (1.0, 0.97, 0.92, 1.0) u_paper (0.05, 0.01, 0.03, 1.0)
     xoffset -24 yoffset 18
-    pause 0.05
+    pause 0.07
     u_ink (0.12, 0.0, 0.03, 1.0) u_paper (0.96, 0.16, 0.18, 1.0)
     xoffset 18 yoffset 10
-    pause 0.05
+    pause 0.07
     u_impact 0.0
     xoffset -14 yoffset -8
     pause 0.04
@@ -160,13 +160,16 @@ transform final_cam:
     zoom 1.32 matrixcolor SaturationMatrix(1.0)
     u_ink (0.03, 0.02, 0.04, 1.0) u_paper (1.0, 0.97, 0.92, 1.0)
     xoffset 30 yoffset -18
-    pause 0.06
+    pause 0.08
     u_ink (1.0, 0.97, 0.92, 1.0) u_paper (0.05, 0.01, 0.03, 1.0)
     xoffset -28 yoffset 20
-    pause 0.06
+    pause 0.08
     u_ink (0.12, 0.0, 0.03, 1.0) u_paper (0.96, 0.16, 0.18, 1.0)
     xoffset 22 yoffset 12
-    pause 0.06
+    pause 0.08
+    u_ink (0.03, 0.02, 0.04, 1.0) u_paper (1.0, 0.97, 0.92, 1.0)
+    xoffset -16 yoffset -10
+    pause 0.08
     u_impact 0.0
     parallel:
         easeout 0.7 zoom 1.0
@@ -411,7 +414,7 @@ transform ghost(x, delay):
 
 ## A star circling over Kaguya's head while she's dazed.
 transform dizzy_star(cx, cy, phase):
-    anchor (0.5, 0.5) zoom 0.42
+    anchor (0.5, 0.5) zoom 0.75
     matrixcolor TintMatrix("#FFE27A")
     blend "add"
     around (cx, cy) radius 140 angle phase
@@ -524,18 +527,18 @@ screen fight_cutin(who, name, sub):
 screen fight_land_fx():
     layer "master"
     zorder 40
-    add Solid("#FFFFFF") at flash_once(0.0, 0.85, 0.2)
+    add Solid("#FFFFFF") at flash_once(0.21, 0.85, 0.2)
     add "focus_lines" at overlay_window(0.0, 0.5, 0.9)
-    add "gui/vfx/ring.png" at shock_ring(700, 585, 0.0, 3.2)
-    add "gui/vfx/ring.png" at shock_ring(700, 585, 0.07, 5.0)
-    add "gui/vfx/glow.png" at pop_fx(700, 540, 0.0, 3.0, 0, "#FFD38A", 0.35)
+    add "gui/vfx/ring.png" at shock_ring(700, 585, 0.21, 3.2)
+    add "gui/vfx/ring.png" at shock_ring(700, 585, 0.28, 5.0)
+    add "gui/vfx/glow.png" at pop_fx(700, 540, 0.21, 3.0, 0, "#FFD38A", 0.35)
     for dx, d in ((-380, 0.0), (360, 0.02), (-200, 0.06), (220, 0.05), (-520, 0.1), (500, 0.08)):
-        add "gui/vfx/smoke_a.png" at puff(700, 590, dx, -90, d, 1.3)
-    add "gui/vfx/debris.png" at puff(700, 520, -240, -260, 0.0, 1.2, "#5A3A2A", 0.7)
-    add "gui/vfx/debris.png" at puff(700, 520, 260, -240, 0.03, 1.1, "#5A3A2A", 0.7)
+        add "gui/vfx/smoke_a.png" at puff(700, 590, dx, -90, d + 0.21, 1.3)
+    for dx, dy, d in ((-300, -280, 0.21), (320, -260, 0.22), (-160, -380, 0.24), (180, -360, 0.23)):
+        add "gui/vfx/flare_star.png" at ember(700, 520, dx, dy, d)
     for x, d, r in ((560, 0.02, -30), (840, 0.04, 30), (700, 0.0, 0)):
-        add "gui/vfx/flame_jet.png" at blaze(x, 470, d, 1.4, "#FF7A2A", 0.7, r)
-    timer 2.0 action Hide("fight_land_fx")
+        add "gui/vfx/flame_jet.png" at blaze(x, 470, d + 0.21, 1.4, "#FF7A2A", 0.7, r)
+    timer 2.21 action Hide("fight_land_fx")
 
 ## The face-off: the screen splits on a diagonal, her eyes against Kaguya's.
 screen fight_faceoff():
@@ -581,22 +584,20 @@ screen fight_slowmo_fx():
 screen fight_final_fx():
     layer "master"
     zorder 40
-    add Solid("#FFFFFF") at flash_once(0.0, 1.0, 0.3)
+    add Solid("#FFFFFF") at flash_once(0.32, 1.0, 0.3)
     add "focus_lines" at overlay_window(0.0, 0.7, 1.0)
-    add "gui/vfx/fireball_a.png" at blaze(1200, 330, 0.0, 3.4, "#FF7A22", 1.0)
-    add "gui/vfx/fireball_b.png" at blaze(1240, 300, 0.06, 2.8, "#FFB03A", 0.9, 40)
-    add "gui/vfx/glow.png" at pop_fx(1200, 330, 0.0, 6.0, 0, "#FFE0A0", 0.5)
-    add "gui/vfx/ring.png" at shock_ring(1200, 330, 0.0, 4.5, 1.0, "#FFE8B0")
-    add "gui/vfx/ring.png" at shock_ring(1200, 330, 0.1, 7.0, 1.0, "#FFB060")
-    add "gui/vfx/ring.png" at shock_ring(1200, 585, 0.04, 6.0, 0.3)
+    add "gui/vfx/fireball_a.png" at blaze(1200, 330, 0.32, 3.4, "#FF7A22", 1.0)
+    add "gui/vfx/fireball_b.png" at blaze(1240, 300, 0.38, 2.8, "#FFB03A", 0.9, 40)
+    add "gui/vfx/glow.png" at pop_fx(1200, 330, 0.32, 6.0, 0, "#FFE0A0", 0.5)
+    add "gui/vfx/ring.png" at shock_ring(1200, 330, 0.32, 4.5, 1.0, "#FFE8B0")
+    add "gui/vfx/ring.png" at shock_ring(1200, 330, 0.42, 7.0, 1.0, "#FFB060")
+    add "gui/vfx/ring.png" at shock_ring(1200, 585, 0.36, 6.0, 0.3)
     for dx, dy, d in ((-560, -220, 0.02), (580, -260, 0.03), (-340, -460, 0.05), (400, -420, 0.04),
                       (0, -520, 0.06), (-700, -60, 0.03), (720, -40, 0.04), (-180, -560, 0.07)):
-        add "gui/vfx/flare_star.png" at ember(1200, 330, dx, dy, d)
-    add "gui/vfx/debris.png" at puff(1200, 420, -320, -200, 0.02, 0.9, "#9A7A5A", 0.7)
-    add "gui/vfx/debris.png" at puff(1200, 420, 340, -180, 0.03, 0.9, "#9A7A5A", 0.7)
+        add "gui/vfx/flare_star.png" at ember(1200, 330, dx, dy, d + 0.32)
     for dx, d in ((-600, 0.2), (620, 0.22), (-350, 0.3), (400, 0.28)):
-        add "gui/vfx/smoke_a.png" at puff(1200, 470, dx, -140, d, 1.6, "#EADCCF", 1.3)
-    timer 2.0 action Hide("fight_final_fx")
+        add "gui/vfx/smoke_a.png" at puff(1200, 470, dx, -140, d + 0.32, 1.6, "#EADCCF", 1.3)
+    timer 2.32 action Hide("fight_final_fx")
 
 ## Kaguya, flat out and seeing stars.
 screen fight_dizzy():
@@ -632,7 +633,7 @@ label mokou_entrance:
     $ sfx("fight_land")
     show kaguya_fumo at kaguya_recoil
     show screen fight_land_fx
-    $ fight_say("fl_land", [ (_("ドンッ！"), 470, 220, 0.0, -10, 150) ])
+    $ fight_say("fl_land", [ (_("ドンッ！"), 470, 250, 0.21, -10, 150) ])
     camera at impact_cam
     pause 0.9
     camera
@@ -650,7 +651,7 @@ label fight_rush:
     show mokou_fumo at mokou_rush
     show kaguya_fumo at kaguya_rushed
     show screen fight_rush_fx
-    $ fight_say("fl_rush", [ (_("ドドドドッ！"), 1260, 130, 0.1, 8, 120), (_("バキッ！"), 1480, 520, 0.95, -12, 150) ], 1.6)
+    $ fight_say("fl_rush", [ (_("ドドドドッ！"), 1250, 220, 0.1, 8, 120), (_("バキッ！"), 1480, 520, 0.95, -12, 150) ], 1.6)
     camera at rush_cam
     pause 1.25
     return
@@ -661,7 +662,7 @@ label fight_finisher:
     show mokou_fumo at mokou_windup
     show kaguya_fumo at kaguya_brace
     show screen fight_slowmo_fx
-    $ fight_say("fl_slow", [ (_("ゴゴゴゴ…"), 560, 150, 0.1, -4, 110) ], 1.3)
+    $ fight_say("fl_slow", [ (_("ゴゴゴゴ…"), 600, 260, 0.1, -4, 110) ], 1.3)
     camera at slowmo_cam
     pause 1.2
     $ sfx("fight_final")
@@ -669,9 +670,9 @@ label fight_finisher:
     show mokou_fumo at mokou_strike
     show kaguya_fumo at kaguya_floored
     show screen fight_final_fx
-    $ fight_say("fl_final", [ (_("ドゴォォン！！"), 760, 190, 0.04, -10, 170) ])
+    $ fight_say("fl_final", [ (_("ドゴォォン！！"), 760, 230, 0.34, -10, 170) ])
     camera at final_cam
-    pause 1.5
+    pause 1.7
     camera
     show screen fight_dizzy
     return
