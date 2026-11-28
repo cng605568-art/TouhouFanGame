@@ -1,0 +1,101 @@
+name: Fight preview (temporary)
+
+# Records Mokou's fight (ci_test/zz_fight.rpy) and publishes it to
+# ci-fight-results. Software rendering on a runner manages a few frames a
+# second, so the picture is recorded with game time slowed ten times
+# (RENPY_TIMEWARP) and sped back up. Music and text blips come from a second,
+# real-time pass, lined up on a flash and a gavel; the sound effects are mixed
+# in from the picture pass's log of when each one played.
+
+on:
+  push:
+    branches:
+      - ci-fight
+
+env:
+  RENPY_VERSION: "8.3.7"
+  WARP: "0.1"
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: FumoCourt
+
+      - name: Download Ren'Py SDK
+        run: |
+          set -euo pipefail
+          curl -fL --retry 4 --retry-delay 5 -o sdk.tar.bz2 "https://www.renpy.org/dl/${RENPY_VERSION}/renpy-${RENPY_VERSION}-sdk.tar.bz2"
+          tar -xjf sdk.tar.bz2
+          mv "renpy-${RENPY_VERSION}-sdk" renpy-sdk
+          grep -n "RENPY_TIMEWARP" -r renpy-sdk/renpy/display/*.py | head -3
+
+      - name: Install display, audio and ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglx-mesa0 pulseaudio ffmpeg > /dev/null
+
+      - name: Picture (slowed)
+        working-directory: renpy-sdk
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          LP_NUM_THREADS: "4"
+          SDL_AUDIODRIVER: dummy
+          SDL_VIDEO_WINDOW_POS: "0,0"
+        run: |
+          cp "${GITHUB_WORKSPACE}/FumoCourt/ci_test/zz_fight.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/"
+          Xvfb :99 -screen 0 1280x720x24 &
+          sleep 2
+          export DISPLAY=:99
+          ffmpeg -y -loglevel error -f x11grab -video_size 1280x720 -framerate 15 -i :99 \
+                 -c:v libx264 -preset ultrafast -crf 16 -pix_fmt yuv420p "${GITHUB_WORKSPACE}/video_raw.mkv" &
+          FF=$!
+          RENPY_TIMEWARP="${WARP}" timeout 1200 ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test fight 2>&1 | tail -20 || true
+          kill -INT $FF; wait $FF || true
+          cp "${GITHUB_WORKSPACE}/FumoCourt/traceback.txt" "${GITHUB_WORKSPACE}/" 2>/dev/null || true
+          cp "${GITHUB_WORKSPACE}/FumoCourt/fight_events.txt" "${GITHUB_WORKSPACE}/"
+          cat "${GITHUB_WORKSPACE}/fight_events.txt"
+          ls -la "${GITHUB_WORKSPACE}"/video_raw.mkv
+
+      - name: Sound (real time)
+        working-directory: renpy-sdk
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          LP_NUM_THREADS: "4"
+          SDL_AUDIODRIVER: pulse
+          SDL_VIDEO_WINDOW_POS: "0,0"
+          FIGHT_AUDIO_PASS: "1"
+        run: |
+          pulseaudio -D --exit-idle-time=-1 || true
+          sleep 1
+          pactl load-module module-null-sink sink_name=rec || true
+          pactl set-default-sink rec || true
+          Xvfb :98 -screen 0 640x360x24 &
+          sleep 2
+          export DISPLAY=:98
+          ffmpeg -y -loglevel error -f pulse -i rec.monitor -ac 2 -ar 48000 "${GITHUB_WORKSPACE}/audio.wav" &
+          FF=$!
+          timeout 400 ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test fight 2>&1 | tail -20 || true
+          kill -INT $FF; wait $FF || true
+          ls -la "${GITHUB_WORKSPACE}"/audio.wav
+
+      - name: Line up and encode
+        run: |
+          python3 FumoCourt/ci_test/fight_sync.py video_raw.mkv audio.wav fight_events.txt FumoCourt/game "${WARP}" fight_preview.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 fight_preview.mp4
+
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out
+          cp fight_preview.mp4 fight_events.txt traceback.txt out/ 2>/dev/null || true
+          ffmpeg -v error -i video_raw.mkv -vf "fps=1/3,scale=640:-1" out/raw_%03d.jpg 2>/dev/null || true
+          cd out
+          git init -q -b ci-fight-results
+          git config user.name ci && git config user.email ci@example.com
+          git add -A && git commit -qm "fight ${GITHUB_RUN_ID}" --allow-empty
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-fight-results
