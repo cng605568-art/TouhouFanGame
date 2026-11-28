@@ -57,8 +57,13 @@ init -1 python:
         return CASES[i] if i < len(CASES) else None
 
     def title_witness():
-        """The fumo on the right of the title screen: whoever testifies next."""
-        return (next_case() or CASES[-1]).fumo
+        """
+        The fumo on the right of the title screen: whoever testifies next.
+        Once every case is closed, the pudding thief from Case 05 takes the
+        spot.
+        """
+        case = next_case()
+        return case.fumo if case else "cirno_fumo"
 
     def BeginTrial():
         """Begin Trial opens the Docket: pick a difficulty, then a case."""
@@ -78,6 +83,9 @@ define CASES = [
     Case("case4", _("CASE 04"), _("The Lunar Prescription"),
          _("The Human Village v. One Moon Rabbit"), "reisen", "appeal_to_authority",
          "testimony_reisen", [ "tonic_bottle", "eirin_diploma", "lab_notebook" ]),
+    Case("case5", _("CASE 05"), _("The Unappealable Verdict"),
+         _("The Scarlet Devil Mansion v. The Verdict in Case 03"), "eiki", "circular_reasoning",
+         "testimony_eiki", [ "case3_verdict", "staff_roster", "frozen_pudding" ]),
     ]
 
 default persistent.cases_cleared = set()
@@ -189,7 +197,8 @@ screen docket():
                                     text "閉廷" style "docket_mark_jp"
                                     text case.fallacy_card.name style "docket_mark_text"
                                     if best:
-                                        text _("Rank [best[0]] · [DIFFICULTY[best[1]][name]!t]") style "docket_mark_text" color VERMILION
+                                        $ best_letter, best_diff = best[0], DIFFICULTY[best[1]]["name"]
+                                        text _("Rank [best_letter] · [best_diff!t]") style "docket_mark_text" color VERMILION
                             elif state == "next":
                                 vbox:
                                     xalign 0.5

@@ -1,6 +1,7 @@
 ################################################################################
 ## case04.rpy - Case 04: The Lunar Prescription. Witness: Reisen.
-## Appeal to authority. The last case on the docket.
+## Appeal to authority. At the end Komachi mentions frozen pudding at Misty
+## Lake, which sets up Case 05.
 ################################################################################
 
 ## Runs after script.rpy, which defines the cast and the fallacy cards.
@@ -202,6 +203,10 @@ label case4_breakthrough:
     window auto
     eiki "I keep saying \"escort.\""
     komachi "And I keep escorting, boss. Very efficiently."
+    komachi "Oh, boss. A fairy at Misty Lake is selling frozen pudding. Two yen a scoop."
+    eiki "Irrelevant. The pudding case is closed. I closed it myself."
+    komachi "Just saying. The cups have a little bat on them."
+    eiki "Komachi. A closed case stays closed."
     eiki "That clears today's docket. Junior Judge, your work was... acceptable."
     komachi "That's her highest praise, by the way."
     eiki "Komachi."

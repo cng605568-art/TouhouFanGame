@@ -1016,9 +1016,33 @@ def make_fallacy_icons():
         dashed([(56, 128), (72, 146), (106, 116)], dash=10, gap=6),
     ])
 
+    # Circular Reasoning: a claim and its reason, each arrow leading back to
+    # the other, so the argument only ever arrives where it started.
+    def arc_arrow(a0, a1, r=52, cx=80, cy=80):
+        """An arc from angle a0 to a1 (degrees, clockwise) with a head at a1."""
+        x0, y0 = cx + r * math.cos(math.radians(a0)), cy + r * math.sin(math.radians(a0))
+        x1, y1 = cx + r * math.cos(math.radians(a1)), cy + r * math.sin(math.radians(a1))
+        t = math.radians(a1 + 90)               # direction of travel at the head
+        n = math.radians(a1)                    # outward normal
+        hx, hy = x1 - 14 * math.cos(t), y1 - 14 * math.sin(t)
+        head = "M%.1f %.1f L%.1f %.1f L%.1f %.1f" % (hx + 10 * math.cos(n), hy + 10 * math.sin(n), x1, y1,
+                                                    hx - 10 * math.cos(n), hy - 10 * math.sin(n))
+        return ('<path d="M%.1f %.1f A%d %d 0 0 1 %.1f %.1f" fill="none" stroke="%s" stroke-width="6" stroke-linecap="round"/>'
+                '<path d="%s" fill="none" stroke="%s" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>'
+                % (x0, y0, r, r, x1, y1, VERMILION, head, VERMILION))
+    cr = "\n".join([
+        arc_arrow(-60, 52), arc_arrow(120, 232),
+        '<circle cx="80" cy="28" r="17" fill="%s" stroke="%s" stroke-width="%d"/>' % (GOLD, ink, sw - 2),
+        '<circle cx="80" cy="132" r="17" fill="%s" stroke="%s" stroke-width="%d"/>' % (GOLD, ink, sw - 2),
+        # The same letter in both: "A, because A".
+        '<path d="M73 37 L80 19 L87 37 M75.5 31 L84.5 31 M73 141 L80 123 L87 141 M75.5 135 L84.5 135" fill="none" '
+        'stroke="%s" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' % ink,
+    ])
+
     for name, body, label in (("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"),
                               ("slippery_slope", ss, "slippery slope"), ("tu_quoque", tq, "tu quoque"),
-                              ("false_dilemma", fd, "false dilemma"), ("appeal_to_authority", aa, "appeal to authority")):
+                              ("false_dilemma", fd, "false dilemma"), ("appeal_to_authority", aa, "appeal to authority"),
+                              ("circular_reasoning", cr, "circular reasoning")):
         write(os.path.join(GUI, "fallacy_%s.svg" % name), svg(W, H, body, "fallacy icon: " + label))
 
 
@@ -1116,6 +1140,16 @@ def make_evidence_icons():
         '<ellipse cx="130" cy="82" rx="10" ry="22" fill="%s" stroke="%s" stroke-width="%d"/>' % ("#E9DDBF", ink, sw),
         p("M74 60 L74 104 M86 60 L86 104", "none", VERMILION, 6),
         p("M80 104 L70 136 L80 128 L90 136 Z", VERMILION, ink, 3),
+    ])
+
+    # A pudding cup, frozen inside a block of fairy ice.
+    icons["pudding"] = "\n".join([
+        p("M24 50 L80 30 L136 50 L136 128 L80 148 L24 128 Z", "#DCEFF7", "#5FA8C8", 4),
+        p("M50 122 L110 122 L100 72 L60 72 Z", "#F2C14E", ink, 4),
+        p("M60 72 Q80 60 100 72 L98 84 Q80 76 62 84 Z", "#8B4A1C", ink, 3),
+        p("M40 126 L120 126", "none", ink, sw),
+        p("M24 50 L80 70 L136 50 M80 70 L80 148", "none", "#5FA8C8", 3, ' stroke-opacity="0.7"'),
+        p("M36 58 L54 52 M40 70 L46 68 M118 112 L126 108", "none", "#FFFFFF", 5),
     ])
 
     for name, body in icons.items():

@@ -2,14 +2,23 @@
 
 An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts Gensokyo's residents (as deadpan fumo plushies) on trial for petty crimes. You're her junior judge: press testimony, spot the **logical fallacy**, and object.
 
-Four cases, played in order. Each witness hides one fallacy in their testimony:
+Five cases, played in order. Each witness hides one fallacy in their testimony:
 
 - **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. *False Cause.*
 - **Case 02: The Long-Term Loan.** Marisa "borrowed" forty-seven grimoires, and besides, Reimu pockets her own donation box. *Tu Quoque.*
 - **Case 03: The Vanished Pudding.** Sakuya is sure the gatekeeper ate the pudding, because the only other suspect would never. *False Dilemma.*
 - **Case 04: The Lunar Prescription.** Reisen's tonic makes villagers hear colours, but Master Eirin says it's safe. *Appeal to Authority.*
+- **Case 05: The Unappealable Verdict.** The pudding from Case 03 turns up frozen at Misty Lake, and a judge can't hear her own appeal. You take the bench; Eiki takes the stand. *Circular Reasoning.*
 
-CASE CLOSED leads straight into the next trial, and the fumo on the right of the title screen is always whoever testifies next. Once you've closed a case, Begin Trial opens the Docket, where closed cases can be replayed.
+How a trial works:
+
+- **Press** every statement. Some presses make the witness add a new statement (TESTIMONY UPDATED), and the flaw is often the one they didn't want to say.
+- **Object** with the fallacy card that names the flaw. On Normal and up, Eiki then asks you to **prove it** with an item from the **Court Record** (TAKE THAT!).
+- Wrong objections cost a magatama of spirit. Run out and it's a mistrial.
+- **Difficulty**, chosen on the Docket: *Easy* (seven magatama, the case's three cards, no proof), *Normal* (five, every fallacy met so far), *Hard* (four, a 30-second card timer) and *Lunatic* (three, fifteen seconds, every card from the start). Each case is ranked S to C by how many mistakes you made, and the Docket keeps your best.
+- When a witness is cornered the pursuit theme kicks in, and each one breaks down in their own way.
+
+CASE CLOSED leads straight into the next trial, and the fumo on the right of the title screen is always whoever testifies next. Begin Trial opens the Docket, where you pick a difficulty and replay closed cases.
 
 The character sprites are photos of the official Fumo plushies, cut out with the open BiRefNet segmentation model and relit to match the courtroom. Every other visual is code: hand-written SVG shapes and Ren'Py styles. Nothing is AI-generated art.
 
@@ -25,6 +34,7 @@ Download the latest build from [Releases](../../releases):
 | Next / previous statement | ◆ arrows | Right / Left |
 | Press the witness | `PRESS` plaque | P |
 | Object | `OBJECT!` plaque | O |
+| Court Record | `COURT RECORD` | R |
 | Withdraw an objection | `Withdraw` | Esc |
 
 ## Building

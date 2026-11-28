@@ -161,6 +161,14 @@ init -1 python:
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             loop=10.839796,
         ),
+        # Case 05, when Eiki herself takes the stand.
+        "eiki": Theme(
+            "finale_theme",
+            "Reach for the Moon, Immortal Smoke",
+            u"月まで届け、不死の煙",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=1.700136,
+        ),
         # The pursuit: takes over from the witness theme when the witness is
         # cornered (court.rpy). No clean second pass in this arrangement, so
         # the loop points were set by hand where a passage repeats 68.9 s

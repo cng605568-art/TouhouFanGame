@@ -343,6 +343,9 @@ label prove_it(tm_name):
         return "withdrawn"
 
     if _return == tm.proof:
+        # Evidence is shown to the witness, so the shout lands on them and
+        # the breakdown that follows has them on screen.
+        call expression tm.witness_shot
         call court_shout("takethat")
         return "proved"
 

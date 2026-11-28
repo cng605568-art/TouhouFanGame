@@ -214,6 +214,13 @@ define fallacy_appeal_to_authority = Fallacy(
     _("Treating a famous name as proof instead of checking the evidence."),
     "gui/fallacy_appeal_to_authority.svg")
 
+define fallacy_circular_reasoning = Fallacy(
+    "circular_reasoning",
+    _("Circular Reasoning"),
+    _("(Begging the Question)"),
+    _("Using the conclusion as its own reason, so the argument proves nothing."),
+    "gui/fallacy_circular_reasoning.svg")
+
 ## Case 01 evidence.
 define evidence_frog_census = Evidence("frog_census", _("Frog Census"),
     _("Twenty frogs, all accounted for. All mildly annoyed."), "gui/ev_document.svg")
