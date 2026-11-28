@@ -62,6 +62,7 @@ define testimony_eiki = Testimony(
 ## beside it.
 label shot_bench(trans=whip_right):
     camera
+    hide screen emote
     scene bg_courtroom
     show judge_bench at stand_pos
     show scales at bench_scales

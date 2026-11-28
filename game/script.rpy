@@ -133,6 +133,7 @@ define you = Character("Junior Judge",
 
 label shot_eiki(trans=whip_right):
     camera
+    hide screen emote
     scene bg_courtroom
     show judge_bench at stand_pos
     show fumo_shadow at shadow_pos
@@ -144,6 +145,7 @@ label shot_eiki(trans=whip_right):
 ## it ("shot_marisa") and the engine can cut back to it after a press.
 label shot_witness(fumo, trans=whip_left):
     camera
+    hide screen emote
     scene bg_courtroom
     show witness_stand at stand_pos
     show fumo_shadow at shadow_pos
