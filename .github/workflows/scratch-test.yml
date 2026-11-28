@@ -1,0 +1,131 @@
+name: Scratch test (temporary)
+
+on:
+  push:
+    branches:
+      - ci-scratch
+
+env:
+  RENPY_VERSION: "8.3.7"
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: FumoCourt
+
+      - name: Restore cached Ren'Py SDK
+        id: sdk-cache
+        uses: actions/cache@v4
+        with:
+          path: renpy-sdk
+          key: renpy-sdk-${{ env.RENPY_VERSION }}-with-web
+
+      - name: Download Ren'Py SDK and web support
+        if: steps.sdk-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          base="https://www.renpy.org/dl/${RENPY_VERSION}"
+          curl -fL --retry 4 --retry-delay 5 -o sdk.tar.bz2 "${base}/renpy-${RENPY_VERSION}-sdk.tar.bz2"
+          curl -fL --retry 4 --retry-delay 5 -o web.zip "${base}/renpy-${RENPY_VERSION}-web.zip"
+          tar -xjf sdk.tar.bz2
+          mv "renpy-${RENPY_VERSION}-sdk" renpy-sdk
+          unzip -q web.zip -d web-unpacked
+          echo "web zip top level:"; ls web-unpacked
+          if [ -d web-unpacked/web ]; then
+            mv web-unpacked/web renpy-sdk/web
+          else
+            mv "$(dirname "$(find web-unpacked -name index.html | head -n 1)")" renpy-sdk/web
+          fi
+          test -f renpy-sdk/web/index.html
+          rm -rf sdk.tar.bz2 web.zip web-unpacked
+
+      - name: Install virtual display
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri libglx-mesa0 > /dev/null
+
+      - name: Lint
+        working-directory: renpy-sdk
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+        run: ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" lint --error-code 2>&1 | tee "${GITHUB_WORKSPACE}/lint.txt"
+
+      - name: Screenshot tour
+        working-directory: renpy-sdk
+        env:
+          FUMO_SHOTS: ${{ github.workspace }}/shots
+          SDL_AUDIODRIVER: dummy
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          cp "${GITHUB_WORKSPACE}/FumoCourt/ci_test/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/"
+          FUMO_AUTOSHOT=1 timeout 600 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test tour 2>&1 | tee "${GITHUB_WORKSPACE}/tour.txt" || true
+          FUMO_AUTOSHOT=1 timeout 600 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test cases 2>&1 | tee "${GITHUB_WORKSPACE}/cases.txt" || true
+          ls -la "${GITHUB_WORKSPACE}/shots" || true
+
+      - name: PNG swap check
+        working-directory: renpy-sdk
+        env:
+          FUMO_SHOTS: ${{ github.workspace }}/shots
+          SDL_AUDIODRIVER: dummy
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          cp "${GITHUB_WORKSPACE}/FumoCourt/ci_test/cirno_fumo_test.png" "${GITHUB_WORKSPACE}/FumoCourt/game/images/cirno_fumo.png"
+          timeout 120 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test pngswap 2>&1 | tee "${GITHUB_WORKSPACE}/pngswap.txt" || true
+          rm "${GITHUB_WORKSPACE}/FumoCourt/game/images/cirno_fumo.png" "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpyc"
+
+      - name: SFX check
+        working-directory: renpy-sdk
+        env:
+          SDL_AUDIODRIVER: dummy
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          cp "${GITHUB_WORKSPACE}/FumoCourt/ci_test/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/"
+          timeout 120 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test sfxcheck 2>&1 | tee "${GITHUB_WORKSPACE}/sfxcheck.txt" || true
+          timeout 120 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test musicloop 2>&1 | tee "${GITHUB_WORKSPACE}/musicloop.txt" || true
+          rm -f "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpyc"
+
+      - name: Collect logs
+        if: always()
+        run: |
+          mkdir -p logs
+          cp FumoCourt/*.txt logs/ 2>/dev/null || true
+          cp FumoCourt/game/*.txt logs/ 2>/dev/null || true
+          cp lint.txt tour.txt cases.txt pngswap.txt sfxcheck.txt musicloop.txt logs/ 2>/dev/null || true
+          ls -la logs
+
+      - name: Build Windows package
+        working-directory: renpy-sdk
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+        run: ./renpy.sh launcher distribute "${GITHUB_WORKSPACE}/FumoCourt" --package win --destination "${GITHUB_WORKSPACE}/dists" 2>&1 | tail -20
+
+      - name: Build web package
+        working-directory: renpy-sdk
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+        run: |
+          ./renpy.sh launcher set_project "${GITHUB_WORKSPACE}/FumoCourt"
+          ./renpy.sh launcher web_build "${GITHUB_WORKSPACE}/FumoCourt" --destination "${GITHUB_WORKSPACE}/dists/FumoCourt-0.1.0-web" 2>&1 | tail -20
+          ls -la "${GITHUB_WORKSPACE}/dists"
+          unzip -Z1 "${GITHUB_WORKSPACE}/dists/FumoCourt-0.1.0-win.zip" > "${GITHUB_WORKSPACE}/logs/win_listing.txt" || true
+          unzip -Z1 "${GITHUB_WORKSPACE}/dists/FumoCourt-0.1.0-web.zip" > "${GITHUB_WORKSPACE}/logs/web_listing.txt" || true
+
+      - name: Push results to ci-results branch
+        if: always()
+        run: |
+          set -x
+          mkdir -p results && cp -r shots logs results/ 2>/dev/null || true
+          if [ -d results/shots ]; then mogrify -format jpg -quality 88 results/shots/*.png && rm -f results/shots/*.png; fi
+          cd results
+          git init -q -b ci-results
+          git config user.name ci && git config user.email ci@example.com
+          git add -A && git commit -qm "results ${GITHUB_RUN_ID}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-results
