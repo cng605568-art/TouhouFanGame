@@ -116,55 +116,6 @@ transform fumo_yeet:
     parallel:
         easeout 0.18 xzoom 1.0 yzoom 1.0
 
-## Case 07: the yeet starts as usual, then Alice's dolls catch her and carry
-## her out, slowly, swaying.
-transform fumo_yeet_caught:
-    subpixel True
-    zoom 1.0 xzoom 1.0 yzoom 1.0 xoffset 0
-    anchor (0.5, 0.5) yoffset FUMO_CENTER_LIFT
-    rotate 0
-    easein 0.12 xzoom 1.12 yzoom 0.84
-    parallel:
-        easeout 0.35 yoffset FUMO_CENTER_LIFT - 320
-        easein 0.25 yoffset FUMO_CENTER_LIFT - 300
-        linear 1.5 yoffset FUMO_CENTER_LIFT - 700
-    parallel:
-        linear 0.35 rotate 140
-        easeout 0.3 rotate 0
-        block:
-            ease 0.4 rotate -6
-            ease 0.4 rotate 6
-            repeat
-    parallel:
-        pause 0.6
-        linear 1.5 xoffset 520
-    parallel:
-        easeout 0.18 xzoom 1.0 yzoom 1.0
-    parallel:
-        pause 1.6
-        linear 0.5 alpha 0.0
-
-## Case 08: Reimu floats up out of the bailiff's reach and bobs there.
-transform fumo_hover:
-    subpixel True
-    xoffset 0 rotate 0 zoom 1.0 xzoom 1.0 yzoom 1.0
-    easeout 0.5 yoffset -150
-    block:
-        ease 0.8 yoffset -170
-        ease 0.8 yoffset -140
-        repeat
-
-## A prop thrown off the right of the stand (Case 08's donation box).
-transform item_yeet:
-    subpixel True
-    anchor (0.5, 0.5) xpos 1060 ypos 520 zoom 1.4 rotate 0
-    parallel:
-        easeout 0.8 ypos -200
-    parallel:
-        linear 0.8 xpos 2200
-    parallel:
-        linear 0.8 rotate 540
-
 ## Eiki's sermon. Apply to the camera so the whole court pushes in:
 ##     camera at eiki_lecture
 ## and reset afterwards with a plain `camera`.
