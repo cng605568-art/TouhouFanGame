@@ -936,6 +936,41 @@ def make_icons():
     im.save(os.path.join(ROOT, "icon.ico"), sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])
 
 
+def make_android_icons():
+    """
+    Adaptive launcher icon for the Android build: the gold scales on their
+    own layer, over a crimson background. Android crops both layers to a
+    shape, so the scales stay inside the middle two-thirds.
+    """
+    exe = shutil.which("rsvg-convert")
+    if not exe:
+        print("rsvg-convert not found; skipping Android icons")
+        return
+    from PIL import Image, ImageDraw
+    size = 432
+    tmp = os.path.join(ROOT, "android-scales.tmp.png")
+    subprocess.check_call([exe, "-w", "250", "-h", "250", "-o", tmp, os.path.join(ROOT, "game", "images", "scales.svg")])
+    fg = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    scales = Image.open(tmp).convert("RGBA")
+    fg.paste(scales, ((size - 250) // 2, (size - 250) // 2 - 6), scales)
+    fg.save(os.path.join(ROOT, "android-icon_foreground.png"), optimize=True)
+    os.remove(tmp)
+
+    bg = Image.new("RGB", (size, size), CRIMSON_DEEP)
+    draw = ImageDraw.Draw(bg)
+    # A soft radial glow, drawn as rings from the edge in.
+    inner, outer = (0x8A, 0x1C, 0x2E), (0x3A, 0x0A, 0x12)
+    for i in range(size // 2, 0, -2):
+        t = i / (size / 2.0)
+        col = tuple(int(inner[k] + (outer[k] - inner[k]) * t) for k in range(3))
+        draw.ellipse([size / 2 - i * 1.4, size / 2 - i * 1.4, size / 2 + i * 1.4, size / 2 + i * 1.4], fill=col)
+    bg.save(os.path.join(ROOT, "android-icon_background.png"), optimize=True)
+
+    # Presplash shown while the game unpacks on first launch.
+    pre = Image.open(os.path.join(ROOT, "web-presplash.png")).convert("RGB")
+    pre.save(os.path.join(ROOT, "android-presplash.jpg"), quality=90)
+
+
 def make_fallacy_icons():
     """Line icons for the fallacy cards, crimson ink on parchment."""
     W = H = 160
@@ -1262,3 +1297,4 @@ if __name__ == "__main__":
     make_ctc()
     make_icons()
     make_presplash()
+    make_android_icons()

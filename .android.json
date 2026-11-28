@@ -1,0 +1,19 @@
+{
+    "package": "io.github.cng605568art.fumocourt",
+    "name": "Fumo Court",
+    "icon_name": "Fumo Court",
+    "version": "0.2.0",
+    "numeric_version": "200",
+    "orientation": "sensorLandscape",
+    "permissions": [ "VIBRATE" ],
+    "store": "none",
+    "heap_size": "3",
+    "include_pil": false,
+    "include_sqlite": false,
+    "layout": null,
+    "source": false,
+    "expansion": false,
+    "update_icons": true,
+    "update_always": true,
+    "update_keystores": true
+}

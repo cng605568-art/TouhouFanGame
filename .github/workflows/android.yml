@@ -1,0 +1,154 @@
+# Builds the Android APK of Fumo Court with Ren'Py's RAPT.
+#
+#   Push a tag like v0.2.0  ->  FumoCourt-0.2.0-android.apk attached to the GitHub Release
+#   Actions tab > "Android" > Run workflow  ->  the APK as a downloadable artifact
+#
+# Signing: if the repository has an ANDROID_KEYSTORE secret (a base64-encoded
+# keystore with the alias "android", made by tools/make_keystore.sh), every
+# build is signed with it, so a new APK installs over the old one. Without it
+# each build signs with a fresh key, and updating means uninstalling first.
+# The keystore password is ANDROID_KEYSTORE_PASSWORD, or "android" if unset.
+
+name: Android
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RENPY_VERSION: "8.3.7"
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  # The runner's own NDK would clash with the libraries RAPT ships.
+  ANDROID_NDK_HOME: ""
+
+jobs:
+  android:
+    name: Android APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out the game
+        uses: actions/checkout@v4
+        with:
+          path: FumoCourt
+
+      - name: Set up Java 21 (RAPT needs it from Ren'Py 8.2 on)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Restore cached Ren'Py SDK with RAPT
+        id: sdk-cache
+        uses: actions/cache@v4
+        with:
+          path: renpy-sdk
+          key: renpy-sdk-${{ env.RENPY_VERSION }}-rapt
+
+      - name: Download Ren'Py SDK and RAPT
+        if: steps.sdk-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          base="https://www.renpy.org/dl/${RENPY_VERSION}"
+          curl -fL --retry 4 --retry-delay 5 -o sdk.tar.bz2 "${base}/renpy-${RENPY_VERSION}-sdk.tar.bz2"
+          curl -fL --retry 4 --retry-delay 5 -o rapt.zip "${base}/renpy-${RENPY_VERSION}-rapt.zip"
+          tar -xjf sdk.tar.bz2
+          mv "renpy-${RENPY_VERSION}-sdk" renpy-sdk
+          unzip -q rapt.zip -d rapt-unpacked
+          echo "rapt zip top level:"; ls rapt-unpacked
+          if [ -d rapt-unpacked/rapt ]; then
+            mv rapt-unpacked/rapt renpy-sdk/rapt
+          else
+            mv rapt-unpacked renpy-sdk/rapt
+          fi
+          test -f renpy-sdk/rapt/android.py
+          rm -rf sdk.tar.bz2 rapt.zip rapt-unpacked
+
+      - name: Point RAPT at the runner's Android SDK
+        run: |
+          set -euo pipefail
+          echo "Android SDK: ${ANDROID_HOME}"
+          ls "${ANDROID_HOME}"
+          # RAPT uses an existing SDK when rapt/sdk.txt holds its path.
+          echo "${ANDROID_HOME}" > renpy-sdk/rapt/sdk.txt
+          yes | "${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Signing keys
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          pass="${ANDROID_KEYSTORE_PASSWORD:-android}"
+          for name in android bundle; do
+            if [ -n "${ANDROID_KEYSTORE}" ]; then
+              base64 -d <<<"${ANDROID_KEYSTORE}" > "FumoCourt/${name}.keystore"
+            else
+              echo "::warning::No ANDROID_KEYSTORE secret: signing with a one-off key."
+              keytool -genkeypair -keystore "FumoCourt/${name}.keystore" -alias android \
+                -keyalg RSA -keysize 2048 -validity 20000 \
+                -storepass "${pass}" -keypass "${pass}" \
+                -dname "CN=Fumo Court, O=Fumo Court fan game, C=MY"
+            fi
+          done
+
+      - name: Read game version
+        id: meta
+        run: |
+          set -euo pipefail
+          version="$(sed -n 's/^define config\.version = "\(.*\)"$/\1/p' FumoCourt/game/options.rpy)"
+          test -n "$version"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Build the APK
+        working-directory: renpy-sdk
+        run: |
+          set -o pipefail
+          ./renpy.sh launcher android_build "${GITHUB_WORKSPACE}/FumoCourt" \
+            --destination "${GITHUB_WORKSPACE}/dists" 2>&1 | tee "${GITHUB_WORKSPACE}/android-build.log"
+
+      - name: Collect the APK
+        run: |
+          set -euo pipefail
+          ls -laR dists | head -50
+          apk="$(find dists -name '*.apk' | head -n 1)"
+          test -n "$apk"
+          mv "$apk" "dists/FumoCourt-${{ steps.meta.outputs.version }}-android.apk"
+          ls -la dists
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-build-log
+          path: |
+            android-build.log
+            renpy-sdk/rapt/project/local.properties
+            renpy-sdk/rapt/project/app/build.gradle
+          if-no-files-found: ignore
+
+      - name: Upload the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: FumoCourt-${{ steps.meta.outputs.version }}-android
+          path: dists/FumoCourt-${{ steps.meta.outputs.version }}-android.apk
+          if-no-files-found: error
+
+      - name: Attach to the GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Fumo Court ${{ github.ref_name }}
+          files: dists/FumoCourt-${{ steps.meta.outputs.version }}-android.apk
+          fail_on_unmatched_files: true

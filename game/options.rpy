@@ -112,6 +112,10 @@ init python:
     build.classify("tools/**", None)
     build.classify("art_src/**", None)
     build.classify("README.md", None)
+    build.classify("ci_test/**", None)
+    build.classify("android-*", None)
+    build.classify("*.keystore", None)
+    build.classify(".android.json", None)
 
     ## Read straight from the project folder by the launcher; not game data.
     build.classify("icon.ico", None)
