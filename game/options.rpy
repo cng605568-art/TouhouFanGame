@@ -34,7 +34,8 @@ Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativ
   Alice's theme: "The Doll Maker of Bucuresti" (ブクレシュティの人形師), from Phantasmagoria of F.M.
   Reimu's theme: "Maiden's Capriccio ~ Dream Battle" (少女綺想曲 ～ Dream Battle), from Phantasmagoria of F.M.
   Kaguya's theme: "Gensokyo Millenium ~ History of the Moon" (千年幻想郷 ～ History of the Moon), from Story of Modulated Frequency.
-  Pursuit: "U.N. Owen Was Her S" (U.N.オーエンは彼女なのか？), from Embodiment of Frequency Modulation.
+  Aya's theme: "Because Princess Inada Is Scolding Me" (稲田姫様に叱られるから), from Phantasmagoria of F.M.
+  Pursuits, Cases 01 to 11: "U.N. Owen Was Her S", "Bad Apple!!", "Flowering Night", "Pierrot of the Star-Spangled Banner", "Heian Alien", "Nostalgic Blood of the East ~ Old World", "Doll Judgment ~ the Girl Who Played with People's Shapes", "Native Faith", "Reverse Ideology", "Captain Murasa" and "Joutounin of Ceramics", from Embodiment of Frequency Modulation, Story of Modulated Frequency and Phantasmagoria of F.M.
 
 Text is set in Shippori Mincho B1 by FONTDASU and Noto Serif SC by Google, under the SIL Open Font License 1.1 (see game/fonts/).
 

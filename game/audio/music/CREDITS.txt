@@ -77,7 +77,7 @@ reisen_theme.ogg (Case 04, Reisen)
     free, non-commercial fan game under the Touhou Project fan-work
     guidelines. No audio is taken from the official games.
 
-pursuit_theme.ogg (the pursuit, when a witness is cornered)
+pursuit_theme.ogg (the pursuit in Case 01, and the fallback for any case without its own)
     "U.N. Owen Was Her S" by +TEK
     from the album "Embodiment of Frequency Modulation" (2024)
     https://plustek.bandcamp.com/track/u-n-owen-was-her-s
@@ -164,5 +164,181 @@ kaguya_theme.ogg (Case 09, Kaguya)
     re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
 
     Arrangement of "千年幻想郷 ～ History of the Moon" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+bad_apple_theme.ogg (the pursuit in Case 02)
+    "Bad Apple!!" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/bad-apple
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "Bad Apple!!" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+flowering_night_theme.ogg (the pursuit in Case 03)
+    "Flowering Night" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/flowering-night
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "フラワリングナイト" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+pierrot_theme.ogg (the pursuit in Case 04)
+    "Pierrot of the Star-Spangled Banner" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/pierrot-of-the-star-spangled-banner
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "星条旗のピエロ" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+heian_alien_theme.ogg (the pursuit in Case 05)
+    "Heian Alien" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/heian-alien
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "平安のエイリアン" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+old_world_theme.ogg (the pursuit in Case 06)
+    "Nostalgic Blood of the East ~ Old World" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/nostalgic-blood-of-the-east-old-world
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "懐かしき東方の血 ～ Old World" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+doll_judgment_theme.ogg (the pursuit in Case 07)
+    "Doll Judgment ~ the Girl Who Played with People's Shapes" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/doll-judgment-the-girl-who-played-with-peoples-shapes
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "人形裁判 ～ 人の形弄びし少女" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+native_faith_theme.ogg (the pursuit in Case 08)
+    "Native Faith" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/native-faith
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "ネイティブフェイス" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+reverse_ideology_theme.ogg (the pursuit in Case 09)
+    "Reverse Ideology" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/reverse-ideology
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "リバースイデオロギー" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+captain_murasa_theme.ogg (the pursuit in Case 10)
+    "Captain Murasa" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/captain-murasa
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "キャプテン・ムラサ" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+joutounin_theme.ogg (the pursuit in Case 11)
+    "Joutounin of Ceramics" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/joutounin-of-ceramics
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "セラミックスの杖刀人" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+aya_theme.ogg (Case 11, Aya)
+    "Because Princess Inada Is Scolding Me" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/because-princess-inada-is-scolding-me
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune's second pass ends and looped back to the start
+    of the first, with a 0.12 s crossfade at the cut (the outro is not
+    included), leading silence trimmed, loudness-normalised to
+    -17 LUFS and re-encoded as Ogg Vorbis from the FLAC download
+    (tools/build_music.py).
+
+    Arrangement of "稲田姫様に叱られるから" by ZUN (Team Shanghai Alice). Used in this
     free, non-commercial fan game under the Touhou Project fan-work
     guidelines. No audio is taken from the official games.

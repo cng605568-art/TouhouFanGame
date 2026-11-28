@@ -220,83 +220,85 @@ init -1 python:
         ),
         # Each case's own pursuit (Case 01 keeps U.N. Owen). A case whose
         # file is missing falls back to "pursuit" (court.rpy: pursuit_theme).
+        # Loop points from tools/build_music.py --find-loop.
         "bad_apple": Theme(   # pursuit, Case 02, Marisa
             "bad_apple_theme",
             "Bad Apple!!",
             u"Bad Apple!!",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.590952,
         ),
         "flowering_night": Theme(   # pursuit, Case 03, Sakuya
             "flowering_night_theme",
             "Flowering Night",
             u"フラワリングナイト",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.450703,
         ),
         "pierrot": Theme(   # pursuit, Case 04, Reisen
             "pierrot_theme",
             "Pierrot of the Star-Spangled Banner",
             u"星条旗のピエロ",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=21.970091,
         ),
         "heian_alien": Theme(   # pursuit, Case 05, Eiki
             "heian_alien_theme",
             "Heian Alien",
             u"平安のエイリアン",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=3.874739,
         ),
         "old_world": Theme(   # pursuit, Case 06, Meiling
             "old_world_theme",
             "Nostalgic Blood of the East ~ Old World",
             u"懐かしき東方の血 ～ Old World",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=6.795488,
         ),
         "doll_judgment": Theme(   # pursuit, Case 07, Alice
             "doll_judgment_theme",
             "Doll Judgment ~ the Girl Who Played with People's Shapes",
             u"人形裁判 ～ 人の形弄びし少女",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=53.700703,
         ),
         "native_faith": Theme(   # pursuit, Case 08, Reimu
             "native_faith_theme",
             "Native Faith",
             u"ネイティブフェイス",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.750023,
         ),
         "reverse_ideology": Theme(   # pursuit, Case 09, Kaguya
             "reverse_ideology_theme",
             "Reverse Ideology",
             u"リバースイデオロギー",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.345941,
         ),
         "captain_murasa": Theme(   # pursuit, Case 10, Mokou
             "captain_murasa_theme",
             "Captain Murasa",
             u"キャプテン・ムラサ",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=7.074853,
         ),
         "joutounin": Theme(   # pursuit, Case 11, Aya
             "joutounin_theme",
             "Joutounin of Ceramics",
             u"セラミックスの杖刀人",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.660227,
         ),
-        # Case 11: Aya's witness theme.
+        # Case 11: Aya's witness theme. Looped over both passes of the tune
+        # (build_music.py --loop 2.250590 106.598390), not just one.
         "aya": Theme(
             "aya_theme",
             "Because Princess Inada Is Scolding Me",
             u"稲田姫様に叱られるから",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=2.080952,
             fallback="title",
         ),
         # Main menu. Never announced with a title card; credited in About.
