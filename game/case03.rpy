@@ -89,12 +89,13 @@ label case3:
 
     call open_case("case3")
 
+    komachi "Witness is already here, boss. She was here before me. Before you, even."
+    eiki "Head maids."
     show gavel at gavel_slam
     $ sfx("gavel")
     with vpunch
-    eiki "Order. The Higan Court of Logic is in session."
+    eiki "Court is in session. The defendant, Hong Meiling, stands accused of eating the mistress's pudding."
     hide gavel
-    eiki "The defendant, Hong Meiling, stands accused of eating the mistress's pudding."
     komachi "Defendant's asleep at the gate, boss. Seemed rude to wake her."
     eiki "...We will proceed without her. The witness, please."
 

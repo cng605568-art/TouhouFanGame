@@ -121,12 +121,12 @@ label case5:
 
     call open_case("case5")
 
+    komachi "Boss, before you bang that thing. There's no defendant today."
     show gavel at gavel_slam
     $ sfx("gavel")
     with vpunch
-    eiki "Order. The Higan Court of Logic is in session."
+    eiki "There is always a defendant. Explain."
     hide gavel
-    eiki "Komachi. The defendant?"
     komachi "About that, boss. There isn't one. It's an appeal."
     eiki "An appeal of what?"
     komachi "The vanished pudding. The mansion says the thief was never found."
