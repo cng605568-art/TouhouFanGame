@@ -575,8 +575,6 @@ screen evidence_pick(tm_name, pair=False):
             button:
                 style "evidence_card"
                 if pair:
-                    selected key in chosen
-                    selected_background ParchmentPanel(corner_size=28, edge=GOLD_HI, inner=VERMILION)
                     action If(key in chosen, RemoveFromSet(chosen, key),
                               If(len(chosen) < 2, AddToSet(chosen, key), None))
                 else:
@@ -585,6 +583,16 @@ screen evidence_pick(tm_name, pair=False):
                 use evidence_face(ev)
 
     if pair:
+        ## A vermilion seal on each chosen card, over the grid.
+        $ ncols = min(4, max(1, len(court_record)))
+        for n, key in enumerate(court_record):
+            if key in chosen:
+                frame:
+                    style "pair_seal"
+                    xcenter 960 + int(((n % ncols) - (ncols - 1) / 2.0) * 426) + 150
+                    ycenter 300 + (n // ncols) * 366 + 30
+                    text "選" style "pair_seal_text"
+
         textbutton _("Present these two"):
             style "menu_plaque"
             xalign 0.5 ypos 900
@@ -602,6 +610,16 @@ screen evidence_pick(tm_name, pair=False):
         at modal_fade
 
     key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
+
+style pair_seal is default:
+    xysize (64, 64)
+    background CourtPanel(fill=VERMILION, edge=GOLD_HI, edge_w=3, shadow=3)
+    padding (0, 0)
+
+style pair_seal_text is default:
+    size 34
+    color PARCHMENT
+    align (0.5, 0.5)
 
 ## Point at the phrase in a piece of evidence that does the work. Returns
 ## the phrase's index, or "withdraw".
@@ -624,7 +642,7 @@ screen evidence_point(ev, phrases):
                 text _("POINT IT OUT") style "court_tag_text"
         frame:
             style "fallacy_quote"
-            text _("Which part of the [ev.name!t] proves it?") style "fallacy_quote_text"
+            text _("Point to the part of it that proves your objection.") style "fallacy_quote_text"
 
     frame:
         style "evidence_card"

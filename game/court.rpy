@@ -176,6 +176,13 @@ init -1 python:
     def testimony(name):
         return getattr(store, name)
 
+    def withdrawn(r):
+        """
+        True if a pick screen was withdrawn. Checked by identity, because a
+        pick can return 1, and 1 == True in Python.
+        """
+        return r is None or r is True or r == "withdraw"
+
     def fallacy(key):
         return getattr(store, "fallacy_" + key)
 
@@ -486,7 +493,7 @@ label prove_it(tm_name):
         $ renpy.say(tm.judge_character, _("A fair objection. Now prove it. What in the Court Record backs you up?"))
         call screen evidence_pick(tm_name)
 
-    if _return in (None, True, "withdraw"):
+    if withdrawn(_return):
         return "withdrawn"
 
     if _return == "timeout":
@@ -513,7 +520,7 @@ label prove_it(tm_name):
         call expression tm.judge_shot
         $ renpy.say(tm.judge_character, _("Good. Now show the court exactly where. Which part of it?"))
         call screen evidence_point(evidence(tm.proof), tm.proof_data["phrases"])
-        if _return in (None, True, "withdraw"):
+        if withdrawn(_return):
             return "withdrawn"
         if _return != tm.proof_data["answer"]:
             call court_penalty(tm_name, tm.proof_data.get("wrong") or _("Right item. Wrong detail. Read it again."))
