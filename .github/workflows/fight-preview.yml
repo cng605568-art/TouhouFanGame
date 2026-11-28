@@ -51,7 +51,7 @@ jobs:
           Xvfb :99 -screen 0 1280x720x24 &
           sleep 2
           export DISPLAY=:99
-          ffmpeg -y -loglevel error -f x11grab -video_size 1280x720 -framerate 15 -i :99 \
+          ffmpeg -y -loglevel error -f x11grab -draw_mouse 0 -video_size 1280x720 -framerate 15 -i :99 \
                  -c:v libx264 -preset ultrafast -crf 16 -pix_fmt yuv420p "${GITHUB_WORKSPACE}/video_raw.mkv" &
           FF=$!
           RENPY_TIMEWARP="${WARP}" timeout 1200 ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test fight 2>&1 | tail -20 || true
