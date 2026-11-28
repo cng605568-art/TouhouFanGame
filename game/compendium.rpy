@@ -76,6 +76,13 @@ init python:
                 return case
         return None
 
+    def case_meeting(key):
+        """The first case that offers this fallacy as a card, or None."""
+        for case in CASES:
+            if any(c.key == key for c in testimony(case.testimony).cards):
+                return case
+        return None
+
 
 default persistent.practice_best = 0
 
@@ -109,6 +116,7 @@ screen compendium():
                 if hasattr(store, "fallacy_" + key):
                     $ card = fallacy(key)
                     $ taught = case_teaching(key)
+                    $ met = case_meeting(key)
                     if key in persistent.fallacies_learned:
                         frame:
                             style "compendium_row"
@@ -122,10 +130,12 @@ screen compendium():
                                         spacing 16
                                         text card.name style "docket_title"
                                         text card.alias style "docket_tagline" yalign 0.7
-                                    text card.blurb style "compendium_blurb"
-                                    text _("How to spot it: [card.tip!t]") style "compendium_tip"
+                                    text card.blurb style "compendium_blurb" xsize 900
+                                    text _("How to spot it: [card.tip!t]") style "compendium_tip" xsize 900
                                     if taught:
                                         text _("Caught in [taught.number!t]: [taught.title!t]") style "docket_number"
+                                    elif met:
+                                        text _("Met in [met.number!t]: [met.title!t]") style "docket_number"
                     else:
                         frame:
                             style "compendium_row_sealed"
@@ -136,8 +146,8 @@ screen compendium():
                                     yalign 0.5
                                     spacing 4
                                     text "? ? ?" style "docket_title"
-                                    if taught:
-                                        text _("Close [taught.number!t] to add this page.") style "docket_title_sealed"
+                                    if met:
+                                        text _("Close [met.number!t] to add this page.") style "docket_title_sealed"
 
 style compendium_row is default:
     xfill True
@@ -263,3 +273,12 @@ label practice_done:
     else:
         eiki "Practice adjourned."
     return
+
+
+## Saves from before the Compendium only knew the fallacy each case taught:
+## give them the other cards of every case they've closed too.
+init 999 python:
+    for _case in CASES:
+        if _case.key in persistent.cases_cleared:
+            persistent.fallacies_learned.add(_case.fallacy)
+            persistent.fallacies_learned.update(c.key for c in testimony(_case.testimony).cards)

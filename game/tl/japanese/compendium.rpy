@@ -193,8 +193,8 @@ translate japanese strings:
     new "[taught.number!t]で発見：[taught.title!t]"
 
     # game/compendium.rpy:140
-    old "Close [taught.number!t] to add this page."
-    new "[taught.number!t]を閉廷するとこのページが加わります。"
+    old "Close [met.number!t] to add this page."
+    new "[met.number!t]を閉廷するとこのページが加わります。"
 
     # game/compendium.rpy:186
     old "PRACTICE [number] / [PRACTICE_LENGTH]"
@@ -204,3 +204,6 @@ translate japanese strings:
     old "Stop practice"
     new "練習をやめる"
 
+    # game/compendium.rpy
+    old "Met in [met.number!t]: [met.title!t]"
+    new "[met.number!t]で登場：[met.title!t]"

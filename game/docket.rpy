@@ -96,6 +96,8 @@ default persistent.cases_cleared = set()
 label close_case(key, fallacy):
     $ persistent.cases_cleared.add(key)
     $ persistent.fallacies_learned.add(fallacy.key)
+    # The other cards in the case's hand were met too, so they get pages.
+    $ persistent.fallacies_learned.update(c.key for c in testimony([ c for c in CASES if c.key == key ][0].testimony).cards)
     $ record_rank(key, case_rank())
     $ close_next = case_after(key)
 

@@ -193,8 +193,8 @@ translate schinese strings:
     new "发现于[taught.number!t]：[taught.title!t]"
 
     # game/compendium.rpy:140
-    old "Close [taught.number!t] to add this page."
-    new "完成[taught.number!t]后加入此页。"
+    old "Close [met.number!t] to add this page."
+    new "完成[met.number!t]后加入此页。"
 
     # game/compendium.rpy:186
     old "PRACTICE [number] / [PRACTICE_LENGTH]"
@@ -204,3 +204,6 @@ translate schinese strings:
     old "Stop practice"
     new "停止练习"
 
+    # game/compendium.rpy
+    old "Met in [met.number!t]: [met.title!t]"
+    new "出现于[met.number!t]：[met.title!t]"
