@@ -45,7 +45,7 @@ An *Ace Attorney*-style courtroom game about spotting bad arguments, made in Ren
 
 - Touhou Project and its characters belong to **Team Shanghai Alice (ZUN)**. This is an unofficial, free, non-commercial fan game. Please support the official games.
 - Character sprites are photos of the official Fumo plushies by Gift, with backgrounds removed by BiRefNet. Every other visual is hand-written vector code. **No AI-generated art.**
-- Music: +TEK, from *Embodiment of Frequency Modulation* and *Story of Modulated Frequency* ([plustek.bandcamp.com](https://plustek.bandcamp.com)), CC BY 4.0. Arrangements of ZUN's compositions.
+- Music: +TEK, from *Embodiment of Frequency Modulation*, *Story of Modulated Frequency* and *Phantasmagoria of F.M* ([plustek.bandcamp.com](https://plustek.bandcamp.com)), CC BY 4.0. Arrangements of ZUN's compositions.
 - Sound effects: Warsong's Petaldust and Nostalgiac Blues packs (CC0).
 - Fonts: Shippori Mincho B1 (FONTDASU) and Noto Serif SC (Google), SIL Open Font License 1.1.
 - Engine: Ren'Py.

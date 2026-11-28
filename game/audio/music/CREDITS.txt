@@ -92,7 +92,7 @@ pursuit_theme.ogg (the pursuit, when a witness is cornered)
     free, non-commercial fan game under the Touhou Project fan-work
     guidelines. No audio is taken from the official games.
 
-finale_theme.ogg (Case 05, Shiki Eiki)
+finale_theme.ogg (Case 05, Shiki Eiki; and Mokou's entrance in Case 09)
     "Reach for the Moon, Immortal Smoke" by +TEK
     from the album "Embodiment of Frequency Modulation" (2024)
     https://plustek.bandcamp.com/track/reach-for-the-moon-immortal-smoke
@@ -104,5 +104,65 @@ finale_theme.ogg (Case 05, Shiki Eiki)
     re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
 
     Arrangement of "月まで届け、不死の煙" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+meiling_theme.ogg (Case 06, Meiling)
+    "Shanghai Teahouse ~ Chinese Tea" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/shanghai-teahouse-chinese-tea
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "上海紅茶館 ～ Chinese Tea" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+alice_theme.ogg (Case 07, Alice)
+    "The Doll Maker of Bucuresti" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/the-doll-maker-of-bucuresti
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "ブクレシュティの人形師" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+reimu_theme.ogg (Case 08, Reimu)
+    "Maiden's Capriccio ~ Dream Battle" by +TEK
+    from the album "Phantasmagoria of F.M" (2020)
+    https://plustek.bandcamp.com/track/maidens-capriccio-dream-battle
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "少女綺想曲 ～ Dream Battle" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+kaguya_theme.ogg (Case 09, Kaguya)
+    "Gensokyo Millenium ~ History of the Moon" by +TEK
+    from the album "Story of Modulated Frequency" (2017)
+    https://plustek.bandcamp.com/track/gensokyo-millenium-history-of-the-moon
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "千年幻想郷 ～ History of the Moon" by ZUN (Team Shanghai Alice). Used in this
     free, non-commercial fan game under the Touhou Project fan-work
     guidelines. No audio is taken from the official games.

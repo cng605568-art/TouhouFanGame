@@ -29,7 +29,11 @@ Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativ
   Marisa's theme: "Love-coloured Master Spark" (恋色マスタースパーク), from Embodiment of Frequency Modulation.
   Sakuya's theme: "Lunar Clock ~ Luna Dial" (月時計 ～ ルナ・ダイアル), from Embodiment of Frequency Modulation.
   Reisen's theme: "Lunatic Eyes ~ Invisible Full Moon" (狂気の瞳), from Embodiment of Frequency Modulation.
-  Case 05: "Reach for the Moon, Immortal Smoke" (月まで届け、不死の煙), from Embodiment of Frequency Modulation.
+  Case 05 and Mokou: "Reach for the Moon, Immortal Smoke" (月まで届け、不死の煙), from Embodiment of Frequency Modulation.
+  Meiling's theme: "Shanghai Teahouse ~ Chinese Tea" (上海紅茶館 ～ Chinese Tea), from Story of Modulated Frequency.
+  Alice's theme: "The Doll Maker of Bucuresti" (ブクレシュティの人形師), from Phantasmagoria of F.M.
+  Reimu's theme: "Maiden's Capriccio ~ Dream Battle" (少女綺想曲 ～ Dream Battle), from Phantasmagoria of F.M.
+  Kaguya's theme: "Gensokyo Millenium ~ History of the Moon" (千年幻想郷 ～ History of the Moon), from Story of Modulated Frequency.
   Pursuit: "U.N. Owen Was Her S" (U.N.オーエンは彼女なのか？), from Embodiment of Frequency Modulation.
 
 Text is set in Shippori Mincho B1 by FONTDASU and Noto Serif SC by Google, under the SIL Open Font License 1.1 (see game/fonts/).

@@ -169,34 +169,34 @@ init -1 python:
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             loop=1.700136,
         ),
-        # Arc two. Loop points are filled in by tools/build_music.py.
+        # Arc two. Loop points from tools/build_music.py --find-loop.
         "meiling": Theme(
             "meiling_theme",
             "Shanghai Teahouse ~ Chinese Tea",
             u"上海紅茶館 ～ Chinese Tea",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=14.170181,
         ),
         "alice": Theme(
             "alice_theme",
             "The Doll Maker of Bucuresti",
             u"ブクレシュティの人形師",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=1.139705,
         ),
         "reimu": Theme(
             "reimu_theme",
             "Maiden's Capriccio ~ Dream Battle",
             u"少女綺想曲 ～ Dream Battle",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=7.139705,
         ),
         "kaguya": Theme(
             "kaguya_theme",
-            "Gensokyo Millennium ~ History of the Moon",
+            "Gensokyo Millenium ~ History of the Moon",
             u"千年幻想郷 ～ History of the Moon",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
-            loop=None,
+            loop=0.580408,
         ),
         # Mokou bursts in to her own theme (the same file as Eiki's case).
         "mokou": Theme(
