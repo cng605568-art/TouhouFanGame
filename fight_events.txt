@@ -1,0 +1,7 @@
+3.9038 audio/sfx/fight_cutin.ogg
+5.2220 audio/sfx/fight_land.ogg
+10.6058 audio/sfx/fight_vs.ogg
+12.1601 audio/sfx/fight_rush.ogg
+13.4150 audio/sfx/fight_slowmo.ogg
+14.6226 audio/sfx/fight_final.ogg
+19.9045 audio/sfx/fight_dash.ogg
