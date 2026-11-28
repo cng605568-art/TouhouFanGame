@@ -393,27 +393,7 @@ screen fallacy_pick(tm_name, index):
                         text card.blurb style "fallacy_blurb"
     else:
         ## A bigger deck: smaller cards in a grid.
-        vpgrid:
-            cols (3 if len(cards) <= 6 else 4)
-            xalign 0.5 ypos 285
-            spacing 26
-            for n, card in enumerate(cards):
-                button:
-                    style "fallacy_card_small"
-                    action Return(card.key)
-                    at card_rise(0.04 * n), plaque_lift
-                    vbox:
-                        xfill True
-                        spacing 8
-                        frame:
-                            style "fallacy_card_head"
-                            padding (12, 10, 12, 12)
-                            vbox:
-                                xalign 0.5
-                                text card.name style "fallacy_name" size 30
-                                text card.alias style "fallacy_alias" size 20
-                        add SVG(card.icon, 0.5) xalign 0.5
-                        text card.blurb style "fallacy_blurb" size 21 xsize 344 line_spacing 2
+        use fallacy_cards(cards)
 
     use pick_timer
 
@@ -460,6 +440,40 @@ style fallacy_card is default:
     background ParchmentPanel(corner_size=36)
     hover_background ParchmentPanel(corner_size=36, edge=GOLD_HI, inner=VERMILION)
     padding (30, 30, 30, 30)
+
+## A deck of fallacy cards to pick from (the fallacy pick and practice):
+## three or four columns of small cards, or six columns of tiny ones once the
+## deck grows past eight.
+screen fallacy_cards(cards):
+    $ tiny = len(cards) > 8
+    $ cols = 6 if tiny else (3 if len(cards) <= 6 else 4)
+    vpgrid:
+        cols cols
+        xalign 0.5 ypos (300 if tiny else 285)
+        spacing (16 if tiny else 22)
+        for n, card in enumerate(cards):
+            button:
+                style ("fallacy_card_tiny" if tiny else "fallacy_card_small")
+                action Return(card.key)
+                at card_rise(0.03 * n), plaque_lift
+                vbox:
+                    xfill True
+                    spacing (4 if tiny else 8)
+                    frame:
+                        style "fallacy_card_head"
+                        padding ((8, 8, 8, 10) if tiny else (12, 10, 12, 12))
+                        vbox:
+                            xalign 0.5
+                            text card.name style "fallacy_name" size (22 if tiny else 30)
+                            text card.alias style "fallacy_alias" size (15 if tiny else 20)
+                    add SVG(card.icon, 0.36 if tiny else 0.5) xalign 0.5
+                    text card.blurb style "fallacy_blurb" size (16 if tiny else 21) xsize (254 if tiny else 344) line_spacing (1 if tiny else 2)
+
+style fallacy_card_tiny is fallacy_card:
+    xysize (290, 300)
+    padding (14, 14, 14, 12)
+    background ParchmentPanel(corner_size=22)
+    hover_background ParchmentPanel(corner_size=22, edge=GOLD_HI, inner=VERMILION)
 
 style fallacy_card_small is fallacy_card:
     xysize (400, 330)

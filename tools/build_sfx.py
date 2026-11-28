@@ -69,6 +69,13 @@ RECIPE = {
     "break_reisen":    (-2,  1.8,  [("P", "error resonance.wav", 0, 0), ("N", "weird.wav", -6, 0)]),            # lunatic ripple
     "break_eiki":      (-1,  2.0,  [("N", "big damage.wav", 0, 0), ("P", "HeadCup.wav", -2, 0),
                                     ("P", "badbell.wav", -6, 0.05, 0.5)]),                                      # the scales fall
+    "break_meiling":   (-2,  1.6,  [("N", "big damage.wav", 0, 0), ("N", "good bloopy.wav", -6, 0.05, 1.25)]),  # rainbow scatters
+    "break_alice":     (-2,  1.2,  [("P", "slashD.wav", 0, 0), ("P", "slashA.wav", -2, 0.08, 1.3),
+                                    ("P", "slashB.wav", -4, 0.16, 1.6)]),                                       # strings snap
+    "break_reimu":     (-2,  1.6,  [("P", "clothB.wav", 0, 0), ("N", "destroyed.wav", -4, 0.02)]),             # ofuda flutter out
+    "break_kaguya":    (-2,  1.8,  [("P", "reconfirm.wav", -3, 0, 0.75), ("N", "breakeffect2.wav", 0, 0.04)]), # treasures scatter
+    "mokou_burst":     (-1,  1.6,  [("N", "big damage.wav", 0, 0), ("N", "destroyed.wav", -2, 0.02, 0.8),
+                                    ("P", "slashC.wav", -3, 0.0)]),                                             # Mokou barges in
 
     # Text blips: built separately (one blip padded to a steady beat). Each
     # speaker has a pitch (audio.rpy): high and quick for fairies, low for
@@ -89,6 +96,8 @@ REVERB = {
     "case_closed": (-13, 2.0),
     "break_sakuya": (-12, 1.8),
     "break_eiki": (-12, 2.0),
+    "break_kaguya": (-14, 1.6),
+    "mokou_burst": (-15, 1.2),
 }
 
 

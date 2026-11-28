@@ -59,11 +59,11 @@ init -1 python:
     def title_witness():
         """
         The fumo on the right of the title screen: whoever testifies next.
-        Once every case is closed, the pudding thief from Case 05 takes the
-        spot.
+        Once every case is closed, Mokou takes the spot: still on the run
+        with Kaguya after Case 09.
         """
         case = next_case()
-        return case.fumo if case else "cirno_fumo"
+        return case.fumo if case else "mokou_fumo"
 
     def BeginTrial():
         """Begin Trial opens the Docket: pick a difficulty, then a case."""
@@ -86,6 +86,18 @@ define CASES = [
     Case("case5", _("CASE 05"), _("The Unappealable Verdict"),
          _("The Scarlet Devil Mansion v. The Verdict in Case 03"), "eiki", "circular_reasoning",
          "testimony_eiki", [ "case3_verdict", "staff_roster", "frozen_pudding" ]),
+    Case("case6", _("CASE 06"), _("The Open Gate"),
+         _("The Scarlet Devil Mansion v. One Gatekeeper, Awake This Time"), "meiling", "hasty_generalization",
+         "testimony_meiling", [ "library_window", "gate_footprints", "parasol_note" ]),
+    Case("case7", _("CASE 07"), _("Strings Attached"),
+         _("Kirisame Marisa v. One Puppeteer"), "alice", "straw_man",
+         "testimony_alice", [ "newest_doll", "doll_string", "bunbunmaru_clipping" ]),
+    Case("case8", _("CASE 08"), _("Fifty Satisfied Customers"),
+         _("The Human Village v. One Shrine Maiden"), "reimu", "bandwagon",
+         "testimony_reimu", [ "lucky_charm", "full_donation_box", "complaint_list" ]),
+    Case("case9", _("CASE 09"), _("The Five Impossible Chores"),
+         _("Reisen Udongein Inaba v. One Moon Princess"), "kaguya", "moving_goalposts",
+         "testimony_kaguya", [ "chore_list", "five_treasures", "new_chore_list" ]),
     ]
 
 default persistent.cases_cleared = set()

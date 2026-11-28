@@ -107,11 +107,40 @@ define reisen = Character("Reisen",
     callback=Callbacks(FumoHop("reisen_fumo"), TextBlip("blip_up")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
+define meiling = Character("Meiling",
+    image="meiling_fumo",
+    callback=Callbacks(FumoHop("meiling_fumo"), TextBlip("blip")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define alice = Character("Alice",
+    image="alice_fumo",
+    callback=Callbacks(FumoHop("alice_fumo"), TextBlip("blip_up")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define reimu = Character("Reimu",
+    image="reimu_fumo",
+    callback=Callbacks(FumoHop("reimu_fumo"), TextBlip("blip")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define kaguya = Character("Kaguya",
+    image="kaguya_fumo",
+    callback=Callbacks(FumoHop("kaguya_fumo"), TextBlip("blip_dn")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
+define mokou = Character("Mokou",
+    image="mokou_fumo",
+    callback=Callbacks(FumoHop("mokou_fumo"), TextBlip("blip_lo")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
 ## Testimony is written in red ink.
 define cirno_t = Character(kind=cirno, what_color="#7A1C2A", what_size=40)
 define marisa_t = Character(kind=marisa, what_color="#7A1C2A", what_size=40)
 define sakuya_t = Character(kind=sakuya, what_color="#7A1C2A", what_size=40)
 define reisen_t = Character(kind=reisen, what_color="#7A1C2A", what_size=40)
+define meiling_t = Character(kind=meiling, what_color="#7A1C2A", what_size=40)
+define alice_t = Character(kind=alice, what_color="#7A1C2A", what_size=40)
+define reimu_t = Character(kind=reimu, what_color="#7A1C2A", what_size=40)
+define kaguya_t = Character(kind=kaguya, what_color="#7A1C2A", what_size=40)
 
 define komachi = Character("Komachi",
     callback=TextBlip("blip_deep"),
@@ -169,6 +198,22 @@ label shot_reisen(trans=whip_left):
     call shot_witness("reisen_fumo", trans)
     return
 
+label shot_meiling(trans=whip_left):
+    call shot_witness("meiling_fumo", trans)
+    return
+
+label shot_alice(trans=whip_left):
+    call shot_witness("alice_fumo", trans)
+    return
+
+label shot_reimu(trans=whip_left):
+    call shot_witness("reimu_fumo", trans)
+    return
+
+label shot_kaguya(trans=whip_left):
+    call shot_witness("kaguya_fumo", trans)
+    return
+
 
 ################################################################################
 ## Fallacies and testimony
@@ -215,6 +260,34 @@ define fallacy_appeal_to_authority = Fallacy(
     _("(Because They Said So)"),
     _("Treating a famous name as proof instead of checking the evidence."),
     "gui/fallacy_appeal_to_authority.svg")
+
+define fallacy_hasty_generalization = Fallacy(
+    "hasty_generalization",
+    _("Hasty Generalization"),
+    _("(A Sample of One)"),
+    _("Drawing a rule about everything from one or two examples."),
+    "gui/fallacy_hasty_generalization.svg")
+
+define fallacy_straw_man = Fallacy(
+    "straw_man",
+    _("Straw Man"),
+    _("(Scarecrow Argument)"),
+    _("Attacking a twisted, weaker version of what someone actually said."),
+    "gui/fallacy_straw_man.svg")
+
+define fallacy_bandwagon = Fallacy(
+    "bandwagon",
+    _("Bandwagon"),
+    _("(Everyone Says So)"),
+    _("Treating a claim as true because lots of people believe it."),
+    "gui/fallacy_bandwagon.svg")
+
+define fallacy_moving_goalposts = Fallacy(
+    "moving_goalposts",
+    _("Moving the Goalposts"),
+    _("(The Finish Line Moves)"),
+    _("Changing the test after it has been passed, so no answer is ever enough."),
+    "gui/fallacy_moving_goalposts.svg")
 
 define fallacy_circular_reasoning = Fallacy(
     "circular_reasoning",

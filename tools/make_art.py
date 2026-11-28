@@ -1074,7 +1074,48 @@ def make_fallacy_icons():
         'stroke="%s" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' % ink,
     ])
 
-    for name, body, label in (("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"),
+    # Hasty Generalization: one figure, an arrow, and a whole crowd stamped
+    # out in its image.
+    def tiny(cx, cy, s, fill):
+        return ('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s" stroke="%s" stroke-width="3"/>'
+                '<path d="M%.1f %.1f Q%.1f %.1f %.1f %.1f Q%.1f %.1f %.1f %.1f Z" fill="%s" stroke="%s" stroke-width="3" stroke-linejoin="round"/>'
+                % (cx, cy - 7 * s, 6 * s, fill, ink, cx - 10 * s, cy + 14 * s, cx - 10 * s, cy, cx, cy, cx + 10 * s, cy, cx + 10 * s, cy + 14 * s, fill, ink))
+    hg = "\n".join([tiny(28, 84, 1.5, GOLD),
+                    '<path d="M50 84 L78 84 M70 76 L80 84 L70 92" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' % VERMILION]
+                   + [tiny(98 + 22 * (i % 3), 50 + 34 * (i // 3), 0.9, PARCHMENT) for i in range(9)])
+
+    # Straw Man: a scarecrow on a post, with a patched hat.
+    sm = "\n".join([
+        '<path d="M80 60 L80 150 M40 78 L120 78" fill="none" stroke="#8A5A2B" stroke-width="7" stroke-linecap="round"/>',
+        '<circle cx="80" cy="46" r="20" fill="#E9D7A0" stroke="%s" stroke-width="5"/>' % ink,
+        '<path d="M52 30 L108 30 L96 12 L64 12 Z" fill="%s" stroke="%s" stroke-width="4" stroke-linejoin="round"/>' % (GOLD, ink),
+        '<path d="M70 44 L76 48 M84 48 L90 44 M72 56 Q80 60 88 56" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % ink,
+        '<path d="M58 78 L66 116 L94 116 L102 78 Z" fill="%s" stroke="%s" stroke-width="4" stroke-linejoin="round"/>' % (GOLD, ink),
+        '<path d="M36 78 L28 90 M42 80 L40 94 M124 78 L132 90 M118 80 L120 94 M66 116 L62 128 M94 116 L98 128" fill="none" stroke="#C9A24A" stroke-width="3" stroke-linecap="round"/>',
+        '<path d="M120 26 L148 54 M148 26 L120 54" fill="none" stroke="%s" stroke-width="6" stroke-linecap="round"/>' % VERMILION,
+    ])
+
+    # Bandwagon: a little wagon full of heads, every one with a tick.
+    bw = "\n".join([
+        '<path d="M20 92 L140 92 L128 126 L32 126 Z" fill="%s" stroke="%s" stroke-width="5" stroke-linejoin="round"/>' % (GOLD, ink),
+        '<circle cx="48" cy="134" r="12" fill="%s" stroke="%s" stroke-width="5"/>' % (PARCHMENT, ink),
+        '<circle cx="112" cy="134" r="12" fill="%s" stroke="%s" stroke-width="5"/>' % (PARCHMENT, ink),
+    ] + ['<circle cx="%d" cy="%d" r="12" fill="%s" stroke="%s" stroke-width="4"/>' % (cx, 78, PARCHMENT, ink) for cx in (40, 66, 92, 118)]
+      + ['<path d="M%d 44 L%d 52 L%d 34" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' % (cx - 7, cx - 2, cx + 8, VERMILION) for cx in (40, 66, 92, 118)])
+
+    # Moving the Goalposts: a goal frame, its ghost where it used to be, and
+    # the arrow it slid along.
+    mg = "\n".join([
+        dashed([(18, 132), (18, 52), (62, 52), (62, 132)], dash=8, gap=6),
+        '<path d="M96 132 L96 52 L142 52 L142 132" fill="none" stroke="%s" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>' % GOLD_LO,
+        '<path d="M96 52 L142 52" fill="none" stroke="%s" stroke-width="7" stroke-linecap="round"/>' % GOLD,
+        '<path d="M70 94 L90 94 M82 86 L92 94 L82 102" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' % ink,
+        '<circle cx="40" cy="116" r="11" fill="%s" stroke="%s" stroke-width="4"/>' % (PARCHMENT, ink),
+    ])
+
+    for name, body, label in (("hasty_generalization", hg, "hasty generalization"), ("straw_man", sm, "straw man"),
+                              ("bandwagon", bw, "bandwagon"), ("moving_goalposts", mg, "moving the goalposts"),
+                              ("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"),
                               ("slippery_slope", ss, "slippery slope"), ("tu_quoque", tq, "tu quoque"),
                               ("false_dilemma", fd, "false dilemma"), ("appeal_to_authority", aa, "appeal to authority"),
                               ("circular_reasoning", cr, "circular reasoning")):
@@ -1187,6 +1228,61 @@ def make_evidence_icons():
         p("M36 58 L54 52 M40 70 L46 68 M118 112 L126 108", "none", "#FFFFFF", 5),
     ])
 
+    # Geta prints walking up the page.
+    def geta(x, y, a):
+        return ('<g transform="rotate(%d %d %d)"><rect x="%d" y="%d" width="22" height="40" rx="6" fill="#9B6A3C" stroke="%s" stroke-width="3"/>'
+                '<path d="M%d %d L%d %d M%d %d L%d %d" stroke="%s" stroke-width="4"/></g>'
+                % (a, x + 11, y + 20, x, y, ink, x + 2, y + 12, x + 20, y + 12, x + 2, y + 30, x + 20, y + 30, INK))
+    icons["footprints"] = "\n".join([geta(36, 104, -8), geta(74, 78, 6), geta(42, 40, -6), geta(86, 12, 8)])
+
+    # An arched window with a latch.
+    icons["window"] = "\n".join([
+        p("M40 144 L40 64 Q40 24 80 24 Q120 24 120 64 L120 144 Z", "#BFE0F0"),
+        p("M80 26 L80 144 M40 86 L120 86", "none", ink, 5),
+        p("M30 144 L130 144", "none", "#8A5A2B", 9),
+        '<rect x="72" y="92" width="16" height="12" rx="2" fill="%s" stroke="%s" stroke-width="3"/>' % (GOLD, ink),
+    ])
+
+    # A folded newspaper with a headline and a photo box.
+    icons["newspaper"] = "\n".join([
+        p("M24 30 L136 30 L136 134 L24 134 Z", PARCHMENT),
+        p("M36 44 L124 44", "none", ink, 8),
+        p("M36 62 L76 62 L76 98 L36 98 Z", "#C9C2AE", ink, 3),
+        p("M86 64 L124 64 M86 76 L124 76 M86 88 L118 88 M36 110 L124 110 M36 122 L106 122", "none", INK, 4),
+    ])
+
+    # A loose loop of enchanted string on a spool.
+    icons["thread"] = "\n".join([
+        p("M58 52 L102 52 L96 64 L96 112 L102 124 L58 124 L64 112 L64 64 Z", "#B98552"),
+        p("M64 72 L96 72 M64 82 L96 82 M64 92 L96 92 M64 102 L96 102", "none", VERMILION, 4),
+        p("M96 88 Q130 70 128 104 Q126 136 92 138 Q60 140 44 118", "none", VERMILION, 4),
+    ])
+
+    # A hand-stitched doll: round head, a dress, one button missing.
+    icons["doll"] = "\n".join([
+        '<circle cx="80" cy="50" r="24" fill="#F3D9C0" stroke="%s" stroke-width="4"/>' % ink,
+        p("M56 40 Q80 14 104 40 L104 50 Q80 34 56 50 Z", GOLD_HI),
+        p("M58 78 L102 78 L120 136 L40 136 Z", "#6D8BC8"),
+        '<circle cx="80" cy="96" r="4" fill="%s"/><circle cx="80" cy="112" r="3" fill="none" stroke="%s" stroke-width="1.5"/>' % (PARCHMENT, PARCHMENT),
+        p("M72 52 L72 54 M88 52 L88 54", "none", INK, 4),
+    ])
+
+    # A shrine charm: a pouch on a cord, with a paper slip peeking out.
+    icons["charm"] = "\n".join([
+        p("M80 14 Q60 14 60 36 M80 14 Q100 14 100 36", "none", GOLD_LO, 4),
+        p("M50 40 L110 40 L114 140 L46 140 Z", "#C41E3A"),
+        p("M62 34 L98 34 L98 70 L62 70 Z", PARCHMENT, ink, 3),
+        p("M70 46 L90 46 M70 56 L86 56", "none", INK, 3),
+        p("M60 100 L100 100 M60 112 L100 112", "none", GOLD, 4),
+    ])
+
+    # A cut jewel with a highlight.
+    icons["jewel"] = "\n".join([
+        p("M40 58 L60 30 L100 30 L120 58 L80 136 Z", "#8FD3C9"),
+        p("M40 58 L120 58 M60 30 L72 58 L80 136 L88 58 L100 30", "none", ink, 3),
+        p("M64 40 L72 40", "none", "#FFFFFF", 5),
+    ])
+
     for name, body in icons.items():
         write(os.path.join(GUI, "ev_%s.svg" % name), svg(W, H, body, "evidence icon: " + name))
 
@@ -1221,6 +1317,21 @@ def make_fx():
     put("fx_scales_tip", 160, 120, '<path d="M80 20 L80 110 M50 110 L110 110" fill="none" stroke="%s" stroke-width="7" stroke-linecap="round"/>'
         '<path d="M14 38 L146 58" fill="none" stroke="%s" stroke-width="7" stroke-linecap="round"/>'
         '<path d="M2 60 Q14 78 30 60 Z M128 82 Q142 100 158 82 Z" fill="%s" stroke="%s" stroke-width="4" stroke-linejoin="round"/>' % (GOLD_LO, GOLD, GOLD, GOLD_LO))
+
+    # Meiling's rainbow: a diamond, tinted per particle in the game.
+    put("fx_diamond", 60, 80, '<path d="M30 2 L58 40 L30 78 L2 40 Z" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="3" stroke-linejoin="round"/>')
+    # Alice's snapped doll strings.
+    put("fx_thread", 120, 40, '<path d="M4 30 Q30 4 60 20 Q90 36 116 10" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round"/>'
+        '<path d="M110 4 L120 14 M2 24 L8 36" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % (VERMILION, VERMILION))
+    # Reimu's ofuda talismans.
+    put("fx_ofuda", 44, 110, '<rect x="3" y="3" width="38" height="104" rx="2" fill="%s" stroke="#C41E3A" stroke-width="4"/>'
+        '<path d="M22 16 L22 94 M12 30 L32 30 M12 52 L32 52 M14 72 L30 80" fill="none" stroke="#C41E3A" stroke-width="4" stroke-linecap="round"/>' % PARCHMENT)
+    # Kaguya's treasures.
+    put("fx_jewel", 70, 80, '<path d="M8 28 L20 6 L50 6 L62 28 L35 76 Z" fill="#8FD3C9" stroke="#3F8F86" stroke-width="3" stroke-linejoin="round"/>'
+        '<path d="M8 28 L62 28 M20 6 L28 28 L35 76 L42 28 L50 6" fill="none" stroke="#3F8F86" stroke-width="2"/>')
+    # Mokou's fire.
+    put("fx_flame", 80, 110, '<path d="M40 4 Q62 34 66 58 Q72 92 40 106 Q8 92 14 58 Q18 40 30 30 Q32 50 40 54 Q46 34 40 4 Z" fill="#FF7A1A" stroke="#C4361E" stroke-width="3" stroke-linejoin="round"/>'
+        '<path d="M40 50 Q54 66 52 84 Q48 98 40 100 Q32 98 28 84 Q28 70 40 50 Z" fill="#FFD25A"/>')
 
     # Reaction emotes.
     put("emote_sweat", 70, 100, '<path d="M35 6 Q62 52 58 70 A23 23 0 0 1 12 70 Q8 52 35 6 Z" fill="#9FD3F0" stroke="#3E7FA6" stroke-width="4" stroke-linejoin="round"/>'

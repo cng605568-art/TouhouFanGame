@@ -147,7 +147,8 @@ init -1 python:
 
     # Canonical order of the cards, so they always sit in the same places.
     FALLACY_ORDER = [ "false_cause", "ad_hominem", "slippery_slope", "tu_quoque",
-                      "false_dilemma", "appeal_to_authority", "circular_reasoning" ]
+                      "false_dilemma", "appeal_to_authority", "circular_reasoning",
+                      "hasty_generalization", "straw_man", "bandwagon", "moving_goalposts" ]
 
     RANKS = [ "S", "A", "B", "C" ]
 

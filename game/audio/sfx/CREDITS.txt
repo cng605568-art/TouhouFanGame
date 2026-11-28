@@ -26,3 +26,14 @@ into which slot:
                    with a synthetic hall reverb
   mistrial         unexpectedoutcome   (Petaldust)
   blip             goodblip, repeated  (Nostalgiac Blues)
+  break_cirno      cirnodeatheffect + breakeffect2   (Nostalgiac Blues)
+  break_marisa     betterbullet + startbleep          (Nostalgiac Blues)
+  break_sakuya     blockberakhigh + progress, slowed, with reverb (Petaldust)
+  break_reisen     error resonance + weird            (Petaldust + Nostalgiac Blues)
+  break_eiki       big damage + HeadCup + badbell, slowed, with reverb
+  break_meiling    big damage + good bloopy           (Nostalgiac Blues)
+  break_alice      slashD + slashA + slashB, pitched up (Petaldust)
+  break_reimu      clothB + destroyed                 (Petaldust + Nostalgiac Blues)
+  break_kaguya     reconfirm, slowed, + breakeffect2, with reverb
+  mokou_burst      big damage + destroyed + slashC
+  blip_hi/up/dn/lo/deep  goodblip at each speaker's pitch (Nostalgiac Blues)

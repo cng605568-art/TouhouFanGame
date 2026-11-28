@@ -20,6 +20,10 @@ init python:
         "false_dilemma": _("When you're offered two choices, ask where the third one went."),
         "appeal_to_authority": _("A name is not a test. Ask what evidence the expert actually has."),
         "circular_reasoning": _("Take the claim out of the reason. If nothing is left, it's a circle."),
+        "hasty_generalization": _("Count the examples behind the rule. One story is not a survey."),
+        "straw_man": _("Put the original words next to the attack. If they don't match, it's a scarecrow."),
+        "bandwagon": _("Popular isn't proof. Ask what the crowd actually checked."),
+        "moving_goalposts": _("Write the test down before the answer arrives. Then hold everyone to it."),
         }
 
     for _k, _tip in FALLACY_TIPS.items():
@@ -50,6 +54,18 @@ init python:
         ("circular_reasoning", _("This book is true, because the book says it's true.")),
         ("circular_reasoning", _("Cirno is the strongest because nobody is stronger than Cirno.")),
         ("circular_reasoning", _("I'm trustworthy. You can trust me on that.")),
+        ("hasty_generalization", _("I met one rude kappa once. Kappa are all rude.")),
+        ("hasty_generalization", _("The first dumpling I tried was cold. This whole shop serves cold food.")),
+        ("hasty_generalization", _("My cousin smoked and lived to ninety. Smoking is fine.")),
+        ("straw_man", _("She wants a shorter festival? So she hates festivals and wants us all miserable.")),
+        ("straw_man", _("He said the bridge needs repairs. Why does he want the village cut off?")),
+        ("straw_man", _("You think we should rest on Sundays? So you want nobody to ever work.")),
+        ("bandwagon", _("Everyone at the shrine is buying these charms. They must work.")),
+        ("bandwagon", _("The whole village believes the old well is cursed, so it is.")),
+        ("bandwagon", _("This newspaper sold out. It must be telling the truth.")),
+        ("moving_goalposts", _("You beat me at shogi? Fine, but best of three. No, best of five.")),
+        ("moving_goalposts", _("Bring proof. That's a photo? I meant a witness. A witness? I meant two.")),
+        ("moving_goalposts", _("You passed the test, but now there's a harder one. Then you're qualified.")),
         ]
 
     PRACTICE_LENGTH = 5
@@ -180,7 +196,6 @@ screen practice_pick(question, number):
     add Solid("#0A0205D9") at modal_fade
 
     $ deck = learned_fallacies()
-    $ cols = 3 if len(deck) <= 6 else 4
     $ quote = question[1]
 
     vbox:
@@ -199,27 +214,7 @@ screen practice_pick(question, number):
             xmaximum 1500
             text "“[quote!t]”" style "fallacy_quote_text"
 
-    vpgrid:
-        cols cols
-        xalign 0.5 ypos 285
-        spacing 22
-        for n, card in enumerate(deck):
-            button:
-                style "fallacy_card_small"
-                action Return(card.key)
-                at card_rise(0.04 * n), plaque_lift
-                vbox:
-                    xfill True
-                    spacing 8
-                    frame:
-                        style "fallacy_card_head"
-                        padding (12, 10, 12, 12)
-                        vbox:
-                            xalign 0.5
-                            text card.name style "fallacy_name" size 30
-                            text card.alias style "fallacy_alias" size 20
-                    add SVG(card.icon, 0.5) xalign 0.5
-                    text card.blurb style "fallacy_blurb" size 21 xsize 344 line_spacing 2
+    use fallacy_cards(deck)
 
     textbutton _("Stop practice"):
         style "menu_plaque"

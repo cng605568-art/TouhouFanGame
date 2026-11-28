@@ -169,6 +169,43 @@ init -1 python:
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             loop=1.700136,
         ),
+        # Arc two. Loop points are filled in by tools/build_music.py.
+        "meiling": Theme(
+            "meiling_theme",
+            "Shanghai Teahouse ~ Chinese Tea",
+            u"上海紅茶館 ～ Chinese Tea",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=None,
+        ),
+        "alice": Theme(
+            "alice_theme",
+            "The Doll Maker of Bucuresti",
+            u"ブクレシュティの人形師",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=None,
+        ),
+        "reimu": Theme(
+            "reimu_theme",
+            "Maiden's Capriccio ~ Dream Battle",
+            u"少女綺想曲 ～ Dream Battle",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=None,
+        ),
+        "kaguya": Theme(
+            "kaguya_theme",
+            "Gensokyo Millennium ~ History of the Moon",
+            u"千年幻想郷 ～ History of the Moon",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=None,
+        ),
+        # Mokou bursts in to her own theme (the same file as Eiki's case).
+        "mokou": Theme(
+            "finale_theme",
+            "Reach for the Moon, Immortal Smoke",
+            u"月まで届け、不死の煙",
+            "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=1.700136,
+        ),
         # The pursuit: takes over from the witness theme when the witness is
         # cornered (court.rpy). No clean second pass in this arrangement, so
         # the loop points were set by hand where a passage repeats 68.9 s

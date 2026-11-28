@@ -81,8 +81,43 @@ screen breakdown_fx(who):
     elif who == "eiki":
         add "gui/fx_scales_tip.svg" at scales_fall
 
+    elif who == "meiling":
+        # A rainbow of diamonds: Meiling's colourful qi, scattered.
+        for i, (dx, dy, rot, delay) in enumerate(((-320, -150, -200, 0.0), (300, -170, 220, 0.02), (-340, 80, 160, 0.04),
+                                                  (330, 100, -180, 0.03), (-160, -290, 120, 0.06), (180, -300, -140, 0.05),
+                                                  (-260, 240, 260, 0.08), (250, 230, -240, 0.07), (0, -330, 90, 0.09))):
+            add "gui/fx_diamond.svg" at particle(960, 300, dx, dy, rot, delay):
+                matrixcolor TintMatrix(RAINBOW[i % len(RAINBOW)])
+
+    elif who == "alice":
+        # Doll strings snap and fall away.
+        for dx, dy, rot, delay in ((-260, 200, -60, 0.0), (240, 220, 70, 0.03), (-140, 260, 30, 0.06),
+                                   (150, 250, -40, 0.05), (-330, 120, -90, 0.08), (320, 140, 100, 0.07)):
+            add "gui/fx_thread.svg" at particle(960, 200, dx, dy, rot, delay)
+
+    elif who == "reimu":
+        # Her ofuda flutter out of her sleeves.
+        for dx, dy, rot, delay in ((-330, -100, -300, 0.0), (310, -120, 320, 0.02), (-280, 160, 260, 0.05),
+                                   (300, 170, -280, 0.04), (-120, -300, 200, 0.07), (130, -290, -220, 0.06),
+                                   (-60, 280, 360, 0.09), (70, 270, -360, 0.08)):
+            add "gui/fx_ofuda.svg" at particle(960, 300, dx, dy, rot, delay)
+
+    elif who == "kaguya":
+        # Her impossible treasures scatter.
+        for dx, dy, rot, delay in ((-300, -180, -160, 0.0), (290, -190, 170, 0.02), (-330, 90, 130, 0.04),
+                                   (320, 110, -150, 0.03), (0, -320, 90, 0.06), (-180, 260, 200, 0.08), (190, 250, -210, 0.07)):
+            add "gui/fx_jewel.svg" at particle(960, 300, dx, dy, rot, delay)
+
     timer 1.9 action Hide("breakdown_fx")
 
+
+## Mokou's entrance: flames burst around Kaguya, at her knocked-back spot.
+screen mokou_fire():
+    zorder 35
+    for dx, dy, rot, delay in ((-220, -160, -40, 0.0), (210, -170, 40, 0.03), (-260, 40, -20, 0.05), (250, 60, 25, 0.02),
+                               (-120, -260, -10, 0.07), (130, -250, 15, 0.06), (0, -300, 0, 0.09)):
+        add "gui/fx_flame.svg" at particle(1180, 330, dx, dy, rot, delay)
+    timer 1.9 action Hide("mokou_fire")
 
 ## A reaction emote by the head of the fumo at centre stage.
 screen emote(kind):
@@ -230,6 +265,51 @@ transform time_stop:
     pause 0.5
     linear 0.4 matrixcolor SaturationMatrix(1.0)
 
+## Mokou charges in from the left and plants herself beside the stand.
+transform mokou_charge:
+    subpixel True
+    xanchor 0.5 yanchor 1.0 ypos FUMO_FEET xpos -320
+    xoffset 0 yoffset 0 rotate None zoom 1.0 xzoom 1.0 yzoom 1.0
+    easein 0.32 xpos 760
+    easeout 0.06 xpos 800
+    easein 0.16 xpos 700
+    block:
+        ease 1.4 yzoom 1.012
+        ease 1.4 yzoom 1.0
+        repeat
+
+## Kaguya takes the hit and is knocked across the stand.
+transform fumo_knocked:
+    subpixel True
+    xoffset 0 yoffset 0 zoom 1.0 xzoom 1.0 yzoom 1.0 rotate 0
+    pause 0.36
+    matrixcolor BrightnessMatrix(0.7)
+    parallel:
+        linear 0.25 matrixcolor BrightnessMatrix(0.0)
+    parallel:
+        easeout 0.14 xpos 1180 rotate 22
+        easein 0.30 rotate 9
+    parallel:
+        easeout 0.10 yoffset -40
+        easein 0.20 yoffset 0
+
+## Off they go: Mokou drags Kaguya out of the court, right.
+transform duo_exit(delay=0.0):
+    subpixel True
+    pause delay
+    parallel:
+        easein 0.75 xpos 2500
+    parallel:
+        block:
+            easeout 0.12 yoffset -50
+            easein 0.12 yoffset 0
+            repeat 3
+
+## The court flushes orange for a moment.
+transform fire_flash:
+    matrixcolor TintMatrix("#FFB070")
+    linear 0.9 matrixcolor TintMatrix("#FFFFFF")
+
 transform lunatic_wobble:
     matrixcolor TintMatrix("#FFC4C4")
     parallel:
@@ -246,6 +326,9 @@ transform lunatic_wobble:
 define BREAKDOWN_FUMO = { "cirno": fumo_frozen, "marisa": fumo_spin }
 
 ## Transforms the talk hop leaves alone (FumoHop in script.rpy).
-define FUMO_STAY = (fumo_frozen, fumo_spin)
+define FUMO_STAY = (fumo_frozen, fumo_spin, mokou_charge, fumo_knocked, duo_exit)
+
+## Meiling's breakdown colours.
+define RAINBOW = [ "#FF5A5A", "#FFA43A", "#FFE04A", "#6BD66B", "#4AB8FF", "#8A6BFF", "#E46BFF" ]
 
 default fumo_hold = None
