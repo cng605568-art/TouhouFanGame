@@ -10,19 +10,23 @@ Shiki Eiki puts Gensokyo's residents on trial for petty crimes, as deadpan fumo 
 
 An *Ace Attorney*-style courtroom game about spotting bad arguments, made in Ren'Py.
 
-## Five cases
+## Nine cases
 
 1. **Cirno's Frosty Fallacy.** Twenty frogs froze, thawed and hopped away, so freezing must make frogs immortal. *False Cause*
 2. **The Long-Term Loan.** Marisa will return the forty-seven grimoires when she dies. Besides, Reimu pockets her own donation box. *Tu Quoque*
 3. **The Vanished Pudding.** Sakuya knows the gatekeeper ate it, because the only other suspect would never. *False Dilemma*
 4. **The Lunar Prescription.** Reisen's tonic makes villagers hear colours, but Master Eirin says it's safe. *Appeal to Authority*
 5. **The Unappealable Verdict.** The pudding turns up frozen at Misty Lake, and a judge can't hear her own appeal. You take the bench. Eiki takes the stand. *Circular Reasoning*
+6. **The Open Gate.** Marisa once came in through a window, so Meiling is sure no thief ever uses her gate. *Hasty Generalization*
+7. **Strings Attached.** Alice tied Marisa to a tree over an insult Marisa never said. *Straw Man*
+8. **Fifty Satisfied Customers.** Reimu's lucky charms must work. Fifty villagers bought one. *Bandwagon*
+9. **The Five Impossible Chores.** Reisen did all five of Kaguya's chores, so now there's a sixth: the moon. *Moving the Goalposts*
 
 ## Features
 
 - **Press, object, prove it.** Some presses make a witness add the statement they were hiding. The right fallacy still needs the right evidence: TAKE THAT!
 - **Easy to Lunatic.** Touhou's four difficulties change your spirit, the card timer and how many fallacy cards you have to choose from. Every case is ranked S to C.
-- **Breakdowns.** Ice shards, stars, a cracking pocket watch, lunatic rings: each witness falls apart in their own way, to a pursuit theme.
+- **Breakdowns.** Ice shards, stars, a cracking pocket watch, lunatic rings, snapping doll strings, scattered ofuda: each witness falls apart in their own way, to a pursuit theme.
 - **The Compendium.** A page for every fallacy you've caught, with how to spot it, plus a practice mode.
 - **Fan-arranged music.** Chiptune arrangements by +TEK (CC BY 4.0), a theme per witness.
 - **English, 日本語, 简体中文.**

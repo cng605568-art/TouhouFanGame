@@ -2,13 +2,17 @@
 
 An *Ace Attorney*-style courtroom game made in Ren'Py 8.3. Yama Shiki Eiki puts Gensokyo's residents (as deadpan fumo plushies) on trial for petty crimes. You're her junior judge: press testimony, spot the **logical fallacy**, and object.
 
-Five cases, played in order. Each witness hides one fallacy in their testimony:
+Nine cases, played in order. Each witness hides one fallacy in their testimony:
 
 - **Case 01: Cirno's Frosty Fallacy.** Cirno froze twenty frogs, they all thawed and hopped off, so she's decided freezing makes frogs immortal. *False Cause.*
 - **Case 02: The Long-Term Loan.** Marisa "borrowed" forty-seven grimoires, and besides, Reimu pockets her own donation box. *Tu Quoque.*
 - **Case 03: The Vanished Pudding.** Sakuya is sure the gatekeeper ate the pudding, because the only other suspect would never. *False Dilemma.*
 - **Case 04: The Lunar Prescription.** Reisen's tonic makes villagers hear colours, but Master Eirin says it's safe. *Appeal to Authority.*
 - **Case 05: The Unappealable Verdict.** The pudding from Case 03 turns up frozen at Misty Lake, and a judge can't hear her own appeal. You take the bench; Eiki takes the stand. *Circular Reasoning.*
+- **Case 06: The Open Gate.** The mistress's parasol is gone, and Meiling knows the thief didn't use her gate: Marisa came in by a window once, so every thief does. *Hasty Generalization.*
+- **Case 07: Strings Attached.** Alice tied Marisa to a tree over an insult Marisa never actually said. *Straw Man.*
+- **Case 08: Fifty Satisfied Customers.** Reimu's lucky charms must work, because fifty villagers bought one. *Bandwagon.*
+- **Case 09: The Five Impossible Chores.** Reisen finished all five of Kaguya's chores, so now there's a sixth: the moon. *Moving the Goalposts.* Someone with a thousand-year grudge has been waiting for Kaguya to lose.
 
 How a trial works:
 
@@ -97,7 +101,7 @@ The sounds come from Warsong's CC0 packs for the Touhou fan games *Petaldust* an
 
 The title screen and each witness have a theme in `game/audio/music/`, listed in the `BGM` table in `game/audio.rpy`. A witness theme starts with the witness's testimony and carries through the cross-examination; when the witness is cornered the pursuit theme takes over, and the music cuts out when the case breaks open. Each title card slides in at the bottom right, the way a Touhou stage names its BGM.
 
-Every piece is a chiptune arrangement by +TEK, released under CC BY 4.0: *Scarlet Beyond a Crimson Dream* on the title screen, then *Beloved Tomboyish Girl* (Cirno), *Love-coloured Master Spark* (Marisa), *Lunar Clock ~ Luna Dial* (Sakuya) and *Lunatic Eyes ~ Invisible Full Moon* (Reisen) and *Reach for the Moon, Immortal Smoke* (Eiki, Case 05), with *U.N. Owen Was Her S* as the pursuit theme. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
+Every piece is a chiptune arrangement by +TEK, released under CC BY 4.0: *Scarlet Beyond a Crimson Dream* on the title screen, then *Beloved Tomboyish Girl* (Cirno), *Love-coloured Master Spark* (Marisa), *Lunar Clock ~ Luna Dial* (Sakuya) and *Lunatic Eyes ~ Invisible Full Moon* (Reisen) and *Reach for the Moon, Immortal Smoke* (Eiki in Case 05, and Mokou), with *U.N. Owen Was Her S* as the pursuit theme. Nothing is extracted from the official games: ZUN's guidelines don't allow that, so every theme is a fan arrangement whose arranger allows game use.
 
 To add or swap a theme, run `python tools/build_music.py track.flac <name> --find-loop`. Arrangements usually play the tune twice and then fade out. The tool finds where the second pass begins, cuts the file there and crossfades the cut, so the theme loops seamlessly for as long as the cross-examination lasts. It also matches the loudness to the sound effects and writes `game/audio/music/<name>.ogg`. Then add a `Theme` to `BGM` with the loop start the tool prints. Without `--find-loop` it just trims the silence and fades the tail.
 
@@ -114,7 +118,7 @@ game/
   reactions.rpy    witness breakdowns, react() emotes and pose photos
   screens.rpy      courtroom HUD, cross-examination, fallacy and evidence picks, menus
   script.rpy       cast, camera shots, fallacy cards, Case 01
-  case02-05.rpy    Cases 02 to 05
+  case02-09.rpy    Cases 02 to 09
   docket.rpy       case list, progress, the Docket screen
   compendium.rpy   the Compendium of fallacies and practice mode
   translations.rpy language switching; the translations are in tl/japanese and tl/schinese
