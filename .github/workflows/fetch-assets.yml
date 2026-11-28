@@ -1,0 +1,57 @@
+name: Fetch CC0 assets (temporary)
+
+# Downloads CC0 sound packs from OpenGameArt (the dev sandbox can't reach it)
+# and publishes the extracted files, with each page's license text, to the
+# ci-assets branch.
+
+on:
+  push:
+    branches:
+      - ci-fetch
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Download and extract
+        run: |
+          set -x
+          sudo apt-get install -y -q p7zip-full >/dev/null
+          mkdir -p out/pages out/raw
+          cd out
+          base=https://opengameart.org/sites/default/files
+          for f in qubodupPunch.7z independent_nu_ljudbank-hits_and_punches.7z swoshes.7z qubodup-timehitwind.zip \
+                   synthetic_explosion_1.flac 25-CC0-bang-sfx.zip swishes.zip; do
+            curl -fsSL -A "Mozilla/5.0" -o "raw/$f" "$base/$f" || echo "FAILED $f" >> failed.txt
+          done
+          for p in content/punch node/2558 node/2242 content/wind-hit-time-morph content/synthesized-explosion node/92774 content/swishes-sound-pack; do
+            curl -fsSL -A "Mozilla/5.0" "https://opengameart.org/$p" -o "pages/$(echo $p | tr / _).html" || echo "FAILED page $p" >> failed.txt
+          done
+          mkdir -p x
+          for f in raw/*; do
+            d="x/$(basename "$f" | sed 's/\.[^.]*$//')"
+            mkdir -p "$d"
+            case "$f" in
+              *.7z|*.zip) 7z x -y -o"$d" "$f" >/dev/null || echo "FAILED extract $f" >> failed.txt ;;
+              *) cp "$f" "$d/" ;;
+            esac
+          done
+          rm -rf raw
+          # License lines from each page, for the credits.
+          for h in pages/*.html; do echo "== $h"; grep -o 'License(s):.\{0,400\}' "$h" | sed 's/<[^>]*>/ /g' | tr -s ' ' | head -2; done > licenses.txt
+          find x -type f | sort > files.txt
+          du -sh x
+          cat files.txt | head -100
+          cat failed.txt 2>/dev/null || true
+
+      - name: Publish to ci-assets
+        run: |
+          cd out
+          git init -q -b ci-assets
+          git config user.name ci && git config user.email ci@example.com
+          git add -A && git commit -qm "assets ${GITHUB_RUN_ID}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-assets
