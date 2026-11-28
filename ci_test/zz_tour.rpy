@@ -50,8 +50,6 @@ testcase pngswap:
     $ renpy.quit()
 
 testcase tour:
-
-testcase tour:
     $ preferences.text_cps = 0
     $ preferences.afm_enable = False
     pause 3.0
