@@ -378,24 +378,20 @@ testcase cases:
     pause 0.3
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
-    pause 0.4
-    $ shot("c03_after_roster")
-    $ print("STATE record", court_record)
-    "待った"
-    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
-    $ shot("c03_hidden_statement")
+    $ shot("c03_trap")
+    $ print("STATE record", court_record)
+    "Next statement"
+    pause 0.3
+    $ shot("c03_dilemma_visible")
     "異議あり"
-    pause 1.0
+    pause 1.2
     "False Dilemma"
     move (40, 540)
     pause 2.5
-    $ shot("c03_prove_line")
-    $ focus_dump("prove_line")
     click pos (40, 540)
-    pause 0.8
+    pause 0.9
     $ shot("c03_evidence")
-    $ focus_dump("evidence")
     "Mansion Roster"
     move (40, 540)
     pause 0.4
@@ -404,7 +400,7 @@ testcase cases:
     click pos (40, 540)
     pause 0.4
     click pos (40, 540)
-    pause 0.2
+    pause 0.25
     $ shot("c03_breakdown")
     click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
@@ -418,15 +414,20 @@ testcase cases:
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
+    $ shot("c04_trap")
+    "Next statement"
+    pause 0.3
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
     $ shot("c04_hidden_statement")
     "異議あり"
-    pause 1.0
+    pause 1.2
     "Appeal to Authority"
     move (40, 540)
     pause 2.5
     click pos (40, 540)
     pause 0.9
-    pause 0.4
     "Lab Notebook"
     move (40, 540)
     pause 0.4
@@ -435,7 +436,7 @@ testcase cases:
     click pos (40, 540)
     pause 0.4
     click pos (40, 540)
-    pause 0.2
+    pause 0.25
     $ shot("c04_breakdown")
     click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
@@ -450,9 +451,13 @@ testcase cases:
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
+    $ shot("c05_review")
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
     $ shot("c05_hidden_statement")
     "異議あり"
-    pause 1.0
+    pause 1.2
     "Circular Reasoning"
     move (40, 540)
     pause 2.5
@@ -476,24 +481,25 @@ testcase cases:
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c06_meiling_stand")
-    "Next statement"
-    pause 0.3
-    "Next statement"
-    pause 0.3
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
-    $ shot("c06_hidden_statement")
+    $ shot("c06_dozing")
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c06_sleeptalk")
+    "Next statement"
+    pause 0.3
     "異議あり"
     pause 1.2
-    $ shot("c06_cards")
     "Hasty Generalization"
     move (40, 540)
     pause 2.5
     click pos (40, 540)
     pause 0.9
-    $ shot("c06_evidence")
-    "Footprints at the Gate"
+    $ shot("c06_counter")
+    "Tengu geta prints run from the front gate"
     move (40, 540)
     pause 0.4
     click pos (40, 540)
@@ -509,17 +515,30 @@ testcase cases:
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c07_alice_stand")
-    "Next statement"
-    pause 0.3
-    "Next statement"
-    pause 0.3
-    "待った"
-    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
-    pause 0.6
-    $ shot("c07_hidden_statement")
     "異議あり"
     pause 1.2
-    $ shot("c07_cards")
+    "Ad Hominem"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c07_heckle")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "異議あり"
+    pause 1.2
+    "Ad Hominem"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c07_second_testimony")
+    "Next statement"
+    pause 0.3
+    "異議あり"
+    pause 1.2
     "Straw Man"
     move (40, 540)
     pause 2.5
@@ -536,30 +555,47 @@ testcase cases:
     click pos (40, 540)
     pause 0.25
     $ shot("c07_breakdown")
+    click pos (40, 540)
+    pause 0.5
+    click pos (40, 540)
+    pause 0.5
     click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c08_reimu_stand")
-    "Next statement"
-    pause 0.3
-    "Next statement"
-    pause 0.3
+    "異議あり"
+    pause 1.2
+    "Bandwagon"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c08_charm_offer")
+    "Take the charm"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c08_after_bribe")
+    $ print("STATE bribe", case_bribed, spirit)
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c08_hidden_statement")
     "異議あり"
     pause 1.2
-    $ shot("c08_cards")
     "Bandwagon"
     move (40, 540)
     pause 2.5
     click pos (40, 540)
     pause 0.9
-    $ shot("c08_evidence")
+    $ shot("c08_pair_pick")
+    "Donation Box (Full)"
+    pause 0.4
     "Village Complaint List"
+    pause 0.4
+    $ shot("c08_pair_chosen")
+    "Present these two"
     move (40, 540)
     pause 0.4
     click pos (40, 540)
@@ -569,6 +605,30 @@ testcase cases:
     click pos (40, 540)
     pause 0.25
     $ shot("c08_breakdown")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_01")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_02")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_03")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_04")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_05")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_06")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_07")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c08e_08")
     click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
@@ -579,20 +639,39 @@ testcase cases:
     pause 0.3
     "Next statement"
     pause 0.3
+    "異議あり"
+    pause 1.2
+    "Moving the Goalposts"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c09_too_early")
     "待った"
     click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
-    $ shot("c09_hidden_statement")
+    $ shot("c09_shift_1")
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c09_shift_2")
+    "Next statement"
+    pause 0.3
+    $ shot("c09_moon")
     "異議あり"
     pause 1.2
-    $ shot("c09_cards")
     "Moving the Goalposts"
     move (40, 540)
     pause 2.5
     click pos (40, 540)
     pause 0.9
-    $ shot("c09_evidence")
     "Signed Chore List"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c09_point")
+    "then a week off"
     move (40, 540)
     pause 0.4
     click pos (40, 540)
@@ -649,58 +728,198 @@ testcase cases:
     $ shot("c09m_15")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_16")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_17")
-    click pos (40, 540)
-    pause 0.3
-    $ shot("c09m_18")
-    pause 0.3
-    $ shot("c09m_19")
-    pause 0.3
-    $ shot("c09m_20")
-    pause 0.3
-    $ shot("c09m_21")
-    pause 0.3
-    $ shot("c09m_22")
-    pause 0.6
-    $ shot("c09m_23")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_24")
-    $ renpy.change_language("japanese")
+    click pos (40, 540)
+    pause 0.45
+    click pos (40, 540)
+    pause 0.3
+    $ shot("c09p_01")
+    pause 0.3
+    $ shot("c09p_02")
+    pause 0.3
+    $ shot("c09p_03")
+    pause 0.3
+    $ shot("c09p_04")
+    pause 0.3
+    $ shot("c09p_05")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
-    $ shot("c09m_24_ja")
-    $ renpy.change_language("schinese")
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
-    $ shot("c09m_24_zh")
-    $ renpy.change_language(None)
-    pause 0.3
-    click pos (40, 540)
-    pause 0.3
-    $ shot("c09m_25")
-    pause 0.3
-    $ shot("c09m_26")
-    pause 0.3
-    $ shot("c09m_27")
+    $ shot("c10_mokou_stand")
+    "異議あり"
+    pause 1.2
+    "Red Herring"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c10_flare")
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
-    $ shot("c09m_28")
+    $ shot("c10_letter")
+    "異議あり"
+    pause 1.2
+    "Red Herring"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    "Kaguya's Letter"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c10_breakdown")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_29")
+    $ shot("c10e_01")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_30")
+    $ shot("c10e_02")
     click pos (40, 540)
     pause 0.45
-    $ shot("c09m_31")
+    $ shot("c10e_03")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c10e_04")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c10e_05")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c10e_06")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c10e_07")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c10e_08")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.4
+    $ shot("c11_speed_a")
+    pause 4.2
+    $ shot("c11_speed_b")
+    $ print("STATE speed", xexam_index)
+    $ gimmick_speed = 1000.0
+    $ xexam_index = 2
+    $ renpy.restart_interaction()
+    pause 0.5
+    "異議あり"
+    pause 1.2
+    "Bandwagon"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "The Bunbunmaru office"
+    pause 0.4
+    $ shot("c11_recess")
+    "The Bunbunmaru office"
+    click pos (40, 540) until move (0.5, 0.5) pattern "The court archive"
+    pause 0.4
+    "The court archive"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c11_second_testimony")
+    $ print("STATE record", court_record)
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "異議あり"
+    pause 1.2
+    "Cherry Picking"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.5
+    $ shot("c11_trap")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "異議あり"
+    pause 1.2
+    "Cherry Picking"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    "Own Docket"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c11_point")
+    "Meiling, not guilty"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c11_breakdown")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_01")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_02")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_03")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_04")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_05")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_06")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_07")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_08")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_09")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_10")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_11")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_12")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_13")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c11e_14")
     click pos (40, 540) until move (0.5, 0.5) pattern "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
     "Return to Title"
     pause 2.5
-    $ shot("c09_title_end_cirno")
+    $ shot("c12_title_end_aya")
     "Compendium"
     pause 0.8
     $ shot("c09a_compendium")
