@@ -12,7 +12,7 @@ define config.name = _("Fumo Court")
 ## The title screen draws its own logo.
 define gui.show_name = False
 
-define config.version = "0.2.0"
+define config.version = "0.3.0"
 
 define gui.about = _p("""
 Fumo Court: Shiki Eiki's Logic Trials is a free, non-commercial fan game.
