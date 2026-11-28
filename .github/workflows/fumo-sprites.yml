@@ -1,7 +1,8 @@
 # Turns plush photos in art_src/ into lit, transparent sprites in game/images/.
 #
 #   1. Add or replace a photo named <character>_fumo.jpg (or .png / .webp) in art_src/
-#      and push it. This workflow runs on its own.
+#      and push it. This workflow runs on its own, and again whenever
+#      art_src/sprite_settings.json (per-character lighting) changes.
 #   2. Or: Actions tab > "Make fumo sprites" > Run workflow (pick a model if you like).
 #
 # It commits game/images/<character>_fumo.png plus a before/after preview in
@@ -29,6 +30,8 @@ on:
       - "art_src/*.jpeg"
       - "art_src/*.png"
       - "art_src/*.webp"
+      - "art_src/sprite_settings.json"
+      - "tools/fumo_sprite.py"
 
 permissions:
   contents: write

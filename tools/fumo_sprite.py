@@ -17,12 +17,22 @@ Steps:
      cushion. `--no-relight` skips this.
   4. Crop to the plush, save a transparent PNG.
 
+Per-character tweaks live in art_src/sprite_settings.json, keyed by the
+photo's name without "_fumo". A bright, flat studio photo needs a darker
+exposure and stronger falloff to sit in the same light as the others, and a
+small photo can be enlarged first (Lanczos, after light denoising) and
+sharpened at the end, so the sprite isn't soft when the game scales it up.
+Plain resampling only: nothing is generated.
+
+    {"sakuya": {"upscale": 2.0, "light": {"exposure": 0.7, "rim": 1.5}}}
+
 Needs:  pip install "rembg[cpu]" pymatting opencv-python-headless pillow
 BiRefNet needs roughly 8 GB of free RAM; the "Make fumo sprites" GitHub
 workflow runs this for you on GitHub's machines.
 """
 
 import argparse
+import json
 import os
 
 import cv2
@@ -141,7 +151,19 @@ def _smoothstep(e0, e1, x):
 def relight(rgb, alpha, L=LIGHT):
     h, w = alpha.shape
     luma = np.array([0.2126, 0.7152, 0.0722])
-    lin = _to_lin(rgb) * L["exposure"]
+    lin = _to_lin(rgb)
+    # Optional "clarity" for flat photos: large-radius local contrast on
+    # perceptual lightness, to bring out the folds and seams of the fabric.
+    # The change per pixel is capped so saturated colours keep their tone.
+    if L.get("clarity", 0):
+        lum0 = np.maximum((lin * luma).sum(-1), 1e-6)
+        light0 = np.power(lum0, 1 / 2.2)
+        radius = L.get("clarity_radius", 0.03) * max(h, w)
+        local = cv2.GaussianBlur(light0.astype(np.float32), (0, 0), radius)
+        light1 = np.clip(light0 + L["clarity"] * (light0 - local), 0, 1)
+        ratio = np.clip(np.power(light1, 2.2) / lum0, 0.6, 1.4)
+        lin = lin * ratio[..., None]
+    lin = lin * L["exposure"]
     lin = lin / (1 + lin * L["shoulder"]) * (1 + L["shoulder"])
     lin = lin * np.array(L["wb"])
 
@@ -153,6 +175,14 @@ def relight(rgb, alpha, L=LIGHT):
 
     lum = (lin * luma).sum(-1, keepdims=True)
     lin = lum + (lin - lum) * L["sat"]
+
+    # Form shading (off unless set): darken a band just inside the
+    # silhouette so a flatly lit studio photo reads as a rounded plush.
+    if L.get("form", 0):
+        solid = (alpha > 0.5).astype(np.uint8)
+        depth = L.get("form_depth", 0.07) * max(h, w)
+        inner = cv2.GaussianBlur(cv2.distanceTransform(solid, cv2.DIST_L2, 5), (0, 0), depth * 0.35)
+        lin = lin * (1 - L["form"] * (1 - _smoothstep(0.0, depth, inner)))[..., None]
 
     # Rim light: strongest on upward- and sideways-facing edges of the upper
     # body, fading out toward the feet (the halo sits behind the head).
@@ -186,8 +216,42 @@ def preview(cutout, lit, path):
     sheet.save(path, quality=90)
 
 
+SETTINGS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "art_src", "sprite_settings.json")
+
+
+def settings_for(src):
+    """This photo's entry in art_src/sprite_settings.json, or {}."""
+    if not os.path.exists(SETTINGS):
+        return {}
+    with open(SETTINGS, encoding="utf-8") as f:
+        table = json.load(f)
+    name = os.path.splitext(os.path.basename(src))[0]
+    if name.endswith("_fumo"):
+        name = name[:-len("_fumo")]
+    return table.get(name, {})
+
+
+def enlarge(img, factor):
+    """Light JPEG denoise, then a Lanczos enlargement."""
+    clean = cv2.fastNlMeansDenoisingColored(img, None, 3, 3, 7, 21)
+    h, w = img.shape[:2]
+    return cv2.resize(clean, (int(round(w * factor)), int(round(h * factor))), interpolation=cv2.INTER_LANCZOS4)
+
+
+def sharpen(rgb, amount, sigma):
+    blur = cv2.GaussianBlur(rgb.astype(np.float32), (0, 0), sigma)
+    return np.clip(rgb + amount * (rgb - blur), 0, 1)
+
+
 def make_sprite(src, dst, model="birefnet-general", do_refine=True, do_relight=True, preview_path=None):
     img = np.array(Image.open(src).convert("RGB"))
+    opts = settings_for(src)
+    light = dict(LIGHT, **opts.get("light", {}))
+    factor = float(opts.get("upscale", 1.0))
+    if factor != 1.0:
+        img = enlarge(img, factor)
+        light.setdefault("rim_width", LIGHT["rim_width"])
+        light["rim_width"] = light["rim_width"] * opts.get("rim_scale", factor ** 0.5)
 
     alpha = classic_alpha(img) if model == "classic" else ai_alpha(img, model)
     alpha = main_subject(alpha)
@@ -202,7 +266,10 @@ def make_sprite(src, dst, model="birefnet-general", do_refine=True, do_relight=T
         return Image.fromarray((arr * 255 + 0.5).astype(np.uint8), "RGBA")
 
     cutout = to_image(rgb)
-    out = to_image(relight(rgb, alpha)) if do_relight else cutout
+    lit = relight(rgb, alpha, light) if do_relight else rgb
+    if factor > 1.0:
+        lit = sharpen(lit, opts.get("sharpen", 0.6), opts.get("sharpen_sigma", 1.2))
+    out = to_image(lit)
 
     box = out.getchannel("A").point(lambda v: 255 if v > 8 else 0).getbbox()
     box = (max(0, box[0] - 2), max(0, box[1] - 2), min(out.width, box[2] + 2), min(out.height, box[3] + 2))
@@ -213,7 +280,8 @@ def make_sprite(src, dst, model="birefnet-general", do_refine=True, do_relight=T
     out.save(dst, optimize=True)
     if preview_path:
         preview(cutout, out, preview_path)
-    print("%s -> %s (%dx%d, %s)" % (src, dst, out.width, out.height, model))
+    print("%s -> %s (%dx%d, %s%s)" % (src, dst, out.width, out.height, model,
+                                       ", settings: " + json.dumps(opts) if opts else ""))
 
 
 if __name__ == "__main__":
