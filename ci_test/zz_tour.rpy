@@ -669,6 +669,14 @@ testcase cases:
     click pos (40, 540)
     pause 0.45
     $ shot("c09m_24")
+    $ renpy.change_language("japanese")
+    pause 0.4
+    $ shot("c09m_24_ja")
+    $ renpy.change_language("schinese")
+    pause 0.4
+    $ shot("c09m_24_zh")
+    $ renpy.change_language(None)
+    pause 0.3
     click pos (40, 540)
     pause 0.3
     $ shot("c09m_25")
@@ -751,7 +759,14 @@ testcase cases:
     "異議あり"
     pause 1.2
     $ shot("c11_lunatic_deck")
-    pause 4.0
+    $ renpy.change_language("japanese")
+    pause 1.0
+    $ shot("c11b_lunatic_deck_ja")
+    $ renpy.change_language("schinese")
+    pause 1.0
+    $ shot("c11c_lunatic_deck_zh")
+    $ renpy.change_language(None)
+    pause 2.0
     pause 4.0
     $ shot("c12_lunatic_timer")
     pause 4.0
