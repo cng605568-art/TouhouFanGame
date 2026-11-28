@@ -24,24 +24,29 @@ define testimony_meiling = Testimony(
         Statement(
             _("Yesterday at noon I rested my eyes. Briefly. My mind stayed on duty."),
             "press_meiling_1",
-            _("A nap is a confession, not a fallacy. Find where she reasons.")),
+            _("A nap is a confession, not a fallacy. Find where she reasons."),
+            reveals="locked"),
+        Statement(
+            _("The library window was locked from the inside all day. So nobody came in that way."),
+            "press_meiling_locked",
+            _("That is perfectly sound. A window locked from inside was not an entrance. It should worry her more than you."),
+            hidden=True, key="locked"),
         Statement(
             _("While I was resting, the mistress's parasol vanished from the hall."),
             "press_meiling_2",
             _("That is simply what happened. Look for where she draws a conclusion.")),
         Statement(
-            _("But the thief didn't come through my gate. Thieves never do."),
-            "press_meiling_3",
-            _("\"Never\" is a big word. Press her on it before you object."),
-            reveals="window"),
+            _("Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."),
+            "press_meiling_sleep",
+            _("Sleep-talk isn't reasoning, Junior Judge. Though it is very informative."),
+            hidden=True, key="sleep"),
         Statement(
-            _("Marisa broke in through the library window. So every thief uses the windows!"),
+            _("The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"),
             "press_meiling_4",
-            None,
-            hidden=True, key="window"),
+            None),
         ],
     cards=[ fallacy_false_cause, fallacy_hasty_generalization, fallacy_slippery_slope ],
-    flaw=3,
+    flaw=4,
     answer="hasty_generalization",
     scolds={
         "false_cause" : _("She isn't saying one event caused another. She's building a rule out of one example."),
@@ -52,14 +57,34 @@ define testimony_meiling = Testimony(
         "appeal_to_authority" : _("No famous name here. Just one memory doing the work of a survey."),
         "circular_reasoning" : _("Her conclusion isn't hiding in her reason. Her reason is simply far too small."),
         },
-    proof="gate_footprints",
-    proof_wrong=_("That doesn't show how this thief got in. Find out which way they came."))
+    proof_kind="counter",
+    proof_data=dict(
+        prompt=_("Her rule: every thief comes in through a window. Which of these breaks it?"),
+        options=[
+            _("Marisa broke in through the library window last month."),
+            _("The library window was locked from the inside all day."),
+            _("Tengu geta prints run from the front gate straight to the hall."),
+            _("The note on the parasol stand is signed \"A.S.\""),
+            ],
+        answer=2,
+        wrong=_("That doesn't show a thief coming in any other way. Find one who used the gate.")),
+    gimmick="doze",
+    doze_press="meiling_sleeptalk",
+    doze_reveals="sleep")
 
 
 label press_meiling_1:
     you "How brief was this rest?"
     $ react("meiling", "nervous")
     meiling "Two hours. For a youkai, that's barely a blink."
+    meiling "But I know the windows were safe. Put this in my testimony, too."
+    return
+
+label press_meiling_locked:
+    you "Locked from the inside. Who checked?"
+    meiling "Sakuya checks every window twice a day since the Marisa incident. Not a scratch."
+    call shot_eiki
+    eiki "Sound. And worse for her than she thinks."
     return
 
 label press_meiling_2:
@@ -69,11 +94,18 @@ label press_meiling_2:
     eiki "Humming."
     return
 
-label press_meiling_3:
-    you "Never? How can you be so sure?"
-    $ react("meiling", "smug")
-    meiling "Because I've seen how thieves get in! Write this down."
-    meiling "Put it in my testimony. Exactly as I say it."
+## Pressing her while she dozes: she talks in her sleep.
+label meiling_sleeptalk:
+    you "Meiling? ...Meiling?"
+    meiling "Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."
+    call shot_eiki
+    eiki "In her sleep, the witness is a far better witness."
+    return
+
+label press_meiling_sleep:
+    you "You let a tengu in through the gate yesterday."
+    $ react("meiling", "shock")
+    meiling "I did? ...I mean, I did not. I was awake. Mostly."
     return
 
 label press_meiling_4:
@@ -88,15 +120,14 @@ label case6:
 
     call open_case("case6")
 
+    komachi "Back on the bench, boss?"
+    eiki "Where I belong. Komachi, why is the defendant snoring?"
+    komachi "She says she's resting her eyes. Loudly."
     show gavel at gavel_slam
     $ sfx("gavel")
     with vpunch
-    eiki "Order. The Higan Court of Logic is in session."
+    eiki "Then this will help. Court is in session."
     hide gavel
-    komachi "Back on the bench, boss?"
-    eiki "Where I belong. Komachi, the defendant?"
-    komachi "Awake, boss. I checked twice."
-    eiki "A first. Bring her in."
 
     call shot_meiling
     meiling "Hong Meiling, gatekeeper of the Scarlet Devil Mansion. I was awake. Mostly."
@@ -111,6 +142,8 @@ label case6:
     camera at eiki_lecture
     eiki "Junior Judge. One example is a story. It is not a rule."
     eiki "Watch for a witness who turns one story into everyone's."
+    komachi "And if she nods off again, boss?"
+    eiki "Then press her anyway. People say the truest things in their sleep."
     camera
     with Dissolve(0.4)
 
@@ -128,7 +161,7 @@ label case6:
 
     meiling_t "Yesterday at noon I rested my eyes. Briefly. My mind stayed on duty."
     meiling_t "While I was resting, the mistress's parasol vanished from the hall."
-    meiling_t "But the thief didn't come through my gate. Thieves never do."
+    meiling_t "The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"
 
     hide screen court_tag
     call shot_eiki

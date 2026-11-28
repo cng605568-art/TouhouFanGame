@@ -36,7 +36,12 @@ define testimony_eiki = Testimony(
             _("This appeal cannot succeed. My verdict stands."),
             "press_eiki_3",
             _("That's a claim, not a reason. Press her for the reason first."),
-            reveals="circle"),
+            reveals="review"),
+        Statement(
+            _("I reviewed that trial myself, page by page, and found no error in it."),
+            "press_eiki_5",
+            _("Not a circle yet, Junior Judge. That's a review. Press her on who checked it."),
+            hidden=True, key="review", reveals="circle"),
         Statement(
             _("My verdicts are correct because I gave them. And I only give correct verdicts."),
             "press_eiki_4",
@@ -44,7 +49,7 @@ define testimony_eiki = Testimony(
             hidden=True, key="circle"),
         ],
     cards=[ fallacy_appeal_to_authority, fallacy_circular_reasoning, fallacy_false_dilemma ],
-    flaw=3,
+    flaw=4,
     answer="circular_reasoning",
     scolds={
         "appeal_to_authority" : _("Close. But she isn't leaning on someone else's name. She's leaning on her own conclusion."),
@@ -94,8 +99,14 @@ label press_eiki_2:
 label press_eiki_3:
     you "Why can't the appeal succeed?"
     $ react("eiki", "smug")
-    eiki "Because my verdicts are correct. Obviously."
+    eiki "Because I reviewed it myself. Thoroughly."
     eiki "Enter that into my testimony, Junior Judge. In full."
+    return
+
+label press_eiki_5:
+    you "And who checked your review?"
+    $ react("eiki", "smug")
+    eiki "No one needed to. I did, and I am always right. Enter that as well."
     return
 
 label press_eiki_4:

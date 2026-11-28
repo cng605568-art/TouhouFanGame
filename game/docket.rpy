@@ -61,11 +61,11 @@ init -1 python:
     def title_witness():
         """
         The fumo on the right of the title screen: whoever testifies next.
-        Once every case is closed, Mokou takes the spot: still on the run
-        with Kaguya after Case 09.
+        Once every case is closed, Aya takes the spot, camera ready: she got
+        away from Sakuya eventually.
         """
         case = next_case()
-        return case.fumo if case else "mokou_fumo"
+        return case.fumo if case else "aya_fumo"
 
     def BeginTrial():
         """Begin Trial opens the Docket: pick a difficulty, then a case."""
@@ -100,6 +100,12 @@ define CASES = [
     Case("case9", _("CASE 09"), _("The Five Impossible Chores"),
          _("Reisen Udongein Inaba v. One Moon Princess"), "kaguya", "moving_goalposts",
          "testimony_kaguya", [ "chore_list", "five_treasures", "new_chore_list" ], pursuit="reverse_ideology"),
+    Case("case10", _("CASE 10"), _("Back by Dinner"),
+         _("The Higan Court v. One Immortal Arsonist"), "mokou", "red_herring",
+         "testimony_mokou", [ "scorched_bench", "bunbunmaru_extra" ], pursuit="captain_murasa"),
+    Case("case11", _("CASE 11"), _("The Scoop"),
+         _("Bunbunmaru News v. The Higan Court"), "aya", "cherry_picking",
+         "testimony_aya", [ "bunbunmaru_headline" ], pursuit="joutounin"),
     ]
 
 default persistent.cases_cleared = set()
@@ -138,6 +144,7 @@ label open_case(key):
     $ case_number = open_this.number
     $ case_title = open_this.title
     $ case_pursuit = open_this.pursuit
+    $ case_key = key
     $ case_bribed = False
 
     scene black

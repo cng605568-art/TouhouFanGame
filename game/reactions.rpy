@@ -44,6 +44,10 @@ label breakdown(who):
         camera at time_stop
     elif who == "reisen":
         camera at lunatic_wobble
+    elif who == "mokou":
+        camera at fire_flash
+    elif who == "aya":
+        camera at photo_flash
     with vpunch
     return
 
@@ -107,6 +111,19 @@ screen breakdown_fx(who):
         for dx, dy, rot, delay in ((-300, -180, -160, 0.0), (290, -190, 170, 0.02), (-330, 90, 130, 0.04),
                                    (320, 110, -150, 0.03), (0, -320, 90, 0.06), (-180, 260, 200, 0.08), (190, 250, -210, 0.07)):
             add "gui/fx_jewel.svg" at particle(960, 300, dx, dy, rot, delay)
+
+    elif who == "mokou":
+        # She flares up, all at once.
+        for dx, dy, rot, delay in ((-300, -160, -40, 0.0), (290, -170, 40, 0.02), (-340, 80, -20, 0.04),
+                                   (330, 90, 25, 0.03), (-120, -300, -10, 0.06), (130, -290, 15, 0.05), (0, -340, 0, 0.08)):
+            add "gui/fx_flame.svg" at particle(960, 320, dx, dy, rot, delay)
+
+    elif who == "aya":
+        # Black tengu feathers, everywhere.
+        for dx, dy, rot, delay in ((-320, -140, -260, 0.0), (300, -160, 280, 0.02), (-270, 150, 220, 0.05),
+                                   (290, 170, -240, 0.04), (-110, -300, 180, 0.07), (120, -290, -200, 0.06),
+                                   (-40, 280, 300, 0.09), (60, 270, -320, 0.08)):
+            add "gui/fx_feather.svg" at particle(960, 300, dx, dy, rot, delay)
 
     timer 1.9 action Hide("breakdown_fx")
 
@@ -353,6 +370,11 @@ transform duo_exit(delay=0.0):
             easein 0.12 yoffset 0
             repeat 3
 
+## A camera flash: the court goes white, then back.
+transform photo_flash:
+    matrixcolor BrightnessMatrix(0.6)
+    linear 0.5 matrixcolor BrightnessMatrix(0.0)
+
 ## The court flushes orange for a moment.
 transform fire_flash:
     matrixcolor TintMatrix("#FFB070")
@@ -374,7 +396,7 @@ transform lunatic_wobble:
 define BREAKDOWN_FUMO = { "cirno": fumo_frozen, "marisa": fumo_spin }
 
 ## Transforms the talk hop leaves alone (FumoHop in script.rpy).
-define FUMO_STAY = (fumo_frozen, fumo_spin, mokou_charge, fumo_knocked, mokou_pummel, fumo_pummeled, duo_exit)
+define FUMO_STAY = (fumo_frozen, fumo_spin, mokou_charge, fumo_knocked, mokou_pummel, fumo_pummeled, duo_exit, fumo_yeet_caught, fumo_hover)
 
 ## Meiling's breakdown colours.
 define RAINBOW = [ "#FF5A5A", "#FFA43A", "#FFE04A", "#6BD66B", "#4AB8FF", "#8A6BFF", "#E46BFF" ]

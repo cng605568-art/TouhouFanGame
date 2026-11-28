@@ -26,17 +26,17 @@ define testimony_sakuya = Testimony(
         Statement(
             _("At five past three, the plate was empty. Only the spoon remained."),
             "press_sakuya_2",
-            _("An empty plate is evidence, not reasoning. Object to how she gets from the plate to the culprit.")),
+            _("An empty plate is evidence, not reasoning. Object to how she gets from the plate to the culprit."),
+            reveals="inside"),
         Statement(
-            _("Only two people could possibly have eaten it."),
-            "press_sakuya_3",
-            _("She hasn't named them yet. Press her before you object."),
-            reveals="dilemma"),
+            _("Five minutes is too quick for anyone outside to reach the kitchen. So it was someone in the mansion."),
+            "press_sakuya_trap",
+            _("That one holds. Five minutes is too short for an outsider. Her mistake is in who she counts as inside."),
+            hidden=True, key="inside"),
         Statement(
             _("Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."),
             "press_sakuya_4",
-            None,
-            hidden=True, key="dilemma"),
+            None),
         ],
     cards=[ fallacy_false_cause, fallacy_false_dilemma, fallacy_tu_quoque ],
     flaw=3,
@@ -64,12 +64,16 @@ label press_sakuya_2:
     $ add_evidence("staff_roster")
     call shot_eiki
     eiki "...The window again, I assume."
+    call shot_sakuya
+    sakuya "And note the timing, Junior Judge. Put this in my testimony."
     return
 
-label press_sakuya_3:
-    you "Only two? Which two?"
-    sakuya "Meiling, and the mistress herself. Who would never."
-    sakuya "Write that down. All of it."
+label press_sakuya_trap:
+    you "Couldn't someone have come in from outside?"
+    $ react("sakuya", "smug")
+    sakuya "Through these halls? I make them longer when I'm annoyed. Nobody outside gets in that fast."
+    call shot_eiki
+    eiki "That much is sound. Keep your objections for the parts that aren't."
     return
 
 label press_sakuya_4:
@@ -124,7 +128,7 @@ label case3:
 
     sakuya_t "At three o'clock, the mistress's pudding was in the kitchen. I placed it there myself."
     sakuya_t "At five past three, the plate was empty. Only the spoon remained."
-    sakuya_t "Only two people could possibly have eaten it."
+    sakuya_t "Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."
 
     hide screen court_tag
     call shot_eiki

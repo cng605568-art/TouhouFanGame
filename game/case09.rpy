@@ -14,6 +14,8 @@ define evidence_five_treasures = Evidence("five_treasures", _("The Five Treasure
 define evidence_new_chore_list = Evidence("new_chore_list", _("New Chore List"),
     _("Written this morning, unsigned: \"Also: the moon. Bring it here.\""), "gui/ev_document.svg")
 
+## Kaguya's testimony rewrites itself: every press moves her statements on
+## to their next version, and the goalposts only finish moving at the end.
 define testimony_kaguya = Testimony(
     title=_("The Five Impossible Chores"),
     witness="kaguya",
@@ -24,7 +26,8 @@ define testimony_kaguya = Testimony(
         Statement(
             _("I told Reisen she could take a week off if she finished five chores."),
             "press_kaguya_1",
-            _("An offer is not an argument. Look for where she reasons.")),
+            _("An offer is not an argument. Look for where she reasons."),
+            variants=[ _("I told Reisen she might take a week off. If she finished five chores. Roughly.") ]),
         Statement(
             _("Yesterday she brought me all five. I admit I was surprised."),
             "press_kaguya_2",
@@ -32,16 +35,14 @@ define testimony_kaguya = Testimony(
         Statement(
             _("But she still hasn't earned her week off."),
             "press_kaguya_3",
-            _("Why not? Ask her before you object."),
-            reveals="goalposts"),
-        Statement(
-            _("Now she must also bring me the moon. Then the week off is hers. Probably."),
-            "press_kaguya_4",
             None,
-            hidden=True, key="goalposts"),
+            variants=[
+                _("A week off is a privilege. Privileges must be earned properly."),
+                _("Now she must also bring me the moon. Then the week off is hers. Probably."),
+                ]),
         ],
     cards=[ fallacy_false_dilemma, fallacy_moving_goalposts, fallacy_circular_reasoning ],
-    flaw=3,
+    flaw=2,
     answer="moving_goalposts",
     scolds={
         "false_dilemma" : _("No either-or here. Just a finish line that keeps sliding away."),
@@ -56,7 +57,18 @@ define testimony_kaguya = Testimony(
         "appeal_to_authority" : _("She isn't citing an expert. She's changing her own rules."),
         },
     proof="chore_list",
-    proof_wrong=_("That doesn't show what was agreed. Find the deal as it was first made."))
+    proof_wrong=_("That doesn't show what was agreed. Find the deal as it was first made."),
+    proof_kind="line",
+    proof_data=dict(
+        phrases=[
+            _("\"Five chores, then a week off.\""),
+            _("Signed: Kaguya Houraisan."),
+            _("All five ticked."),
+            ],
+        answer=0,
+        wrong=_("True, but that isn't where the finish line was drawn. Point to the deal itself.")),
+    gimmick="shift",
+    shift_early=_("Not yet. She's stalling, not moving anything. Press her and watch the line move."))
 
 
 label press_kaguya_1:
@@ -73,16 +85,19 @@ label press_kaguya_2:
     return
 
 label press_kaguya_3:
-    you "Why not? She finished all five."
-    kaguya "Ah, but finishing was never really the point. Add this to my testimony."
-    return
-
-label press_kaguya_4:
-    you "The moon wasn't on the list. When did you add it?"
-    $ react("kaguya", "nervous")
-    kaguya "This morning. After she finished the other five. Obviously."
-    call shot_eiki
-    eiki "So the finish line moved the moment she reached it."
+    if xexam_shift == 0:
+        you "Why not? She finished all five."
+        kaguya "Ah, but finishing was never really the point. Let me rephrase."
+    elif xexam_shift == 1:
+        you "Earned properly how?"
+        $ react("kaguya", "smug")
+        kaguya "Oh, you'll see. Let me rephrase again."
+    else:
+        you "The moon wasn't on the list. When did you add it?"
+        $ react("kaguya", "nervous")
+        kaguya "This morning. After she finished the other five. Obviously."
+        call shot_eiki
+        eiki "So the finish line moved the moment she reached it."
     return
 
 
@@ -90,14 +105,12 @@ label case9:
 
     call open_case("case9")
 
+    komachi "Boss, the defendant sent word. She'll arrive when she feels like it."
     show gavel at gavel_slam
     $ sfx("gavel")
     with vpunch
-    eiki "Order. The Higan Court of Logic is in session."
-    hide gavel
-    eiki "Komachi. The defendant?"
-    komachi "She sent word, boss. She'll arrive when she feels like it."
     eiki "Bring her in. Now."
+    hide gavel
     komachi "...She feels like it now."
 
     call shot_kaguya
@@ -113,6 +126,7 @@ label case9:
     camera at eiki_lecture
     eiki "Junior Judge. A fair test keeps its rules from start to finish."
     eiki "When the finish line moves every time someone reaches it, the race was never fair."
+    eiki "And watch her testimony closely. With this one, it tends to change while you read it."
     camera
     with Dissolve(0.4)
 
@@ -210,7 +224,8 @@ label case9_breakthrough:
 
     mokou "KAGUYAAA!"
     kaguya "Oh no. Not now. Not in court."
-    mokou "Fujiwara no Mokou. Heard you finally lost something. Thought I'd help you lose more."
+    mokou "Fujiwara no Mokou. The Bunbunmaru says you lost. They printed it an hour before your verdict."
+    mokou "Thought I'd help you lose some more."
     eiki "This is a courtroom. The defendant is in this court's custody."
     mokou "Great. I'll take custody."
 
@@ -242,9 +257,9 @@ label case9_breakthrough:
     komachi "...Want me to chase them, boss?"
     eiki "No. They have been doing this for a thousand years. They will be back by dinner."
     eiki "Reisen's week off begins regardless. Court is adjourned."
-    komachi "That's the whole docket, boss."
-    eiki "Junior Judge. Your work was... more than acceptable."
-    komachi "She's never said that before. Not once."
+    komachi "That's the docket, boss."
+    eiki "Not quite. Keep the court open. They will be back by dinner."
+    komachi "...You're keeping the court open for dinner?"
     eiki "Komachi."
     komachi "Escorting myself out."
 

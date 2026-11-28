@@ -247,7 +247,7 @@ screen cross_exam(tm_name):
                 add SVG("gui/ev_charm.svg", 0.22) yalign 0.5
                 text _("Take the charm (+1)") style "record_button_text" yalign 0.5
     if tm.gimmick == "speed":
-        timer 3.6 repeat True action [ SetVariable("xexam_index", (xexam_index + 1) % count), Function(sfx, "nav") ]
+        timer gimmick_speed repeat True action [ SetVariable("xexam_index", (xexam_index + 1) % count), Function(sfx, "nav") ]
 
     ## Statement arrows.
     imagebutton:

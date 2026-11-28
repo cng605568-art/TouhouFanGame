@@ -76,6 +76,9 @@ RECIPE = {
     "break_kaguya":    (-2,  1.8,  [("P", "reconfirm.wav", -3, 0, 0.75), ("N", "breakeffect2.wav", 0, 0.04)]), # treasures scatter
     "mokou_burst":     (-1,  1.6,  [("N", "big damage.wav", 0, 0), ("N", "destroyed.wav", -2, 0.02, 0.8),
                                     ("P", "slashC.wav", -3, 0.0)]),                                             # Mokou barges in
+    "break_mokou":     (-2,  1.8,  [("N", "destroyed.wav", 0, 0, 0.85), ("P", "slashC.wav", -3, 0.02), ("N", "big damage.wav", -5, 0.05, 0.7)]),  # she flares up
+    "break_aya":       (-2,  1.6,  [("P", "HybridFoley.wav", 0, 0, 1.3), ("N", "bulletpuff.wav", -2, 0.04), ("P", "clothA.wav", -3, 0.08, 1.4),
+                                    ("P", "clothC.wav", -5, 0.22, 1.2)]),                                       # a shutter, then feathers
     # Mokou lays into Kaguya: four quick hits, the last one heavy.
     "mokou_pummel":    (-1,  1.9,  [("N", "playerhurt.wav", 0, 0.00), ("P", "slashA.wav", -4, 0.00),
                                     ("N", "playerhurt.wav", -1, 0.28, 1.12), ("P", "slashB.wav", -4, 0.28),

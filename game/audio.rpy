@@ -112,7 +112,8 @@ init -1 python:
     class Theme(object):
         """A piece of music and the credit line shown when it starts."""
 
-        def __init__(self, name, title, original, credit, loop=None):
+        def __init__(self, name, title, original, credit, loop=None, fallback=None):
+            self.fallback = fallback    # BGM key to play instead if the file is missing
             self.name = name            # file stem in game/audio/music/
             self.title = title          # shown in the title card
             self.original = original    # ZUN's title, shown beside it
@@ -296,6 +297,7 @@ init -1 python:
             u"稲田姫様に叱られるから",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
             loop=None,
+            fallback="title",
         ),
         # Main menu. Never announced with a title card; credited in About.
         "title": Theme(
@@ -316,6 +318,8 @@ init -1 python:
         theme = BGM[name]
         filename = theme.filename
         if filename is None:
+            if theme.fallback:
+                bgm(theme.fallback, fadein, card_delay, fadeout)
             return
         if renpy.music.get_playing("music") == filename:
             return

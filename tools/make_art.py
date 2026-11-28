@@ -607,6 +607,43 @@ def make_cirno():
                                                       "Cirno fumo placeholder"))
 
 
+def make_aya():
+    """Vector placeholder for Aya, until a photo of her fumo is in art_src/."""
+    defs = "\n".join([
+        "<defs>",
+        fumo_common_defs(("#4A3A38", "#2A1E1E", "#140C0C"), "#8C1A1A", "#E04A3A"),
+        lin("skirt", [(0, "#2A2A30"), (1, "#121216")]),
+        lin("tokin", [(0, "#E2443A"), (1, "#A81E1E")]),
+        "</defs>",
+    ])
+    back_hair = "M%s C%s %s %s C%s %s %s C%s %s %s C%s %s %s Z" % (
+        pts((96, 318)),
+        pts((52, 214)), pts((96, 70)), pts((240, 60)),
+        pts((384, 70)), pts((428, 214)), pts((384, 318)),
+        pts((360, 344)), pts((330, 336)), pts((320, 320)),
+        pts((280, 330)), pts((200, 330)), pts((160, 320)))
+    mouth = ('<path d="M%s Q%s %s" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round"/>'
+             % (pts((226, 334)), pts((240, 344)), pts((256, 332)), LINE))
+    # The little red tokin cap, and a camera on a strap.
+    tokin = "\n".join([
+        '<path d="M%s L%s L%s L%s L%s Z" fill="url(#tokin)" stroke="%s" stroke-width="4" stroke-linejoin="round"/>' % (
+            pts((212, 66)), pts((240, 22)), pts((268, 66)), pts((258, 84)), pts((222, 84)), LINE),
+        '<path d="M%s L%s" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.7" stroke-linecap="round"/>' % (pts((232, 40)), pts((226, 62))),
+        '<path d="M%s Q%s %s M%s Q%s %s" fill="none" stroke="#E8D9A0" stroke-width="5" stroke-linecap="round"/>' % (
+            pts((222, 84)), pts((214, 104)), pts((206, 112)), pts((258, 84)), pts((266, 104)), pts((274, 112))),
+    ])
+    camera = "\n".join([
+        '<path d="M%s L%s" stroke="#3B3540" stroke-width="5"/>' % (pts((176, 372)), pts((292, 470))),
+        '<rect x="262" y="452" width="72" height="50" rx="8" fill="#3B3540" stroke="%s" stroke-width="4"/>' % LINE,
+        '<circle cx="298" cy="477" r="15" fill="#8FA8C8" stroke="#D9B44A" stroke-width="4"/>',
+    ])
+    body = body_block(DRESS, "url(#skirt)", "#FFFFFF", "#2A1E1E", COLLAR + ribbon_bow(240, 366, 0.9, "#2A2A30", "#55555E"),
+                      extras_front="<!-- Camera -->\n" + camera)
+    head = face_and_head(back_hair, bangs_path(FRINGE), True, mouth)
+    write(os.path.join(IMAGES, "aya_fumo.svg"), svg(FUMO_W, FUMO_H, "\n".join([defs, body, head, "<!-- Tokin -->", tokin]),
+                                                    "Aya fumo placeholder"))
+
+
 def make_eiki():
     defs = "\n".join([
         "<defs>",
@@ -1399,6 +1436,9 @@ def make_fx():
     # Kaguya's treasures.
     put("fx_jewel", 70, 80, '<path d="M8 28 L20 6 L50 6 L62 28 L35 76 Z" fill="#8FD3C9" stroke="#3F8F86" stroke-width="3" stroke-linejoin="round"/>'
         '<path d="M8 28 L62 28 M20 6 L28 28 L35 76 L42 28 L50 6" fill="none" stroke="#3F8F86" stroke-width="2"/>')
+    # Aya's tengu feathers.
+    put("fx_feather", 50, 120, '<path d="M25 4 Q46 30 40 70 Q34 100 25 116 Q16 100 10 70 Q4 30 25 4 Z" fill="#1E1A22" stroke="#4A4452" stroke-width="3" stroke-linejoin="round"/>'
+        '<path d="M25 10 L25 116 M25 40 L14 30 M25 58 L38 46 M25 76 L13 66 M25 92 L36 82" fill="none" stroke="#6E6878" stroke-width="2" stroke-linecap="round"/>')
     # Mokou's fire.
     put("fx_flame", 80, 110, '<path d="M40 4 Q62 34 66 58 Q72 92 40 106 Q8 92 14 58 Q18 40 30 30 Q32 50 40 54 Q46 34 40 4 Z" fill="#FF7A1A" stroke="#C4361E" stroke-width="3" stroke-linejoin="round"/>'
         '<path d="M40 50 Q54 66 52 84 Q48 98 40 100 Q32 98 28 84 Q28 70 40 50 Z" fill="#FFD25A"/>')
@@ -1457,6 +1497,7 @@ if __name__ == "__main__":
     make_gavel()
     make_scales()
     make_cirno()
+    make_aya()
     make_eiki()
     make_magatama()
     for k in ("press", "object"):

@@ -132,6 +132,11 @@ define mokou = Character("Mokou",
     callback=Callbacks(FumoHop("mokou_fumo"), TextBlip("blip_lo")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
+define aya = Character("Aya",
+    image="aya_fumo",
+    callback=Callbacks(FumoHop("aya_fumo"), TextBlip("blip_hi")),
+    namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
+
 ## Testimony is written in red ink.
 define cirno_t = Character(kind=cirno, what_color="#7A1C2A", what_size=40)
 define marisa_t = Character(kind=marisa, what_color="#7A1C2A", what_size=40)
@@ -141,6 +146,8 @@ define meiling_t = Character(kind=meiling, what_color="#7A1C2A", what_size=40)
 define alice_t = Character(kind=alice, what_color="#7A1C2A", what_size=40)
 define reimu_t = Character(kind=reimu, what_color="#7A1C2A", what_size=40)
 define kaguya_t = Character(kind=kaguya, what_color="#7A1C2A", what_size=40)
+define mokou_t = Character(kind=mokou, what_color="#7A1C2A", what_size=40)
+define aya_t = Character(kind=aya, what_color="#7A1C2A", what_size=40)
 
 define komachi = Character("Komachi",
     callback=TextBlip("blip_deep"),
@@ -212,6 +219,14 @@ label shot_reimu(trans=whip_left):
 
 label shot_kaguya(trans=whip_left):
     call shot_witness("kaguya_fumo", trans)
+    return
+
+label shot_mokou(trans=whip_left):
+    call shot_witness("mokou_fumo", trans)
+    return
+
+label shot_aya(trans=whip_left):
+    call shot_witness("aya_fumo", trans)
     return
 
 

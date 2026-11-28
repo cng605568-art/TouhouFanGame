@@ -24,7 +24,13 @@ define testimony_reisen = Testimony(
         Statement(
             _("I sold the tonic in the Human Village yesterday. Everyone paid in full."),
             "press_reisen_1",
-            _("A sales record is not an argument. Though the receipts are very neat.")),
+            _("A sales record is not an argument. Though the receipts are very neat."),
+            reveals="eirin"),
+        Statement(
+            _("Master Eirin says it's perfectly safe. So it can't be the tonic."),
+            "press_reisen_4",
+            None,
+            hidden=True, key="eirin"),
         Statement(
             _("This morning, three customers said they could hear colours. Mostly blue."),
             "press_reisen_2",
@@ -32,16 +38,16 @@ define testimony_reisen = Testimony(
         Statement(
             _("But the tonic was cleared before I sold a single bottle."),
             "press_reisen_3",
-            _("Cleared by whom? Press her before you object."),
-            reveals="eirin"),
+            _("Cleared by whom? Press around her before you object."),
+            reveals="order"),
         Statement(
-            _("Master Eirin says it's perfectly safe. So it can't be the tonic."),
-            "press_reisen_4",
-            None,
-            hidden=True, key="eirin"),
+            _("They heard colours after drinking it, yes. But coming after isn't the same as caused by."),
+            "press_reisen_5",
+            _("She's right about that. Coming after is not the same as caused by. Her mistake is somewhere else."),
+            hidden=True, key="order"),
         ],
     cards=[ fallacy_ad_hominem, fallacy_false_dilemma, fallacy_appeal_to_authority ],
-    flaw=3,
+    flaw=1,
     answer="appeal_to_authority",
     scolds={
         "ad_hominem" : _("That's the mirror image. Ad Hominem rejects a claim because of who made it. She's accepting one."),
@@ -58,6 +64,7 @@ label press_reisen_1:
     you "What exactly is in the tonic?"
     $ react("reisen", "nervous")
     reisen "Moon herbs, honey, and something Master told me not to ask about."
+    reisen "It's Master Eirin's own formula. Add that to my testimony. It settles everything."
     return
 
 label press_reisen_2:
@@ -70,7 +77,16 @@ label press_reisen_3:
     you "Cleared by whom, exactly?"
     $ react("reisen", "smug")
     reisen "By the greatest pharmacist in Gensokyo! My master!"
-    reisen "Add that to my testimony. It settles everything."
+    you "And the colours started right after they drank it."
+    $ react("reisen", "smug")
+    reisen "I've read your docket, Junior Judge. I know that trick. Write this down."
+    return
+
+label press_reisen_5:
+    you "So you admit the timing proves nothing?"
+    reisen "Timing alone proves nothing. I listen in lectures."
+    call shot_eiki
+    eiki "She is right about that much. Which is not the same as being right."
     return
 
 label press_reisen_4:

@@ -239,11 +239,13 @@ init -1 python:
         if mode == "all":
             keys = set(k for k in FALLACY_ORDER if hasattr(store, "fallacy_" + k))
         else:
-            keys = set()
+            keys = set(c.key for c in tm.cards)
             for case in CASES:
                 case_tm = testimony(case.testimony)
                 keys.update(c.key for c in case_tm.cards)
-                if case_tm is tm:
+                # A case with two testimonies names its last; stop at the
+                # case being played either way.
+                if case_tm is tm or case.key == store.case_key:
                     break
         return [ fallacy(k) for k in FALLACY_ORDER if k in keys ]
 
@@ -297,6 +299,7 @@ default case_mistrial = False
 default case_number = ""
 default case_title = ""
 default case_pursuit = "pursuit"
+default case_key = None
 default case_bribed = False
 
 default xexam_index = 0
@@ -307,6 +310,8 @@ default xexam_stmt = 0
 default xexam_revealed = set()
 default xexam_vis = [ ]
 default xexam_shift = 0
+# Seconds between statements for the "speed" gimmick (tests turn it right up).
+default gimmick_speed = 3.6
 default xexam_dozing = False
 
 
