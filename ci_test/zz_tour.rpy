@@ -66,7 +66,7 @@ testcase tour:
     "Cirno's Frosty Fallacy"
     pause 1.4
     $ shot("04_case_card")
-    click until "待った"
+    click until move "待った"
     pause 0.6
     $ shot("05_xexam_s1")
     $ print("STATE spirit", spirit, spirit_cap, difficulty, court_record)
@@ -76,7 +76,7 @@ testcase tour:
     click
     pause 0.35
     $ shot("07_press_smug")
-    click until "異議あり"
+    click until move "異議あり"
     pause 0.6
     $ shot("08_xexam_s2")
     "異議あり"
@@ -85,7 +85,7 @@ testcase tour:
     "False Cause"
     pause 2.4
     $ shot("10_penalty_wrong_statement")
-    click until "Next statement"
+    click until move "Next statement"
     pause 0.5
     "Next statement"
     pause 0.5
@@ -95,20 +95,20 @@ testcase tour:
     "Ad Hominem"
     pause 2.4
     $ shot("12_scold")
-    click until "異議あり"
+    click until move "異議あり"
     pause 0.5
     "異議あり"
     pause 0.9
     "False Cause"
     pause 2.0
     $ shot("13_prove_it")
-    click until "Frog Census"
+    click until move "Frog Census"
     pause 0.8
     $ shot("14_evidence_pick")
     "Frog Census"
     pause 2.2
     $ shot("15_wrong_evidence")
-    click until "COURT RECORD"
+    click until move "COURT RECORD"
     pause 0.5
     $ shot("16_after_wrong_evidence")
     $ print("STATE spirit", spirit, "penalties", case_penalties)
@@ -120,7 +120,7 @@ testcase tour:
     "異議あり"
     pause 0.9
     "False Cause"
-    click until "Weather Log"
+    click until move "Weather Log"
     pause 0.5
     "Weather Log"
     pause 0.35
@@ -137,7 +137,7 @@ testcase tour:
     $ shot("20_breakdown_cirno")
     pause 0.4
     $ shot("21_breakdown_cirno_b")
-    click until "Return to Title"
+    click until move "Return to Title"
     pause 0.4
     $ shot("22_case_closed_rank")
     $ print("STATE rank", case_rank(), persistent.best_ranks)
@@ -266,20 +266,20 @@ testcase cases:
     "Begin Trial"
     pause 1.0
     "The Long-Term Loan"
-    click until "待った"
+    click until move "待った"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until "異議あり"
+    click until move "異議あり"
     pause 0.6
     $ shot("c02_hidden_statement")
     "異議あり"
     pause 1.0
     "Tu Quoque"
-    click until "Library Ledger"
+    click until move "Library Ledger"
     pause 0.4
     "Library Ledger"
     pause 0.4
@@ -290,26 +290,26 @@ testcase cases:
     click
     pause 0.15
     $ shot("c02_breakdown")
-    click until "Next Case"
+    click until move "Next Case"
     pause 0.4
     "Next Case"
-    click until "待った"
+    click until move "待った"
     pause 0.4
     "Next statement"
     pause 0.3
     "待った"
-    click until "待った"
+    click until move "待った"
     pause 0.4
     $ shot("c03_after_roster")
     $ print("STATE record", court_record)
     "待った"
-    click until "異議あり"
+    click until move "異議あり"
     pause 0.6
     $ shot("c03_hidden_statement")
     "異議あり"
     pause 1.0
     "False Dilemma"
-    click until "Mansion Roster"
+    click until move "Mansion Roster"
     pause 0.4
     "Mansion Roster"
     pause 0.4
@@ -320,23 +320,23 @@ testcase cases:
     click
     pause 0.2
     $ shot("c03_breakdown")
-    click until "Next Case"
+    click until move "Next Case"
     pause 0.4
     "Next Case"
-    click until "待った"
+    click until move "待った"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until "異議あり"
+    click until move "異議あり"
     pause 0.6
     $ shot("c04_hidden_statement")
     "異議あり"
     pause 1.0
     "Appeal to Authority"
-    click until "Lab Notebook"
+    click until move "Lab Notebook"
     pause 0.4
     "Lab Notebook"
     pause 0.4
@@ -347,7 +347,7 @@ testcase cases:
     click
     pause 0.2
     $ shot("c04_breakdown")
-    click until "Return to Title"
+    click until move "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
     "Return to Title"
@@ -359,7 +359,7 @@ testcase cases:
     "Lunatic"
     pause 0.3
     "Cirno's Frosty Fallacy"
-    click until "待った"
+    click until move "待った"
     pause 0.4
     $ print("STATE lunatic", spirit, spirit_cap, difficulty)
     "異議あり"
