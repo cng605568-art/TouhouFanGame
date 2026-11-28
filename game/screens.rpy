@@ -1071,8 +1071,8 @@ screen main_menu():
 
         textbutton _("Begin Trial") action BeginTrial()
         textbutton _("Continue") action ShowMenu("load")
+        textbutton _("Compendium") action ShowMenu("compendium")
         textbutton _("Settings") action ShowMenu("preferences")
-        textbutton _("Controls") action ShowMenu("controls")
         textbutton _("About") action ShowMenu("about")
         if renpy.variant("pc"):
             textbutton _("Quit") action Quit(confirm=False)
@@ -1138,6 +1138,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                 textbutton _("Save") action ShowMenu("save")
 
             textbutton _("Load") action ShowMenu("load")
+            textbutton _("Compendium") action ShowMenu("compendium")
             textbutton _("Settings") action ShowMenu("preferences")
             textbutton _("Controls") action ShowMenu("controls")
             textbutton _("About") action ShowMenu("about")
