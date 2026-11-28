@@ -347,12 +347,41 @@ testcase cases:
     click
     pause 0.2
     $ shot("c04_breakdown")
+    click until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click until move (0.5, 0.5) pattern "待った"
+    pause 0.4
+    $ shot("c05_eiki_stand")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "待った"
+    click until move (0.5, 0.5) pattern "異議あり"
+    pause 0.6
+    $ shot("c05_hidden_statement")
+    "異議あり"
+    pause 1.0
+    "Circular Reasoning"
+    click until move (0.5, 0.5) pattern "Frozen Pudding"
+    pause 0.6
+    $ shot("c05_evidence")
+    "Frozen Pudding"
+    pause 0.4
+    click
+    pause 0.4
+    click
+    pause 0.4
+    click
+    pause 0.25
+    $ shot("c05_breakdown")
     click until move (0.5, 0.5) pattern "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
     "Return to Title"
     pause 2.5
-    $ shot("c09_title_end")
+    $ shot("c09_title_end_cirno")
     "Begin Trial"
     pause 1.0
     $ shot("c10_docket_all_closed")
