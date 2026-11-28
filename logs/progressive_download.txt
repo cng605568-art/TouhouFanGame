@@ -1,0 +1,8 @@
+# RenPyWeb progressive download rules - first match applies
+# '+' = progressive download, '-' = keep in game.zip (default)
+#
+# Fumo Court is small and all vector, so everything ships inside game.zip.
+# That keeps the first frame crisp instead of showing blurry placeholders.
+- image game/**
+- music game/**
+- voice game/**

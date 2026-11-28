@@ -1,0 +1,75 @@
+SHOT auto_main_menu_1 True
+SHOT 01_title True
+MUSIC 01_title <loop 26.264989>audio/music/title_theme.ogg no-card
+SHOT auto_docket_1 True
+SHOT 02_docket True
+SHOT 03_docket_lunatic True
+SHOT auto_case_card_1 True
+SHOT 04_case_card True
+LABEL cross_examination stmt 0 pick None index 0 return None
+SHOT auto_bgm_title_1 True
+SHOT 05_xexam_s1 True
+STATE spirit 5 5 normal ['frog_census', 'weather_log', 'cirno_ice']
+SHOT auto_court_shout_1 True
+SHOT 06_press True
+SHOT 07_press_smug True
+SHOT 08_xexam_s2 True
+SHOT 09_cards True
+SHOT auto_fallacy_pick_1 True
+SHOT auto_court_shout_2 True
+LABEL court_penalty stmt 1 pick false_cause index 1 return None
+SHOT auto_emote_1 True
+SHOT 10_penalty_wrong_statement True
+SHOT 11_flaw True
+SHOT auto_court_shout_3 True
+LABEL court_penalty stmt 2 pick ad_hominem index 2 return None
+SHOT auto_emote_2 True
+SHOT 12_scold True
+SHOT auto_court_shout_4 True
+LABEL prove_it stmt 2 pick false_cause index 2 return None
+SHOT 13_prove_it True
+SHOT auto_bgm_title_2 True
+SHOT auto_evidence_pick_1 True
+SHOT 14_evidence_pick True
+LABEL court_penalty stmt 2 pick false_cause index 2 return frog_census
+SHOT auto_emote_3 True
+SHOT 15_wrong_evidence True
+SHOT 16_after_wrong_evidence True
+STATE spirit 2 penalties 3
+SHOT auto_court_record_1 True
+SHOT 17_court_record True
+SHOT auto_court_shout_5 True
+LABEL prove_it stmt 2 pick false_cause index 2 return None
+SHOT auto_evidence_pick_2 True
+SHOT auto_court_shout_6 True
+SHOT 18_take_that True
+LABEL breakdown stmt 2 pick false_cause index 2 return solved
+SHOT auto_breakdown_fx_1 True
+SHOT 19_breakthrough True
+SHOT 20_breakdown_cirno True
+SHOT 21_breakdown_cirno_b True
+SHOT auto_verdict_stamp_1 True
+LABEL close_case stmt 2 pick false_cause index 2 return None
+SHOT 22_case_closed_rank True
+STATE rank C {'case1:normal': 'C'}
+SHOT auto_main_menu_2 True
+SHOT 23_title_marisa True
+SHOT auto_docket_2 True
+SHOT 24_docket_after_case1 True
+SHOT 25_settings True
+SHOT 26_about True
+SHOT 27_compendium_one True
+SHOT 27b_settings_language True
+SHOT auto_main_menu_3 True
+SHOT 28_title_ja True
+SHOT auto_docket_3 True
+SHOT 29_docket_ja True
+SHOT auto_case_card_2 True
+LABEL cross_examination stmt 0 pick None index 0 return None
+SHOT auto_bgm_title_3 True
+SHOT 30_xexam_ja True
+SHOT auto_fallacy_pick_2 True
+SHOT 31_cards_ja True
+SHOT 32_xexam_zh True
+SHOT auto_fallacy_pick_3 True
+SHOT 33_cards_zh True

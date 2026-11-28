@@ -1,0 +1,27 @@
+SFXCHECK styles audio/sfx/ui_hover.ogg audio/sfx/ui_confirm.ogg audio/sfx/ui_cancel.ogg audio/sfx/nav.ogg
+SFXCHECK ui_hover audio/sfx/ui_hover.ogg None None
+SFXCHECK ui_confirm audio/sfx/ui_confirm.ogg None None
+SFXCHECK ui_cancel audio/sfx/ui_cancel.ogg None None
+SFXCHECK nav audio/sfx/nav.ogg audio/sfx/nav.ogg 0.256
+SFXCHECK shout_objection audio/sfx/shout_objection.ogg audio/sfx/shout_objection.ogg 0.282
+SFXCHECK shout_hold audio/sfx/shout_hold.ogg audio/sfx/shout_hold.ogg 0.24
+SFXCHECK gavel audio/sfx/gavel.ogg None None
+SFXCHECK stamp audio/sfx/stamp.ogg audio/sfx/stamp.ogg 0.256
+SFXCHECK banner audio/sfx/banner.ogg audio/sfx/banner.ogg 0.256
+SFXCHECK penalty audio/sfx/penalty.ogg audio/sfx/penalty.ogg 0.282
+SFXCHECK breakthrough audio/sfx/breakthrough.ogg audio/sfx/breakthrough.ogg 0.213
+SFXCHECK shock audio/sfx/shock.ogg None None
+SFXCHECK yeet audio/sfx/yeet.ogg audio/sfx/yeet.ogg 0.256
+SFXCHECK case_closed audio/sfx/case_closed.ogg audio/sfx/case_closed.ogg 0.24
+SFXCHECK mistrial audio/sfx/mistrial.ogg audio/sfx/mistrial.ogg 0.282
+SFXCHECK blip audio/sfx/blip.ogg None None
+SFXCHECK blip_hi audio/sfx/blip_hi.ogg None None
+SFXCHECK blip_up audio/sfx/blip_up.ogg None None
+SFXCHECK blip_dn audio/sfx/blip_dn.ogg None None
+SFXCHECK blip_lo audio/sfx/blip_lo.ogg None None
+SFXCHECK blip_deep audio/sfx/blip_deep.ogg None None
+SFXCHECK break_cirno audio/sfx/break_cirno.ogg audio/sfx/break_cirno.ogg 0.213
+SFXCHECK break_marisa audio/sfx/break_marisa.ogg audio/sfx/break_marisa.ogg 0.256
+SFXCHECK break_sakuya audio/sfx/break_sakuya.ogg audio/sfx/break_sakuya.ogg 0.213
+SFXCHECK break_reisen audio/sfx/break_reisen.ogg audio/sfx/break_reisen.ogg 0.282
+SFXCHECK break_eiki audio/sfx/break_eiki.ogg audio/sfx/break_eiki.ogg 0.282

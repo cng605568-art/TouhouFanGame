@@ -1,0 +1,306 @@
+SHOT auto_main_menu_1 True
+SHOT c00_title True
+SHOT auto_docket_1 True
+LABEL cross_examination stmt 0 pick None index 0 return None
+SHOT auto_bgm_title_1 True
+SHOT auto_court_shout_1 True
+LABEL testimony_updated stmt 2 pick None index 2 return None
+SHOT c02_hidden_statement True
+SHOT auto_fallacy_pick_1 True
+SHOT auto_court_shout_2 True
+LABEL prove_it stmt 3 pick tu_quoque index 3 return None
+SHOT auto_evidence_pick_1 True
+SHOT auto_court_shout_3 True
+SHOT c02_breakdown True
+LABEL breakdown stmt 3 pick tu_quoque index 3 return solved
+SHOT auto_breakdown_fx_1 True
+LABEL close_case stmt 3 pick tu_quoque index 3 return None
+LABEL cross_examination stmt 3 pick tu_quoque index 3 return None
+SHOT auto_bgm_title_2 True
+SHOT auto_court_shout_4 True
+LABEL testimony_updated stmt 1 pick tu_quoque index 1 return None
+SHOT auto_evidence_added_1 True
+SHOT c03_trap True
+STATE record ['empty_plate', 'pudding_recipe', 'staff_roster']
+SHOT c03_dilemma_visible True
+SHOT auto_fallacy_pick_2 True
+SHOT auto_court_shout_5 True
+LABEL prove_it stmt 3 pick false_dilemma index 3 return None
+SHOT auto_evidence_pick_2 True
+SHOT c03_evidence True
+SHOT auto_court_shout_6 True
+SHOT c03_breakdown True
+LABEL breakdown stmt 3 pick false_dilemma index 3 return solved
+SHOT auto_breakdown_fx_2 True
+SHOT auto_verdict_stamp_1 True
+LABEL close_case stmt 3 pick false_dilemma index 3 return None
+LABEL cross_examination stmt 3 pick false_dilemma index 3 return None
+SHOT auto_bgm_title_3 True
+SHOT auto_court_shout_7 True
+LABEL testimony_updated stmt 3 pick false_dilemma index 2 return None
+SHOT c04_trap True
+SHOT auto_court_shout_8 True
+LABEL testimony_updated stmt 0 pick false_dilemma index 0 return None
+SHOT c04_hidden_statement True
+SHOT auto_fallacy_pick_3 True
+SHOT auto_court_shout_9 True
+LABEL prove_it stmt 1 pick appeal_to_authority index 1 return None
+SHOT auto_evidence_pick_3 True
+SHOT auto_court_shout_10 True
+SHOT c04_breakdown True
+LABEL breakdown stmt 1 pick appeal_to_authority index 1 return solved
+SHOT auto_breakdown_fx_3 True
+SHOT auto_verdict_stamp_2 True
+LABEL close_case stmt 1 pick appeal_to_authority index 1 return None
+LABEL cross_examination stmt 1 pick appeal_to_authority index 1 return None
+SHOT auto_bgm_title_4 True
+SHOT c05_eiki_stand True
+SHOT auto_court_shout_11 True
+LABEL testimony_updated stmt 2 pick appeal_to_authority index 2 return None
+SHOT c05_review True
+SHOT auto_court_shout_12 True
+LABEL testimony_updated stmt 3 pick appeal_to_authority index 3 return None
+SHOT c05_hidden_statement True
+SHOT auto_fallacy_pick_4 True
+SHOT auto_court_shout_13 True
+LABEL prove_it stmt 4 pick circular_reasoning index 4 return None
+SHOT auto_evidence_pick_4 True
+SHOT c05_evidence True
+SHOT auto_court_shout_14 True
+SHOT c05_breakdown True
+LABEL breakdown stmt 4 pick circular_reasoning index 4 return solved
+SHOT auto_breakdown_fx_4 True
+LABEL close_case stmt 4 pick circular_reasoning index 4 return None
+SHOT auto_emote_1 True
+LABEL cross_examination stmt 4 pick circular_reasoning index 4 return None
+SHOT auto_bgm_title_5 True
+SHOT c06_meiling_stand True
+SHOT auto_court_shout_15 True
+LABEL testimony_updated stmt 0 pick circular_reasoning index 0 return None
+SHOT c06_dozing True
+SHOT c06_dozing_ja True
+SHOT c06_dozing_zh True
+SHOT auto_court_shout_16 True
+LABEL testimony_updated stmt 1 pick circular_reasoning index 1 return None
+SHOT c06_sleeptalk True
+SHOT auto_fallacy_pick_5 True
+SHOT auto_court_shout_17 True
+LABEL prove_it stmt 4 pick hasty_generalization index 4 return None
+SHOT c06_counter True
+SHOT auto_court_shout_18 True
+SHOT c06_breakdown True
+LABEL breakdown stmt 4 pick hasty_generalization index 4 return solved
+SHOT auto_breakdown_fx_5 True
+SHOT auto_verdict_stamp_3 True
+LABEL close_case stmt 4 pick hasty_generalization index 4 return None
+LABEL cross_examination stmt 4 pick hasty_generalization index 4 return None
+SHOT auto_bgm_title_6 True
+SHOT c07_alice_stand True
+SHOT auto_fallacy_pick_6 True
+SHOT auto_court_shout_19 True
+LABEL court_penalty stmt 0 pick ad_hominem index 0 return None
+SHOT auto_emote_2 True
+SHOT c07_heckle True
+SHOT auto_fallacy_pick_7 True
+SHOT auto_court_shout_20 True
+SHOT auto_court_shout_21 True
+LABEL cross_examination stmt 2 pick ad_hominem index 2 return None
+SHOT c07_second_testimony True
+SHOT auto_bgm_title_7 True
+SHOT auto_fallacy_pick_8 True
+SHOT auto_court_shout_22 True
+LABEL prove_it stmt 1 pick straw_man index 1 return None
+SHOT auto_evidence_pick_5 True
+SHOT c07_evidence True
+SHOT auto_court_shout_23 True
+SHOT c07_breakdown True
+LABEL breakdown stmt 1 pick straw_man index 1 return solved
+SHOT auto_breakdown_fx_6 True
+LABEL close_case stmt 1 pick straw_man index 1 return None
+LABEL cross_examination stmt 1 pick straw_man index 1 return None
+SHOT auto_bgm_title_8 True
+SHOT c08_reimu_stand True
+SHOT auto_fallacy_pick_9 True
+SHOT auto_court_shout_24 True
+LABEL court_penalty stmt 0 pick bandwagon index 0 return None
+SHOT auto_emote_3 True
+SHOT c08_charm_offer True
+SHOT auto_emote_4 True
+SHOT c08_after_bribe True
+STATE bribe True 5
+SHOT auto_court_shout_25 True
+LABEL testimony_updated stmt 0 pick bandwagon index 0 return None
+SHOT c08_hidden_statement True
+SHOT auto_bgm_title_9 True
+SHOT auto_fallacy_pick_10 True
+SHOT auto_court_shout_26 True
+LABEL prove_it stmt 1 pick bandwagon index 1 return None
+SHOT c08_pair_pick True
+SHOT auto_evidence_pick_6 True
+SHOT c08_pair_chosen True
+SHOT auto_court_shout_27 True
+SHOT c08_breakdown True
+LABEL breakdown stmt 1 pick bandwagon index 1 return solved
+SHOT auto_breakdown_fx_7 True
+SHOT c08e_01 True
+SHOT c08e_02 True
+SHOT c08e_03 True
+SHOT c08e_04 True
+SHOT c08e_05 True
+SHOT c08e_06 True
+SHOT auto_verdict_stamp_4 True
+SHOT c08e_07 True
+SHOT c08e_08 True
+SHOT auto_emote_5 True
+LABEL close_case stmt 1 pick bandwagon index 1 return None
+LABEL cross_examination stmt 1 pick bandwagon index 1 return None
+SHOT auto_bgm_title_10 True
+SHOT c09_kaguya_stand True
+SHOT auto_fallacy_pick_11 True
+SHOT auto_court_shout_28 True
+LABEL court_penalty stmt 2 pick moving_goalposts index 2 return None
+SHOT auto_emote_6 True
+SHOT c09_too_early True
+SHOT auto_court_shout_29 True
+LABEL testimony_updated stmt 2 pick moving_goalposts index 0 return None
+SHOT c09_shift_1 True
+SHOT auto_court_shout_30 True
+LABEL testimony_updated stmt 0 pick moving_goalposts index 1 return None
+SHOT c09_shift_2 True
+SHOT c09_moon True
+SHOT auto_fallacy_pick_12 True
+SHOT auto_court_shout_31 True
+LABEL prove_it stmt 2 pick moving_goalposts index 2 return None
+SHOT auto_evidence_pick_7 True
+SHOT auto_bgm_title_11 True
+SHOT c09_point True
+SHOT auto_court_shout_32 True
+SHOT c09_breakdown True
+LABEL breakdown stmt 2 pick moving_goalposts index 2 return solved
+SHOT auto_breakdown_fx_8 True
+SHOT c09m_01 True
+SHOT c09m_02 True
+SHOT c09m_03 True
+SHOT c09m_04 True
+SHOT c09m_05 True
+SHOT c09m_06 True
+SHOT auto_verdict_stamp_5 True
+SHOT c09m_07 True
+SHOT c09m_08 True
+SHOT c09m_09 True
+SHOT c09m_10 True
+SHOT c09m_11 True
+SHOT c09m_12 True
+SHOT c09m_13 True
+SHOT c09m_14 True
+SHOT auto_bgm_title_12 True
+SHOT c09m_15 True
+SHOT c09p_01 True
+SHOT c09p_02 True
+SHOT c09p_03 True
+SHOT c09p_04 True
+SHOT c09p_05 True
+LABEL close_case stmt 2 pick moving_goalposts index 2 return None
+LABEL cross_examination stmt 2 pick moving_goalposts index 2 return None
+SHOT auto_bgm_title_13 True
+SHOT c10_mokou_stand True
+SHOT auto_fallacy_pick_13 True
+SHOT auto_court_shout_33 True
+LABEL court_penalty stmt 0 pick red_herring index 0 return None
+SHOT auto_emote_7 True
+SHOT c10_flare True
+SHOT auto_court_shout_34 True
+SHOT auto_evidence_added_2 True
+SHOT c10_letter True
+SHOT auto_fallacy_pick_14 True
+SHOT auto_court_shout_35 True
+LABEL prove_it stmt 1 pick red_herring index 1 return None
+SHOT auto_evidence_pick_8 True
+SHOT auto_bgm_title_14 True
+SHOT auto_court_shout_36 True
+SHOT c10_breakdown True
+LABEL breakdown stmt 1 pick red_herring index 1 return solved
+SHOT auto_breakdown_fx_9 True
+SHOT c10e_01 True
+SHOT c10e_02 True
+SHOT c10e_03 True
+SHOT c10e_04 True
+SHOT c10e_05 True
+SHOT c10e_06 True
+SHOT c10e_07 True
+SHOT auto_verdict_stamp_6 True
+SHOT c10e_08 True
+LABEL close_case stmt 1 pick red_herring index 1 return None
+SHOT auto_emote_8 True
+LABEL cross_examination stmt 1 pick red_herring index 1 return None
+SHOT auto_bgm_title_15 True
+SHOT c11_speed_a True
+SHOT c11_speed_b True
+STATE speed 1
+SHOT auto_fallacy_pick_15 True
+SHOT auto_court_shout_37 True
+SHOT auto_court_title_1 True
+SHOT c11_recess True
+SHOT auto_evidence_added_3 True
+LABEL cross_examination stmt 2 pick bandwagon index 2 return None
+SHOT auto_bgm_title_16 True
+SHOT c11_second_testimony True
+STATE record ['bunbunmaru_headline', 'film_roll', 'mistress_parasol', 'court_docket']
+SHOT auto_fallacy_pick_16 True
+SHOT auto_court_shout_38 True
+LABEL court_penalty stmt 2 pick cherry_picking index 2 return None
+SHOT c11_trap True
+SHOT auto_fallacy_pick_17 True
+SHOT auto_court_shout_39 True
+LABEL prove_it stmt 1 pick cherry_picking index 1 return None
+SHOT auto_evidence_pick_9 True
+SHOT c11_point True
+SHOT c11_point_ja True
+SHOT c11_point_zh True
+SHOT auto_court_shout_40 True
+SHOT c11_breakdown True
+LABEL breakdown stmt 1 pick cherry_picking index 1 return solved
+SHOT auto_breakdown_fx_10 True
+SHOT c11e_01 True
+SHOT c11e_02 True
+SHOT c11e_03 True
+SHOT c11e_04 True
+SHOT c11e_05 True
+SHOT auto_verdict_stamp_7 True
+SHOT c11e_06 True
+SHOT c11e_07 True
+SHOT c11e_08 True
+SHOT auto_emote_9 True
+SHOT c11e_09 True
+SHOT c11e_10 True
+SHOT c11e_11 True
+SHOT c11e_12 True
+SHOT c11e_13 True
+SHOT c11e_14 True
+LABEL close_case stmt 1 pick cherry_picking index 1 return None
+STATE ranks {'case1:normal': 'C', 'case2:normal': 'S', 'case3:normal': 'S', 'case4:normal': 'S', 'case5:normal': 'S', 'case6:normal': 'S', 'case7:normal': 'A', 'case8:normal': 'A', 'case9:normal': 'A', 'case10:normal': 'A', 'case11:normal': 'A'}
+SHOT auto_main_menu_2 True
+SHOT c12_title_end_aya True
+SHOT c09a_compendium True
+LABEL practice stmt 0 pick None index 0 return None
+SHOT c09b_practice_q1 True
+SHOT auto_emote_10 True
+SHOT auto_emote_11 True
+SHOT auto_emote_12 True
+SHOT auto_emote_13 True
+SHOT auto_emote_14 True
+SHOT c09c_practice_feedback True
+LABEL practice_done stmt 0 pick None index 0 return ad_hominem
+STATE practice 0
+SHOT auto_docket_2 True
+SHOT c10_docket_all_closed True
+LABEL cross_examination stmt 0 pick None index 0 return None
+SHOT auto_bgm_title_17 True
+STATE lunatic 3 3 lunatic
+SHOT auto_fallacy_pick_18 True
+SHOT c11_lunatic_deck True
+SHOT c11b_lunatic_deck_ja True
+SHOT c11c_lunatic_deck_zh True
+SHOT c12_lunatic_timer True
+LABEL court_penalty stmt 0 pick timeout index 0 return timeout
+SHOT c13_timeout True

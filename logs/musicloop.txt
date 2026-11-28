@@ -1,0 +1,4 @@
+LOOPCHECK file <loop 4.389705>audio/music/cirno_theme.ogg
+LOOPCHECK before end 87.097 88.734739
+LOOPCHECK after wrap 5.394 <from 86.5 loop 3.875488>audio/music/cirno_theme.ogg
+LOOPCHECK later 7.528

@@ -1,0 +1,132 @@
+﻿Ren'Py 8.3.7.25031702 lint report, generated at: Sat Nov 28 14:49:37 2026
+
+
+Orphan Translations:
+
+game/tl/japanese/case03.rpy:
+    * line    37 (id press_sakuya_3_214b97c5)
+    * line    43 (id press_sakuya_3_b6f8bc4d)
+    * line    49 (id press_sakuya_3_aa1a7464)
+    * line    73 (id case3_3af4f096)
+    * line    79 (id case3_3a85d08e)
+    * line   139 (id case3_c2f25894)
+
+game/tl/japanese/case04.rpy:
+    * line    43 (id press_reisen_3_c707d443)
+
+game/tl/japanese/case05.rpy:
+    * line    43 (id press_eiki_3_d55cc248)
+    * line    73 (id case5_3af4f096)
+    * line    79 (id case5_b506956e)
+
+game/tl/japanese/case06.rpy:
+    * line    37 (id press_meiling_3_1147c1f1)
+    * line    43 (id press_meiling_3_afee21f4)
+    * line    49 (id press_meiling_3_2c276c8f)
+    * line    73 (id case6_3af4f096)
+    * line    85 (id case6_20fb4d4c)
+    * line    91 (id case6_e390f340)
+    * line    97 (id case6_9228cb8e)
+    * line   145 (id case6_082ce7fe)
+
+game/tl/japanese/case07.rpy:
+    * line    49 (id press_alice_3_a465442d)
+    * line    73 (id case7_3af4f096)
+    * line    79 (id case7_b506956e)
+    * line    85 (id case7_7452aaf8)
+    * line   145 (id case7_373ff126)
+
+game/tl/japanese/case08.rpy:
+    * line    43 (id press_reimu_3_e63e3b45)
+    * line    67 (id case8_3af4f096)
+    * line    73 (id case8_0d42250e)
+    * line    79 (id case8_cdc3345c)
+    * line    85 (id case8_ac34ad81)
+    * line   157 (id case8_breakthrough_aa714668)
+
+game/tl/japanese/case09.rpy:
+    * line    43 (id press_kaguya_3_76b6752c)
+    * line    49 (id press_kaguya_4_65bc0e33)
+    * line    55 (id press_kaguya_4_156e1420)
+    * line    61 (id press_kaguya_4_0fe2b220)
+    * line    67 (id case9_3af4f096)
+    * line    73 (id case9_b506956e)
+    * line    79 (id case9_5ce059df)
+    * line   229 (id case9_breakthrough_f5cfe6d1)
+    * line   283 (id case9_breakthrough_cebf22fd)
+    * line   289 (id case9_breakthrough_71bf8c82)
+    * line   295 (id case9_breakthrough_42d7cba4)
+
+game/tl/schinese/case03.rpy:
+    * line    37 (id press_sakuya_3_214b97c5)
+    * line    43 (id press_sakuya_3_b6f8bc4d)
+    * line    49 (id press_sakuya_3_aa1a7464)
+    * line    73 (id case3_3af4f096)
+    * line    79 (id case3_3a85d08e)
+    * line   139 (id case3_c2f25894)
+
+game/tl/schinese/case04.rpy:
+    * line    43 (id press_reisen_3_c707d443)
+
+game/tl/schinese/case05.rpy:
+    * line    43 (id press_eiki_3_d55cc248)
+    * line    73 (id case5_3af4f096)
+    * line    79 (id case5_b506956e)
+
+game/tl/schinese/case06.rpy:
+    * line    37 (id press_meiling_3_1147c1f1)
+    * line    43 (id press_meiling_3_afee21f4)
+    * line    49 (id press_meiling_3_2c276c8f)
+    * line    73 (id case6_3af4f096)
+    * line    85 (id case6_20fb4d4c)
+    * line    91 (id case6_e390f340)
+    * line    97 (id case6_9228cb8e)
+    * line   145 (id case6_082ce7fe)
+
+game/tl/schinese/case07.rpy:
+    * line    49 (id press_alice_3_a465442d)
+    * line    73 (id case7_3af4f096)
+    * line    79 (id case7_b506956e)
+    * line    85 (id case7_7452aaf8)
+    * line   145 (id case7_373ff126)
+
+game/tl/schinese/case08.rpy:
+    * line    43 (id press_reimu_3_e63e3b45)
+    * line    67 (id case8_3af4f096)
+    * line    73 (id case8_0d42250e)
+    * line    79 (id case8_cdc3345c)
+    * line    85 (id case8_ac34ad81)
+    * line   157 (id case8_breakthrough_aa714668)
+
+game/tl/schinese/case09.rpy:
+    * line    43 (id press_kaguya_3_76b6752c)
+    * line    49 (id press_kaguya_4_65bc0e33)
+    * line    55 (id press_kaguya_4_156e1420)
+    * line    61 (id press_kaguya_4_0fe2b220)
+    * line    67 (id case9_3af4f096)
+    * line    73 (id case9_b506956e)
+    * line    79 (id case9_5ce059df)
+    * line   229 (id case9_breakthrough_f5cfe6d1)
+    * line   283 (id case9_breakthrough_cebf22fd)
+    * line   289 (id case9_breakthrough_71bf8c82)
+    * line   295 (id case9_breakthrough_42d7cba4)
+
+
+Statistics:
+
+The game contains 547 dialogue blocks, containing 5,044 words and 28,712
+characters, for an average of 9.2 words and 52 characters per block.
+
+The japanese translation contains 587 dialogue blocks, containing 587 words
+and 14,781 characters, for an average of 1.0 words and 25 characters per
+block.
+
+The schinese translation contains 587 dialogue blocks, containing 591 words
+and 10,501 characters, for an average of 1.0 words and 18 characters per
+block.
+
+The game contains 1 menus, 5 images, and 54 screens.
+
+
+Lint is not a substitute for thorough testing. Remember to update Ren'Py
+before releasing. New releases fix bugs and improve compatibility.
