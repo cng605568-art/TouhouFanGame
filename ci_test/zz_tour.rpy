@@ -470,6 +470,180 @@ testcase cases:
     click pos (40, 540)
     pause 0.25
     $ shot("c05_breakdown")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.4
+    $ shot("c06_meiling_stand")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c06_hidden_statement")
+    "異議あり"
+    pause 1.2
+    $ shot("c06_cards")
+    "Hasty Generalization"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c06_evidence")
+    "Footprints at the Gate"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c06_breakdown")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.4
+    $ shot("c07_alice_stand")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c07_hidden_statement")
+    "異議あり"
+    pause 1.2
+    $ shot("c07_cards")
+    "Straw Man"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c07_evidence")
+    "Bunbunmaru Clipping"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c07_breakdown")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.4
+    $ shot("c08_reimu_stand")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c08_hidden_statement")
+    "異議あり"
+    pause 1.2
+    $ shot("c08_cards")
+    "Bandwagon"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c08_evidence")
+    "Village Complaint List"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c08_breakdown")
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
+    pause 0.4
+    "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.4
+    $ shot("c09_kaguya_stand")
+    "Next statement"
+    pause 0.3
+    "Next statement"
+    pause 0.3
+    "待った"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
+    pause 0.6
+    $ shot("c09_hidden_statement")
+    "異議あり"
+    pause 1.2
+    $ shot("c09_cards")
+    "Moving the Goalposts"
+    move (40, 540)
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
+    $ shot("c09_evidence")
+    "Signed Chore List"
+    move (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.4
+    click pos (40, 540)
+    pause 0.25
+    $ shot("c09_breakdown")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_01")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_02")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_03")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_04")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_05")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_06")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_07")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_08")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_09")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_10")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_11")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_12")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_13")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_14")
     click pos (40, 540) until move (0.5, 0.5) pattern "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
