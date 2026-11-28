@@ -90,6 +90,24 @@ jobs:
           timeout 120 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test musicloop 2>&1 | tee "${GITHUB_WORKSPACE}/musicloop.txt" || true
           rm -f "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/zz_tour.rpyc"
 
+      - name: Translation templates and the Chinese font
+        working-directory: renpy-sdk
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+        run: |
+          for lang in japanese schinese; do
+            ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" translate "$lang" 2>&1 | tail -3 || true
+          done
+          mkdir -p "${GITHUB_WORKSPACE}/tl" "${GITHUB_WORKSPACE}/fonts"
+          cp -r "${GITHUB_WORKSPACE}/FumoCourt/game/tl/." "${GITHUB_WORKSPACE}/tl/" || true
+          ls -R "${GITHUB_WORKSPACE}/tl" | head -40
+          if [ ! -f "${GITHUB_WORKSPACE}/FumoCourt/ci_test/have_fonts" ]; then
+            curl -fL --retry 3 -o "${GITHUB_WORKSPACE}/fonts/NotoSerifSC.ttf" "https://github.com/google/fonts/raw/main/ofl/notoserifsc/NotoSerifSC%5Bwght%5D.ttf" || true
+            curl -fL --retry 3 -o "${GITHUB_WORKSPACE}/fonts/OFL.txt" "https://github.com/google/fonts/raw/main/ofl/notoserifsc/OFL.txt" || true
+          fi
+          ls -la "${GITHUB_WORKSPACE}/fonts"
+
       - name: Collect logs
         if: always()
         run: |
@@ -122,7 +140,7 @@ jobs:
         if: always()
         run: |
           set -x
-          mkdir -p results && cp -r shots logs results/ 2>/dev/null || true
+          mkdir -p results && cp -r shots logs tl fonts results/ 2>/dev/null || true
           if [ -d results/shots ]; then mogrify -format jpg -quality 88 results/shots/*.png && rm -f results/shots/*.png; fi
           cd results
           git init -q -b ci-results

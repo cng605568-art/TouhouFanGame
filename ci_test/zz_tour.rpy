@@ -83,6 +83,7 @@ testcase tour:
     pause 1.0
     $ shot("09_cards")
     "False Cause"
+    move (40, 540)
     pause 2.4
     $ shot("10_penalty_wrong_statement")
     click until move (0.5, 0.5) pattern "Next statement"
@@ -93,6 +94,7 @@ testcase tour:
     "異議あり"
     pause 0.9
     "Ad Hominem"
+    move (40, 540)
     pause 2.4
     $ shot("12_scold")
     click until move (0.5, 0.5) pattern "Next statement"
@@ -100,12 +102,14 @@ testcase tour:
     "異議あり"
     pause 0.9
     "False Cause"
+    move (40, 540)
     pause 2.0
     $ shot("13_prove_it")
     click until move (0.5, 0.5) pattern "Frog Census"
     pause 0.8
     $ shot("14_evidence_pick")
     "Frog Census"
+    move (40, 540)
     pause 2.2
     $ shot("15_wrong_evidence")
     click until move (0.5, 0.5) pattern "COURT RECORD"
@@ -120,9 +124,11 @@ testcase tour:
     "異議あり"
     pause 0.9
     "False Cause"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Weather Log"
     pause 0.5
     "Weather Log"
+    move (40, 540)
     pause 0.35
     $ shot("18_take_that")
     click
@@ -284,9 +290,11 @@ testcase cases:
     "異議あり"
     pause 1.0
     "Tu Quoque"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Library Ledger"
     pause 0.4
     "Library Ledger"
+    move (40, 540)
     pause 0.4
     click
     pause 0.4
@@ -314,9 +322,11 @@ testcase cases:
     "異議あり"
     pause 1.0
     "False Dilemma"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Mansion Roster"
     pause 0.4
     "Mansion Roster"
+    move (40, 540)
     pause 0.4
     click
     pause 0.4
@@ -341,9 +351,11 @@ testcase cases:
     "異議あり"
     pause 1.0
     "Appeal to Authority"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Lab Notebook"
     pause 0.4
     "Lab Notebook"
+    move (40, 540)
     pause 0.4
     click
     pause 0.4
@@ -369,10 +381,12 @@ testcase cases:
     "異議あり"
     pause 1.0
     "Circular Reasoning"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Frozen Pudding"
     pause 0.6
     $ shot("c05_evidence")
     "Frozen Pudding"
+    move (40, 540)
     pause 0.4
     click
     pause 0.4
@@ -395,14 +409,19 @@ testcase cases:
     pause 0.8
     $ shot("c09b_practice_q1")
     "False Cause"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Stop practice"
     "Circular Reasoning"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Stop practice"
     "Tu Quoque"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Stop practice"
     "False Dilemma"
+    move (40, 540)
     click until move (0.5, 0.5) pattern "Stop practice"
     "Ad Hominem"
+    move (40, 540)
     pause 1.0
     $ shot("c09c_practice_feedback")
     click until move (0.5, 0.5) pattern "Begin Trial"
