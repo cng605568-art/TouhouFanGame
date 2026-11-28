@@ -207,3 +207,71 @@ translate japanese strings:
     # game/compendium.rpy
     old "Met in [met.number!t]: [met.title!t]"
     new "[met.number!t]で登場：[met.title!t]"
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate japanese strings:
+
+    # game/compendium.rpy:15
+    old "Count the examples behind the rule. One story is not a survey."
+    new "法則の裏にある例を数えよう。一つの話は調査ではない。"
+
+    # game/compendium.rpy:15
+    old "Put the original words next to the attack. If they don't match, it's a scarecrow."
+    new "元の言葉と、攻撃されている言葉を並べよう。食い違えば、それはかかしだ。"
+
+    # game/compendium.rpy:15
+    old "Popular isn't proof. Ask what the crowd actually checked."
+    new "人気は証明ではない。群衆が実際に何を確かめたか聞こう。"
+
+    # game/compendium.rpy:15
+    old "Write the test down before the answer arrives. Then hold everyone to it."
+    new "答えが出る前に、試験の内容を書き留めよう。そして全員にそれを守らせよう。"
+
+    # game/compendium.rpy:35
+    old "I met one rude kappa once. Kappa are all rude."
+    new "前に失礼な河童に会ったことがある。河童はみんな失礼だ。"
+
+    # game/compendium.rpy:35
+    old "The first dumpling I tried was cold. This whole shop serves cold food."
+    new "最初に食べた団子が冷めていた。この店は全部冷めた料理を出す。"
+
+    # game/compendium.rpy:35
+    old "My cousin smoked and lived to ninety. Smoking is fine."
+    new "いとこは煙草を吸って九十まで生きた。煙草は平気だ。"
+
+    # game/compendium.rpy:35
+    old "She wants a shorter festival? So she hates festivals and wants us all miserable."
+    new "お祭りを短くしたい？つまりお祭りが嫌いで、みんなを不幸にしたいんだ。"
+
+    # game/compendium.rpy:35
+    old "He said the bridge needs repairs. Why does he want the village cut off?"
+    new "橋の修理が必要だと言った？なぜ里を孤立させたいんだ？"
+
+    # game/compendium.rpy:35
+    old "You think we should rest on Sundays? So you want nobody to ever work."
+    new "日曜は休むべきだって？つまり誰にも働いてほしくないんだな。"
+
+    # game/compendium.rpy:35
+    old "Everyone at the shrine is buying these charms. They must work."
+    new "神社のみんながこのお守りを買っている。効くに違いない。"
+
+    # game/compendium.rpy:35
+    old "The whole village believes the old well is cursed, so it is."
+    new "里中の人が古井戸は呪われていると信じている。だから呪われている。"
+
+    # game/compendium.rpy:35
+    old "This newspaper sold out. It must be telling the truth."
+    new "この新聞は売り切れた。本当のことが書いてあるに違いない。"
+
+    # game/compendium.rpy:35
+    old "You beat me at shogi? Fine, but best of three. No, best of five."
+    new "将棋で私に勝った？いいだろう、でも三番勝負だ。いや、五番勝負だ。"
+
+    # game/compendium.rpy:35
+    old "Bring proof. That's a photo? I meant a witness. A witness? I meant two."
+    new "証拠を持ってこい。写真？証人のことだ。証人？二人のことだ。"
+
+    # game/compendium.rpy:35
+    old "You passed the test, but now there's a harder one. Then you're qualified."
+    new "試験に合格した？でも次はもっと難しい試験だ。そうしたら資格をやろう。"
+

@@ -78,3 +78,47 @@ translate schinese strings:
     old "NEXT"
     new "下一案"
 
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate schinese strings:
+
+    # game/docket.rpy:73
+    old "CASE 06"
+    new "第六案"
+
+    # game/docket.rpy:73
+    old "The Open Gate"
+    new "敞开的大门"
+
+    # game/docket.rpy:73
+    old "The Scarlet Devil Mansion v. One Gatekeeper, Awake This Time"
+    new "红魔馆 诉 这次醒着的门卫一名"
+
+    # game/docket.rpy:73
+    old "CASE 07"
+    new "第七案"
+
+    # game/docket.rpy:73
+    old "Strings Attached"
+    new "丝线缠身"
+
+    # game/docket.rpy:73
+    old "Kirisame Marisa v. One Puppeteer"
+    new "雾雨魔理沙 诉 人偶师一名"
+
+    # game/docket.rpy:73
+    old "CASE 08"
+    new "第八案"
+
+    # game/docket.rpy:73
+    old "The Human Village v. One Shrine Maiden"
+    new "人类村落 诉 巫女一名"
+
+    # game/docket.rpy:73
+    old "CASE 09"
+    new "第九案"
+
+    # game/docket.rpy:73
+    old "Reisen Udongein Inaba v. One Moon Princess"
+    new "铃仙·优昙华院·因幡 诉 月之公主一名"
+

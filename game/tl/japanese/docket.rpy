@@ -78,3 +78,47 @@ translate japanese strings:
     old "NEXT"
     new "次"
 
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate japanese strings:
+
+    # game/docket.rpy:73
+    old "CASE 06"
+    new "第六の事件"
+
+    # game/docket.rpy:73
+    old "The Open Gate"
+    new "開いた門"
+
+    # game/docket.rpy:73
+    old "The Scarlet Devil Mansion v. One Gatekeeper, Awake This Time"
+    new "紅魔館 対 今回は起きていた門番一名"
+
+    # game/docket.rpy:73
+    old "CASE 07"
+    new "第七の事件"
+
+    # game/docket.rpy:73
+    old "Strings Attached"
+    new "ひも付き"
+
+    # game/docket.rpy:73
+    old "Kirisame Marisa v. One Puppeteer"
+    new "霧雨魔理沙 対 人形遣い一名"
+
+    # game/docket.rpy:73
+    old "CASE 08"
+    new "第八の事件"
+
+    # game/docket.rpy:73
+    old "The Human Village v. One Shrine Maiden"
+    new "人間の里 対 巫女一名"
+
+    # game/docket.rpy:73
+    old "CASE 09"
+    new "第九の事件"
+
+    # game/docket.rpy:73
+    old "Reisen Udongein Inaba v. One Moon Princess"
+    new "鈴仙・優曇華院・イナバ 対 月の姫一名"
+

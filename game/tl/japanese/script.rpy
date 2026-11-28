@@ -438,3 +438,55 @@ translate japanese strings:
     old "GUILTY"
     new "GUILTY"
 
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate japanese strings:
+
+    # game/script.rpy:264
+    old "Hasty Generalization"
+    new "早まった一般化"
+
+    # game/script.rpy:264
+    old "(A Sample of One)"
+    new "（たった一つの例）"
+
+    # game/script.rpy:264
+    old "Drawing a rule about everything from one or two examples."
+    new "一つか二つの例から、すべてについての法則を作ること。"
+
+    # game/script.rpy:271
+    old "Straw Man"
+    new "わら人形論法"
+
+    # game/script.rpy:271
+    old "(Scarecrow Argument)"
+    new "（かかしの議論）"
+
+    # game/script.rpy:271
+    old "Attacking a twisted, weaker version of what someone actually said."
+    new "相手の発言をねじ曲げ、弱くした版を攻撃すること。"
+
+    # game/script.rpy:278
+    old "Bandwagon"
+    new "多数派論証"
+
+    # game/script.rpy:278
+    old "(Everyone Says So)"
+    new "（みんなそう言ってる）"
+
+    # game/script.rpy:278
+    old "Treating a claim as true because lots of people believe it."
+    new "大勢が信じているから、その主張を真とみなすこと。"
+
+    # game/script.rpy:285
+    old "Moving the Goalposts"
+    new "ゴールポストの移動"
+
+    # game/script.rpy:285
+    old "(The Finish Line Moves)"
+    new "（ゴールが動く）"
+
+    # game/script.rpy:285
+    old "Changing the test after it has been passed, so no answer is ever enough."
+    new "合格した後で試験を変え、どんな答えも足りなくすること。"
+

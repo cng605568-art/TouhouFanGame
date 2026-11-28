@@ -438,3 +438,55 @@ translate schinese strings:
     old "GUILTY"
     new "有罪"
 
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate schinese strings:
+
+    # game/script.rpy:264
+    old "Hasty Generalization"
+    new "以偏概全"
+
+    # game/script.rpy:264
+    old "(A Sample of One)"
+    new "（样本只有一个）"
+
+    # game/script.rpy:264
+    old "Drawing a rule about everything from one or two examples."
+    new "仅凭一两个例子就给所有情况下规律。"
+
+    # game/script.rpy:271
+    old "Straw Man"
+    new "稻草人谬误"
+
+    # game/script.rpy:271
+    old "(Scarecrow Argument)"
+    new "（稻草人论证）"
+
+    # game/script.rpy:271
+    old "Attacking a twisted, weaker version of what someone actually said."
+    new "攻击被扭曲、削弱过的对方说法。"
+
+    # game/script.rpy:278
+    old "Bandwagon"
+    new "从众谬误"
+
+    # game/script.rpy:278
+    old "(Everyone Says So)"
+    new "（大家都这么说）"
+
+    # game/script.rpy:278
+    old "Treating a claim as true because lots of people believe it."
+    new "因为很多人相信，就把一个说法当成真的。"
+
+    # game/script.rpy:285
+    old "Moving the Goalposts"
+    new "移动球门"
+
+    # game/script.rpy:285
+    old "(The Finish Line Moves)"
+    new "（终点线会动）"
+
+    # game/script.rpy:285
+    old "Changing the test after it has been passed, so no answer is ever enough."
+    new "考验通过后再改标准，让任何答案都不够。"
+

@@ -207,3 +207,71 @@ translate schinese strings:
     # game/compendium.rpy
     old "Met in [met.number!t]: [met.title!t]"
     new "出现于[met.number!t]：[met.title!t]"
+# TODO: Translation updated at 2026-11-28 07:05
+
+translate schinese strings:
+
+    # game/compendium.rpy:15
+    old "Count the examples behind the rule. One story is not a survey."
+    new "数数规律背后有几个例子。一个故事不是调查。"
+
+    # game/compendium.rpy:15
+    old "Put the original words next to the attack. If they don't match, it's a scarecrow."
+    new "把原话和被攻击的话放在一起。对不上，就是稻草人。"
+
+    # game/compendium.rpy:15
+    old "Popular isn't proof. Ask what the crowd actually checked."
+    new "受欢迎不是证据。问问人群到底查证了什么。"
+
+    # game/compendium.rpy:15
+    old "Write the test down before the answer arrives. Then hold everyone to it."
+    new "在答案出现前写下考验标准。然后让所有人都遵守。"
+
+    # game/compendium.rpy:35
+    old "I met one rude kappa once. Kappa are all rude."
+    new "我遇见过一个无礼的河童。河童都很无礼。"
+
+    # game/compendium.rpy:35
+    old "The first dumpling I tried was cold. This whole shop serves cold food."
+    new "我吃的第一个饺子是凉的。这家店的菜全是凉的。"
+
+    # game/compendium.rpy:35
+    old "My cousin smoked and lived to ninety. Smoking is fine."
+    new "我表哥抽烟活到了九十岁。抽烟没事。"
+
+    # game/compendium.rpy:35
+    old "She wants a shorter festival? So she hates festivals and wants us all miserable."
+    new "她想把祭典缩短？那她就是讨厌祭典，想让大家都不开心。"
+
+    # game/compendium.rpy:35
+    old "He said the bridge needs repairs. Why does he want the village cut off?"
+    new "他说桥需要修？他为什么想让村子与世隔绝？"
+
+    # game/compendium.rpy:35
+    old "You think we should rest on Sundays? So you want nobody to ever work."
+    new "你觉得周日该休息？那你就是想让谁都别干活。"
+
+    # game/compendium.rpy:35
+    old "Everyone at the shrine is buying these charms. They must work."
+    new "神社里人人都在买这种护身符。肯定管用。"
+
+    # game/compendium.rpy:35
+    old "The whole village believes the old well is cursed, so it is."
+    new "全村人都相信那口老井被诅咒了，所以它就是被诅咒了。"
+
+    # game/compendium.rpy:35
+    old "This newspaper sold out. It must be telling the truth."
+    new "这份报纸卖光了。上面写的一定是真的。"
+
+    # game/compendium.rpy:35
+    old "You beat me at shogi? Fine, but best of three. No, best of five."
+    new "你下将棋赢了我？行，但要三局两胜。不，五局三胜。"
+
+    # game/compendium.rpy:35
+    old "Bring proof. That's a photo? I meant a witness. A witness? I meant two."
+    new "拿证据来。照片？我说的是证人。证人？我说的是两个。"
+
+    # game/compendium.rpy:35
+    old "You passed the test, but now there's a harder one. Then you're qualified."
+    new "你通过了考验，但现在还有更难的。过了才算合格。"
+
