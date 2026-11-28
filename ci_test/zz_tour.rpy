@@ -188,6 +188,37 @@ testcase tour:
     $ shot("27_compendium_one")
     "Return"
     pause 0.5
+    "Settings"
+    pause 0.8
+    $ shot("27b_settings_language")
+    "Return"
+    pause 0.5
+    $ renpy.change_language("japanese")
+    pause 1.5
+    $ shot("28_title_ja")
+    "裁判を始める"
+    pause 1.0
+    $ shot("29_docket_ja")
+    "チルノの凍てつく誤謬"
+    pause 1.5
+    click until move (0.5, 0.5) pattern "次の発言"
+    pause 0.6
+    $ shot("30_xexam_ja")
+    "異議あり"
+    pause 1.0
+    $ shot("31_cards_ja")
+    "取り下げる"
+    pause 0.6
+    $ renpy.change_language("schinese")
+    pause 1.0
+    $ shot("32_xexam_zh")
+    "异议"
+    pause 1.0
+    $ shot("33_cards_zh")
+    "撤回"
+    pause 0.6
+    $ renpy.change_language(None)
+    pause 0.5
     $ renpy.quit()
 
 testcase sfxcheck:

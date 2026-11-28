@@ -99,7 +99,12 @@ jobs:
           for lang in japanese schinese; do
             ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" translate "$lang" 2>&1 | tail -3 || true
           done
-          mkdir -p "${GITHUB_WORKSPACE}/tl" "${GITHUB_WORKSPACE}/fonts"
+          mkdir -p "${GITHUB_WORKSPACE}/tl" "${GITHUB_WORKSPACE}/fonts" "${GITHUB_WORKSPACE}/tl_sdk"
+          for lang in japanese schinese; do
+            mkdir -p "${GITHUB_WORKSPACE}/tl_sdk/$lang"
+            cp gui/game/tl/$lang/*.rpy "${GITHUB_WORKSPACE}/tl_sdk/$lang/" 2>/dev/null || true
+          done
+          ls -R "${GITHUB_WORKSPACE}/tl_sdk" | head
           cp -r "${GITHUB_WORKSPACE}/FumoCourt/game/tl/." "${GITHUB_WORKSPACE}/tl/" || true
           ls -R "${GITHUB_WORKSPACE}/tl" | head -40
           if [ ! -f "${GITHUB_WORKSPACE}/FumoCourt/ci_test/have_fonts" ]; then
@@ -140,7 +145,7 @@ jobs:
         if: always()
         run: |
           set -x
-          mkdir -p results && cp -r shots logs tl fonts results/ 2>/dev/null || true
+          mkdir -p results && cp -r shots logs tl tl_sdk fonts results/ 2>/dev/null || true
           if [ -d results/shots ]; then mogrify -format jpg -quality 88 results/shots/*.png && rm -f results/shots/*.png; fi
           cd results
           git init -q -b ci-results
