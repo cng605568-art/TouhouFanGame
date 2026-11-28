@@ -134,7 +134,9 @@ testcase tour:
     move (40, 540)
     pause 2.0
     $ shot("13_prove_it")
-    click pos (40, 540) until move (0.5, 0.5) pattern "Frog Census"
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
     pause 0.8
     $ shot("14_evidence_pick")
     "Frog Census"
@@ -154,7 +156,9 @@ testcase tour:
     pause 0.9
     "False Cause"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Weather Log"
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
     pause 0.5
     "Weather Log"
     move (40, 540)
@@ -351,7 +355,9 @@ testcase cases:
     pause 1.0
     "Tu Quoque"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Library Ledger"
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
     pause 0.4
     "Library Ledger"
     move (40, 540)
@@ -417,7 +423,9 @@ testcase cases:
     pause 1.0
     "Appeal to Authority"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Lab Notebook"
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
     pause 0.4
     "Lab Notebook"
     move (40, 540)
@@ -447,7 +455,9 @@ testcase cases:
     pause 1.0
     "Circular Reasoning"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Frozen Pudding"
+    pause 2.5
+    click pos (40, 540)
+    pause 0.9
     pause 0.6
     $ shot("c05_evidence")
     "Frozen Pudding"
@@ -470,21 +480,41 @@ testcase cases:
     pause 0.8
     $ shot("c09a_compendium")
     "Practice"
-    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
+    pause 1.5
+    click pos (40, 540)
+    pause 0.6
+    click pos (40, 540)
+    pause 0.9
     pause 0.8
     $ shot("c09b_practice_q1")
     "False Cause"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
+    pause 1.5
+    click pos (40, 540)
+    pause 0.6
+    click pos (40, 540)
+    pause 0.9
     "Circular Reasoning"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
+    pause 1.5
+    click pos (40, 540)
+    pause 0.6
+    click pos (40, 540)
+    pause 0.9
     "Tu Quoque"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
+    pause 1.5
+    click pos (40, 540)
+    pause 0.6
+    click pos (40, 540)
+    pause 0.9
     "False Dilemma"
     move (40, 540)
-    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
+    pause 1.5
+    click pos (40, 540)
+    pause 0.6
+    click pos (40, 540)
+    pause 0.9
     "Ad Hominem"
     move (40, 540)
     pause 1.0
