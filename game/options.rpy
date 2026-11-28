@@ -32,7 +32,7 @@ Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativ
   Case 05: "Reach for the Moon, Immortal Smoke" (月まで届け、不死の煙), from Embodiment of Frequency Modulation.
   Pursuit: "U.N. Owen Was Her S" (U.N.オーエンは彼女なのか？), from Embodiment of Frequency Modulation.
 
-Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
+Text is set in Shippori Mincho B1 by FONTDASU and Noto Serif SC by Google, under the SIL Open Font License 1.1 (see game/fonts/).
 
 Built with Ren'Py.
 """)

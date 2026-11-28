@@ -1403,6 +1403,15 @@ screen preferences():
                     use pref_option(_("After Choices"), Preference("after choices", "toggle"))
                     use pref_option(_("Transitions"), InvertSelected(Preference("transitions", "toggle")))
 
+                ## Each language is named in its own script, so nobody has to
+                ## read a language they don't know to find their own.
+                vbox:
+                    style_prefix "pref"
+                    text _("LANGUAGE") style "cm_heading"
+                    use pref_option("English", Language(None))
+                    use pref_option("日本語", Language("japanese"))
+                    use pref_option("简体中文", Language("schinese"), font=FONT_SC_HEAD)
+
             hbox:
                 spacing 90
 
@@ -1427,14 +1436,17 @@ screen preferences():
                         use pref_option(_("Mute All"), Preference("all mute", "toggle"))
 
 ## A settings toggle: a diamond that fills in when selected, then the label.
-screen pref_option(caption, action):
+screen pref_option(caption, action, font=None):
     button:
         style "pref_button"
         action action
         hbox:
             spacing 16
             text "◆" style "pref_diamond" yalign 0.5
-            text caption style "pref_button_text" yalign 0.5
+            if font:
+                text caption style "pref_button_text" yalign 0.5 font font
+            else:
+                text caption style "pref_button_text" yalign 0.5
 
 style pref_vbox is default:
     spacing 10

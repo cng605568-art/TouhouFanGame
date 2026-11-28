@@ -1,0 +1,80 @@
+﻿# TODO: Translation updated at 2026-11-28 03:59
+
+translate japanese strings:
+
+    # game/docket.rpy:73
+    old "CASE 01"
+    new "第一の事件"
+
+    # game/docket.rpy:73
+    old "Cirno's Frosty Fallacy"
+    new "チルノの凍てつく誤謬"
+
+    # game/docket.rpy:73
+    old "The Ministry of Right and Wrong v. One Ice Fairy"
+    new "是非曲直庁 対 氷の妖精一名"
+
+    # game/docket.rpy:73
+    old "CASE 02"
+    new "第二の事件"
+
+    # game/docket.rpy:73
+    old "The Long-Term Loan"
+    new "長期貸し出し"
+
+    # game/docket.rpy:73
+    old "The Scarlet Devil Library v. One Ordinary Magician"
+    new "紅魔館図書館 対 普通の魔法使い一名"
+
+    # game/docket.rpy:73
+    old "CASE 03"
+    new "第三の事件"
+
+    # game/docket.rpy:73
+    old "The Vanished Pudding"
+    new "消えたプリン"
+
+    # game/docket.rpy:73
+    old "The Scarlet Devil Mansion v. One Sleeping Gatekeeper"
+    new "紅魔館 対 居眠りする門番一名"
+
+    # game/docket.rpy:73
+    old "CASE 04"
+    new "第四の事件"
+
+    # game/docket.rpy:73
+    old "The Lunar Prescription"
+    new "月の処方箋"
+
+    # game/docket.rpy:73
+    old "The Human Village v. One Moon Rabbit"
+    new "人間の里 対 月の兎一名"
+
+    # game/docket.rpy:73
+    old "CASE 05"
+    new "第五の事件"
+
+    # game/docket.rpy:73
+    old "The Scarlet Devil Mansion v. The Verdict in Case 03"
+    new "紅魔館 対 第三の事件の判決"
+
+    # game/docket.rpy:144
+    old "Docket"
+    new "事件簿"
+
+    # game/docket.rpy:151
+    old "DIFFICULTY"
+    new "難易度"
+
+    # game/docket.rpy:186
+    old "Sealed until the case before it is closed."
+    new "前の事件を閉廷するまで封印されています。"
+
+    # game/docket.rpy:201
+    old "Rank [best_letter] · [best_diff!t]"
+    new "ランク [best_letter] · [best_diff!t]"
+
+    # game/docket.rpy:206
+    old "NEXT"
+    new "次"
+

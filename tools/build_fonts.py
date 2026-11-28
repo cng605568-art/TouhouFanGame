@@ -1,10 +1,13 @@
 """
-Builds the two subset fonts shipped in game/fonts/ from the full
-Shippori Mincho B1 release (SIL Open Font License 1.1).
+Builds the subset fonts shipped in game/fonts/ from the full Shippori Mincho
+B1 release and, for Simplified Chinese, Noto Serif SC (both SIL Open Font
+License 1.1).
 
-    python tools/build_fonts.py path/to/ShipporiMinchoB1-Bold.ttf path/to/ShipporiMinchoB1-ExtraBold.ttf
+    python tools/build_fonts.py path/to/ShipporiMinchoB1-Bold.ttf path/to/ShipporiMinchoB1-ExtraBold.ttf [path/to/NotoSerifSC[wght].ttf]
 
 Full fonts: https://github.com/google/fonts/tree/main/ofl/shipporiminchob1
+and https://github.com/google/fonts/tree/main/ofl/notoserifsc (the variable
+font; SemiBold and Black instances are cut from it).
 
 Both subsets keep Latin, punctuation, kana and every character used in
 game/*.rpy. The dialogue font also keeps the JIS level-1 kanji, so new
@@ -43,10 +46,12 @@ def jis_level1():
     return out
 
 
-def script_chars():
+def script_chars(skip=()):
     out = set()
     game = os.path.join(ROOT, "game")
     for dirpath, _dirs, files in os.walk(game):
+        if any(os.path.join(game, s) in dirpath for s in skip):
+            continue
         for fn in files:
             if fn.endswith(".rpy"):
                 with open(os.path.join(dirpath, fn), encoding="utf-8") as f:
@@ -104,16 +109,20 @@ def add_not_equal(font):
             table.cmap[0x2260] = name
 
 
-def build(src, dst, kanji):
+def build(src, dst, kanji, weight=None, skip=()):
     font = TTFont(src)
-    add_not_equal(font)
+    if weight is not None:
+        from fontTools.varLib import instancer
+        font = instancer.instantiateVariableFont(font, {"wght": weight})
+    if "glyf" in font:
+        add_not_equal(font)
 
     codepoints = set()
     for a, b in RANGES:
         codepoints.update(range(a, b + 1))
     if kanji:
         codepoints.update(ord(c) for c in jis_level1())
-    codepoints.update(ord(c) for c in script_chars() if ord(c) >= 0x20)
+    codepoints.update(ord(c) for c in script_chars(skip) if ord(c) >= 0x20)
     codepoints.add(0x2260)
 
     opts = subset.Options()
@@ -130,10 +139,16 @@ def build(src, dst, kanji):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         sys.exit(__doc__)
     os.makedirs(OUT, exist_ok=True)
     # Dialogue font: keeps common kanji so new Japanese lines just work.
     build(sys.argv[1], os.path.join(OUT, "ShipporiMinchoB1-Bold-sub.ttf"), True)
     # Heading font: Latin, kana and the kanji the script actually uses.
     build(sys.argv[2], os.path.join(OUT, "ShipporiMinchoB1-ExtraBold-sub.ttf"), False)
+    # Simplified Chinese: every character in the game except the Japanese
+    # translation, at the weights of the two Shippori fonts.
+    if len(sys.argv) == 4:
+        skip = (os.path.join("tl", "japanese"),)
+        build(sys.argv[3], os.path.join(OUT, "NotoSerifSC-SemiBold-sub.ttf"), False, 600, skip)
+        build(sys.argv[3], os.path.join(OUT, "NotoSerifSC-Black-sub.ttf"), False, 900, skip)

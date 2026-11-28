@@ -37,6 +37,11 @@ define LINE = "#160406"            # outer keyline around panels
 define FONT_BODY = "fonts/ShipporiMinchoB1-Bold-sub.ttf"
 define FONT_HEAD = "fonts/ShipporiMinchoB1-ExtraBold-sub.ttf"
 
+## Simplified Chinese uses Noto Serif SC, cut down by tools/build_fonts.py to
+## the characters in game/tl/schinese. Swapped in by translations.rpy.
+define FONT_SC_BODY = "fonts/NotoSerifSC-SemiBold-sub.ttf"
+define FONT_SC_HEAD = "fonts/NotoSerifSC-Black-sub.ttf"
+
 
 ################################################################################
 ## Layout constants (virtual pixels at 1920x1080)
