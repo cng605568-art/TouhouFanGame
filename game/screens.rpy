@@ -421,10 +421,10 @@ screen fallacy_pick(tm_name, index):
         style "menu_plaque"
         xalign 0.5 ypos 1000
         activate_sound SFX_CANCEL
-        action Return(None)
+        action Return("withdraw")
         at modal_fade
 
-    key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
 
 ## On Hard and Lunatic, a shrinking vermilion bar; at zero the pick times out.
 screen pick_timer():
@@ -534,10 +534,10 @@ screen evidence_pick(tm_name):
         style "menu_plaque"
         xalign 0.5 ypos 1000
         activate_sound SFX_CANCEL
-        action Return(None)
+        action Return("withdraw")
         at modal_fade
 
-    key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
 
 ## One evidence card's contents.
 screen evidence_face(ev):

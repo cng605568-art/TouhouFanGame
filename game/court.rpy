@@ -296,7 +296,9 @@ label cross_examination(tm_name):
         elif xexam_act == "object":
 
             call screen fallacy_pick(tm_name, xexam_stmt)
-            $ xexam_pick = _return
+            # Withdraw returns "withdraw" (Return(None) would end the
+            # screen with True, which is why it isn't used).
+            $ xexam_pick = None if _return in (None, True, "withdraw") else _return
 
             if xexam_pick is None:
                 pass
@@ -339,7 +341,7 @@ label prove_it(tm_name):
     $ renpy.say(tm.judge_character, _("A fair objection. Now prove it. What in the Court Record backs you up?"))
     call screen evidence_pick(tm_name)
 
-    if _return is None:
+    if _return in (None, True, "withdraw"):
         return "withdrawn"
 
     if _return == tm.proof:

@@ -215,10 +215,10 @@ screen practice_pick(question, number):
         style "menu_plaque"
         xalign 0.5 ypos 1000
         activate_sound SFX_CANCEL
-        action Return(None)
+        action Return("withdraw")
         at modal_fade
 
-    key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
 
 
 label practice:
@@ -235,7 +235,7 @@ label practice:
         $ practice_card = fallacy(practice_q[0])
         call screen practice_pick(practice_q, practice_n + 1)
 
-        if _return is None:
+        if _return in (None, True, "withdraw"):
             jump practice_done
 
         if _return == practice_card.key:
