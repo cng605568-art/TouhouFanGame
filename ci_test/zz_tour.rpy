@@ -534,8 +534,10 @@ testcase cases:
     "異議あり"
     pause 1.2
     $ shot("c11_lunatic_deck")
-    pause 8.0
+    pause 4.0
+    pause 4.0
     $ shot("c12_lunatic_timer")
-    pause 8.5
+    pause 4.0
+    pause 4.5
     $ shot("c13_timeout")
     $ renpy.quit()
