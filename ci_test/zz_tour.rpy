@@ -644,6 +644,49 @@ testcase cases:
     click pos (40, 540)
     pause 0.45
     $ shot("c09m_14")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_15")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_16")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_17")
+    click pos (40, 540)
+    pause 0.3
+    $ shot("c09m_18")
+    pause 0.3
+    $ shot("c09m_19")
+    pause 0.3
+    $ shot("c09m_20")
+    pause 0.3
+    $ shot("c09m_21")
+    pause 0.3
+    $ shot("c09m_22")
+    pause 0.6
+    $ shot("c09m_23")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_24")
+    click pos (40, 540)
+    pause 0.3
+    $ shot("c09m_25")
+    pause 0.3
+    $ shot("c09m_26")
+    pause 0.3
+    $ shot("c09m_27")
+    pause 0.6
+    $ shot("c09m_28")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_29")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_30")
+    click pos (40, 540)
+    pause 0.45
+    $ shot("c09m_31")
     click pos (40, 540) until move (0.5, 0.5) pattern "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
