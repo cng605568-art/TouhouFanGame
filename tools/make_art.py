@@ -1113,7 +1113,36 @@ def make_fallacy_icons():
         '<circle cx="40" cy="116" r="11" fill="%s" stroke="%s" stroke-width="4"/>' % (PARCHMENT, ink),
     ])
 
-    for name, body, label in (("hasty_generalization", hg, "hasty generalization"), ("straw_man", sm, "straw man"),
+    # Red Herring: a red fish, and the dotted trail it drags away from the
+    # target the argument was heading for.
+    rh = "\n".join([
+        '<circle cx="128" cy="34" r="16" fill="none" stroke="%s" stroke-width="5"/>' % ink,
+        '<circle cx="128" cy="34" r="6" fill="%s"/>' % VERMILION,
+        dashed([(30, 40), (70, 40), (110, 34)], dash=7, gap=6),
+        '<path d="M26 112 Q60 78 104 104 Q60 132 26 112 Z" fill="%s" stroke="%s" stroke-width="5" stroke-linejoin="round"/>' % (VERMILION, ink),
+        '<path d="M104 104 L136 86 L132 104 L136 122 Z" fill="%s" stroke="%s" stroke-width="5" stroke-linejoin="round"/>' % (VERMILION, ink),
+        '<circle cx="42" cy="106" r="4" fill="%s"/>' % ink,
+        '<path d="M58 96 Q64 106 58 116 M72 94 Q78 106 72 118" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % ink,
+        '<path d="M112 60 Q100 80 116 92" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round"/>' % GOLD_LO,
+    ])
+
+    # Cherry Picking: a branch with five cherries, two of them picked into a
+    # little basket; the rest left hanging, unripe.
+    def cherry(cx, cy, fill):
+        return '<circle cx="%d" cy="%d" r="10" fill="%s" stroke="%s" stroke-width="4"/>' % (cx, cy, fill, ink)
+    cp = "\n".join([
+        '<path d="M14 26 Q80 6 146 24" fill="none" stroke="#8A5A2B" stroke-width="7" stroke-linecap="round"/>',
+        '<path d="M40 20 L36 52 M64 15 L66 50 M90 15 L92 54 M116 18 L120 50" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % "#5E8A3A",
+        cherry(36, 60, "#8FB04A"), cherry(66, 58, "#8FB04A"), cherry(120, 58, "#8FB04A"),
+        '<path d="M92 54 L92 62" fill="none" stroke="%s" stroke-width="3" stroke-dasharray="3 3"/>' % ink,
+        '<path d="M44 104 L116 104 L106 144 L54 144 Z" fill="%s" stroke="%s" stroke-width="5" stroke-linejoin="round"/>' % (GOLD, ink),
+        '<path d="M50 120 L110 120 M52 132 L108 132" fill="none" stroke="%s" stroke-width="3"/>' % GOLD_LO,
+        cherry(70, 96, VERMILION), cherry(92, 94, VERMILION),
+        '<path d="M70 86 Q78 70 92 84" fill="none" stroke="%s" stroke-width="3" stroke-linecap="round"/>' % "#5E8A3A",
+    ])
+
+    for name, body, label in (("red_herring", rh, "red herring"), ("cherry_picking", cp, "cherry picking"),
+                              ("hasty_generalization", hg, "hasty generalization"), ("straw_man", sm, "straw man"),
                               ("bandwagon", bw, "bandwagon"), ("moving_goalposts", mg, "moving the goalposts"),
                               ("false_cause", fc, "false cause"), ("ad_hominem", ah, "ad hominem"),
                               ("slippery_slope", ss, "slippery slope"), ("tu_quoque", tq, "tu quoque"),
@@ -1281,6 +1310,47 @@ def make_evidence_icons():
         p("M40 58 L60 30 L100 30 L120 58 L80 136 Z", "#8FD3C9"),
         p("M40 58 L120 58 M60 30 L72 58 L80 136 L88 58 L100 30", "none", ink, 3),
         p("M64 40 L72 40", "none", "#FFFFFF", 5),
+    ])
+
+    # A sealed letter.
+    icons["letter"] = "\n".join([
+        p("M22 44 L138 44 L138 128 L22 128 Z", PARCHMENT),
+        p("M22 44 L80 92 L138 44", "none"),
+        p("M22 128 L66 82 M138 128 L94 82", "none", ink, 3),
+        '<circle cx="80" cy="92" r="12" fill="%s" stroke="%s" stroke-width="3"/>' % (VERMILION, ink),
+    ])
+
+    # A tengu's camera, flash up.
+    icons["camera"] = "\n".join([
+        p("M24 56 L56 56 L64 40 L96 40 L104 56 L136 56 L136 128 L24 128 Z", "#3B3540"),
+        '<circle cx="80" cy="92" r="26" fill="%s" stroke="%s" stroke-width="5"/>' % ("#8FA8C8", GOLD),
+        '<circle cx="80" cy="92" r="12" fill="%s"/>' % INK,
+        '<circle cx="74" cy="86" r="4" fill="#FFFFFF"/>',
+        p("M108 64 L126 64 L126 76 L108 76 Z", GOLD_HI, ink, 3),
+    ])
+
+    # A strip of film: some frames bright, most dark.
+    frames = "\n".join('<rect x="%d" y="58" width="22" height="44" rx="2" fill="%s" stroke="%s" stroke-width="2"/>'
+                       % (24 + 30 * i, GOLD_HI if i in (1, 3) else "#6B6470", ink) for i in range(4))
+    icons["film"] = "\n".join([
+        p("M14 44 L146 44 L146 116 L14 116 Z", "#2A2530"),
+        frames,
+    ] + ['<rect x="%d" y="48" width="6" height="6" fill="%s"/><rect x="%d" y="106" width="6" height="6" fill="%s"/>'
+         % (20 + 14 * i, PARCHMENT, 20 + 14 * i, PARCHMENT) for i in range(9)])
+
+    # A frilled pink parasol.
+    icons["parasol"] = "\n".join([
+        p("M18 74 Q80 8 142 74 Q126 66 112 74 Q96 64 80 74 Q64 64 48 74 Q34 66 18 74 Z", "#F2B8C6"),
+        p("M80 20 L80 74 M50 30 L64 72 M110 30 L96 72", "none", ink, 3),
+        p("M80 74 L80 136 Q80 148 68 146", "none", "#8A5A2B", 6),
+    ])
+
+    # A scorched bench: a plank with black burn marks and a flame.
+    icons["scorch"] = "\n".join([
+        p("M18 92 L142 92 L142 112 L18 112 Z", "#9B6A3C"),
+        p("M30 112 L30 138 M130 112 L130 138", "none", "#6B4A2A", 8),
+        '<ellipse cx="62" cy="100" rx="18" ry="8" fill="#2A1A10"/><ellipse cx="104" cy="102" rx="12" ry="6" fill="#2A1A10"/>',
+        p("M78 86 Q64 66 78 44 Q80 60 90 62 Q98 46 94 30 Q116 52 102 86 Z", "#F08A2C", "#C04A1C", 4),
     ])
 
     for name, body in icons.items():

@@ -289,6 +289,20 @@ define fallacy_moving_goalposts = Fallacy(
     _("Changing the test after it has been passed, so no answer is ever enough."),
     "gui/fallacy_moving_goalposts.svg")
 
+define fallacy_red_herring = Fallacy(
+    "red_herring",
+    _("Red Herring"),
+    _("(Change the Subject)"),
+    _("Dragging in something else, so nobody notices the question was never answered."),
+    "gui/fallacy_red_herring.svg")
+
+define fallacy_cherry_picking = Fallacy(
+    "cherry_picking",
+    _("Cherry Picking"),
+    _("(Only the Ripe Ones)"),
+    _("Showing only the evidence that agrees, and hiding the rest."),
+    "gui/fallacy_cherry_picking.svg")
+
 define fallacy_circular_reasoning = Fallacy(
     "circular_reasoning",
     _("Circular Reasoning"),

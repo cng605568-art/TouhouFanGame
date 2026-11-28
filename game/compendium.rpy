@@ -24,6 +24,8 @@ init python:
         "straw_man": _("Put the original words next to the attack. If they don't match, it's a scarecrow."),
         "bandwagon": _("Popular isn't proof. Ask what the crowd actually checked."),
         "moving_goalposts": _("Write the test down before the answer arrives. Then hold everyone to it."),
+        "red_herring": _("Ask the question again. If the answer is about something else, that's the fish."),
+        "cherry_picking": _("Ask what was left out. A handful of examples means nothing without the whole basket."),
         }
 
     for _k, _tip in FALLACY_TIPS.items():
@@ -66,6 +68,12 @@ init python:
         ("moving_goalposts", _("You beat me at shogi? Fine, but best of three. No, best of five.")),
         ("moving_goalposts", _("Bring proof. That's a photo? I meant a witness. A witness? I meant two.")),
         ("moving_goalposts", _("You passed the test, but now there's a harder one. Then you're qualified.")),
+        ("red_herring", _("Did I eat the last dumpling? Never mind that. Have you seen the moon tonight?")),
+        ("red_herring", _("Yes, my homework is late. But think of all the fairies who never do homework.")),
+        ("red_herring", _("Why is the shrine roof leaking? Let's talk about how hard I work instead.")),
+        ("cherry_picking", _("Three customers loved the soup. Ignore the other forty who left.")),
+        ("cherry_picking", _("The almanac was right twice this year. I framed those pages and burned the rest.")),
+        ("cherry_picking", _("My review quotes the one kind line from her letter. The rest was complaints.")),
         ]
 
     PRACTICE_LENGTH = 5

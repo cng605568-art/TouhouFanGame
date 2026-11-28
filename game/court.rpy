@@ -33,15 +33,23 @@ init -1 python:
         `hidden`   True if it only appears once revealed.
         `key`      name of a hidden statement.
         `reveals`  key of the hidden statement that pressing this one adds.
+        `variants` later versions of `text`. With the "shift" gimmick, every
+                   press moves the statement on to its next version.
         """
 
-        def __init__(self, text, press, wrong, hidden=False, key=None, reveals=None):
+        def __init__(self, text, press, wrong, hidden=False, key=None, reveals=None, variants=None):
             self.text = text
             self.press = press
             self.wrong = wrong
             self.hidden = hidden
             self.key = key
             self.reveals = reveals
+            self.variants = variants or [ ]
+
+        def shown(self, shift=0):
+            """The text on show after `shift` presses."""
+            versions = [ self.text ] + list(self.variants)
+            return versions[min(shift, len(versions) - 1)]
 
 
     class Fallacy(object):
@@ -81,11 +89,38 @@ init -1 python:
                    fallacy.
         `proof`    key of the Evidence that proves the objection.
         `proof_wrong`  the judge's line for presenting anything else.
+        `proof_kind`   how the objection is proved:
+                       "item"    present `proof` (the default);
+                       "line"    present `proof`, then point at the phrase
+                                 in it that does the work: proof_data is
+                                 dict(phrases=[...], answer=i, wrong=line);
+                       "pair"    present two items together: proof_data is
+                                 dict(items=(a, b), wrong=line);
+                       "counter" pick the counterexample that breaks the
+                                 witness's rule: proof_data is
+                                 dict(prompt=..., options=[...], answer=i,
+                                 wrong=line).
+        `gimmick`  None, or the witness's quirk during cross-examination:
+                   "doze"  the witness nods off after every press. Pressing
+                           while she sleeps plays `doze_press` and reveals
+                           `doze_reveals`.
+                   "bribe" a charm on the stand restores a magatama, but a
+                           judge who takes it can't rank S. `bribe_label`
+                           plays when it's taken.
+                   "shift" every press moves each statement on to its next
+                           variant; the flaw only counts in its last one.
+                           `shift_early` is the judge's line for objecting
+                           to it too soon.
+                   "speed" statements advance on their own every few
+                           seconds.
+        `after_wrong`  label played after each wrong objection, if any.
         """
 
         def __init__(self, title, witness, judge, witness_shot, judge_shot,
                      statements, cards, flaw, answer, scolds,
-                     proof=None, proof_wrong=None):
+                     proof=None, proof_wrong=None, proof_kind="item", proof_data=None,
+                     gimmick=None, doze_press=None, doze_reveals=None, bribe_label=None,
+                     shift_early=None, after_wrong=None):
             self.title = title
             self.witness = witness
             self.judge = judge
@@ -98,6 +133,31 @@ init -1 python:
             self.scolds = scolds
             self.proof = proof
             self.proof_wrong = proof_wrong
+            self.proof_kind = proof_kind
+            self.proof_data = proof_data or { }
+            self.gimmick = gimmick
+            self.doze_press = doze_press
+            self.doze_reveals = doze_reveals
+            self.bribe_label = bribe_label
+            self.shift_early = shift_early
+            self.after_wrong = after_wrong
+
+        @property
+        def needs_proof(self):
+            return bool(self.proof or self.proof_kind in ("pair", "counter"))
+
+        def text_of(self, i, shift=0):
+            return self.statements[i].shown(shift if self.gimmick == "shift" else 0)
+
+        @property
+        def max_shift(self):
+            return max(len(st.variants) for st in self.statements)
+
+        def flaw_ready(self, shift):
+            """With "shift", the flaw only counts once it reaches its last version."""
+            if self.gimmick != "shift":
+                return True
+            return shift >= len(self.statements[self.flaw].variants)
 
         @property
         def witness_character(self):
@@ -148,7 +208,8 @@ init -1 python:
     # Canonical order of the cards, so they always sit in the same places.
     FALLACY_ORDER = [ "false_cause", "ad_hominem", "slippery_slope", "tu_quoque",
                       "false_dilemma", "appeal_to_authority", "circular_reasoning",
-                      "hasty_generalization", "straw_man", "bandwagon", "moving_goalposts" ]
+                      "hasty_generalization", "straw_man", "bandwagon", "moving_goalposts",
+                      "red_herring", "cherry_picking" ]
 
     RANKS = [ "S", "A", "B", "C" ]
 
@@ -187,10 +248,23 @@ init -1 python:
         return [ fallacy(k) for k in FALLACY_ORDER if k in keys ]
 
     def case_rank():
-        """S for a clean case, then A, B, C; a mistrial caps it at C."""
+        """S for a clean case, then A, B, C; a mistrial caps it at C, a bribe at A."""
         if store.case_mistrial:
             return "C"
-        return RANKS[min(store.case_penalties, 3)]
+        rank = RANKS[min(store.case_penalties, 3)]
+        if store.case_bribed and rank == "S":
+            rank = "A"
+        return rank
+
+    def pursuit_theme():
+        """The case's own pursuit theme, or the shared one if its file is missing."""
+        name = store.case_pursuit
+        if name in BGM and BGM[name].filename is not None:
+            return name
+        return "pursuit"
+
+    def bgm_pursuit(**kwargs):
+        bgm(pursuit_theme(), **kwargs)
 
     def record_rank(key, rank):
         slot = "%s:%s" % (key, store.difficulty)
@@ -222,6 +296,8 @@ default case_penalties = 0
 default case_mistrial = False
 default case_number = ""
 default case_title = ""
+default case_pursuit = "pursuit"
+default case_bribed = False
 
 default xexam_index = 0
 default xexam_act = None
@@ -230,6 +306,8 @@ default xexam_line = ""
 default xexam_stmt = 0
 default xexam_revealed = set()
 default xexam_vis = [ ]
+default xexam_shift = 0
+default xexam_dozing = False
 
 
 ################################################################################
@@ -260,6 +338,8 @@ label cross_examination(tm_name):
     $ tm = testimony(tm_name)
     $ xexam_revealed = set()
     $ xexam_index = 0
+    $ xexam_shift = 0
+    $ xexam_dozing = False
 
     window hide
     show screen court_title(_("CROSS-EXAMINATION"), "反対尋問", tm.title)
@@ -277,22 +357,64 @@ label cross_examination(tm_name):
         $ xexam_act, xexam_index = _return
         $ xexam_stmt = xexam_vis[xexam_index]
 
-        if xexam_act == "press":
+        if xexam_act == "nudge":
+            $ xexam_dozing = False
+            $ sfx("nav")
+
+        elif xexam_act == "bribe":
+            $ case_bribed = True
+            $ spirit = min(spirit_cap, spirit + 1)
+            $ spirit_broken = -1
+            $ sfx("breakthrough")
+            if tm.bribe_label:
+                call expression tm.bribe_label
+            call expression tm.witness_shot
+
+        elif xexam_act == "press" and xexam_dozing:
+
+            # Pressing a sleeping witness: she talks in her sleep.
+            call court_shout("hold")
+            call expression tm.doze_press
+            $ xexam_dozing = False
+            $ xexam_new = tm.doze_reveals
+            if xexam_new and xexam_new not in xexam_revealed:
+                $ xexam_revealed.add(xexam_new)
+                call expression tm.witness_shot
+                $ bgm_pursuit(fadein=0.2, card_delay=1.7, fadeout=0.3)
+                call testimony_updated(tm.title)
+                $ xexam_vis = tm.visible(xexam_revealed)
+                $ xexam_index = [ tm.statements[i].key for i in xexam_vis ].index(xexam_new)
+            else:
+                call expression tm.witness_shot
+
+        elif xexam_act == "press":
 
             call court_shout("hold")
             call expression tm.statements[xexam_stmt].press
             $ xexam_new = tm.statements[xexam_stmt].reveals
+            if tm.gimmick == "shift":
+                $ xexam_shift += 1
+            if tm.gimmick == "doze" and tm.doze_reveals not in xexam_revealed:
+                $ xexam_dozing = True
 
             if xexam_new and xexam_new not in xexam_revealed:
                 $ xexam_revealed.add(xexam_new)
                 call expression tm.witness_shot
-                $ bgm("pursuit", fadein=0.2, card_delay=1.7, fadeout=0.3)
+                $ bgm_pursuit(fadein=0.2, card_delay=1.7, fadeout=0.3)
                 call testimony_updated(tm.title)
                 $ xexam_vis = tm.visible(xexam_revealed)
                 $ xexam_index = [ tm.statements[i].key for i in xexam_vis ].index(xexam_new)
             else:
                 $ xexam_index = (xexam_index + 1) % len(xexam_vis)
                 call expression tm.witness_shot
+            if tm.gimmick == "shift" and xexam_shift <= tm.max_shift:
+                call testimony_updated(tm.title)
+
+        elif xexam_act == "object" and xexam_dozing:
+
+            call expression tm.judge_shot
+            $ renpy.say(tm.judge_character, _("She's asleep, Junior Judge. Object when she can hear you."))
+            call expression tm.witness_shot
 
         elif xexam_act == "object":
 
@@ -310,9 +432,14 @@ label cross_examination(tm_name):
             else:
                 call court_shout("objection")
 
-                if xexam_stmt == tm.flaw and xexam_pick == tm.answer:
+                if xexam_stmt == tm.flaw and not tm.flaw_ready(xexam_shift):
+                    call court_penalty(tm_name, tm.shift_early or _("Not yet. Keep pressing and watch what she does with it."))
+                    if tm.after_wrong:
+                        call expression tm.after_wrong
 
-                    if not (diff()["proof"] and tm.proof):
+                elif xexam_stmt == tm.flaw and xexam_pick == tm.answer:
+
+                    if not (diff()["proof"] and tm.needs_proof):
                         return "solved"
 
                     call prove_it(tm_name)
@@ -321,10 +448,14 @@ label cross_examination(tm_name):
 
                 elif xexam_stmt != tm.flaw:
                     call court_penalty(tm_name, tm.statements[xexam_stmt].wrong)
+                    if tm.after_wrong:
+                        call expression tm.after_wrong
 
                 else:
                     call court_penalty(tm_name, tm.scolds.get(xexam_pick,
                         _("Right statement. Wrong fallacy. Look again at how the reasoning fails.")))
+                    if tm.after_wrong:
+                        call expression tm.after_wrong
 
             if spirit <= 0:
                 return "mistrial"
@@ -337,13 +468,54 @@ label cross_examination(tm_name):
 ## "proved", "wrong" (penalty given) or "withdrawn".
 label prove_it(tm_name):
     $ tm = testimony(tm_name)
-    $ bgm("pursuit", fadein=0.2, card_delay=0.6, fadeout=0.3)
+    $ bgm_pursuit(fadein=0.2, card_delay=0.6, fadeout=0.3)
     call expression tm.judge_shot
-    $ renpy.say(tm.judge_character, _("A fair objection. Now prove it. What in the Court Record backs you up?"))
-    call screen evidence_pick(tm_name)
+
+    if tm.proof_kind == "counter":
+        $ renpy.say(tm.judge_character, _("A fair objection. A rule needs only one exception to fall. Find it."))
+        call screen counter_pick(tm.proof_data["prompt"], tm.proof_data["options"])
+    elif tm.proof_kind == "pair":
+        $ renpy.say(tm.judge_character, _("A fair objection. No single item proves it. Which two do, together?"))
+        call screen evidence_pick(tm_name, pair=True)
+    else:
+        $ renpy.say(tm.judge_character, _("A fair objection. Now prove it. What in the Court Record backs you up?"))
+        call screen evidence_pick(tm_name)
 
     if _return in (None, True, "withdraw"):
         return "withdrawn"
+
+    if _return == "timeout":
+        call court_penalty(tm_name, _("Time's up. An objection without proof is just noise."))
+        return "wrong"
+
+    if tm.proof_kind == "counter":
+        if _return != tm.proof_data["answer"]:
+            call court_penalty(tm_name, tm.proof_data.get("wrong") or _("That doesn't break her rule."))
+            return "wrong"
+        call expression tm.witness_shot
+        call court_shout("takethat")
+        return "proved"
+
+    if tm.proof_kind == "pair":
+        if set(_return) != set(tm.proof_data["items"]):
+            call court_penalty(tm_name, tm.proof_data.get("wrong") or tm.proof_wrong or _("Those two don't prove it together."))
+            return "wrong"
+        call expression tm.witness_shot
+        call court_shout("takethat")
+        return "proved"
+
+    if _return == tm.proof and tm.proof_kind == "line":
+        call expression tm.judge_shot
+        $ renpy.say(tm.judge_character, _("Good. Now show the court exactly where. Which part of it?"))
+        call screen evidence_point(evidence(tm.proof), tm.proof_data["phrases"])
+        if _return in (None, True, "withdraw"):
+            return "withdrawn"
+        if _return != tm.proof_data["answer"]:
+            call court_penalty(tm_name, tm.proof_data.get("wrong") or _("Right item. Wrong detail. Read it again."))
+            return "wrong"
+        call expression tm.witness_shot
+        call court_shout("takethat")
+        return "proved"
 
     if _return == tm.proof:
         # Evidence is shown to the witness, so the shout lands on them and
@@ -352,10 +524,7 @@ label prove_it(tm_name):
         call court_shout("takethat")
         return "proved"
 
-    if _return == "timeout":
-        call court_penalty(tm_name, _("Time's up. An objection without proof is just noise."))
-    else:
-        call court_penalty(tm_name, tm.proof_wrong or _("That proves nothing about this statement."))
+    call court_penalty(tm_name, tm.proof_wrong or _("That proves nothing about this statement."))
     return "wrong"
 
 

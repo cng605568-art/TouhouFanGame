@@ -221,9 +221,33 @@ screen cross_exam(tm_name):
         text _("STATEMENT [stmt_no] / [count]"):
             style "xexam_counter"
 
-        for n, i in enumerate(xexam_vis):
-            showif n == xexam_index:
-                text tm.statements[i].text style "testimony_text" at statement_in
+        if xexam_dozing:
+            text _("Zzz…") style "testimony_text" color "#7A1C2A99" at statement_in
+        else:
+            for n, i in enumerate(xexam_vis):
+                showif n == xexam_index:
+                    text tm.text_of(i, xexam_shift) style "testimony_text" at statement_in
+
+    ## Gimmicks: a sleeping witness can be nudged awake; a charm sits on the
+    ## stand; a fast talker's statements run on by themselves.
+    if xexam_dozing:
+        textbutton _("Nudge her awake"):
+            style "record_button"
+            ypos 190
+            action Return(("nudge", xexam_index))
+            at hud_drop(0.05)
+    if tm.gimmick == "bribe" and not case_bribed and spirit < spirit_cap:
+        button:
+            style "record_button"
+            ypos 190
+            action Return(("bribe", xexam_index))
+            at hud_drop(0.05)
+            hbox:
+                spacing 10
+                add SVG("gui/ev_charm.svg", 0.22) yalign 0.5
+                text _("Take the charm (+1)") style "record_button_text" yalign 0.5
+    if tm.gimmick == "speed":
+        timer 3.6 repeat True action [ SetVariable("xexam_index", (xexam_index + 1) % count), Function(sfx, "nav") ]
 
     ## Statement arrows.
     imagebutton:
@@ -350,7 +374,7 @@ screen fallacy_pick(tm_name, index):
     $ tm = testimony(tm_name)
     $ cards = deck_for(tm)
     $ stmt_no = xexam_index + 1
-    $ quote = tm.statements[index].text
+    $ quote = tm.text_of(index, xexam_shift)
 
     add Solid("#0A0205D9") at modal_fade
 
@@ -445,15 +469,16 @@ style fallacy_card is default:
 ## three or four columns of small cards, or six columns of tiny ones once the
 ## deck grows past eight.
 screen fallacy_cards(cards):
+    $ micro = len(cards) > 12
     $ tiny = len(cards) > 8
-    $ cols = 6 if tiny else (3 if len(cards) <= 6 else 4)
+    $ cols = 7 if micro else (6 if tiny else (3 if len(cards) <= 6 else 4))
     vpgrid:
         cols cols
         xalign 0.5 ypos (300 if tiny else 285)
-        spacing (16 if tiny else 22)
+        spacing (12 if micro else (16 if tiny else 22))
         for n, card in enumerate(cards):
             button:
-                style ("fallacy_card_tiny" if tiny else "fallacy_card_small")
+                style ("fallacy_card_micro" if micro else ("fallacy_card_tiny" if tiny else "fallacy_card_small"))
                 action Return(card.key)
                 at card_rise(0.03 * n), plaque_lift
                 vbox:
@@ -464,10 +489,16 @@ screen fallacy_cards(cards):
                         padding ((8, 8, 8, 10) if tiny else (12, 10, 12, 12))
                         vbox:
                             xalign 0.5
-                            text card.name style "fallacy_name" size (22 if tiny else 30)
-                            text card.alias style "fallacy_alias" size (15 if tiny else 20)
-                    add SVG(card.icon, 0.36 if tiny else 0.5) xalign 0.5
-                    text card.blurb style "fallacy_blurb" size (16 if tiny else 21) xsize (254 if tiny else 344) line_spacing (1 if tiny else 2)
+                            text card.name style "fallacy_name" size (20 if micro else (22 if tiny else 30))
+                            text card.alias style "fallacy_alias" size (14 if micro else (15 if tiny else 20))
+                    add SVG(card.icon, 0.3 if micro else (0.36 if tiny else 0.5)) xalign 0.5
+                    text card.blurb style "fallacy_blurb" size (15 if micro else (16 if tiny else 21)) xsize (222 if micro else (254 if tiny else 344)) line_spacing (1 if tiny else 2)
+
+style fallacy_card_micro is fallacy_card:
+    xysize (254, 290)
+    padding (12, 12, 12, 10)
+    background ParchmentPanel(corner_size=20)
+    hover_background ParchmentPanel(corner_size=20, edge=GOLD_HI, inner=VERMILION)
 
 style fallacy_card_tiny is fallacy_card:
     xysize (290, 300)
@@ -509,9 +540,11 @@ style fallacy_blurb is default:
 
 ## Prove it: pick the evidence that backs the objection. Returns an Evidence
 ## key, None to withdraw, or "timeout".
-screen evidence_pick(tm_name):
+screen evidence_pick(tm_name, pair=False):
     zorder 60
     modal True
+
+    default chosen = [ ]
 
     add Solid("#0A0205D9") at modal_fade
 
@@ -528,7 +561,10 @@ screen evidence_pick(tm_name):
                 text _("PRESENT EVIDENCE") style "court_tag_text"
         frame:
             style "fallacy_quote"
-            text _("Which item proves your objection?") style "fallacy_quote_text"
+            if pair:
+                text _("Which two items prove it together? Choose both, then present.") style "fallacy_quote_text"
+            else:
+                text _("Which item proves your objection?") style "fallacy_quote_text"
 
     vpgrid:
         cols min(4, max(1, len(court_record)))
@@ -538,9 +574,23 @@ screen evidence_pick(tm_name):
             $ ev = evidence(key)
             button:
                 style "evidence_card"
-                action Return(ev.key)
+                if pair:
+                    selected key in chosen
+                    selected_background ParchmentPanel(corner_size=28, edge=GOLD_HI, inner=VERMILION)
+                    action If(key in chosen, RemoveFromSet(chosen, key),
+                              If(len(chosen) < 2, AddToSet(chosen, key), None))
+                else:
+                    action Return(ev.key)
                 at card_rise(0.05 * n), plaque_lift
                 use evidence_face(ev)
+
+    if pair:
+        textbutton _("Present these two"):
+            style "menu_plaque"
+            xalign 0.5 ypos 900
+            sensitive len(chosen) == 2
+            action Return(tuple(chosen))
+            at modal_fade
 
     use pick_timer
 
@@ -552,6 +602,128 @@ screen evidence_pick(tm_name):
         at modal_fade
 
     key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
+
+## Point at the phrase in a piece of evidence that does the work. Returns
+## the phrase's index, or "withdraw".
+screen evidence_point(ev, phrases):
+    zorder 60
+    modal True
+
+    add Solid("#0A0205D9") at modal_fade
+
+    vbox:
+        at modal_fade
+        xalign 0.5 ypos 54
+        spacing 22
+        frame:
+            style "court_tag"
+            xalign 0.5 ypos 0
+            hbox:
+                spacing 20
+                text "指摘" style "court_tag_text" color PARCHMENT
+                text _("POINT IT OUT") style "court_tag_text"
+        frame:
+            style "fallacy_quote"
+            text _("Which part of the [ev.name!t] proves it?") style "fallacy_quote_text"
+
+    frame:
+        style "evidence_card"
+        xalign 0.5 ypos 300
+        at card_rise(0.0)
+        vbox:
+            xfill True
+            spacing 10
+            frame:
+                style "evidence_head"
+                text ev.name style "evidence_name"
+            add SVG(ev.icon, 0.62) xalign 0.5
+
+    vbox:
+        xalign 0.5 ypos 680
+        spacing 14
+        hbox:
+            xalign 0.5
+            spacing 16
+            for n, phrase in enumerate(phrases):
+                textbutton phrase:
+                    style "phrase_button"
+                    action Return(n)
+                    at card_rise(0.05 * n), plaque_lift
+
+    textbutton _("Withdraw"):
+        style "menu_plaque"
+        xalign 0.5 ypos 1000
+        activate_sound SFX_CANCEL
+        action Return("withdraw")
+        at modal_fade
+
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
+
+style phrase_button is default:
+    background CourtPanel(fill=PARCHMENT, edge=GOLD, edge_w=2, shadow=4)
+    hover_background CourtPanel(fill=PARCHMENT, edge=GOLD_HI, edge_w=4, shadow=4)
+    padding (22, 14, 22, 16)
+    xmaximum 440
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
+
+style phrase_button_text is default:
+    size 26
+    color "#7A1C2A"
+    hover_color CRIMSON
+    text_align 0.5
+    xalign 0.5
+
+## Break the witness's rule: pick the one counterexample. Returns its index,
+## "withdraw" or "timeout".
+screen counter_pick(prompt, options):
+    zorder 60
+    modal True
+
+    add Solid("#0A0205D9") at modal_fade
+
+    vbox:
+        at modal_fade
+        xalign 0.5 ypos 54
+        spacing 22
+        frame:
+            style "court_tag"
+            xalign 0.5 ypos 0
+            hbox:
+                spacing 20
+                text "反例" style "court_tag_text" color PARCHMENT
+                text _("FIND THE EXCEPTION") style "court_tag_text"
+        frame:
+            style "fallacy_quote"
+            text prompt style "fallacy_quote_text"
+
+    vbox:
+        xalign 0.5 ypos 330
+        spacing 20
+        for n, option in enumerate(options):
+            textbutton option:
+                style "counter_button"
+                action Return(n)
+                at card_rise(0.05 * n), plaque_lift
+
+    use pick_timer
+
+    textbutton _("Withdraw"):
+        style "menu_plaque"
+        xalign 0.5 ypos 1000
+        activate_sound SFX_CANCEL
+        action Return("withdraw")
+        at modal_fade
+
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return("withdraw") ]
+
+style counter_button is phrase_button:
+    xsize 1100
+    xmaximum 1100
+    padding (30, 18, 30, 20)
+
+style counter_button_text is phrase_button_text:
+    size 30
 
 ## One evidence card's contents.
 screen evidence_face(ev):

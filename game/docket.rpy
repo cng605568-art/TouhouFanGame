@@ -13,8 +13,10 @@ init -1 python:
     class Case(object):
         """One trial: where it starts, who testifies, what it teaches."""
 
-        def __init__(self, key, number, title, tagline, witness, fallacy, testimony, record):
+        def __init__(self, key, number, title, tagline, witness, fallacy, testimony, record,
+                     pursuit="pursuit"):
             self.key = key              # also the label the case starts at
+            self.pursuit = pursuit      # BGM key of the case's pursuit theme
             self.number = number
             self.title = title
             self.tagline = tagline
@@ -76,28 +78,28 @@ define CASES = [
          "testimony_cirno", [ "frog_census", "weather_log", "cirno_ice" ]),
     Case("case2", _("CASE 02"), _("The Long-Term Loan"),
          _("The Scarlet Devil Library v. One Ordinary Magician"), "marisa", "tu_quoque",
-         "testimony_marisa", [ "library_ledger", "donation_box", "reading_glasses" ]),
+         "testimony_marisa", [ "library_ledger", "donation_box", "reading_glasses" ], pursuit="bad_apple"),
     Case("case3", _("CASE 03"), _("The Vanished Pudding"),
          _("The Scarlet Devil Mansion v. One Sleeping Gatekeeper"), "sakuya", "false_dilemma",
-         "testimony_sakuya", [ "empty_plate", "pudding_recipe" ]),
+         "testimony_sakuya", [ "empty_plate", "pudding_recipe" ], pursuit="flowering_night"),
     Case("case4", _("CASE 04"), _("The Lunar Prescription"),
          _("The Human Village v. One Moon Rabbit"), "reisen", "appeal_to_authority",
-         "testimony_reisen", [ "tonic_bottle", "eirin_diploma", "lab_notebook" ]),
+         "testimony_reisen", [ "tonic_bottle", "eirin_diploma", "lab_notebook" ], pursuit="pierrot"),
     Case("case5", _("CASE 05"), _("The Unappealable Verdict"),
          _("The Scarlet Devil Mansion v. The Verdict in Case 03"), "eiki", "circular_reasoning",
-         "testimony_eiki", [ "case3_verdict", "staff_roster", "frozen_pudding" ]),
+         "testimony_eiki", [ "case3_verdict", "staff_roster", "frozen_pudding" ], pursuit="heian_alien"),
     Case("case6", _("CASE 06"), _("The Open Gate"),
          _("The Scarlet Devil Mansion v. One Gatekeeper, Awake This Time"), "meiling", "hasty_generalization",
-         "testimony_meiling", [ "library_window", "gate_footprints", "parasol_note" ]),
+         "testimony_meiling", [ "library_window", "gate_footprints", "parasol_note" ], pursuit="old_world"),
     Case("case7", _("CASE 07"), _("Strings Attached"),
          _("Kirisame Marisa v. One Puppeteer"), "alice", "straw_man",
-         "testimony_alice", [ "newest_doll", "doll_string", "bunbunmaru_clipping" ]),
+         "testimony_alice", [ "newest_doll", "doll_string", "bunbunmaru_clipping" ], pursuit="doll_judgment"),
     Case("case8", _("CASE 08"), _("Fifty Satisfied Customers"),
          _("The Human Village v. One Shrine Maiden"), "reimu", "bandwagon",
-         "testimony_reimu", [ "lucky_charm", "full_donation_box", "complaint_list" ]),
+         "testimony_reimu", [ "lucky_charm", "full_donation_box", "complaint_list" ], pursuit="native_faith"),
     Case("case9", _("CASE 09"), _("The Five Impossible Chores"),
          _("Reisen Udongein Inaba v. One Moon Princess"), "kaguya", "moving_goalposts",
-         "testimony_kaguya", [ "chore_list", "five_treasures", "new_chore_list" ]),
+         "testimony_kaguya", [ "chore_list", "five_treasures", "new_chore_list" ], pursuit="reverse_ideology"),
     ]
 
 default persistent.cases_cleared = set()
@@ -135,6 +137,8 @@ label open_case(key):
     $ court_record = list(open_this.record)
     $ case_number = open_this.number
     $ case_title = open_this.title
+    $ case_pursuit = open_this.pursuit
+    $ case_bribed = False
 
     scene black
     show screen case_card(open_this.number, open_this.title, open_this.tagline)
