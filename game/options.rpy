@@ -26,6 +26,9 @@ Sound effects by Warsong, from the Petaldust and Nostalgiac Blues sound packs (C
 Music by +TEK, arrangements of ZUN's compositions, used under CC BY 4.0 (creativecommons.org/licenses/by/4.0). Each was cut to loop seamlessly, loudness-normalised and re-encoded.
   Title: "Scarlet Beyond a Crimson Dream", from Embodiment of Frequency Modulation.
   Cirno's theme: "Beloved Tomboyish Girl" (おてんば恋娘), from Story of Modulated Frequency.
+  Marisa's theme: "Love-coloured Master Spark" (恋色マスタースパーク), from Embodiment of Frequency Modulation.
+  Sakuya's theme: "Lunar Clock ~ Luna Dial" (月時計 ～ ルナ・ダイアル), from Embodiment of Frequency Modulation.
+  Reisen's theme: "Lunatic Eyes ~ Invisible Full Moon" (狂気の瞳), from Embodiment of Frequency Modulation.
 
 Text is set in Shippori Mincho B1 by FONTDASU, under the SIL Open Font License 1.1 (see game/fonts/OFL.txt).
 

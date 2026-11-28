@@ -125,18 +125,21 @@ init -1 python:
             "Love-coloured Master Spark",
             u"恋色マスタースパーク",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=10.844785,
         ),
         "sakuya": Theme(
             "sakuya_theme",
             "Lunar Clock ~ Luna Dial",
             u"月時計 ～ ルナ・ダイアル",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=1.545488,
         ),
         "reisen": Theme(
             "reisen_theme",
             "Lunatic Eyes ~ Invisible Full Moon",
             u"狂気の瞳",
             "arr. +TEK  ·  comp. ZUN (Team Shanghai Alice)",
+            loop=10.839796,
         ),
         # Main menu. Never announced with a title card; credited in About.
         "title": Theme(

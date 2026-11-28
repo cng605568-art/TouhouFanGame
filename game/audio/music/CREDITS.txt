@@ -31,3 +31,48 @@ title_theme.ogg (main menu)
 
     Arrangement of music by ZUN (Team Shanghai Alice). Used in this free,
     non-commercial fan game under the Touhou Project fan-work guidelines.
+
+marisa_theme.ogg (Case 02, Marisa)
+    "Love-coloured Master Spark" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/love-coloured-master-spark
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "恋色マスタースパーク" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+sakuya_theme.ogg (Case 03, Sakuya)
+    "Lunar Clock ~ Luna Dial" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/lunar-clock-luna-dial
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "月時計 ～ ルナ・ダイアル" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
+
+reisen_theme.ogg (Case 04, Reisen)
+    "Lunatic Eyes ~ Invisible Full Moon" by +TEK
+    from the album "Embodiment of Frequency Modulation" (2024)
+    https://plustek.bandcamp.com/track/lunatic-eyes-invisible-full-moon
+    License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+    Changes: cut where the tune repeats, with a 0.12 s crossfade at the cut
+    so it loops seamlessly (the rest of the repeat and the fade-out are not
+    included), leading silence trimmed, loudness-normalised to -17 LUFS and
+    re-encoded as Ogg Vorbis from the FLAC download (tools/build_music.py).
+
+    Arrangement of "狂気の瞳 ～ Invisible Full Moon" by ZUN (Team Shanghai Alice). Used in this
+    free, non-commercial fan game under the Touhou Project fan-work
+    guidelines. No audio is taken from the official games.
