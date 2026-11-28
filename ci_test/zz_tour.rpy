@@ -40,6 +40,24 @@ init python:
 
     config.periodic_callbacks.append(autoshot)
 
+    # Trace the trial engine's labels, so a stuck run shows where it went.
+    def _trace(name, abnormal):
+        if name in ("prove_it", "court_penalty", "cross_examination", "testimony_updated",
+                    "breakdown", "mistrial", "close_case", "practice", "practice_done"):
+            print("LABEL", name, "stmt", getattr(store, "xexam_stmt", None), "pick",
+                  getattr(store, "xexam_pick", None), "index", getattr(store, "xexam_index", None),
+                  "return", getattr(store, "_return", None))
+    config.label_callbacks.append(_trace)
+
+    # Give up instead of hanging until the runner kills X.
+    _t0 = time.time()
+    def _deadline():
+        limit = float(os.environ.get("FUMO_MAX", "0") or 0)
+        if limit and time.time() - _t0 > limit:
+            print("DEADLINE reached; quitting")
+            renpy.quit()
+    config.periodic_callbacks.append(_deadline)
+
     def mus(tag):
         print("MUSIC", tag, renpy.music.get_playing("music"),
               "card" if renpy.get_screen("bgm_title") else "no-card")
