@@ -66,20 +66,20 @@ testcase tour:
     "Cirno's Frosty Fallacy"
     pause 1.4
     $ shot("04_case_card")
-    click until "PRESS"
+    click until "待った"
     pause 0.6
     $ shot("05_xexam_s1")
     $ print("STATE spirit", spirit, spirit_cap, difficulty, court_record)
-    "PRESS"
+    "待った"
     pause 1.3
     $ shot("06_press")
     click
     pause 0.35
     $ shot("07_press_smug")
-    click until "OBJECT"
+    click until "異議あり"
     pause 0.6
     $ shot("08_xexam_s2")
-    "OBJECT"
+    "異議あり"
     pause 1.0
     $ shot("09_cards")
     "False Cause"
@@ -90,14 +90,14 @@ testcase tour:
     "Next statement"
     pause 0.5
     $ shot("11_flaw")
-    "OBJECT"
+    "異議あり"
     pause 0.9
     "Ad Hominem"
     pause 2.4
     $ shot("12_scold")
-    click until "OBJECT"
+    click until "異議あり"
     pause 0.5
-    "OBJECT"
+    "異議あり"
     pause 0.9
     "False Cause"
     pause 2.0
@@ -117,7 +117,7 @@ testcase tour:
     $ shot("17_court_record")
     "Close"
     pause 0.4
-    "OBJECT"
+    "異議あり"
     pause 0.9
     "False Cause"
     click until "Weather Log"
@@ -266,17 +266,17 @@ testcase cases:
     "Begin Trial"
     pause 1.0
     "The Long-Term Loan"
-    click until "PRESS"
+    click until "待った"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
-    "PRESS"
-    click until "OBJECT"
+    "待った"
+    click until "異議あり"
     pause 0.6
     $ shot("c02_hidden_statement")
-    "OBJECT"
+    "異議あり"
     pause 1.0
     "Tu Quoque"
     click until "Library Ledger"
@@ -293,20 +293,20 @@ testcase cases:
     click until "Next Case"
     pause 0.4
     "Next Case"
-    click until "PRESS"
+    click until "待った"
     pause 0.4
     "Next statement"
     pause 0.3
-    "PRESS"
-    click until "PRESS"
+    "待った"
+    click until "待った"
     pause 0.4
     $ shot("c03_after_roster")
     $ print("STATE record", court_record)
-    "PRESS"
-    click until "OBJECT"
+    "待った"
+    click until "異議あり"
     pause 0.6
     $ shot("c03_hidden_statement")
-    "OBJECT"
+    "異議あり"
     pause 1.0
     "False Dilemma"
     click until "Mansion Roster"
@@ -323,17 +323,17 @@ testcase cases:
     click until "Next Case"
     pause 0.4
     "Next Case"
-    click until "PRESS"
+    click until "待った"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
-    "PRESS"
-    click until "OBJECT"
+    "待った"
+    click until "異議あり"
     pause 0.6
     $ shot("c04_hidden_statement")
-    "OBJECT"
+    "異議あり"
     pause 1.0
     "Appeal to Authority"
     click until "Lab Notebook"
@@ -359,10 +359,10 @@ testcase cases:
     "Lunatic"
     pause 0.3
     "Cirno's Frosty Fallacy"
-    click until "PRESS"
+    click until "待った"
     pause 0.4
     $ print("STATE lunatic", spirit, spirit_cap, difficulty)
-    "OBJECT"
+    "異議あり"
     pause 1.2
     $ shot("c11_lunatic_deck")
     pause 8.0
