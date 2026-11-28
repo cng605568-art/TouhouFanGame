@@ -362,3 +362,9 @@ translate schinese strings:
     old "Skipping"
     new "快进中"
 
+
+translate schinese strings:
+
+    # game/screens.rpy
+    old "LANGUAGE"
+    new "语言"

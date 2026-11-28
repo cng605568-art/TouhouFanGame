@@ -362,3 +362,9 @@ translate japanese strings:
     old "Skipping"
     new "スキップ中"
 
+
+translate japanese strings:
+
+    # game/screens.rpy
+    old "LANGUAGE"
+    new "言語"
