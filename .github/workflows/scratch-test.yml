@@ -100,9 +100,12 @@ jobs:
             ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" translate "$lang" 2>&1 | tail -3 || true
           done
           mkdir -p "${GITHUB_WORKSPACE}/tl" "${GITHUB_WORKSPACE}/fonts" "${GITHUB_WORKSPACE}/tl_sdk"
+          find . -path "*tl/japanese*" -name "*.rpy" | head -20
           for lang in japanese schinese; do
             mkdir -p "${GITHUB_WORKSPACE}/tl_sdk/$lang"
-            cp gui/game/tl/$lang/*.rpy "${GITHUB_WORKSPACE}/tl_sdk/$lang/" 2>/dev/null || true
+            find . -path "*tl/$lang/*" -name "*.rpy" | while read f; do
+              cp "$f" "${GITHUB_WORKSPACE}/tl_sdk/$lang/$(echo "$f" | tr '/' '_')"
+            done
           done
           ls -R "${GITHUB_WORKSPACE}/tl_sdk" | head
           cp -r "${GITHUB_WORKSPACE}/FumoCourt/game/tl/." "${GITHUB_WORKSPACE}/tl/" || true
