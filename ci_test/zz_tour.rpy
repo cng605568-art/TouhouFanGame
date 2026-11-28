@@ -58,6 +58,17 @@ init python:
             renpy.quit()
     config.periodic_callbacks.append(_deadline)
 
+    def focus_dump(tag):
+        out = []
+        for f in renpy.display.focus.focus_list:
+            try:
+                t = f.widget._tts_all()[:24]
+            except Exception:
+                t = "?"
+            out.append((t, f.x, f.y, f.w, f.h))
+        print("FOCUS", tag, out)
+        print("MOUSE", tag, renpy.get_mouse_pos())
+
     def mus(tag):
         print("MUSIC", tag, renpy.music.get_playing("music"),
               "card" if renpy.get_screen("bgm_title") else "no-card")
@@ -374,12 +385,11 @@ testcase cases:
     move (40, 540)
     pause 2.5
     $ shot("c03_prove_line")
-    $ print("FOCUS1", [ (f.widget._tts_all()[:24], f.x, f.y, f.w, f.h) for f in renpy.display.focus.focus_list ])
+    $ focus_dump("prove_line")
     click pos (40, 540)
     pause 0.8
     $ shot("c03_evidence")
-    $ print("FOCUS", [ (f.widget._tts_all()[:24], f.x, f.y, f.w, f.h) for f in renpy.display.focus.focus_list ])
-    $ print("MOUSE", renpy.test.testmouse.mouse_pos, renpy.get_mouse_pos())
+    $ focus_dump("evidence")
     "Mansion Roster"
     move (40, 540)
     pause 0.4
