@@ -66,7 +66,7 @@ testcase tour:
     "Cirno's Frosty Fallacy"
     pause 1.4
     $ shot("04_case_card")
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("05_xexam_s1")
     $ print("STATE spirit", spirit, spirit_cap, difficulty, court_record)
@@ -76,7 +76,7 @@ testcase tour:
     click
     pause 0.35
     $ shot("07_press_smug")
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("08_xexam_s2")
     "異議あり"
@@ -95,7 +95,7 @@ testcase tour:
     "Ad Hominem"
     pause 2.4
     $ shot("12_scold")
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.5
     "異議あり"
     pause 0.9
@@ -157,6 +157,11 @@ testcase tour:
     "About"
     pause 0.8
     $ shot("26_about")
+    "Return"
+    pause 0.5
+    "Compendium"
+    pause 0.8
+    $ shot("27_compendium_one")
     "Return"
     pause 0.5
     $ renpy.quit()
@@ -266,14 +271,14 @@ testcase cases:
     "Begin Trial"
     pause 1.0
     "The Long-Term Loan"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c02_hidden_statement")
     "異議あり"
@@ -293,17 +298,17 @@ testcase cases:
     click until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c03_after_roster")
     $ print("STATE record", court_record)
     "待った"
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c03_hidden_statement")
     "異議あり"
@@ -323,14 +328,14 @@ testcase cases:
     click until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c04_hidden_statement")
     "異議あり"
@@ -350,7 +355,7 @@ testcase cases:
     click until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c05_eiki_stand")
     "Next statement"
@@ -358,7 +363,7 @@ testcase cases:
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "異議あり"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c05_hidden_statement")
     "異議あり"
@@ -382,13 +387,34 @@ testcase cases:
     "Return to Title"
     pause 2.5
     $ shot("c09_title_end_cirno")
+    "Compendium"
+    pause 0.8
+    $ shot("c09a_compendium")
+    "Practice"
+    click until move (0.5, 0.5) pattern "Stop practice"
+    pause 0.8
+    $ shot("c09b_practice_q1")
+    "False Cause"
+    click until move (0.5, 0.5) pattern "Stop practice"
+    "Circular Reasoning"
+    click until move (0.5, 0.5) pattern "Stop practice"
+    "Tu Quoque"
+    click until move (0.5, 0.5) pattern "Stop practice"
+    "False Dilemma"
+    click until move (0.5, 0.5) pattern "Stop practice"
+    "Ad Hominem"
+    pause 1.0
+    $ shot("c09c_practice_feedback")
+    click until move (0.5, 0.5) pattern "Begin Trial"
+    pause 1.0
+    $ print("STATE practice", persistent.practice_best)
     "Begin Trial"
     pause 1.0
     $ shot("c10_docket_all_closed")
     "Lunatic"
     pause 0.3
     "Cirno's Frosty Fallacy"
-    click until move (0.5, 0.5) pattern "待った"
+    click until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ print("STATE lunatic", spirit, spirit_cap, difficulty)
     "異議あり"
