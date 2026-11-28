@@ -94,7 +94,9 @@ image speed_streaks:
 
 ## The three impact frames, then a hard shake that dies away.
 transform impact_cam:
+    subpixel True
     shader "fumo.impact"
+    xanchor 0.5 xpos 0.5 yanchor 0.5 ypos 0.5 zoom 1.04
     u_cut 0.32 u_impact 1.0
     u_ink (0.03, 0.02, 0.04, 1.0) u_paper (1.0, 0.97, 0.92, 1.0)
     xoffset 26 yoffset -16
@@ -115,10 +117,13 @@ transform impact_cam:
     xoffset 3 yoffset 2
     pause 0.04
     xoffset 0 yoffset 0
+    linear 0.15 zoom 1.0
 
 ## The rush: a jolt on every blow, impact frames on the last.
 transform rush_cam:
+    subpixel True
     shader "fumo.impact"
+    xanchor 0.5 xpos 0.5 yanchor 0.5 ypos 0.5 zoom 1.03
     u_cut 0.32 u_impact 0.0
     u_ink (0.03, 0.02, 0.04, 1.0) u_paper (1.0, 0.97, 0.92, 1.0)
     xoffset 0 yoffset 0
@@ -140,6 +145,7 @@ transform rush_cam:
     u_impact 0.0 xoffset 8 yoffset -4
     pause 0.05
     xoffset 0 yoffset 0
+    linear 0.15 zoom 1.0
 
 ## Time slows: the court drains of colour and the camera creeps in on Kaguya.
 transform slowmo_cam:
@@ -519,8 +525,11 @@ screen fight_cutin(who, name, sub):
         vbox:
             xpos 380 yalign 0.5
             spacing 4
-            text name style "fight_cutin_name"
-            text sub style "fight_cutin_sub"
+            frame:
+                background Solid("#14050ADD")
+                padding (22, 4, 26, 6)
+                text name style "fight_cutin_name"
+            text sub style "fight_cutin_sub" xoffset 22
     timer 1.4 action Hide("fight_cutin")
 
 ## Landing: rings along the floor, dust, debris, focus lines, lettering.
