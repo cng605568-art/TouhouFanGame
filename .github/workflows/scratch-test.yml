@@ -14,7 +14,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
         with:
@@ -65,7 +65,7 @@ jobs:
         run: |
           cp "${GITHUB_WORKSPACE}/FumoCourt/ci_test/zz_tour.rpy" "${GITHUB_WORKSPACE}/FumoCourt/game/"
           FUMO_MAX=200 FUMO_AUTOSHOT=1 timeout 600 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test tour 2>&1 | tee "${GITHUB_WORKSPACE}/tour.txt" || true
-          FUMO_MAX=900 FUMO_AUTOSHOT=1 timeout 1300 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test cases 2>&1 | tee "${GITHUB_WORKSPACE}/cases.txt" || true
+          FUMO_MAX=1500 FUMO_AUTOSHOT=1 timeout 1700 xvfb-run -a -s "-screen 0 2560x1600x24" ./renpy.sh "${GITHUB_WORKSPACE}/FumoCourt" test cases 2>&1 | tee "${GITHUB_WORKSPACE}/cases.txt" || true
           ls -la "${GITHUB_WORKSPACE}/shots" || true
 
       - name: PNG swap check
