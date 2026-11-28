@@ -209,17 +209,12 @@ label case9_breakthrough:
     eiki "Every cup. Bailiff."
     komachi "On it, boss."
 
-    ## Before Komachi can get there, Mokou gets there first.
+    ## Before Komachi can get there, Mokou gets there first. The fight is
+    ## staged in fight.rpy.
     window hide
     call shot_kaguya
-    $ bgm("mokou", fadein=0.3, card_delay=1.0, fadeout=0.2)
-    $ sfx("mokou_burst")
-    show mokou_fumo at mokou_charge
-    show kaguya_fumo at fumo_knocked
-    show screen mokou_fire
-    camera at fire_flash
-    with vpunch
-    pause 0.8
+    $ bgm("mokou", fadein=0.3, card_delay=2.4, fadeout=0.2)
+    call mokou_entrance
     window auto
 
     mokou "KAGUYAAA!"
@@ -230,29 +225,19 @@ label case9_breakthrough:
     mokou "Great. I'll take custody."
 
     window hide
-    $ sfx("mokou_pummel")
-    show mokou_fumo at mokou_pummel
-    show kaguya_fumo at fumo_pummeled
-    show screen mokou_scuffle
-    pause 0.86
-    camera at fire_flash
-    with vpunch
-    pause 0.6
+    call fight_faceoff
+    call fight_rush
+    call fight_finisher
     window auto
     kaguya "Ow! Ow! My face is priceless!"
     mokou "So's this. Free of charge."
 
     window hide
-    show mokou_fumo at duo_exit(0.0)
-    show kaguya_fumo at duo_exit(0.08)
-    show fumo_shadow at shadow_gone
-    $ sfx("yeet")
-    pause 1.0
-    hide mokou_fumo
-    hide kaguya_fumo
+    call fight_dash_exit
     window auto
     kaguya "Eirin! Somebody! Bailiff!"
 
+    call fight_cleanup
     call shot_eiki
     komachi "...Want me to chase them, boss?"
     eiki "No. They have been doing this for a thousand years. They will be back by dinner."

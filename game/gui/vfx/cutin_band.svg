@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="420" viewBox="0 0 2400 420">
+<!-- cut-in band (tools/make_vfx.py) -->
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A0A10"/><stop offset="0.5" stop-color="#7A1420"/><stop offset="1" stop-color="#2A0A10"/></linearGradient></defs>
+<path d="M120 0 L2400 0 L2280 420 L0 420 Z" fill="url(#g)"/>
+<path d="M120 0 L2400 0 L2396 14 L116 14 Z" fill="#E8C060"/>
+<path d="M4 406 L2284 406 L2280 420 L0 420 Z" fill="#E8C060"/>
+</svg>

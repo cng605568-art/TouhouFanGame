@@ -1,0 +1,3 @@
+Particle sprites (the .png files) from Particle Pack by Kenney (kenney.nl),
+Creative Commons CC0 1.0. https://kenney.nl/assets/particle-pack
+Resized and renamed by tools/make_vfx.py. The .svg overlays are drawn by that script.

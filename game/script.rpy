@@ -70,6 +70,9 @@ init python:
                 return
             if not renpy.showing(self.tag):
                 return
+            # Mid-fight poses (fight.rpy) hold until the fight is over.
+            if self.tag in store.fumo_freeze:
+                return
             # A reaction from react() or a breakdown holds for one line.
             hold, store.fumo_hold = store.fumo_hold, None
             if hold == self.tag:

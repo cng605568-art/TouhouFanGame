@@ -1,9 +1,17 @@
 """
 Builds game/audio/sfx/*.ogg from Warsong's CC0 sound packs.
 
-    python tools/build_sfx.py path/to/petaldust path/to/nostalgiac [slot ...]
+    python tools/build_sfx.py path/to/petaldust path/to/nostalgiac [path/to/oga] [slot ...]
 
 Name slots at the end to rebuild only those.
+
+Layers marked "O" (the fight in Case 09) come from CC0 packs on OpenGameArt,
+unpacked into one folder and given as the third path:
+  qubodupPunch.7z, swoshes.7z, qubodup-timehitwind.zip and
+  synthetic_explosion_1.flac by qubodup; 25-CC0-bang-sfx.zip by rubberduck.
+  (opengameart.org/content/punch, /node/2242, /content/wind-hit-time-morph,
+  /content/synthesized-explosion, /node/92774; files under
+  opengameart.org/sites/default/files/.)
 
 The packs (CC0, public domain) were made for the Touhou fan games Petaldust and
 Nostalgiac Blues: https://warsong.pages.dev/tags/touhou/ (download
@@ -79,6 +87,32 @@ RECIPE = {
     "break_mokou":     (-2,  1.8,  [("N", "destroyed.wav", 0, 0, 0.85), ("P", "slashC.wav", -3, 0.02), ("N", "big damage.wav", -5, 0.05, 0.7)]),  # she flares up
     "break_aya":       (-2,  1.6,  [("P", "HybridFoley.wav", 0, 0, 1.3), ("N", "bulletpuff.wav", -2, 0.04), ("P", "clothA.wav", -3, 0.08, 1.4),
                                     ("P", "clothC.wav", -5, 0.22, 1.2)]),                                       # a shutter, then feathers
+    # Case 09's fight, anime style (layers from the OpenGameArt packs, "O").
+    # Mokou's cut-in: a big whoosh into a flame burst.
+    "fight_cutin":     (-1,  1.6,  [("O", "qubodup-megaswosh1.wav", 0, 0), ("O", "qubodup-megaswosh2.wav", -3, 0.12, 0.8),
+                                    ("N", "destroyed.wav", -4, 0.30, 0.7), ("O", "bang_03.ogg", -6, 0.34)]),
+    # She lands on the stand: a crunch and a deep boom.
+    "fight_land":      (-1,  1.8,  [("O", "synthetic_explosion_1.flac", -1, 0), ("O", "qubodupPunch02.flac", 0, 0, 0.8),
+                                    ("O", "cannon_02.ogg", -4, 0), ("P", "HeadCup.wav", -6, 0, 0.7)]),
+    # The face-off: a lightning crack down the split.
+    "fight_vs":        (-2,  1.6,  [("O", "bang_09.ogg", -1, 0), ("O", "swosh-03.flac", -4, 0),
+                                    ("P", "error resonance.wav", -9, 0.02, 0.6), ("O", "qubodup-megaswosh2.wav", -6, 0.0, 1.4)]),
+    # The rush: seven punches in a second and a bit, with whooshes between.
+    "fight_rush":      (-1,  1.7,  [("O", "qubodupPunch01.flac", 0, 0.00), ("O", "swosh-01.flac", -8, 0.06),
+                                    ("O", "qubodupPunch03.flac", -1, 0.16, 1.1), ("O", "swosh-04.flac", -8, 0.22),
+                                    ("O", "qubodupPunch05.flac", 0, 0.32, 0.92), ("O", "swosh-07.flac", -8, 0.38),
+                                    ("O", "qubodupPunch02.flac", -1, 0.48, 1.15), ("O", "swosh-09.flac", -8, 0.54),
+                                    ("O", "qubodupPunch04.flac", 0, 0.64, 0.95), ("O", "qubodupPunch01.flac", -1, 0.80, 1.2),
+                                    ("O", "qubodupPunch03.flac", 0, 0.96, 0.85), ("O", "bang_04.ogg", -5, 0.96)]),
+    # Time slows for the last blow.
+    "fight_slowmo":    (-3,  1.4,  [("O", "qubodup-slomo1.wav", 0, 0), ("O", "qubodup-megaswosh1.wav", -6, 0.1, 0.5)]),
+    # The last blow: everything at once.
+    "fight_final":     (-1,  2.6,  [("O", "synthetic_explosion_1.flac", 0, 0), ("O", "cannon_02.ogg", -2, 0),
+                                    ("O", "qubodupPunch03.flac", 0, 0, 0.75), ("O", "bang_06.ogg", -4, 0.04),
+                                    ("N", "big damage.wav", -6, 0.02, 0.6), ("O", "fw_06.ogg", -8, 0.35)]),
+    # Off they go: a burst of dust and a long whoosh.
+    "fight_dash":      (-2,  1.4,  [("O", "qubodup-megaswosh2.wav", 0, 0, 0.9), ("O", "swosh-05.flac", -3, 0.08),
+                                    ("O", "bang_01.ogg", -8, 0.0), ("O", "swosh-03.flac", -6, 0.2, 0.8)]),
     # Mokou lays into Kaguya: four quick hits, the last one heavy.
     "mokou_pummel":    (-1,  1.9,  [("N", "playerhurt.wav", 0, 0.00), ("P", "slashA.wav", -4, 0.00),
                                     ("N", "playerhurt.wav", -1, 0.28, 1.12), ("P", "slashB.wav", -4, 0.28),
@@ -106,6 +140,9 @@ REVERB = {
     "break_eiki": (-12, 2.0),
     "break_kaguya": (-14, 1.6),
     "mokou_burst": (-15, 1.2),
+    "fight_land": (-16, 1.0),
+    "fight_final": (-14, 1.4),
+    "fight_slowmo": (-12, 1.6),
     "mokou_pummel": (-17, 1.0),
 }
 
@@ -191,11 +228,14 @@ def encode(data, dst):
     os.remove(tmp)
 
 
-def main(petaldust, nostalgiac, only=()):
-    packs = {"P": petaldust, "N": nostalgiac}
+def main(petaldust, nostalgiac, only=(), oga=None):
+    packs = {"P": petaldust, "N": nostalgiac, "O": oga}
     os.makedirs(OUT, exist_ok=True)
     for slot, (peak, max_s, layers) in RECIPE.items():
         if only and slot not in only:
+            continue
+        if any(l[0] == "O" for l in layers) and not oga:
+            print("%-16s skipped (needs the OpenGameArt folder)" % slot)
             continue
         data = mix(layers, packs)
         if slot in REVERB:
@@ -214,7 +254,9 @@ def main(petaldust, nostalgiac, only=()):
 if __name__ == "__main__":
     if len(sys.argv) < 3 or not shutil.which("ffmpeg"):
         sys.exit(__doc__)
-    unknown = [s for s in sys.argv[3:] if s not in RECIPE]
+    rest = sys.argv[3:]
+    oga = rest.pop(0) if rest and os.path.isdir(rest[0]) else None
+    unknown = [s for s in rest if s not in RECIPE]
     if unknown:
         sys.exit("unknown slot: " + ", ".join(unknown))
-    main(sys.argv[1], sys.argv[2], sys.argv[3:])
+    main(sys.argv[1], sys.argv[2], rest, oga)
