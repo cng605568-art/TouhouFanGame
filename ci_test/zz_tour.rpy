@@ -84,17 +84,17 @@ testcase tour:
     "Cirno's Frosty Fallacy"
     pause 1.4
     $ shot("04_case_card")
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("05_xexam_s1")
     $ print("STATE spirit", spirit, spirit_cap, difficulty, court_record)
     "待った"
     pause 1.3
     $ shot("06_press")
-    click
+    click pos (40, 540)
     pause 0.35
     $ shot("07_press_smug")
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("08_xexam_s2")
     "異議あり"
@@ -104,7 +104,7 @@ testcase tour:
     move (40, 540)
     pause 2.4
     $ shot("10_penalty_wrong_statement")
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.5
     "Next statement"
     pause 0.5
@@ -115,7 +115,7 @@ testcase tour:
     move (40, 540)
     pause 2.4
     $ shot("12_scold")
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.5
     "異議あり"
     pause 0.9
@@ -123,14 +123,14 @@ testcase tour:
     move (40, 540)
     pause 2.0
     $ shot("13_prove_it")
-    click until move (0.5, 0.5) pattern "Frog Census"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Frog Census"
     pause 0.8
     $ shot("14_evidence_pick")
     "Frog Census"
     move (40, 540)
     pause 2.2
     $ shot("15_wrong_evidence")
-    click until move (0.5, 0.5) pattern "COURT RECORD"
+    click pos (40, 540) until move (0.5, 0.5) pattern "COURT RECORD"
     pause 0.5
     $ shot("16_after_wrong_evidence")
     $ print("STATE spirit", spirit, "penalties", case_penalties)
@@ -143,25 +143,25 @@ testcase tour:
     pause 0.9
     "False Cause"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Weather Log"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Weather Log"
     pause 0.5
     "Weather Log"
     move (40, 540)
     pause 0.35
     $ shot("18_take_that")
-    click
+    click pos (40, 540)
     pause 0.5
-    click
+    click pos (40, 540)
     pause 0.5
-    click
+    click pos (40, 540)
     pause 0.6
     $ shot("19_breakthrough")
-    click
+    click pos (40, 540)
     pause 0.15
     $ shot("20_breakdown_cirno")
     pause 0.4
     $ shot("21_breakdown_cirno_b")
-    click until move (0.5, 0.5) pattern "Return to Title"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Return to Title"
     pause 0.4
     $ shot("22_case_closed_rank")
     $ print("STATE rank", case_rank(), persistent.best_ranks)
@@ -201,7 +201,7 @@ testcase tour:
     $ shot("29_docket_ja")
     "チルノの凍てつく誤謬"
     pause 1.5
-    click until move (0.5, 0.5) pattern "次の発言"
+    click pos (40, 540) until move (0.5, 0.5) pattern "次の発言"
     pause 0.6
     $ shot("30_xexam_ja")
     "異議あり"
@@ -326,97 +326,97 @@ testcase cases:
     "Begin Trial"
     pause 1.0
     "The Long-Term Loan"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c02_hidden_statement")
     "異議あり"
     pause 1.0
     "Tu Quoque"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Library Ledger"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Library Ledger"
     pause 0.4
     "Library Ledger"
     move (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.15
     $ shot("c02_breakdown")
-    click until move (0.5, 0.5) pattern "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c03_after_roster")
     $ print("STATE record", court_record)
     "待った"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c03_hidden_statement")
     "異議あり"
     pause 1.0
     "False Dilemma"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Mansion Roster"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Mansion Roster"
     pause 0.4
     "Mansion Roster"
     move (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.2
     $ shot("c03_breakdown")
-    click until move (0.5, 0.5) pattern "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     "Next statement"
     pause 0.3
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c04_hidden_statement")
     "異議あり"
     pause 1.0
     "Appeal to Authority"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Lab Notebook"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Lab Notebook"
     pause 0.4
     "Lab Notebook"
     move (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.2
     $ shot("c04_breakdown")
-    click until move (0.5, 0.5) pattern "Next Case"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next Case"
     pause 0.4
     "Next Case"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ shot("c05_eiki_stand")
     "Next statement"
@@ -424,27 +424,27 @@ testcase cases:
     "Next statement"
     pause 0.3
     "待った"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.6
     $ shot("c05_hidden_statement")
     "異議あり"
     pause 1.0
     "Circular Reasoning"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Frozen Pudding"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Frozen Pudding"
     pause 0.6
     $ shot("c05_evidence")
     "Frozen Pudding"
     move (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.4
-    click
+    click pos (40, 540)
     pause 0.25
     $ shot("c05_breakdown")
-    click until move (0.5, 0.5) pattern "Return to Title"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Return to Title"
     pause 0.5
     $ print("STATE ranks", persistent.best_ranks)
     "Return to Title"
@@ -454,26 +454,26 @@ testcase cases:
     pause 0.8
     $ shot("c09a_compendium")
     "Practice"
-    click until move (0.5, 0.5) pattern "Stop practice"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
     pause 0.8
     $ shot("c09b_practice_q1")
     "False Cause"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Stop practice"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
     "Circular Reasoning"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Stop practice"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
     "Tu Quoque"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Stop practice"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
     "False Dilemma"
     move (40, 540)
-    click until move (0.5, 0.5) pattern "Stop practice"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Stop practice"
     "Ad Hominem"
     move (40, 540)
     pause 1.0
     $ shot("c09c_practice_feedback")
-    click until move (0.5, 0.5) pattern "Begin Trial"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Begin Trial"
     pause 1.0
     $ print("STATE practice", persistent.practice_best)
     "Begin Trial"
@@ -482,7 +482,7 @@ testcase cases:
     "Lunatic"
     pause 0.3
     "Cirno's Frosty Fallacy"
-    click until move (0.5, 0.5) pattern "Next statement"
+    click pos (40, 540) until move (0.5, 0.5) pattern "Next statement"
     pause 0.4
     $ print("STATE lunatic", spirit, spirit_cap, difficulty)
     "異議あり"
