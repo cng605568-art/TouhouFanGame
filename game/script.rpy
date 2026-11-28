@@ -31,15 +31,21 @@ init -1 python:
 
     # Every images/<name>_fumo.* becomes the image <name>_fumo, in its slot.
     # New characters from art_src/ work with `show reimu_fumo at on_stand`.
+    # A pose photo, images/<name>_fumo_<pose>.*, becomes "<name>_fumo <pose>"
+    # (see react() in reactions.rpy).
     def register_fumo_sprites():
         import os
         names = set()
         for fn in renpy.list_files():
             base, ext = os.path.splitext(os.path.basename(fn))
-            if fn.startswith("images/") and base.endswith("_fumo") and ext.lower() in (".png", ".webp", ".svg"):
+            if fn.startswith("images/") and "_fumo" in base and ext.lower() in (".png", ".webp", ".svg"):
                 names.add(base.lower())
         for name in sorted(names):
-            renpy.image(name, fumo_sprite(name))
+            char, _, pose = name.partition("_fumo")
+            if not pose:
+                renpy.image(name, fumo_sprite(name))
+            elif pose.startswith("_") and len(pose) > 1:
+                renpy.image((char + "_fumo", pose[1:]), fumo_sprite(name))
 
     register_fumo_sprites()
 
@@ -53,7 +59,7 @@ init python:
     class FumoHop(object):
         """
         Character callback: the speaker's fumo hops at the start of each line,
-        unless it is mid-reaction (shocked or being yeeted).
+        unless it is mid-reaction (shocked, broken down, or being yeeted).
         """
 
         def __init__(self, tag):
@@ -64,37 +70,41 @@ init python:
                 return
             if not renpy.showing(self.tag):
                 return
+            # A reaction from react() or a breakdown holds for one line.
+            hold, store.fumo_hold = store.fumo_hold, None
+            if hold == self.tag:
+                return
             for t in renpy.get_at_list(self.tag) or [ ]:
-                if t is fumo_shock or t is fumo_yeet:
+                if t is fumo_shock or t is fumo_yeet or any(t is s for s in FUMO_STAY):
                     return
             renpy.show(self.tag, at_list=[ fumo_talk ])
 
 ## Every speaker shares the bobbing click-to-continue magatama.
 define adv = Character(kind=adv, ctc="ctc_marker", ctc_position="fixed")
-define narrator = Character(None, kind=adv)
+define narrator = Character(None, kind=adv, callback=TextBlip("blip"))
 
 define eiki = Character("Shiki Eiki",
     image="eiki_fumo",
-    callback=FumoHop("eiki_fumo"))
+    callback=Callbacks(FumoHop("eiki_fumo"), TextBlip("blip_lo")))
 
 define cirno = Character("Cirno",
     image="cirno_fumo",
-    callback=FumoHop("cirno_fumo"),
+    callback=Callbacks(FumoHop("cirno_fumo"), TextBlip("blip_hi")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
 define marisa = Character("Marisa",
     image="marisa_fumo",
-    callback=FumoHop("marisa_fumo"),
+    callback=Callbacks(FumoHop("marisa_fumo"), TextBlip("blip")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
 define sakuya = Character("Sakuya",
     image="sakuya_fumo",
-    callback=FumoHop("sakuya_fumo"),
+    callback=Callbacks(FumoHop("sakuya_fumo"), TextBlip("blip_dn")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
 define reisen = Character("Reisen",
     image="reisen_fumo",
-    callback=FumoHop("reisen_fumo"),
+    callback=Callbacks(FumoHop("reisen_fumo"), TextBlip("blip_up")),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
 ## Testimony is written in red ink.
@@ -104,10 +114,12 @@ define sakuya_t = Character(kind=sakuya, what_color="#7A1C2A", what_size=40)
 define reisen_t = Character(kind=reisen, what_color="#7A1C2A", what_size=40)
 
 define komachi = Character("Komachi",
+    callback=TextBlip("blip_deep"),
     namebox_background=LacquerPanel(rule_inset=7, rule_w=1, shadow=4))
 
 ## The player.
 define you = Character("Junior Judge",
+    callback=TextBlip("blip_dn"),
     namebox_background=CourtPanel(fill=GOLD, edge=GOLD_HI, edge_w=3, rule=CRIMSON, rule_inset=7, rule_w=1, shadow=4),
     who_color=CRIMSON_DEEP,
     who_outlines=[ ])
@@ -120,6 +132,7 @@ define you = Character("Junior Judge",
 ## Camera set-ups. Call with the transition to use for the cut.
 
 label shot_eiki(trans=whip_right):
+    camera
     scene bg_courtroom
     show judge_bench at stand_pos
     show fumo_shadow at shadow_pos
@@ -130,6 +143,7 @@ label shot_eiki(trans=whip_right):
 ## Witness stand. Each witness has a one-line shot so testimony data can name
 ## it ("shot_marisa") and the engine can cut back to it after a press.
 label shot_witness(fumo, trans=whip_left):
+    camera
     scene bg_courtroom
     show witness_stand at stand_pos
     show fumo_shadow at shadow_pos
@@ -200,6 +214,14 @@ define fallacy_appeal_to_authority = Fallacy(
     _("Treating a famous name as proof instead of checking the evidence."),
     "gui/fallacy_appeal_to_authority.svg")
 
+## Case 01 evidence.
+define evidence_frog_census = Evidence("frog_census", _("Frog Census"),
+    _("Twenty frogs, all accounted for. All mildly annoyed."), "gui/ev_document.svg")
+define evidence_weather_log = Evidence("weather_log", _("Misty Lake Weather Log"),
+    _("Clear skies all day. Thirty-one degrees by noon."), "gui/ev_sun.svg")
+define evidence_cirno_ice = Evidence("cirno_ice", _("Cirno's Ice"),
+    _("Ordinary ice. Melts in the sun, like all ice."), "gui/ev_ice.svg")
+
 define testimony_cirno = Testimony(
     title=_("The Frog Incident"),
     witness="cirno",
@@ -226,7 +248,13 @@ define testimony_cirno = Testimony(
     scolds={
         "ad_hominem" : _("Ad Hominem means attacking the speaker. Nobody insulted anyone. Except, arguably, the frogs."),
         "slippery_slope" : _("Slippery Slope predicts a chain of disasters. She predicted one immortal frog. Look again."),
-        })
+        "tu_quoque" : _("She isn't excusing herself by pointing at anyone. She's crediting the ice with the sun's work."),
+        "false_dilemma" : _("Nobody offered two doors. She saw two events in a row and crowned the first one."),
+        "appeal_to_authority" : _("She cites no famous name. Only herself, which is not the same thing."),
+        "circular_reasoning" : _("Her logic doesn't loop back on itself. It just trips over the word \"then.\""),
+        },
+    proof="weather_log",
+    proof_wrong=_("That doesn't explain the thawing. What actually warmed those frogs?"))
 
 
 ################################################################################
@@ -235,6 +263,7 @@ define testimony_cirno = Testimony(
 
 label press_cirno_1:
     you "Twenty exactly? How did you count them?"
+    $ react("cirno", "smug")
     cirno "On my fingers! I ran out, so I counted my fingers again."
     call shot_eiki
     eiki "...That is correct arithmetic. I am as surprised as you are."
@@ -243,12 +272,14 @@ label press_cirno_1:
 label press_cirno_2:
     you "What was the weather like at noon?"
     cirno "Hot! The sun was showing off all day. Rude, honestly."
+    $ react("cirno", "angry")
     cirno "Stop changing the subject. The subject is me being amazing."
     return
 
 label press_cirno_3:
     you "How exactly does freezing make a frog immortal?"
     cirno "Easy! First, ice. Then, frog is alive. So the ice did the alive part!"
+    $ react("cirno", "smug")
     cirno "That's called science. I'm basically a scientist. A cold one."
     call shot_eiki
     eiki "Her entire argument is balanced on the word \"then.\""
@@ -293,6 +324,8 @@ label case1:
     eiki "Listen well, Junior Judge. A liar is easy to catch."
     eiki "Bad logic is slipperier. It hides between true facts and dresses up as common sense."
     eiki "Find the step that doesn't follow. Then object, and name the fallacy."
+    if diff()["proof"]:
+        eiki "Then prove it. Everything this court knows sits in the Court Record."
     camera
     with Dissolve(0.4)
 
@@ -315,7 +348,7 @@ label case1:
     hide screen court_tag
     call shot_eiki
     eiki "The floor is yours, Junior Judge. Press her for details."
-    eiki "When a statement fails, object. You have five magatama of spirit. Spend them wisely."
+    eiki "When a statement fails, object. You have [spirit_word!t] magatama of spirit. Spend them wisely."
 
     jump case1_cross
 
@@ -343,9 +376,7 @@ label case1_breakthrough:
     you "Plenty of frogs freeze in winter and thaw in spring. They manage it without you."
     you "The ice didn't save them. The noon sun thawed them. You just happened to be first."
 
-    show cirno_fumo at fumo_shock
-    $ sfx("shock")
-    with vpunch
+    call breakdown("cirno")
     cirno "B-but the ice came first! First means it did it!"
 
     call shot_eiki

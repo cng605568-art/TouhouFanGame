@@ -3,8 +3,9 @@
 ##
 ## Cases are played in order. Clearing one unlocks the next, and the title
 ## screen's right-hand fumo is always the witness waiting on the next case.
-## Once any case is closed, Begin Trial opens the Docket, where every closed
-## case can be replayed and sealed ones show only a silhouette.
+## Begin Trial opens the Docket: choose a difficulty, then the next case or
+## any closed one to replay. Sealed cases show only a silhouette, and closed
+## ones their best rank.
 ################################################################################
 
 init -1 python:
@@ -12,13 +13,15 @@ init -1 python:
     class Case(object):
         """One trial: where it starts, who testifies, what it teaches."""
 
-        def __init__(self, key, number, title, tagline, witness, fallacy):
+        def __init__(self, key, number, title, tagline, witness, fallacy, testimony, record):
             self.key = key              # also the label the case starts at
             self.number = number
             self.title = title
             self.tagline = tagline
             self.witness = witness      # image tag prefix: <witness>_fumo
             self.fallacy = fallacy      # key of the fallacy it teaches
+            self.testimony = testimony  # name of its Testimony
+            self.record = record        # evidence keys in the Court Record at the start
 
         @property
         def label(self):
@@ -58,21 +61,23 @@ init -1 python:
         return (next_case() or CASES[-1]).fumo
 
     def BeginTrial():
-        """New players go straight to Case 01; anyone else picks from the Docket."""
-        if persistent.cases_cleared:
-            return ShowMenu("docket")
-        return Start()
+        """Begin Trial opens the Docket: pick a difficulty, then a case."""
+        return ShowMenu("docket")
 
 
 define CASES = [
     Case("case1", _("CASE 01"), _("Cirno's Frosty Fallacy"),
-         _("The Ministry of Right and Wrong v. One Ice Fairy"), "cirno", "false_cause"),
+         _("The Ministry of Right and Wrong v. One Ice Fairy"), "cirno", "false_cause",
+         "testimony_cirno", [ "frog_census", "weather_log", "cirno_ice" ]),
     Case("case2", _("CASE 02"), _("The Long-Term Loan"),
-         _("The Scarlet Devil Library v. One Ordinary Magician"), "marisa", "tu_quoque"),
+         _("The Scarlet Devil Library v. One Ordinary Magician"), "marisa", "tu_quoque",
+         "testimony_marisa", [ "library_ledger", "donation_box", "reading_glasses" ]),
     Case("case3", _("CASE 03"), _("The Vanished Pudding"),
-         _("The Scarlet Devil Mansion v. One Sleeping Gatekeeper"), "sakuya", "false_dilemma"),
+         _("The Scarlet Devil Mansion v. One Sleeping Gatekeeper"), "sakuya", "false_dilemma",
+         "testimony_sakuya", [ "empty_plate", "pudding_recipe" ]),
     Case("case4", _("CASE 04"), _("The Lunar Prescription"),
-         _("The Human Village v. One Moon Rabbit"), "reisen", "appeal_to_authority"),
+         _("The Human Village v. One Moon Rabbit"), "reisen", "appeal_to_authority",
+         "testimony_reisen", [ "tonic_bottle", "eirin_diploma", "lab_notebook" ]),
     ]
 
 default persistent.cases_cleared = set()
@@ -83,6 +88,7 @@ default persistent.cases_cleared = set()
 label close_case(key, fallacy):
     $ persistent.cases_cleared.add(key)
     $ persistent.fallacies_learned.add(fallacy.key)
+    $ record_rank(key, case_rank())
     $ close_next = case_after(key)
 
     hide screen court_hud
@@ -99,8 +105,12 @@ label close_case(key, fallacy):
 ## shows the case card.
 label open_case(key):
     $ bgm_stop(1.0)
+    $ difficulty = persistent.difficulty
     $ spirit_reset()
+    $ case_penalties = 0
+    $ case_mistrial = False
     $ open_this = [ c for c in CASES if c.key == key ][0]
+    $ court_record = list(open_this.record)
     $ case_number = open_this.number
     $ case_title = open_this.title
 
@@ -126,6 +136,18 @@ screen docket():
     use game_menu(_("Docket"), scroll="viewport"):
         vbox:
             spacing 16
+
+            ## Difficulty, remembered between sessions.
+            hbox:
+                spacing 14
+                text _("DIFFICULTY") style "docket_number" yalign 0.5
+                null width 6
+                for d in DIFFICULTY_ORDER:
+                    textbutton DIFFICULTY[d]["name"]:
+                        style "docket_diff"
+                        action SetField(persistent, "difficulty", d)
+            text DIFFICULTY[persistent.difficulty]["blurb"] style "docket_tagline"
+            null height 4
 
             for case in CASES:
                 $ state = case_state(case)
@@ -161,10 +183,13 @@ screen docket():
                         frame:
                             style "docket_mark"
                             if state == "closed":
+                                $ best = best_rank(case.key)
                                 vbox:
                                     xalign 0.5
                                     text "閉廷" style "docket_mark_jp"
                                     text case.fallacy_card.name style "docket_mark_text"
+                                    if best:
+                                        text _("Rank [best[0]] · [DIFFICULTY[best[1]][name]!t]") style "docket_mark_text" color VERMILION
                             elif state == "next":
                                 vbox:
                                     xalign 0.5
@@ -172,6 +197,22 @@ screen docket():
                                     text _("NEXT") style "docket_mark_text" color VERMILION
                             else:
                                 text "封" style "docket_mark_jp" color GOLD_LO
+
+style docket_diff is default:
+    xminimum 150
+    padding (18, 8, 18, 10)
+    background CourtPanel(fill=PARCHMENT_SHADE, edge=GOLD_LO, edge_w=2, shadow=2)
+    hover_background CourtPanel(fill=PARCHMENT, edge=GOLD, edge_w=2, shadow=2)
+    selected_background CourtPanel(fill=CRIMSON, edge=GOLD, edge_w=2, shadow=2)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
+
+style docket_diff_text is default:
+    font FONT_HEAD
+    size 24
+    color INK
+    selected_color GOLD_HI
+    xalign 0.5
 
 style docket_row is default:
     xfill True

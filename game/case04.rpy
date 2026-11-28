@@ -6,6 +6,13 @@
 ## Runs after script.rpy, which defines the cast and the fallacy cards.
 init offset = 1
 
+define evidence_tonic_bottle = Evidence("tonic_bottle", _("Miracle Tonic"),
+    _("Label: \"Perfectly safe! —Eirin.\" Smells faintly of blueberries."), "gui/ev_bottle.svg")
+define evidence_eirin_diploma = Evidence("eirin_diploma", _("Eirin's Diploma"),
+    _("Lunar Academy of Medicine. Top of her class, ten thousand years running."), "gui/ev_diploma.svg")
+define evidence_lab_notebook = Evidence("lab_notebook", _("Eientei Lab Notebook"),
+    _("\"Miracle Tonic. Tests run: none yet. Selling anyway (Reisen).\""), "gui/ev_book.svg")
+
 define testimony_reisen = Testimony(
     title=_("Eientei's Miracle Tonic"),
     witness="reisen",
@@ -22,31 +29,52 @@ define testimony_reisen = Testimony(
             "press_reisen_2",
             _("That is a symptom, not a syllogism. Find the place where she reasons.")),
         Statement(
-            _("But Master Eirin says the tonic is perfectly safe. So it can't be the tonic."),
+            _("But the tonic was cleared before I sold a single bottle."),
             "press_reisen_3",
-            None),
+            _("Cleared by whom? Press her before you object."),
+            reveals="eirin"),
+        Statement(
+            _("Master Eirin says it's perfectly safe. So it can't be the tonic."),
+            "press_reisen_4",
+            None,
+            hidden=True, key="eirin"),
         ],
     cards=[ fallacy_ad_hominem, fallacy_false_dilemma, fallacy_appeal_to_authority ],
-    flaw=2,
+    flaw=3,
     answer="appeal_to_authority",
     scolds={
         "ad_hominem" : _("That's the mirror image. Ad Hominem rejects a claim because of who made it. She's accepting one."),
         "false_dilemma" : _("Nobody is offering two doors here. She's leaning on one very famous name."),
-        })
+        "false_cause" : _("Order isn't her mistake. She's treating a name as if it were a test."),
+        "tu_quoque" : _("She isn't pointing at anyone else's sins. She's hiding behind her teacher's title."),
+        "slippery_slope" : _("No chain of disasters predicted. Just one reputation, doing all the work."),
+        },
+    proof="lab_notebook",
+    proof_wrong=_("That's a reputation, not a result. Show whether anyone actually tested it."))
 
 
 label press_reisen_1:
     you "What exactly is in the tonic?"
+    $ react("reisen", "nervous")
     reisen "Moon herbs, honey, and something Master told me not to ask about."
     return
 
 label press_reisen_2:
     you "Is hearing colours a known side effect?"
+    $ react("reisen", "shock")
     reisen "Define \"known.\" On the moon, we... never mind. No. It isn't."
     return
 
 label press_reisen_3:
+    you "Cleared by whom, exactly?"
+    $ react("reisen", "smug")
+    reisen "By the greatest pharmacist in Gensokyo! My master!"
+    reisen "Add that to my testimony. It settles everything."
+    return
+
+label press_reisen_4:
     you "Did Eirin actually test the tonic?"
+    $ react("reisen", "smug")
     reisen "She didn't need to. She's a genius. Geniuses just know things."
     call shot_eiki
     eiki "Her teacher's reputation is doing all of her arguing for her."
@@ -97,7 +125,7 @@ label case4:
 
     reisen_t "I sold the tonic in the Human Village yesterday. Everyone paid in full."
     reisen_t "This morning, three customers said they could hear colours. Mostly blue."
-    reisen_t "But Master Eirin says the tonic is perfectly safe. So it can't be the tonic."
+    reisen_t "But the tonic was cleared before I sold a single bottle."
 
     hide screen court_tag
     call shot_eiki
@@ -129,9 +157,7 @@ label case4_breakthrough:
     you "Eirin's genius doesn't change what happened to your customers."
     you "Three villagers hear colours. A reputation can't outvote three witnesses."
 
-    show reisen_fumo at fumo_shock
-    $ sfx("shock")
-    with vpunch
+    call breakdown("reisen")
     reisen "B-but Master is never wrong! ...She's rarely wrong. She's wrong sometimes."
 
     call shot_eiki

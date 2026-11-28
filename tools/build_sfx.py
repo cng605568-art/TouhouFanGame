@@ -62,8 +62,23 @@ RECIPE = {
                                     ("P", "progress.wav", -7, 0.20, 0.792)]),
     "mistrial":        (-3,  None, [("P", "unexpectedoutcome.wav", 0, 0)]),
 
-    # Text blip: built separately (one blip padded to a steady beat).
+    # Breakdowns: each witness falls apart in their own way (reactions.rpy).
+    "break_cirno":     (-2,  1.8,  [("N", "cirnodeatheffect.wav", 0, 0), ("N", "breakeffect2.wav", -5, 0)]),    # ice shatters
+    "break_marisa":    (-2,  1.6,  [("N", "betterbullet.wav", 0, 0), ("N", "startbleep.wav", -4, 0.05)]),       # star burst
+    "break_sakuya":    (-2,  1.8,  [("P", "blockberakhigh.wav", 0, 0), ("P", "progress.wav", -6, 0.05, 0.5)]),  # watch cracks, time drags
+    "break_reisen":    (-2,  1.8,  [("P", "error resonance.wav", 0, 0), ("N", "weird.wav", -6, 0)]),            # lunatic ripple
+    "break_eiki":      (-1,  2.0,  [("N", "big damage.wav", 0, 0), ("P", "HeadCup.wav", -2, 0),
+                                    ("P", "badbell.wav", -6, 0.05, 0.5)]),                                      # the scales fall
+
+    # Text blips: built separately (one blip padded to a steady beat). Each
+    # speaker has a pitch (audio.rpy): high and quick for fairies, low for
+    # the judge.
     "blip":            (-17, None, [("N", "goodblip.wav", 0, 0)]),
+    "blip_hi":         (-17, None, [("N", "goodblip.wav", 0, 0, 1.32)]),
+    "blip_up":         (-17, None, [("N", "goodblip.wav", 0, 0, 1.16)]),
+    "blip_dn":         (-17, None, [("N", "goodblip.wav", 0, 0, 0.92)]),
+    "blip_lo":         (-16, None, [("N", "goodblip.wav", 0, 0, 0.84)]),
+    "blip_deep":       (-15, None, [("N", "goodblip.wav", 0, 0, 0.72)]),
 }
 
 BLIP_PERIOD = 0.072   # seconds between blips while text types out
@@ -72,6 +87,8 @@ BLIP_PERIOD = 0.072   # seconds between blips while text types out
 # out instead of stopping dead.
 REVERB = {
     "case_closed": (-13, 2.0),
+    "break_sakuya": (-12, 1.8),
+    "break_eiki": (-12, 2.0),
 }
 
 
@@ -165,7 +182,7 @@ def main(petaldust, nostalgiac, only=()):
         data = mix(layers, packs)
         if slot in REVERB:
             data = hall(data, *REVERB[slot])
-        if slot == "blip":
+        if slot.startswith("blip"):
             data = finish(data, peak, None)
             beat = int(BLIP_PERIOD * RATE)
             data = np.concatenate([data[:beat], np.zeros((max(0, beat - len(data)), 2), np.float32)])

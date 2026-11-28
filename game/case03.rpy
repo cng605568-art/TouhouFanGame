@@ -5,6 +5,13 @@
 ## Runs after script.rpy, which defines the cast and the fallacy cards.
 init offset = 1
 
+define evidence_empty_plate = Evidence("empty_plate", _("Empty Plate"),
+    _("One spoon, licked clean. No fingerprints, just custard."), "gui/ev_plate.svg")
+define evidence_pudding_recipe = Evidence("pudding_recipe", _("Pudding Recipe"),
+    _("Eggs, milk, sugar. \"For the mistress only\" piped in caramel."), "gui/ev_document.svg")
+define evidence_staff_roster = Evidence("staff_roster", _("Mansion Roster, 3 PM"),
+    _("Present: the mistress, her sister, Patchouli, forty fairy maids, one uninvited magician."), "gui/ev_list.svg")
+
 define testimony_sakuya = Testimony(
     title=_("The Three O'Clock Pudding"),
     witness="sakuya",
@@ -21,36 +28,56 @@ define testimony_sakuya = Testimony(
             "press_sakuya_2",
             _("An empty plate is evidence, not reasoning. Object to how she gets from the plate to the culprit.")),
         Statement(
-            _("Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."),
+            _("Only two people could possibly have eaten it."),
             "press_sakuya_3",
-            None),
+            _("She hasn't named them yet. Press her before you object."),
+            reveals="dilemma"),
+        Statement(
+            _("Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."),
+            "press_sakuya_4",
+            None,
+            hidden=True, key="dilemma"),
         ],
     cards=[ fallacy_false_cause, fallacy_false_dilemma, fallacy_tu_quoque ],
-    flaw=2,
+    flaw=3,
     answer="false_dilemma",
     scolds={
         "false_cause" : _("Nothing here mistakes order for cause. The trouble is her menu. Count the dishes."),
         "tu_quoque" : _("Nobody is excusing themselves by pointing elsewhere. Count her suspects. Then count the mansion."),
-        })
+        "ad_hominem" : _("She isn't attacking Meiling's character. She's offering the court only two doors."),
+        "slippery_slope" : _("No chain of disasters here. Just a list of suspects that is suspiciously short."),
+        },
+    proof="staff_roster",
+    proof_wrong=_("That says nothing about who else was home. Ask her who was in the mansion."))
 
 
 label press_sakuya_1:
     you "How can you be certain of the time?"
+    $ react("sakuya", "smug")
     sakuya "I stop it every day. I always know exactly where I left it."
     return
 
 label press_sakuya_2:
     you "Who else was in the mansion at three?"
+    $ react("sakuya", "angry")
     sakuya "The mistress, her sister, Patchouli, forty fairy maids, and a certain magician. Uninvited."
+    $ add_evidence("staff_roster")
     call shot_eiki
     eiki "...The window again, I assume."
     return
 
 label press_sakuya_3:
+    you "Only two? Which two?"
+    sakuya "Meiling, and the mistress herself. Who would never."
+    sakuya "Write that down. All of it."
+    return
+
+label press_sakuya_4:
     you "Why are those the only two suspects?"
+    $ react("sakuya", "nervous")
     sakuya "Because they're the two I considered. That makes the list complete."
     call shot_eiki
-    eiki "Forty fairy maids, a vampire's little sister, and a window. Complete."
+    eiki "A list is complete when it holds everyone, not when you stop writing."
     return
 
 
@@ -97,7 +124,7 @@ label case3:
 
     sakuya_t "At three o'clock, the mistress's pudding was in the kitchen. I placed it there myself."
     sakuya_t "At five past three, the plate was empty. Only the spoon remained."
-    sakuya_t "Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."
+    sakuya_t "Only two people could possibly have eaten it."
 
     hide screen court_tag
     call shot_eiki
@@ -129,9 +156,7 @@ label case3_breakthrough:
     you "Your mansion holds dozens of people. You offered the court exactly two."
     you "Fairy maids, the mistress's sister, a certain magician. Any of them could have eaten it."
 
-    show sakuya_fumo at fumo_shock
-    $ sfx("shock")
-    with vpunch
+    call breakdown("sakuya")
     sakuya "...Forty fairy maids. I didn't count the fairy maids."
 
     call shot_eiki

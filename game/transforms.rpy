@@ -249,6 +249,11 @@ transform card_rise(delay=0.0):
     pause delay
     easeout 0.28 yoffset 0 alpha 1.0
 
+## The pick timer's bar drains from the right.
+transform timer_shrink(seconds):
+    xanchor 0.0 xzoom 1.0
+    linear seconds xzoom 0.0
+
 ## Plaque buttons: lift on hover.
 transform plaque_lift:
     on idle:

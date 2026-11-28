@@ -1,9 +1,8 @@
 ################################################################################
-## screens.rpy - courtroom UI and the cross-examination engine.
+## screens.rpy - courtroom UI. The engine that drives it is in court.rpy.
 ##
-##   1. Engine data types (Statement, Fallacy, Testimony) and spirit helpers
-##   2. Engine labels: cross_examination, court_shout, court_penalty, mistrial
-##   3. Courtroom screens: HUD, banners, cross-exam, fallacy cards, verdicts
+##   3. Courtroom screens: HUD, banners, cross-exam, fallacy and evidence
+##      cards, the Court Record, verdicts
 ##   4. Standard screens restyled: say, choice, quick menu, menus, save/load...
 ################################################################################
 
@@ -11,195 +10,6 @@ init offset = -1
 
 init python:
     config.character_id_prefixes.append("namebox")
-
-
-################################################################################
-## 1. Engine data
-################################################################################
-
-init -1 python:
-
-    class Statement(object):
-        """
-        One line of testimony.
-
-        `text`   what the witness says.
-        `press`  label played when the player presses this statement.
-        `wrong`  the judge's scolding if the player objects to it when it
-                 is not the flawed statement.
-        """
-
-        def __init__(self, text, press, wrong):
-            self.text = text
-            self.press = press
-            self.wrong = wrong
-
-
-    class Fallacy(object):
-        """A logical fallacy card in the objection menu."""
-
-        def __init__(self, key, name, alias, blurb, icon):
-            self.key = key
-            self.name = name
-            self.alias = alias
-            self.blurb = blurb
-            self.icon = icon
-
-
-    class Testimony(object):
-        """
-        Everything the cross-examination engine needs for one witness.
-
-        Characters and shots are stored by name so save files stay small and
-        survive edits to the script.
-
-        `flaw`    index of the statement that contains the fallacy.
-        `answer`  key of the correct Fallacy.
-        `scolds`  {fallacy key: line} for objecting to the right statement
-                  with the wrong fallacy.
-        """
-
-        def __init__(self, title, witness, judge, witness_shot, judge_shot,
-                     statements, cards, flaw, answer, scolds):
-            self.title = title
-            self.witness = witness
-            self.judge = judge
-            self.witness_shot = witness_shot
-            self.judge_shot = judge_shot
-            self.statements = statements
-            self.cards = cards
-            self.flaw = flaw
-            self.answer = answer
-            self.scolds = scolds
-
-        @property
-        def witness_character(self):
-            return getattr(store, self.witness)
-
-        @property
-        def judge_character(self):
-            return getattr(store, self.judge)
-
-
-    def testimony(name):
-        return getattr(store, name)
-
-
-    def spirit_lose():
-        store.spirit = max(0, store.spirit - 1)
-        store.spirit_broken = store.spirit
-
-
-    def spirit_reset():
-        store.spirit = SPIRIT_MAX
-        store.spirit_broken = -1
-
-
-define SPIRIT_MAX = 5
-
-default spirit = SPIRIT_MAX
-default spirit_broken = -1
-default case_number = ""
-default case_title = ""
-
-default xexam_index = 0
-default xexam_act = None
-default xexam_pick = None
-default xexam_line = ""
-
-default persistent.fallacies_learned = set()
-
-
-################################################################################
-## 2. Engine labels
-################################################################################
-
-## Runs a cross-examination until the player names the right fallacy on the
-## right statement ("solved") or runs out of spirit ("mistrial").
-label cross_examination(tm_name):
-
-    $ tm = testimony(tm_name)
-    $ xexam_index = 0
-
-    window hide
-    show screen court_title(_("CROSS-EXAMINATION"), "反対尋問", tm.title)
-    with Dissolve(0.2)
-    pause 1.5
-    hide screen court_title
-    with Dissolve(0.2)
-    window auto
-
-    while True:
-
-        call screen cross_exam(tm_name)
-        $ xexam_act, xexam_index = _return
-
-        if xexam_act == "press":
-
-            call court_shout("hold")
-            call expression tm.statements[xexam_index].press
-            $ xexam_index = (xexam_index + 1) % len(tm.statements)
-            call expression tm.witness_shot
-
-        elif xexam_act == "object":
-
-            call screen fallacy_pick(tm_name, xexam_index)
-            $ xexam_pick = _return
-
-            if xexam_pick is not None:
-
-                call court_shout("objection")
-
-                if xexam_index == tm.flaw and xexam_pick == tm.answer:
-                    return "solved"
-
-                if xexam_index != tm.flaw:
-                    $ xexam_line = tm.statements[xexam_index].wrong
-                else:
-                    $ xexam_line = tm.scolds[xexam_pick]
-
-                call court_penalty(tm_name, xexam_line)
-
-                if spirit <= 0:
-                    return "mistrial"
-
-                call expression tm.witness_shot
-
-
-## A shout bubble: "objection" or "hold".
-label court_shout(kind):
-    show screen court_shout(kind)
-    with vpunch
-    pause 0.8
-    hide screen court_shout
-    with Dissolve(0.12)
-    return
-
-
-## Cut to the judge, flash red, scold, and crack a magatama.
-label court_penalty(tm_name, line):
-    $ tm = testimony(tm_name)
-    call expression tm.judge_shot
-    with red_flash
-    $ renpy.say(tm.judge_character, line)
-    $ spirit_lose()
-    $ sfx("penalty")
-    with hpunch
-    pause 0.7
-    $ renpy.block_rollback()
-    return
-
-
-## Game over. Returns to the caller to retry, or restarts to the title.
-label mistrial:
-    $ bgm_stop(1.2)
-    hide screen court_hud
-    call screen mistrial_screen
-    if _return == "retry":
-        $ spirit_reset()
-        show screen court_hud
-        return
-    $ renpy.full_restart()
 
 
 ################################################################################
@@ -227,7 +37,7 @@ screen court_hud():
                 text _("SPIRIT") style "hud_spirit_label"
                 text "霊力" style "hud_spirit_jp"
             null width 6
-            for i in range(SPIRIT_MAX):
+            for i in range(spirit_cap):
                 fixed:
                     xysize (48, 60)
                     if i < spirit:
@@ -385,13 +195,19 @@ screen cross_exam(tm_name):
     modal True
 
     $ tm = testimony(tm_name)
-    $ count = len(tm.statements)
+    $ count = len(xexam_vis)
     $ stmt_no = xexam_index + 1
 
     ## Ribbon.
     frame at banner_sweep:
         style "court_tag"
         text _("CROSS-EXAMINATION") style "court_tag_text"
+
+    ## Court Record, under the spirit gauge.
+    textbutton _("COURT RECORD"):
+        style "record_button"
+        action Show("court_record")
+        at hud_drop(0.12)
 
     ## Parchment box with the current statement.
     frame:
@@ -405,9 +221,9 @@ screen cross_exam(tm_name):
         text _("STATEMENT [stmt_no] / [count]"):
             style "xexam_counter"
 
-        for i, s in enumerate(tm.statements):
-            showif i == xexam_index:
-                text s.text style "testimony_text" at statement_in
+        for n, i in enumerate(xexam_vis):
+            showif n == xexam_index:
+                text tm.statements[i].text style "testimony_text" at statement_in
 
     ## Statement arrows.
     imagebutton:
@@ -435,6 +251,22 @@ screen cross_exam(tm_name):
     key "K_RIGHT" action [ SetVariable("xexam_index", (xexam_index + 1) % count), Function(sfx, "nav") ]
     key "K_p" action [ Function(sfx, "ui_confirm"), Return(("press", xexam_index)) ]
     key "K_o" action [ Function(sfx, "ui_confirm"), Return(("object", xexam_index)) ]
+    key "K_r" action [ Function(sfx, "ui_confirm"), Show("court_record") ]
+
+style record_button is default:
+    xanchor 1.0 xpos 1880 ypos 130
+    background IndigoPanel(rule=GOLD_LO, rule_inset=6, rule_w=1, shadow=4)
+    hover_background IndigoPanel(edge=GOLD_HI, rule=GOLD, rule_inset=6, rule_w=1, shadow=4)
+    padding (26, 10, 26, 12)
+    hover_sound SFX_HOVER
+    activate_sound SFX_CONFIRM
+
+style record_button_text is default:
+    font FONT_HEAD
+    size 22
+    color GOLD
+    hover_color GOLD_HI
+    kerning 4
 
 screen cross_exam_plaques():
     fixed:
@@ -509,13 +341,15 @@ style testimony_text is default:
     color "#7A1C2A"
 
 
-## Objection: pick the fallacy. Returns a Fallacy key, or None to withdraw.
+## Objection: pick the fallacy. Returns a Fallacy key, None to withdraw, or
+## "timeout" when the clock runs out (Hard and Lunatic).
 screen fallacy_pick(tm_name, index):
     zorder 60
     modal True
 
     $ tm = testimony(tm_name)
-    $ stmt_no = index + 1
+    $ cards = deck_for(tm)
+    $ stmt_no = xexam_index + 1
     $ quote = tm.statements[index].text
 
     add Solid("#0A0205D9") at modal_fade
@@ -537,38 +371,75 @@ screen fallacy_pick(tm_name, index):
             style "fallacy_quote"
             text _("Statement [stmt_no]: “[quote!t]”") style "fallacy_quote_text"
 
-    hbox:
-        xalign 0.5 ypos 318
-        spacing 40
+    if len(cards) <= 3:
+        hbox:
+            xalign 0.5 ypos 318
+            spacing 40
+            for n, card in enumerate(cards):
+                button:
+                    style "fallacy_card"
+                    action Return(card.key)
+                    at card_rise(0.06 * n), plaque_lift
+                    vbox:
+                        xfill True
+                        spacing 18
+                        frame:
+                            style "fallacy_card_head"
+                            vbox:
+                                xalign 0.5
+                                text card.name style "fallacy_name"
+                                text card.alias style "fallacy_alias"
+                        add SVG(card.icon, 1.15) xalign 0.5
+                        text card.blurb style "fallacy_blurb"
+    else:
+        ## A bigger deck: smaller cards in a grid.
+        vpgrid:
+            cols (3 if len(cards) <= 6 else 4)
+            xalign 0.5 ypos 300
+            spacing 26
+            for n, card in enumerate(cards):
+                button:
+                    style "fallacy_card_small"
+                    action Return(card.key)
+                    at card_rise(0.04 * n), plaque_lift
+                    vbox:
+                        xfill True
+                        spacing 8
+                        frame:
+                            style "fallacy_card_head"
+                            padding (12, 10, 12, 12)
+                            vbox:
+                                xalign 0.5
+                                text card.name style "fallacy_name" size 30
+                                text card.alias style "fallacy_alias" size 20
+                        add SVG(card.icon, 0.62) xalign 0.5
+                        text card.blurb style "fallacy_blurb" size 21 xsize 344 line_spacing 2
 
-        for n, card in enumerate(tm.cards):
-            button:
-                style "fallacy_card"
-                action Return(card.key)
-                at card_rise(0.06 * n), plaque_lift
-
-                vbox:
-                    xfill True
-                    spacing 18
-
-                    frame:
-                        style "fallacy_card_head"
-                        vbox:
-                            xalign 0.5
-                            text card.name style "fallacy_name"
-                            text card.alias style "fallacy_alias"
-
-                    add SVG(card.icon, 1.15) xalign 0.5
-                    text card.blurb style "fallacy_blurb"
+    use pick_timer
 
     textbutton _("Withdraw"):
         style "menu_plaque"
-        xalign 0.5 ypos 900
+        xalign 0.5 ypos 1000
         activate_sound SFX_CANCEL
         action Return(None)
         at modal_fade
 
     key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
+
+## On Hard and Lunatic, a shrinking vermilion bar; at zero the pick times out.
+screen pick_timer():
+    $ seconds = diff()["timer"]
+    if seconds:
+        timer seconds action Return("timeout")
+        frame:
+            style "pick_timer_frame"
+            add Solid(VERMILION) xsize 1200 ysize 10 at timer_shrink(seconds)
+
+style pick_timer_frame is default:
+    xalign 0.5 ypos 286
+    xsize 1212 ysize 22
+    background Solid("#00000066")
+    padding (6, 6, 6, 6)
 
 style fallacy_quote is default:
     xalign 0.5
@@ -590,6 +461,12 @@ style fallacy_card is default:
     hover_background ParchmentPanel(corner_size=36, edge=GOLD_HI, inner=VERMILION)
     padding (30, 30, 30, 30)
 
+style fallacy_card_small is fallacy_card:
+    xysize (400, 320)
+    padding (22, 22, 22, 18)
+    background ParchmentPanel(corner_size=28)
+    hover_background ParchmentPanel(corner_size=28, edge=GOLD_HI, inner=VERMILION)
+
 style fallacy_card_head is default:
     xfill True
     background CourtPanel(fill=CRIMSON, edge=GOLD, edge_w=2, shadow=0)
@@ -600,6 +477,7 @@ style fallacy_name is default:
     size 40
     color GOLD_HI
     xalign 0.5
+    text_align 0.5
 
 style fallacy_alias is default:
     size 24
@@ -615,14 +493,167 @@ style fallacy_blurb is default:
     line_spacing 6
 
 
+## Prove it: pick the evidence that backs the objection. Returns an Evidence
+## key, None to withdraw, or "timeout".
+screen evidence_pick(tm_name):
+    zorder 60
+    modal True
+
+    add Solid("#0A0205D9") at modal_fade
+
+    vbox:
+        at modal_fade
+        xalign 0.5 ypos 54
+        spacing 22
+        frame:
+            style "court_tag"
+            xalign 0.5 ypos 0
+            hbox:
+                spacing 20
+                text "証拠" style "court_tag_text" color PARCHMENT
+                text _("PRESENT EVIDENCE") style "court_tag_text"
+        frame:
+            style "fallacy_quote"
+            text _("Which item proves your objection?") style "fallacy_quote_text"
+
+    vpgrid:
+        cols min(4, max(1, len(court_record)))
+        xalign 0.5 ypos 300
+        spacing 26
+        for n, key in enumerate(court_record):
+            $ ev = evidence(key)
+            button:
+                style "evidence_card"
+                action Return(ev.key)
+                at card_rise(0.05 * n), plaque_lift
+                use evidence_face(ev)
+
+    use pick_timer
+
+    textbutton _("Withdraw"):
+        style "menu_plaque"
+        xalign 0.5 ypos 1000
+        activate_sound SFX_CANCEL
+        action Return(None)
+        at modal_fade
+
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Return(None) ]
+
+## One evidence card's contents.
+screen evidence_face(ev):
+    vbox:
+        xfill True
+        spacing 10
+        frame:
+            style "evidence_head"
+            text ev.name style "evidence_name"
+        add SVG(ev.icon, 0.62) xalign 0.5
+        text ev.desc style "evidence_desc"
+
+style evidence_card is fallacy_card_small:
+    xysize (400, 340)
+
+style evidence_head is default:
+    xfill True
+    background CourtPanel(fill=INDIGO, edge=GOLD, edge_w=2, shadow=0)
+    padding (12, 12, 12, 14)
+
+style evidence_name is default:
+    font FONT_HEAD
+    size 28
+    color GOLD_HI
+    xalign 0.5
+    text_align 0.5
+
+style evidence_desc is default:
+    size 22
+    color INK
+    text_align 0.5
+    xalign 0.5
+    xsize 350
+    line_spacing 3
+
+
+## The Court Record: every item collected in this case. Opened from the
+## cross-examination; closes back to it.
+screen court_record():
+    zorder 70
+    modal True
+
+    add Solid("#0A0205E6") at modal_fade
+
+    frame:
+        style "court_tag"
+        xalign 0.5 ypos 54
+        at modal_fade
+        hbox:
+            spacing 20
+            text "法廷記録" style "court_tag_text" color PARCHMENT
+            text _("COURT RECORD") style "court_tag_text"
+
+    vpgrid:
+        cols min(4, max(1, len(court_record)))
+        xalign 0.5 ypos 190
+        spacing 26
+        for n, key in enumerate(court_record):
+            frame:
+                style "evidence_card"
+                at card_rise(0.05 * n)
+                use evidence_face(evidence(key))
+
+    textbutton _("Close"):
+        style "menu_plaque"
+        xalign 0.5 ypos 1000
+        activate_sound SFX_CANCEL
+        action Hide("court_record")
+
+    key "game_menu" action [ Function(sfx, "ui_cancel"), Hide("court_record") ]
+    key "K_r" action [ Function(sfx, "ui_cancel"), Hide("court_record") ]
+
+
+## "Added to the Court Record" card, top right, for a few seconds.
+screen evidence_added(ev):
+    zorder 90
+    frame at bgm_card(0.0):
+        style "evidence_added_frame"
+        hbox:
+            spacing 18
+            add SVG(ev.icon, 0.42) yalign 0.5
+            vbox:
+                yalign 0.5
+                spacing 2
+                text _("ADDED TO THE COURT RECORD") style "evidence_added_label"
+                text ev.name style "evidence_added_name"
+    timer 3.2 action Hide("evidence_added")
+
+style evidence_added_frame is default:
+    xanchor 1.0 xpos 1880 ypos 200
+    background IndigoPanel(rule=GOLD_LO, rule_inset=7, rule_w=1, shadow=4)
+    padding (20, 12, 30, 14)
+
+style evidence_added_label is default:
+    font FONT_HEAD
+    size 18
+    color GOLD
+    kerning 3
+
+style evidence_added_name is default:
+    font FONT_HEAD
+    size 30
+    color PARCHMENT
+
+
 ## OBJECTION! / HOLD IT! bubble over speed lines.
 screen court_shout(kind):
     zorder 80
-    on "show" action Function(sfx, "shout_" + kind)
+    on "show" action Function(sfx, "shout_" + ("objection" if kind == "takethat" else kind))
 
     if kind == "hold":
         $ main = _("HOLD IT!")
         $ jp = "待った！"
+    elif kind == "takethat":
+        $ main = _("TAKE THAT!")
+        $ jp = "くらえ！"
     else:
         $ main = _("OBJECTION!")
         $ jp = "異議あり！"
@@ -757,8 +788,13 @@ screen case_closed(fallacy, next_case=None):
                     spacing 12
                     text _("SPIRIT REMAINING") style "closed_label" yalign 0.5
                     null width 8
-                    for i in range(SPIRIT_MAX):
+                    for i in range(spirit_cap):
                         add ("gui/magatama_full.svg" if i < spirit else "gui/magatama_empty.svg")
+                hbox:
+                    spacing 18
+                    text _("RANK") style "closed_label" yalign 0.5
+                    text case_rank() style "closed_rank" yalign 0.5
+                    text diff()["name"] style "closed_label" yalign 0.5 color GOLD_LO
 
         hbox:
             xalign 0.5
@@ -770,6 +806,12 @@ screen case_closed(fallacy, next_case=None):
             textbutton _("Return to Title"):
                 style "menu_plaque"
                 action Return("title")
+
+style closed_rank is default:
+    font FONT_HEAD
+    size 64
+    color VERMILION
+    outlines [ (absolute(2), CRIMSON_DEEP, absolute(0), absolute(2)) ]
 
 style closed_title is default:
     font FONT_HEAD

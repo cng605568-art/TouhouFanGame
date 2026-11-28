@@ -1022,6 +1022,152 @@ def make_fallacy_icons():
         write(os.path.join(GUI, "fallacy_%s.svg" % name), svg(W, H, body, "fallacy icon: " + label))
 
 
+def make_evidence_icons():
+    """Line icons for Court Record items, in the fallacy cards' style."""
+    W = H = 160
+    ink, sw = CRIMSON, 5
+
+    def p(d, fill=GOLD, stroke=None, width=sw, extra=""):
+        return '<path d="%s" fill="%s" stroke="%s" stroke-width="%d" stroke-linejoin="round" stroke-linecap="round"%s/>' % (
+            d, fill, stroke or ink, width, extra)
+
+    icons = {}
+
+    # A page with ruled lines and a folded corner.
+    icons["document"] = "\n".join([
+        p("M40 18 L102 18 L124 40 L124 142 L40 142 Z", PARCHMENT),
+        p("M102 18 L102 40 L124 40", "none"),
+        p("M56 62 L108 62 M56 82 L108 82 M56 102 L108 102 M56 122 L90 122", "none", VERMILION, 4),
+    ])
+
+    # A checklist: boxes with ticks.
+    icons["list"] = "\n".join([
+        p("M36 16 L124 16 L124 144 L36 144 Z", PARCHMENT),
+        p("M50 40 L62 40 L62 52 L50 52 Z M50 72 L62 72 L62 84 L50 84 Z M50 104 L62 104 L62 116 L50 116 Z", GOLD, ink, 3),
+        p("M74 46 L110 46 M74 78 L110 78 M74 110 L110 110", "none", ink, 4),
+        p("M48 44 L55 51 L66 36 M48 76 L55 83 L66 68 M48 108 L55 115 L66 100", "none", VERMILION, 4),
+    ])
+
+    # A sun over a thermometer.
+    icons["sun"] = "\n".join([
+        '<circle cx="66" cy="62" r="24" fill="%s" stroke="%s" stroke-width="%d"/>' % (GOLD, ink, sw),
+        p(" ".join("M%.1f %.1f L%.1f %.1f" % (66 + 34 * math.cos(a), 62 + 34 * math.sin(a), 66 + 46 * math.cos(a), 62 + 46 * math.sin(a))
+                   for a in [i * math.pi / 4 for i in range(8)]), "none", VERMILION, 5),
+        p("M112 40 L112 110", "none", ink, 14),
+        p("M112 40 L112 110", "none", PARCHMENT, 6),
+        '<circle cx="112" cy="122" r="14" fill="%s" stroke="%s" stroke-width="%d"/>' % (VERMILION, ink, sw),
+        p("M112 72 L112 110", "none", VERMILION, 6),
+    ])
+
+    # An ice cube with a highlight and a drip.
+    icons["ice"] = "\n".join([
+        p("M42 58 L92 38 L128 58 L78 80 Z", "#DCEFF7"),
+        p("M42 58 L78 80 L78 132 L42 110 Z", "#A9D4E6"),
+        p("M78 80 L128 58 L128 110 L78 132 Z", "#C3E2EF"),
+        p("M54 66 L66 61", "none", "#FFFFFF", 5),
+        p("M104 122 Q100 132 104 138 Q108 132 104 122 Z", "#A9D4E6", ink, 3),
+    ])
+
+    # A closed book with a ribbon.
+    icons["book"] = "\n".join([
+        p("M36 24 L118 24 L118 136 L36 136 Z", CRIMSON_HI),
+        p("M118 24 L128 32 L128 144 L46 144 L36 136", PARCHMENT),
+        p("M52 48 L102 48 L102 76 L52 76 Z", GOLD, GOLD_LO, 3),
+        p("M92 24 L92 150 L100 142 L108 150 L108 24", VERMILION, ink, 3),
+    ])
+
+    # A wooden offering box with a slot.
+    icons["box"] = "\n".join([
+        p("M28 66 L132 66 L132 138 L28 138 Z", "#9B6A3C"),
+        p("M20 50 L140 50 L132 66 L28 66 Z", "#B98552"),
+        p("M48 58 L112 58", "none", INK, 6),
+        p("M28 92 L132 92 M28 116 L132 116", "none", "#6E4724", 3),
+    ])
+
+    # Round spectacles.
+    icons["glasses"] = "\n".join([
+        '<circle cx="50" cy="86" r="26" fill="%s" stroke="%s" stroke-width="%d"/>' % ("#E8F1F5", ink, sw),
+        '<circle cx="110" cy="86" r="26" fill="%s" stroke="%s" stroke-width="%d"/>' % ("#E8F1F5", ink, sw),
+        p("M76 82 Q80 74 84 82", "none", ink, sw),
+        p("M24 80 L10 64 M136 80 L150 64", "none", ink, sw),
+        p("M38 76 L48 70 M98 76 L108 70", "none", "#FFFFFF", 4),
+    ])
+
+    # A plate seen from above, with a spoon.
+    icons["plate"] = "\n".join([
+        '<ellipse cx="80" cy="96" rx="64" ry="36" fill="%s" stroke="%s" stroke-width="%d"/>' % (PARCHMENT, ink, sw),
+        '<ellipse cx="80" cy="96" rx="40" ry="20" fill="none" stroke="%s" stroke-width="3"/>' % GOLD,
+        p("M96 50 L132 22", "none", GOLD_LO, 7),
+        '<ellipse cx="90" cy="56" rx="10" ry="7" fill="%s" stroke="%s" stroke-width="4" transform="rotate(-38 90 56)"/>' % (GOLD, ink),
+    ])
+
+    # A medicine bottle with a label and cork.
+    icons["bottle"] = "\n".join([
+        p("M66 20 L94 20 L94 36 L66 36 Z", "#B98552"),
+        p("M68 36 L92 36 L92 52 Q120 62 120 90 L120 140 L40 140 L40 90 Q40 62 68 52 Z", "#8E7CC3"),
+        p("M50 88 L110 88 L110 120 L50 120 Z", PARCHMENT, ink, 4),
+        p("M60 104 L100 104", "none", VERMILION, 4),
+    ])
+
+    # A rolled diploma tied with a ribbon.
+    icons["diploma"] = "\n".join([
+        p("M30 60 L130 60 L130 104 L30 104 Z", PARCHMENT),
+        '<ellipse cx="30" cy="82" rx="10" ry="22" fill="%s" stroke="%s" stroke-width="%d"/>' % (PARCHMENT, ink, sw),
+        '<ellipse cx="130" cy="82" rx="10" ry="22" fill="%s" stroke="%s" stroke-width="%d"/>' % ("#E9DDBF", ink, sw),
+        p("M74 60 L74 104 M86 60 L86 104", "none", VERMILION, 6),
+        p("M80 104 L70 136 L80 128 L90 136 Z", VERMILION, ink, 3),
+    ])
+
+    for name, body in icons.items():
+        write(os.path.join(GUI, "ev_%s.svg" % name), svg(W, H, body, "evidence icon: " + name))
+
+
+def make_fx():
+    """Breakdown props and reaction emotes: simple objects and symbols only."""
+    ink = CRIMSON
+
+    def put(name, w, h, body):
+        write(os.path.join(GUI, "%s.svg" % name), svg(w, h, body, name.replace("_", " ")))
+
+    # Breakdown props.
+    put("fx_shard", 60, 90, '<path d="M30 2 L56 34 L36 88 L6 40 Z" fill="#DCEFF7" stroke="#6FA8C4" stroke-width="3" stroke-linejoin="round"/>'
+        '<path d="M30 2 L36 88" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.8"/>')
+    star = " ".join("%s%.1f %.1f" % ("M" if i == 0 else "L", 40 + (36 if i % 2 == 0 else 15) * math.cos(-math.pi / 2 + i * math.pi / 5),
+                                     40 + (36 if i % 2 == 0 else 15) * math.sin(-math.pi / 2 + i * math.pi / 5)) for i in range(10)) + " Z"
+    put("fx_star", 80, 80, '<path d="%s" fill="%s" stroke="%s" stroke-width="3" stroke-linejoin="round"/>' % (star, GOLD_HI, GOLD_LO))
+    ticks = " ".join("M%.1f %.1f L%.1f %.1f" % (100 + 52 * math.cos(a), 116 + 52 * math.sin(a), 100 + 60 * math.cos(a), 116 + 60 * math.sin(a))
+                     for a in [i * math.pi / 6 for i in range(12)])
+    put("fx_watch", 200, 200, "\n".join([
+        '<circle cx="100" cy="22" r="12" fill="none" stroke="%s" stroke-width="6"/>' % GOLD_LO,
+        '<rect x="90" y="30" width="20" height="18" rx="4" fill="%s" stroke="%s" stroke-width="4"/>' % (GOLD, GOLD_LO),
+        '<circle cx="100" cy="116" r="74" fill="%s" stroke="%s" stroke-width="8"/>' % (GOLD, GOLD_LO),
+        '<circle cx="100" cy="116" r="62" fill="%s" stroke="%s" stroke-width="3"/>' % (PARCHMENT, GOLD_LO),
+        '<path d="%s" fill="none" stroke="%s" stroke-width="4" stroke-linecap="round"/>' % (ticks, INK),
+        '<path d="M100 116 L100 74 M100 116 L128 128" fill="none" stroke="%s" stroke-width="6" stroke-linecap="round"/>' % INK,
+    ]))
+    put("fx_crack", 200, 200, '<path d="M100 116 L82 80 L92 62 L74 44 M100 116 L132 96 L146 108 L166 92 M100 116 L94 152 L112 170 L104 190 '
+        'M100 116 L60 126 L46 150" fill="none" stroke="%s" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' % INK)
+    put("fx_ring", 200, 200, '<circle cx="100" cy="100" r="90" fill="none" stroke="#E0303C" stroke-width="8"/>'
+        '<circle cx="100" cy="100" r="76" fill="none" stroke="#E0303C" stroke-width="3" stroke-opacity="0.6"/>')
+    put("fx_scales_tip", 160, 120, '<path d="M80 20 L80 110 M50 110 L110 110" fill="none" stroke="%s" stroke-width="7" stroke-linecap="round"/>'
+        '<path d="M14 38 L146 58" fill="none" stroke="%s" stroke-width="7" stroke-linecap="round"/>'
+        '<path d="M2 60 Q14 78 30 60 Z M128 82 Q142 100 158 82 Z" fill="%s" stroke="%s" stroke-width="4" stroke-linejoin="round"/>' % (GOLD_LO, GOLD, GOLD, GOLD_LO))
+
+    # Reaction emotes.
+    put("emote_sweat", 70, 100, '<path d="M35 6 Q62 52 58 70 A23 23 0 0 1 12 70 Q8 52 35 6 Z" fill="#9FD3F0" stroke="#3E7FA6" stroke-width="4" stroke-linejoin="round"/>'
+        '<path d="M24 66 Q24 78 34 82" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>')
+    vein = "M36 10 Q40 30 22 34 M44 10 Q40 30 58 34 M36 70 Q40 50 22 46 M44 70 Q40 50 58 46"
+    put("emote_anger", 80, 80, '<path d="%s" fill="none" stroke="#C41E3A" stroke-width="9" stroke-linecap="round"/>' % vein)
+    sp = lambda cx, cy, r: "M%d %d Q%d %d %d %d Q%d %d %d %d Q%d %d %d %d Q%d %d %d %d Z" % (
+        cx, cy - r, cx, cy, cx + r, cy, cx, cy, cx, cy + r, cx, cy, cx - r, cy, cx, cy, cx, cy - r)
+    put("emote_sparkle", 100, 100, '<path d="%s %s %s" fill="%s" stroke="%s" stroke-width="2" stroke-linejoin="round"/>' % (
+        sp(40, 44, 30), sp(78, 20, 14), sp(76, 76, 12), GOLD_HI, GOLD_LO))
+    put("emote_exclaim", 50, 110, '<path d="M14 6 L36 6 L30 72 L20 72 Z" fill="#C41E3A" stroke="%s" stroke-width="3" stroke-linejoin="round"/>'
+        '<circle cx="25" cy="92" r="10" fill="#C41E3A" stroke="%s" stroke-width="3"/>' % (CRIMSON_DEEP, CRIMSON_DEEP))
+    put("emote_gloom", 120, 90, '<path d="M14 4 L14 70 M38 4 L38 84 M62 4 L62 60 M86 4 L86 78 M108 4 L108 52" fill="none" stroke="#5B6FA8" '
+        'stroke-width="6" stroke-linecap="round" stroke-opacity="0.85"/>')
+
+
 def make_presplash():
     """Loading image for the desktop (game/presplash.png) and web builds."""
     exe = shutil.which("rsvg-convert")
@@ -1077,6 +1223,8 @@ if __name__ == "__main__":
     make_slider_thumb()
     make_fumo_shadow()
     make_fallacy_icons()
+    make_evidence_icons()
+    make_fx()
     make_ctc()
     make_icons()
     make_presplash()

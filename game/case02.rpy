@@ -5,6 +5,13 @@
 ## Runs after script.rpy, which defines the cast and the fallacy cards.
 init offset = 1
 
+define evidence_library_ledger = Evidence("library_ledger", _("Library Ledger"),
+    _("Forty-seven grimoires signed out to \"M. Kirisame.\" None returned."), "gui/ev_book.svg")
+define evidence_donation_box = Evidence("donation_box", _("Shrine Donation Box"),
+    _("Nearly empty. Contents: one leaf, one button."), "gui/ev_box.svg")
+define evidence_reading_glasses = Evidence("reading_glasses", _("Patchouli's Spare Glasses"),
+    _("Dusty. Found under a stack of unread books."), "gui/ev_glasses.svg")
+
 define testimony_marisa = Testimony(
     title=_("The Forty-Seven Grimoires"),
     witness="marisa",
@@ -21,21 +28,31 @@ define testimony_marisa = Testimony(
             "press_marisa_2",
             _("Dust is evidence. Annoyingly good evidence. The bad step is somewhere else.")),
         Statement(
-            _("Besides, Reimu pockets her own donation box! So who's the real thief here? Not me."),
+            _("And honestly? I'm not the only one around here with sticky fingers."),
             "press_marisa_3",
-            None),
+            _("That's a hint, not an argument. Press her and make her say it."),
+            reveals="reimu"),
+        Statement(
+            _("Reimu pockets her own donation box! So who's the real thief here? Not me."),
+            "press_marisa_4",
+            None,
+            hidden=True, key="reimu"),
         ],
     cards=[ fallacy_ad_hominem, fallacy_tu_quoque, fallacy_slippery_slope ],
-    flaw=2,
+    flaw=3,
     answer="tu_quoque",
     scolds={
         "ad_hominem" : _("Close. But she isn't insulting her accuser. She's hiding behind someone else's sins. There's a sharper name for that."),
         "slippery_slope" : _("Slippery Slope needs a chain of disasters. She predicted nothing. She just pointed at Reimu."),
-        })
+        "false_cause" : _("Nobody is mistaking order for cause. She is pointing at Reimu to excuse herself."),
+        },
+    proof="library_ledger",
+    proof_wrong=_("That has nothing to do with the forty-seven books. Show what she actually took."))
 
 
 label press_marisa_1:
     you "And when exactly do you plan to die?"
+    $ react("marisa", "smug")
     marisa "Not anytime soon. That's the beauty of it."
     call shot_eiki
     eiki "A loan with no due date. I will be writing to the Ministry."
@@ -47,7 +64,14 @@ label press_marisa_2:
     return
 
 label press_marisa_3:
+    you "Not the only one? Who else?"
+    marisa "Oh, nobody. Just a certain shrine maiden. With a certain donation box."
+    marisa "You know what? Put it in the testimony."
+    return
+
+label press_marisa_4:
     you "What does Reimu's donation box have to do with your books?"
+    $ react("marisa", "nervous")
     marisa "Everything! If the shrine maiden does it, it can't be that bad, right?"
     call shot_eiki
     eiki "Reimu's ledger is Reimu's problem. Yours is forty-seven books long."
@@ -75,6 +99,7 @@ label case2:
     eiki "The charge: removal of forty-seven grimoires from the Scarlet Devil library."
 
     call shot_marisa
+    $ react("marisa", "smug")
     marisa "Removal's a strong word. I prefer \"long-term borrowing.\""
 
     call shot_eiki
@@ -98,11 +123,11 @@ label case2:
 
     marisa_t "I borrowed those books. I'll give 'em back when I die. That's a promise."
     marisa_t "Patchouli hasn't opened most of 'em in a hundred years. I checked the dust."
-    marisa_t "Besides, Reimu pockets her own donation box! So who's the real thief here? Not me."
+    marisa_t "And honestly? I'm not the only one around here with sticky fingers."
 
     hide screen court_tag
     call shot_eiki
-    eiki "Your witness, Junior Judge. Five magatama, as before."
+    eiki "Your witness, Junior Judge. [spirit_Word!t] magatama of spirit, as always."
 
     jump case2_cross
 
@@ -130,9 +155,7 @@ label case2_breakthrough:
     you "Reimu's donation box isn't on trial today. Your forty-seven books are."
     you "Even if she's guilty, that doesn't return a single grimoire."
 
-    show marisa_fumo at fumo_shock
-    $ sfx("shock")
-    with vpunch
+    call breakdown("marisa")
     marisa "Hey! I was making a comparison! A really convincing one!"
 
     call shot_eiki

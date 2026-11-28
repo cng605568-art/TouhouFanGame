@@ -23,7 +23,10 @@
 ##   yeet          a defendant leaves the stand at speed
 ##   case_closed   CASE CLOSED
 ##   mistrial      spirit runs out
-##   blip          text blip, looped while dialogue types out
+##   blip          text blip, looped while dialogue types out; blip_hi,
+##                 blip_up, blip_dn, blip_lo and blip_deep are the same blip
+##                 at each speaker's pitch (see the cast in script.rpy)
+##   break_<who>   a witness breaks down (reactions.rpy)
 ##
 ## Music
 ## -----
@@ -63,19 +66,34 @@ init -1 python:
 
 
     class TextBlip(object):
-        """Character callback: loops the blip while a line is typing out."""
+        """
+        Character callback: loops a blip while a line is typing out. Each
+        speaker has their own pitch (blip_hi ... blip_deep in build_sfx.py).
+        """
+
+        def __init__(self, voice="blip"):
+            self.voice = voice
 
         def __call__(self, event, interact=True, **kwargs):
             if not interact:
                 return
             if event == "show":
-                filename = sfx_file("blip")
+                filename = sfx_file(self.voice) or sfx_file("blip")
                 if filename and preferences.text_cps:
                     renpy.music.play(filename, channel="blip", loop=True)
             elif event in ("slow_done", "end"):
                 renpy.music.stop(channel="blip")
 
-    config.all_character_callbacks.append(TextBlip())
+
+    class Callbacks(object):
+        """Several character callbacks as one."""
+
+        def __init__(self, *callbacks):
+            self.callbacks = callbacks
+
+        def __call__(self, event, **kwargs):
+            for cb in self.callbacks:
+                cb(event, **kwargs)
 
     # Button sounds for the styles in screens.rpy (set here, at init -1, so
     # they exist before those styles are built).

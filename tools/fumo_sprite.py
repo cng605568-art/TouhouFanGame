@@ -22,7 +22,9 @@ photo's name without "_fumo". A bright, flat studio photo needs a darker
 exposure and stronger falloff to sit in the same light as the others, and a
 small photo can be enlarged first (Lanczos, after light denoising) and
 sharpened at the end, so the sprite isn't soft when the game scales it up.
-Plain resampling only: nothing is generated.
+Plain resampling only: nothing is generated. Pose photos (cirno_fumo_smug.jpg,
+used by react() in the game) take the character's settings unless they have an
+entry of their own ("cirno_smug").
 
     {"sakuya": {"upscale": 2.0, "light": {"exposure": 0.7, "rim": 1.5}}}
 
@@ -226,9 +228,12 @@ def settings_for(src):
     with open(SETTINGS, encoding="utf-8") as f:
         table = json.load(f)
     name = os.path.splitext(os.path.basename(src))[0]
-    if name.endswith("_fumo"):
-        name = name[:-len("_fumo")]
-    return table.get(name, {})
+    # A pose photo (cirno_fumo_smug) uses its own entry (cirno_smug) if there
+    # is one, otherwise the character's, so poses match the main sprite.
+    char, _, pose = name.partition("_fumo")
+    if pose.startswith("_") and char + pose in table:
+        return table[char + pose]
+    return table.get(char, {})
 
 
 def enlarge(img, factor):
