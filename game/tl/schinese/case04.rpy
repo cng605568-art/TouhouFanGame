@@ -352,3 +352,55 @@ translate schinese strings:
     old "That's a reputation, not a result. Show whether anyone actually tested it."
     new "那是名声，不是结果。拿出有没有人真正测试过的证据。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case04.rpy:67
+translate schinese press_reisen_1_f8527b89:
+
+    # reisen "It's Master Eirin's own formula. Add that to my testimony. It settles everything."
+    reisen "这是永琳师父亲自配的方子。把这句加进我的证词。这就说明一切了。"
+
+# game/case04.rpy:80
+translate schinese press_reisen_3_2a83a3c4:
+
+    # you "And the colours started right after they drank it."
+    you "而且，他们一喝下去就开始听见颜色了。"
+
+# game/case04.rpy:82
+translate schinese press_reisen_3_b7a88ed3:
+
+    # reisen "I've read your docket, Junior Judge. I know that trick. Write this down."
+    reisen "我读过你的案卷，见习法官。我知道这一招。记下来。"
+
+# game/case04.rpy:86
+translate schinese press_reisen_5_764117fc:
+
+    # you "So you admit the timing proves nothing?"
+    you "所以你承认，时间先后什么也证明不了？"
+
+# game/case04.rpy:87
+translate schinese press_reisen_5_09ab8fe2:
+
+    # reisen "Timing alone proves nothing. I listen in lectures."
+    reisen "光凭时间先后什么也证明不了。课我可是认真听了的。"
+
+# game/case04.rpy:89
+translate schinese press_reisen_5_e0bea76d:
+
+    # eiki "She is right about that much. Which is not the same as being right."
+    eiki "这一点她说得对。但这不等于她就是对的。"
+
+translate schinese strings:
+
+    # game/case04.rpy:17
+    old "Cleared by whom? Press around her before you object."
+    new "谁批准的？反对之前先追问周围的陈述。"
+
+    # game/case04.rpy:17
+    old "They heard colours after drinking it, yes. But coming after isn't the same as caused by."
+    new "他们喝了之后才听见颜色，没错。但发生在后不等于由它导致。"
+
+    # game/case04.rpy:17
+    old "She's right about that. Coming after is not the same as caused by. Her mistake is somewhere else."
+    new "这一点她说得对。发生在后不等于是原因。她的错误在别处。"
+

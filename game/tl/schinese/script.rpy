@@ -490,3 +490,31 @@ translate schinese strings:
     old "Changing the test after it has been passed, so no answer is ever enough."
     new "考验通过后再改标准，让任何答案都不够。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate schinese strings:
+
+    # game/script.rpy:307
+    old "Red Herring"
+    new "红鲱鱼谬误"
+
+    # game/script.rpy:307
+    old "(Change the Subject)"
+    new "（转移话题）"
+
+    # game/script.rpy:307
+    old "Dragging in something else, so nobody notices the question was never answered."
+    new "扯进别的事，让人察觉不到问题根本没被回答。"
+
+    # game/script.rpy:314
+    old "Cherry Picking"
+    new "选择性举证"
+
+    # game/script.rpy:314
+    old "(Only the Ripe Ones)"
+    new "（只挑熟樱桃）"
+
+    # game/script.rpy:314
+    old "Showing only the evidence that agrees, and hiding the rest."
+    new "只展示支持自己的证据，把其余的藏起来。"
+

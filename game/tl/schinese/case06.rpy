@@ -348,3 +348,141 @@ translate schinese strings:
     old "That doesn't show how this thief got in. Find out which way they came."
     new "这证明不了这个小偷是怎么进来的。查清对方从哪边来的。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case06.rpy:80
+translate schinese press_meiling_1_7f3da3f6:
+
+    # meiling "But I know the windows were safe. Put this in my testimony, too."
+    meiling "但我确定窗户是安全的。这句也加进我的证词。"
+
+# game/case06.rpy:84
+translate schinese press_meiling_locked_b09c8449:
+
+    # you "Locked from the inside. Who checked?"
+    you "从里面锁着。谁检查的？"
+
+# game/case06.rpy:85
+translate schinese press_meiling_locked_42638b4b:
+
+    # meiling "Sakuya checks every window twice a day since the Marisa incident. Not a scratch."
+    meiling "自从魔理沙那件事以后，咲夜小姐每天检查两次所有窗户。毫无刮痕。"
+
+# game/case06.rpy:87
+translate schinese press_meiling_locked_cbe8215c:
+
+    # eiki "Sound. And worse for her than she thinks."
+    eiki "说得通。而且比她想的更不利于她。"
+
+# game/case06.rpy:99
+translate schinese meiling_sleeptalk_874a9db5:
+
+    # you "Meiling? ...Meiling?"
+    you "美铃？……美铃？"
+
+# game/case06.rpy:100
+translate schinese meiling_sleeptalk_65a113fb:
+
+    # meiling "Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."
+    meiling "唔……早上好，天狗小姐……拍照？……好啊……请进……"
+
+# game/case06.rpy:102
+translate schinese meiling_sleeptalk_dc98578d:
+
+    # eiki "In her sleep, the witness is a far better witness."
+    eiki "睡着的证人，反而是好得多的证人。"
+
+# game/case06.rpy:106
+translate schinese press_meiling_sleep_c8c7a3ba:
+
+    # you "You let a tengu in through the gate yesterday."
+    you "你昨天放一个天狗从正门进去了。"
+
+# game/case06.rpy:108
+translate schinese press_meiling_sleep_b8f5569b:
+
+    # meiling "I did? ...I mean, I did not. I was awake. Mostly."
+    meiling "我放的？……不，我没有。我醒着呢。大部分时间。"
+
+# game/case06.rpy:124
+translate schinese case6_f3f02b54:
+
+    # eiki "Where I belong. Komachi, why is the defendant snoring?"
+    eiki "这才是我的位置。小町，被告为什么在打呼？"
+
+# game/case06.rpy:125
+translate schinese case6_86419567:
+
+    # komachi "She says she's resting her eyes. Loudly."
+    komachi "她说她只是在闭目养神。很大声地。"
+
+# game/case06.rpy:129
+translate schinese case6_c5ca79df:
+
+    # eiki "Then this will help. Court is in session."
+    eiki "那么这个会有用。现在开庭。"
+
+# game/case06.rpy:145
+translate schinese case6_f19bff0b:
+
+    # komachi "And if she nods off again, boss?"
+    komachi "要是她又打瞌睡呢，四季大人？"
+
+# game/case06.rpy:146
+translate schinese case6_87741a26:
+
+    # eiki "Then press her anyway. People say the truest things in their sleep."
+    eiki "照样追问她。人在睡梦中说的话最真。"
+
+# game/case06.rpy:164
+translate schinese case6_cb5a25a3:
+
+    # meiling_t "The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"
+    meiling_t "小偷没走我的门。魔理沙是从图书馆窗户进来的，所以小偷都走窗户！"
+
+translate schinese strings:
+
+    # game/case06.rpy:17
+    old "The library window was locked from the inside all day. So nobody came in that way."
+    new "图书馆的窗户一整天都从里面锁着。所以没人从那里进来。"
+
+    # game/case06.rpy:17
+    old "That is perfectly sound. A window locked from inside was not an entrance. It should worry her more than you."
+    new "这完全说得通。从里面锁着的窗户不是入口。该担心的是她，不是你。"
+
+    # game/case06.rpy:17
+    old "Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."
+    new "唔……早上好，天狗小姐……拍照？……好啊……请进……"
+
+    # game/case06.rpy:17
+    old "Sleep-talk isn't reasoning, Junior Judge. Though it is very informative."
+    new "梦话不是推理，见习法官。不过很有参考价值。"
+
+    # game/case06.rpy:17
+    old "The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"
+    new "小偷没走我的门。魔理沙是从图书馆窗户进来的，所以小偷都走窗户！"
+
+    # game/case06.rpy:17
+    old "Her rule: every thief comes in through a window. Which of these breaks it?"
+    new "她的规律：小偷都从窗户进来。下面哪一项能打破它？"
+
+    # game/case06.rpy:17
+    old "Marisa broke in through the library window last month."
+    new "魔理沙上个月从图书馆窗户闯了进来。"
+
+    # game/case06.rpy:17
+    old "The library window was locked from the inside all day."
+    new "图书馆的窗户一整天都从里面锁着。"
+
+    # game/case06.rpy:17
+    old "Tengu geta prints run from the front gate straight to the hall."
+    new "天狗的木屐印从正门一直延伸到大厅。"
+
+    # game/case06.rpy:17
+    old "The note on the parasol stand is signed \"A.S.\""
+    new "伞架上字条的署名是“A.S.”。"
+
+    # game/case06.rpy:17
+    old "That doesn't show a thief coming in any other way. Find one who used the gate."
+    new "这证明不了有小偷从别处进来。找出走正门的那个人。"
+

@@ -90,3 +90,39 @@ translate schinese strings:
     old "TESTIMONY UPDATED"
     new "证词追加"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate schinese strings:
+
+    # game/court.rpy:428
+    old "She's asleep, Junior Judge. Object when she can hear you."
+    new "她睡着了，见习法官。等她听得见时再反对。"
+
+    # game/court.rpy:448
+    old "Not yet. Keep pressing and watch what she does with it."
+    new "还没到时候。继续追问，看她会怎么处理它。"
+
+    # game/court.rpy:487
+    old "A fair objection. A rule needs only one exception to fall. Find it."
+    new "合理的反对。一条规律只需一个例外就会倒下。找出来。"
+
+    # game/court.rpy:490
+    old "A fair objection. No single item proves it. Which two do, together?"
+    new "合理的反对。单凭一样东西证明不了。哪两样合起来可以？"
+
+    # game/court.rpy:505
+    old "That doesn't break her rule."
+    new "这打破不了她的规律。"
+
+    # game/court.rpy:513
+    old "Those two don't prove it together."
+    new "这两样合起来也证明不了。"
+
+    # game/court.rpy:521
+    old "Good. Now show the court exactly where. Which part of it?"
+    new "很好。现在向法庭指出确切的地方。是哪一部分？"
+
+    # game/court.rpy:526
+    old "Right item. Wrong detail. Read it again."
+    new "东西对了，细节错了。再读一遍。"
+

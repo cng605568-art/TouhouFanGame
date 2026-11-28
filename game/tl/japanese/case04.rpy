@@ -352,3 +352,55 @@ translate japanese strings:
     old "That's a reputation, not a result. Show whether anyone actually tested it."
     new "それは評判であって、結果ではありません。誰かが実際に試験したかを示しなさい。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case04.rpy:67
+translate japanese press_reisen_1_f8527b89:
+
+    # reisen "It's Master Eirin's own formula. Add that to my testimony. It settles everything."
+    reisen "師匠の永琳様直々の処方です。証言に加えてください。それで全部決まりです。"
+
+# game/case04.rpy:80
+translate japanese press_reisen_3_2a83a3c4:
+
+    # you "And the colours started right after they drank it."
+    you "それに、色が聞こえ始めたのは飲んだ直後です。"
+
+# game/case04.rpy:82
+translate japanese press_reisen_3_b7a88ed3:
+
+    # reisen "I've read your docket, Junior Judge. I know that trick. Write this down."
+    reisen "あなたの事件記録は読みましたよ、見習い判事。その手は知っています。書き留めてください。"
+
+# game/case04.rpy:86
+translate japanese press_reisen_5_764117fc:
+
+    # you "So you admit the timing proves nothing?"
+    you "では、時間だけでは何も証明できないと認めるのですね？"
+
+# game/case04.rpy:87
+translate japanese press_reisen_5_09ab8fe2:
+
+    # reisen "Timing alone proves nothing. I listen in lectures."
+    reisen "時間だけでは何も証明できません。講義はちゃんと聞いていますから。"
+
+# game/case04.rpy:89
+translate japanese press_reisen_5_e0bea76d:
+
+    # eiki "She is right about that much. Which is not the same as being right."
+    eiki "そこまでは彼女の言う通りです。それは、正しいこととは別ですが。"
+
+translate japanese strings:
+
+    # game/case04.rpy:17
+    old "Cleared by whom? Press around her before you object."
+    new "誰が許可したのか？異議の前に、周りを問いただしなさい。"
+
+    # game/case04.rpy:17
+    old "They heard colours after drinking it, yes. But coming after isn't the same as caused by."
+    new "飲んだ後に色が聞こえた、それは認めます。でも、後に起きたからといって原因とは限りません。"
+
+    # game/case04.rpy:17
+    old "She's right about that. Coming after is not the same as caused by. Her mistake is somewhere else."
+    new "それは彼女の言う通りです。後に起きたことは原因とは限りません。誤りは別の所にあります。"
+

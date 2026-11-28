@@ -408,3 +408,113 @@ translate schinese strings:
     old "That doesn't show what was agreed. Find the deal as it was first made."
     new "这证明不了当初约定了什么。找出最初的约定。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case09.rpy:90
+translate schinese press_kaguya_3_e31802fb:
+
+    # kaguya "Ah, but finishing was never really the point. Let me rephrase."
+    kaguya "啊，但完成从来就不是重点。让我换个说法。"
+
+# game/case09.rpy:92
+translate schinese press_kaguya_3_78409258:
+
+    # you "Earned properly how?"
+    you "好好挣来是什么意思？"
+
+# game/case09.rpy:94
+translate schinese press_kaguya_3_ad3f368d:
+
+    # kaguya "Oh, you'll see. Let me rephrase again."
+    kaguya "哦，你马上就知道了。让我再换个说法。"
+
+# game/case09.rpy:96
+translate schinese press_kaguya_3_65bc0e33:
+
+    # you "The moon wasn't on the list. When did you add it?"
+    you "清单上没有月亮。你什么时候加上的？"
+
+# game/case09.rpy:98
+translate schinese press_kaguya_3_156e1420:
+
+    # kaguya "This morning. After she finished the other five. Obviously."
+    kaguya "今天早上。在她完成另外五件之后。理所当然。"
+
+# game/case09.rpy:100
+translate schinese press_kaguya_3_0fe2b220:
+
+    # eiki "So the finish line moved the moment she reached it."
+    eiki "也就是说，她刚到终点线，终点线就挪走了。"
+
+# game/case09.rpy:108
+translate schinese case9_1a9632ff:
+
+    # komachi "Boss, the defendant sent word. She'll arrive when she feels like it."
+    komachi "四季大人，被告捎来话了。她说想来的时候自然会来。"
+
+# game/case09.rpy:129
+translate schinese case9_b7298928:
+
+    # eiki "And watch her testimony closely. With this one, it tends to change while you read it."
+    eiki "还有，仔细看她的证言。这个人的证言往往会在你读的时候改变。"
+
+# game/case09.rpy:227
+translate schinese case9_breakthrough_5e869890:
+
+    # mokou "Fujiwara no Mokou. The Bunbunmaru says you lost. They printed it an hour before your verdict."
+    mokou "藤原妹红。文文。新闻说你输了。在判决前一个小时就印出来了。"
+
+# game/case09.rpy:228
+translate schinese case9_breakthrough_293de786:
+
+    # mokou "Thought I'd help you lose some more."
+    mokou "我想来帮你多输点。"
+
+# game/case09.rpy:260
+translate schinese case9_breakthrough_093112bf:
+
+    # komachi "That's the docket, boss."
+    komachi "案卷审完了，四季大人。"
+
+# game/case09.rpy:261
+translate schinese case9_breakthrough_eb865a48:
+
+    # eiki "Not quite. Keep the court open. They will be back by dinner."
+    eiki "还没完。让法庭开着。她们晚饭前就会回来。"
+
+# game/case09.rpy:262
+translate schinese case9_breakthrough_f1d6e2c2:
+
+    # komachi "...You're keeping the court open for dinner?"
+    komachi "……您要为了晚饭让法庭开着？"
+
+translate schinese strings:
+
+    # game/case09.rpy:19
+    old "I told Reisen she might take a week off. If she finished five chores. Roughly."
+    new "我跟铃仙说过，她也许可以休一周假。如果完成五件差事的话。大概吧。"
+
+    # game/case09.rpy:19
+    old "A week off is a privilege. Privileges must be earned properly."
+    new "一周假期是特权。特权必须好好挣来。"
+
+    # game/case09.rpy:19
+    old "\"Five chores, then a week off.\""
+    new "“五件差事，然后休一周。”"
+
+    # game/case09.rpy:19
+    old "Signed: Kaguya Houraisan."
+    new "签名：蓬莱山辉夜。"
+
+    # game/case09.rpy:19
+    old "All five ticked."
+    new "五件全打勾。"
+
+    # game/case09.rpy:19
+    old "True, but that isn't where the finish line was drawn. Point to the deal itself."
+    new "没错，但那不是终点线画下的地方。指出约定本身。"
+
+    # game/case09.rpy:19
+    old "Not yet. She's stalling, not moving anything. Press her and watch the line move."
+    new "还没到时候。她只是在拖延，还没挪动任何东西。追问她，看着那条线移动。"
+

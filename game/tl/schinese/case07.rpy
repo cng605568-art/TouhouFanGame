@@ -328,3 +328,179 @@ translate schinese strings:
     old "That doesn't tell us what Marisa actually said. Find her real words."
     new "这说明不了魔理沙到底说了什么。找出她的原话。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case07.rpy:98
+translate schinese alice_doll_heckle_8ab6a0d4:
+
+    # alice "[heckle!t]"
+    alice "[heckle!t]"
+
+# game/case07.rpy:118
+translate schinese press_alice_thief_9908cae0:
+
+    # you "What does her borrowing have to do with your dolls?"
+    you "她借书的毛病和你的人偶有什么关系？"
+
+# game/case07.rpy:120
+translate schinese press_alice_thief_c53a41e8:
+
+    # alice "Everything. A thief's opinion is worthless."
+    alice "关系大了。小偷的意见一文不值。"
+
+# game/case07.rpy:122
+translate schinese press_alice_thief_ac02b00d:
+
+    # eiki "A thief can still be right about a doll."
+    eiki "小偷对人偶的看法也可能是对的。"
+
+# game/case07.rpy:126
+translate schinese press_alice_exact_96047bc0:
+
+    # you "Exactly? Word for word?"
+    you "原样？一字不差？"
+
+# game/case07.rpy:127
+translate schinese press_alice_exact_1b1412a9:
+
+    # alice "I have a perfect memory for insults. Every puppeteer does."
+    alice "对侮辱我的记性好得很。人偶师都是这样。"
+
+# game/case07.rpy:132
+translate schinese press_alice_3_ec96795c:
+
+    # alice "From her insult, obviously. I just told you what she said."
+    alice "当然是她的侮辱。我刚才不是说了吗。"
+
+# game/case07.rpy:148
+translate schinese case7_0cb412bd:
+
+    # komachi "Defendant's here, boss. She brought a lawyer."
+    komachi "被告到了，四季大人。还带了律师。"
+
+# game/case07.rpy:186
+translate schinese case7_48a6246b:
+
+    # alice_t "Marisa steals books and lies about borrowing them. Nothing she says about my dolls can be trusted."
+    alice_t "魔理沙偷书，还撒谎说是借的。她对我人偶说的任何话都不可信。"
+
+# game/case07.rpy:210
+translate schinese case7_cross_72281978:
+
+    # you "Marisa's habits don't decide whether her comment was fair. That's an attack on the speaker."
+    you "魔理沙的习惯决定不了她的评论是否公道。那是在攻击说话的人。"
+
+# game/case07.rpy:212
+translate schinese case7_cross_ef44909b:
+
+    # eiki "Ad hominem. A thief can still be right about a doll. Sustained."
+    eiki "人身攻击。小偷对人偶的看法也可能是对的。反对有效。"
+
+# game/case07.rpy:221
+translate schinese case7_cross_d9889fb6:
+
+    # alice "...My counsel objects. To me."
+    alice "……我的律师提出反对了。反对我。"
+
+# game/case07.rpy:222
+translate schinese case7_cross_c306bee0:
+
+    # alice "She says I should stop talking about Marisa, and quote Marisa instead."
+    alice "她说我别再谈论魔理沙，改为引用魔理沙的原话。"
+
+# game/case07.rpy:224
+translate schinese case7_cross_7fe434e1:
+
+    # eiki "Your counsel is wiser than you. A second testimony, then. Word for word."
+    eiki "你的律师比你聪明。那么第二次证言。一字不差。"
+
+# game/case07.rpy:236
+translate schinese case7_cross_1c0802c0:
+
+    # alice_t "Fine. My counsel insists I quote Marisa exactly. So I will."
+    alice_t "好吧。我的律师坚持要我原样引用魔理沙的话。那我就照做。"
+
+# game/case07.rpy:237
+translate schinese case7_cross_edca5483:
+
+    # alice_t "She called my dolls worthless junk and said I should quit. So she deserved the string."
+    alice_t "她说我的人偶是一文不值的破烂，还叫我别做了。所以她活该被绑。"
+
+# game/case07.rpy:238
+translate schinese case7_cross_373ff126:
+
+    # alice_t "So I defended my life's work. Anyone would have."
+    alice_t "所以我捍卫了我毕生的心血。换谁都会这么做。"
+
+# game/case07.rpy:253
+translate schinese case7_cross2_d5efc309:
+
+    # eiki "Again. Her second story, from the top."
+    eiki "再来一次。她的第二个说法，从头开始。"
+
+# game/case07.rpy:311
+translate schinese case7_breakthrough_e3d34dd7:
+
+    # komachi "...Her dolls caught her, boss. They're carrying her out. Gently."
+    komachi "……她的人偶接住她了，四季大人。正在把她抬出去。轻轻地。"
+
+# game/case07.rpy:312
+translate schinese case7_breakthrough_de0525af:
+
+    # eiki "Show-off."
+    eiki "爱显摆。"
+
+translate schinese strings:
+
+    # game/case07.rpy:17
+    old "Marisa steals books and lies about borrowing them. Nothing she says about my dolls can be trusted."
+    new "魔理沙偷书，还撒谎说是借的。她对我人偶说的任何话都不可信。"
+
+    # game/case07.rpy:17
+    old "Not yet. She hasn't quoted Marisa at all. She's dismissing the speaker."
+    new "还没到时候。她根本没引用魔理沙的话。她是在否定说话的人。"
+
+    # game/case07.rpy:17
+    old "She isn't saying Marisa does it too. She's saying Marisa doesn't count, because of who Marisa is."
+    new "她没说魔理沙也一样。她是说，因为魔理沙是那种人，所以她的话不算数。"
+
+    # game/case07.rpy:17
+    old "No rule built from one example. Just a comment thrown out because of who made it."
+    new "没有从一个例子造出的规律。只是因为说话的人而丢掉了一句评论。"
+
+    # game/case07.rpy:17
+    old "Nothing is mistaken for a cause. She's judging the speaker instead of the words."
+    new "没有把什么误当成原因。她评判的是说话的人，不是话。"
+
+    # game/case07.rpy:49
+    old "Word for Word"
+    new "一字不差"
+
+    # game/case07.rpy:49
+    old "Fine. My counsel insists I quote Marisa exactly. So I will."
+    new "好吧。我的律师坚持要我原样引用魔理沙的话。那我就照做。"
+
+    # game/case07.rpy:49
+    old "Quoting is allowed. Misquoting is the question. Read on."
+    new "引用可以。问题在于引错。继续读。"
+
+    # game/case07.rpy:49
+    old "Defending your work isn't a fallacy. What she says she defended it from is."
+    new "捍卫自己的作品不是谬误。问题在于她说要捍卫它免受什么。"
+
+    # game/case07.rpy:87
+    old "My counsel says that was embarrassing."
+    new "我的律师说，刚才那下很丢人。"
+
+    # game/case07.rpy:87
+    old "My counsel is laughing. Silently."
+    new "我的律师在笑。无声地。"
+
+    # game/case07.rpy:87
+    old "My counsel would like that struck from the record. And from your memory."
+    new "我的律师希望把那句从记录里删掉。也从你的记忆里删掉。"
+
+    # game/case07.rpy:87
+    old "My counsel asks whether the Junior Judge is new. ...She is? That explains it."
+    new "我的律师问见习法官是不是新来的。……是吗？难怪。"
+

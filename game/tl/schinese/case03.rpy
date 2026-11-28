@@ -292,3 +292,63 @@ translate schinese strings:
     old "NOT GUILTY"
     new "无罪"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case03.rpy:68
+translate schinese press_sakuya_2_05717a1f:
+
+    # sakuya "And note the timing, Junior Judge. Put this in my testimony."
+    sakuya "还有请注意时间，见习法官。把这句加进我的证词。"
+
+# game/case03.rpy:72
+translate schinese press_sakuya_trap_1d9b9d12:
+
+    # you "Couldn't someone have come in from outside?"
+    you "会不会有人从外面进来？"
+
+# game/case03.rpy:74
+translate schinese press_sakuya_trap_4dcf8bfb:
+
+    # sakuya "Through these halls? I make them longer when I'm annoyed. Nobody outside gets in that fast."
+    sakuya "穿过这些走廊？我心情不好时会把它们变长。外面的人不可能那么快进来。"
+
+# game/case03.rpy:76
+translate schinese press_sakuya_trap_f3a1f87b:
+
+    # eiki "That much is sound. Keep your objections for the parts that aren't."
+    eiki "这部分说得通。把反对留给说不通的地方。"
+
+# game/case03.rpy:92
+translate schinese case3_c840247a:
+
+    # komachi "Witness is already here, boss. She was here before me. Before you, even."
+    komachi "证人已经到了，四季大人。比我先到。可能比您还早。"
+
+# game/case03.rpy:93
+translate schinese case3_a5042828:
+
+    # eiki "Head maids."
+    eiki "女仆长嘛。"
+
+# game/case03.rpy:97
+translate schinese case3_322c1d95:
+
+    # eiki "Court is in session. The defendant, Hong Meiling, stands accused of eating the mistress's pudding."
+    eiki "现在开庭。被告红美铃被控吃掉了大小姐的布丁。"
+
+# game/case03.rpy:132
+translate schinese case3_0ce05c23:
+
+    # sakuya_t "Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."
+    sakuya_t "要么是美铃吃的，要么是大小姐吃了自己的布丁。大小姐不会这么做。所以：是美铃。"
+
+translate schinese strings:
+
+    # game/case03.rpy:15
+    old "Five minutes is too quick for anyone outside to reach the kitchen. So it was someone in the mansion."
+    new "五分钟太短，外面的人到不了厨房。所以是馆内的人。"
+
+    # game/case03.rpy:15
+    old "That one holds. Five minutes is too short for an outsider. Her mistake is in who she counts as inside."
+    new "这一句站得住。对外人来说五分钟太短了。她的错误在于把谁算作“馆内”。"
+

@@ -326,3 +326,131 @@ translate japanese strings:
     old "That doesn't show whether the charms work. Find out what happened to the people who bought them."
     new "それではお守りが効くかはわかりません。買った人たちに何が起きたかを調べなさい。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case08.rpy:76
+translate japanese reimu_bribe_02edb58b:
+
+    # reimu "Smart judge. That one's on the house. Stay lucky."
+    reimu "賢い判事ね。それはおまけよ。幸運を。"
+
+# game/case08.rpy:79
+translate japanese reimu_bribe_6c768d3b:
+
+    # eiki "...I saw that, Junior Judge. This court remembers."
+    eiki "……見ましたよ、見習い判事。この法廷は覚えています。"
+
+# game/case08.rpy:88
+translate japanese press_reimu_1_92277283:
+
+    # reimu "It's the best-selling charm in Gensokyo. Put that in my testimony."
+    reimu "幻想郷一の売れ筋のお守りよ。証言に加えて。"
+
+# game/case08.rpy:99
+translate japanese press_reimu_3_e1cb6495:
+
+    # reimu "Weren't you listening? Fifty customers! And it was in the paper. Write that down too."
+    reimu "聞いてなかったの？五十人のお客よ！新聞にも載ったし。それも書いといて。"
+
+# game/case08.rpy:103
+translate japanese press_reimu_advert_2154861a:
+
+    # you "You advertised in the Bunbunmaru?"
+    you "文々。新聞に広告を出したのですか？"
+
+# game/case08.rpy:104
+translate japanese press_reimu_advert_f0a54c1a:
+
+    # reimu "That tengu wouldn't stop following me. Taking pictures. Asking about my donation box."
+    reimu "あの天狗がずっとつきまとってくるのよ。写真を撮ったり。賽銭箱のことを聞いたり。"
+
+# game/case08.rpy:106
+translate japanese press_reimu_advert_bbe835f4:
+
+    # eiki "That tengu has been following a great many of our defendants."
+    eiki "あの天狗は、ずいぶん多くの被告人につきまとっているようですね。"
+
+# game/case08.rpy:122
+translate japanese case8_6ceae4da:
+
+    # komachi "Boss! Lucky charms, one hundred yen. Want one?"
+    komachi "四季様！幸運のお守り、百円です。おひとついかが？"
+
+# game/case08.rpy:123
+translate japanese case8_99ffd979:
+
+    # eiki "Komachi. Where did you get those?"
+    eiki "小町。それをどこで手に入れたのですか？"
+
+# game/case08.rpy:124
+translate japanese case8_a7bcae20:
+
+    # komachi "The defendant. She's selling them in the waiting room."
+    komachi "被告人からです。待合室で売ってるんですよ。"
+
+# game/case08.rpy:128
+translate japanese case8_426a16df:
+
+    # eiki "Confiscate them. Court is in session."
+    eiki "没収しなさい。開廷します。"
+
+# game/case08.rpy:145
+translate japanese case8_5d7f6b0d:
+
+    # eiki "And whatever she offers you on the stand, Junior Judge, do not take it."
+    eiki "それと、証言台で彼女が何を差し出しても、見習い判事、受け取ってはいけません。"
+
+# game/case08.rpy:192
+translate japanese case8_breakthrough_a09d2427:
+
+    # you "Five thousand yen in the box: fifty charms sold. And this list: not one owner got any luckier."
+    you "箱の中に五千円。お守りは五十個売れた。そしてこのリスト。持ち主の誰一人として幸運になっていません。"
+
+# game/case08.rpy:234
+translate japanese case8_breakthrough_0f981eb3:
+
+    # reimu "Nice try. Shrine maiden. I fly."
+    reimu "残念でした。巫女だもの。飛べるのよ。"
+
+# game/case08.rpy:235
+translate japanese case8_breakthrough_505dcbe4:
+
+    # komachi "...She flies, boss."
+    komachi "……飛べるそうです、四季様。"
+
+# game/case08.rpy:237
+translate japanese case8_breakthrough_62588067:
+
+    # eiki "Then throw the donation box."
+    eiki "では賽銭箱を投げなさい。"
+
+# game/case08.rpy:240
+translate japanese case8_breakthrough_d080f390:
+
+    # reimu "You wouldn't."
+    reimu "まさか。"
+
+# game/case08.rpy:254
+translate japanese case8_breakthrough_464e9005:
+
+    # komachi "She dived after it, boss. Didn't even hesitate."
+    komachi "追いかけて飛び込みましたよ、四季様。迷いもせずに。"
+
+translate japanese strings:
+
+    # game/case08.rpy:19
+    old "That's her conclusion. Object to the reason she gives for it."
+    new "それは彼女の結論です。そこに挙げる理由に異議を唱えなさい。"
+
+    # game/case08.rpy:19
+    old "The Bunbunmaru even ran an advert for them. I paid that tengu five hundred yen."
+    new "文々。新聞にも広告を出したのよ。あの天狗に五百円払ったんだから。"
+
+    # game/case08.rpy:19
+    old "An advert is a fact, not an argument. Though it tells us who has been watching this court."
+    new "広告は事実であって議論ではありません。もっとも、誰がこの法廷を見張っているかは分かりますが。"
+
+    # game/case08.rpy:19
+    old "Show what the crowd bought, and what happened to the crowd. Both."
+    new "群衆が何を買ったか、そして群衆に何が起きたか。両方を示しなさい。"
+

@@ -368,3 +368,39 @@ translate schinese strings:
     # game/screens.rpy
     old "LANGUAGE"
     new "语言"
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate schinese strings:
+
+    # game/screens.rpy:225
+    old "Zzz…"
+    new "Zzz…"
+
+    # game/screens.rpy:234
+    old "Nudge her awake"
+    new "把她摇醒"
+
+    # game/screens.rpy:248
+    old "Take the charm (+1)"
+    new "收下护身符（+1）"
+
+    # game/screens.rpy:565
+    old "Which two items prove it together? Choose both, then present."
+    new "哪两样东西合起来能证明？两样都选好，再出示。"
+
+    # game/screens.rpy:596
+    old "Present these two"
+    new "出示这两样"
+
+    # game/screens.rpy:642
+    old "POINT IT OUT"
+    new "指出"
+
+    # game/screens.rpy:645
+    old "Point to the part of it that proves your objection."
+    new "指出能证明你的反对的部分。"
+
+    # game/screens.rpy:713
+    old "FIND THE EXCEPTION"
+    new "找出例外"
+

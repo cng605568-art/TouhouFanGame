@@ -348,3 +348,141 @@ translate japanese strings:
     old "That doesn't show how this thief got in. Find out which way they came."
     new "それではこの泥棒の侵入経路はわかりません。どこから来たかを調べなさい。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case06.rpy:80
+translate japanese press_meiling_1_7f3da3f6:
+
+    # meiling "But I know the windows were safe. Put this in my testimony, too."
+    meiling "でも窓が安全だったのは確かです。これも証言に加えてください。"
+
+# game/case06.rpy:84
+translate japanese press_meiling_locked_b09c8449:
+
+    # you "Locked from the inside. Who checked?"
+    you "内側から施錠。誰が確かめたのですか？"
+
+# game/case06.rpy:85
+translate japanese press_meiling_locked_42638b4b:
+
+    # meiling "Sakuya checks every window twice a day since the Marisa incident. Not a scratch."
+    meiling "魔理沙の件以来、咲夜さんが毎日二回すべての窓を確かめています。傷一つありません。"
+
+# game/case06.rpy:87
+translate japanese press_meiling_locked_cbe8215c:
+
+    # eiki "Sound. And worse for her than she thinks."
+    eiki "筋は通っています。そして彼女が思うより、彼女に不利です。"
+
+# game/case06.rpy:99
+translate japanese meiling_sleeptalk_874a9db5:
+
+    # you "Meiling? ...Meiling?"
+    you "美鈴？……美鈴？"
+
+# game/case06.rpy:100
+translate japanese meiling_sleeptalk_65a113fb:
+
+    # meiling "Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."
+    meiling "むにゃ……おはようございます、天狗さん……撮影？……どうぞ……お入りください……"
+
+# game/case06.rpy:102
+translate japanese meiling_sleeptalk_dc98578d:
+
+    # eiki "In her sleep, the witness is a far better witness."
+    eiki "眠っている時の証人の方が、ずっと良い証人ですね。"
+
+# game/case06.rpy:106
+translate japanese press_meiling_sleep_c8c7a3ba:
+
+    # you "You let a tengu in through the gate yesterday."
+    you "あなたは昨日、天狗を門から通しましたね。"
+
+# game/case06.rpy:108
+translate japanese press_meiling_sleep_b8f5569b:
+
+    # meiling "I did? ...I mean, I did not. I was awake. Mostly."
+    meiling "私がですか？……いえ、通してません。起きてましたから。だいたいは。"
+
+# game/case06.rpy:124
+translate japanese case6_f3f02b54:
+
+    # eiki "Where I belong. Komachi, why is the defendant snoring?"
+    eiki "本来の場所です。小町、なぜ被告人はいびきをかいているのですか？"
+
+# game/case06.rpy:125
+translate japanese case6_86419567:
+
+    # komachi "She says she's resting her eyes. Loudly."
+    komachi "目を休めているだけだそうです。大きな音で。"
+
+# game/case06.rpy:129
+translate japanese case6_c5ca79df:
+
+    # eiki "Then this will help. Court is in session."
+    eiki "では、これが効くでしょう。開廷します。"
+
+# game/case06.rpy:145
+translate japanese case6_f19bff0b:
+
+    # komachi "And if she nods off again, boss?"
+    komachi "また居眠りしたらどうします、四季様？"
+
+# game/case06.rpy:146
+translate japanese case6_87741a26:
+
+    # eiki "Then press her anyway. People say the truest things in their sleep."
+    eiki "それでも問いただしなさい。人は眠っている時に一番本当のことを言うものです。"
+
+# game/case06.rpy:164
+translate japanese case6_cb5a25a3:
+
+    # meiling_t "The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"
+    meiling_t "泥棒は私の門を通っていません。魔理沙は図書館の窓から入ったんだから、泥棒はみんな窓を使うんです！"
+
+translate japanese strings:
+
+    # game/case06.rpy:17
+    old "The library window was locked from the inside all day. So nobody came in that way."
+    new "図書館の窓は一日中内側から施錠されていました。だから誰もそこからは入っていません。"
+
+    # game/case06.rpy:17
+    old "That is perfectly sound. A window locked from inside was not an entrance. It should worry her more than you."
+    new "それは完全に筋が通っています。内側から施錠された窓は入口になりません。困るのはあなたより彼女の方です。"
+
+    # game/case06.rpy:17
+    old "Mm... morning, Miss Tengu... a photo shoot? Sure... go on in..."
+    new "むにゃ……おはようございます、天狗さん……撮影？……どうぞ……お入りください……"
+
+    # game/case06.rpy:17
+    old "Sleep-talk isn't reasoning, Junior Judge. Though it is very informative."
+    new "寝言は推論ではありませんよ、見習い判事。とても参考にはなりますが。"
+
+    # game/case06.rpy:17
+    old "The thief didn't use my gate. Marisa came in by the library window, so every thief uses the windows!"
+    new "泥棒は私の門を通っていません。魔理沙は図書館の窓から入ったんだから、泥棒はみんな窓を使うんです！"
+
+    # game/case06.rpy:17
+    old "Her rule: every thief comes in through a window. Which of these breaks it?"
+    new "彼女の法則：泥棒はみんな窓から入る。この法則を崩すのはどれ？"
+
+    # game/case06.rpy:17
+    old "Marisa broke in through the library window last month."
+    new "魔理沙は先月、図書館の窓から侵入した。"
+
+    # game/case06.rpy:17
+    old "The library window was locked from the inside all day."
+    new "図書館の窓は一日中内側から施錠されていた。"
+
+    # game/case06.rpy:17
+    old "Tengu geta prints run from the front gate straight to the hall."
+    new "天狗の下駄の跡が、正門から広間までまっすぐ続いている。"
+
+    # game/case06.rpy:17
+    old "The note on the parasol stand is signed \"A.S.\""
+    new "傘立てのメモの署名は「A.S.」。"
+
+    # game/case06.rpy:17
+    old "That doesn't show a thief coming in any other way. Find one who used the gate."
+    new "それでは、窓以外から入った泥棒がいることにはなりません。門を使った者を見つけなさい。"
+

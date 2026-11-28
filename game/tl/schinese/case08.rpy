@@ -326,3 +326,131 @@ translate schinese strings:
     old "That doesn't show whether the charms work. Find out what happened to the people who bought them."
     new "这证明不了护身符是否管用。查查买了的人后来怎么样了。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case08.rpy:76
+translate schinese reimu_bribe_02edb58b:
+
+    # reimu "Smart judge. That one's on the house. Stay lucky."
+    reimu "聪明的法官。这个算我送的。祝你好运。"
+
+# game/case08.rpy:79
+translate schinese reimu_bribe_6c768d3b:
+
+    # eiki "...I saw that, Junior Judge. This court remembers."
+    eiki "……我看见了，见习法官。本庭会记住的。"
+
+# game/case08.rpy:88
+translate schinese press_reimu_1_92277283:
+
+    # reimu "It's the best-selling charm in Gensokyo. Put that in my testimony."
+    reimu "这可是幻想乡最畅销的护身符。把这句加进我的证词。"
+
+# game/case08.rpy:99
+translate schinese press_reimu_3_e1cb6495:
+
+    # reimu "Weren't you listening? Fifty customers! And it was in the paper. Write that down too."
+    reimu "你没在听吗？五十个顾客！还上了报纸。这个也记下来。"
+
+# game/case08.rpy:103
+translate schinese press_reimu_advert_2154861a:
+
+    # you "You advertised in the Bunbunmaru?"
+    you "你在文文。新闻上登了广告？"
+
+# game/case08.rpy:104
+translate schinese press_reimu_advert_f0a54c1a:
+
+    # reimu "That tengu wouldn't stop following me. Taking pictures. Asking about my donation box."
+    reimu "那个天狗一直跟着我。拍照片。打听我的香火钱箱。"
+
+# game/case08.rpy:106
+translate schinese press_reimu_advert_bbe835f4:
+
+    # eiki "That tengu has been following a great many of our defendants."
+    eiki "那个天狗似乎一直跟踪着我们的许多被告。"
+
+# game/case08.rpy:122
+translate schinese case8_6ceae4da:
+
+    # komachi "Boss! Lucky charms, one hundred yen. Want one?"
+    komachi "四季大人！幸运护身符，一百日元。来一个吗？"
+
+# game/case08.rpy:123
+translate schinese case8_99ffd979:
+
+    # eiki "Komachi. Where did you get those?"
+    eiki "小町。你从哪儿弄来的？"
+
+# game/case08.rpy:124
+translate schinese case8_a7bcae20:
+
+    # komachi "The defendant. She's selling them in the waiting room."
+    komachi "被告那里。她在候审室里卖。"
+
+# game/case08.rpy:128
+translate schinese case8_426a16df:
+
+    # eiki "Confiscate them. Court is in session."
+    eiki "没收。现在开庭。"
+
+# game/case08.rpy:145
+translate schinese case8_5d7f6b0d:
+
+    # eiki "And whatever she offers you on the stand, Junior Judge, do not take it."
+    eiki "还有，见习法官，无论她在证人席上给你什么，都不要收。"
+
+# game/case08.rpy:192
+translate schinese case8_breakthrough_a09d2427:
+
+    # you "Five thousand yen in the box: fifty charms sold. And this list: not one owner got any luckier."
+    you "箱里五千日元：卖出五十个护身符。再看这份清单：没有一个持有者变得更幸运。"
+
+# game/case08.rpy:234
+translate schinese case8_breakthrough_0f981eb3:
+
+    # reimu "Nice try. Shrine maiden. I fly."
+    reimu "想得美。我是巫女。我会飞。"
+
+# game/case08.rpy:235
+translate schinese case8_breakthrough_505dcbe4:
+
+    # komachi "...She flies, boss."
+    komachi "……她会飞，四季大人。"
+
+# game/case08.rpy:237
+translate schinese case8_breakthrough_62588067:
+
+    # eiki "Then throw the donation box."
+    eiki "那就把香火钱箱扔出去。"
+
+# game/case08.rpy:240
+translate schinese case8_breakthrough_d080f390:
+
+    # reimu "You wouldn't."
+    reimu "你不会吧。"
+
+# game/case08.rpy:254
+translate schinese case8_breakthrough_464e9005:
+
+    # komachi "She dived after it, boss. Didn't even hesitate."
+    komachi "她跟着扑出去了，四季大人。毫不犹豫。"
+
+translate schinese strings:
+
+    # game/case08.rpy:19
+    old "That's her conclusion. Object to the reason she gives for it."
+    new "那是她的结论。反对她给出的理由。"
+
+    # game/case08.rpy:19
+    old "The Bunbunmaru even ran an advert for them. I paid that tengu five hundred yen."
+    new "文文。新闻还登了广告呢。我付了那个天狗五百日元。"
+
+    # game/case08.rpy:19
+    old "An advert is a fact, not an argument. Though it tells us who has been watching this court."
+    new "广告是事实，不是论证。不过它告诉我们，是谁一直在盯着本庭。"
+
+    # game/case08.rpy:19
+    old "Show what the crowd bought, and what happened to the crowd. Both."
+    new "展示人群买了什么，以及人群后来怎么样了。两样都要。"
+

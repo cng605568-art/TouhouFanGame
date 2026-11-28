@@ -368,3 +368,39 @@ translate japanese strings:
     # game/screens.rpy
     old "LANGUAGE"
     new "言語"
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate japanese strings:
+
+    # game/screens.rpy:225
+    old "Zzz…"
+    new "Zzz…"
+
+    # game/screens.rpy:234
+    old "Nudge her awake"
+    new "揺り起こす"
+
+    # game/screens.rpy:248
+    old "Take the charm (+1)"
+    new "お守りを受け取る（+1）"
+
+    # game/screens.rpy:565
+    old "Which two items prove it together? Choose both, then present."
+    new "合わせて証明になる二つの品は？両方選んでから提示してください。"
+
+    # game/screens.rpy:596
+    old "Present these two"
+    new "この二つを提示"
+
+    # game/screens.rpy:642
+    old "POINT IT OUT"
+    new "POINT IT OUT"
+
+    # game/screens.rpy:645
+    old "Point to the part of it that proves your objection."
+    new "異議を証明する部分を指してください。"
+
+    # game/screens.rpy:713
+    old "FIND THE EXCEPTION"
+    new "FIND THE EXCEPTION"
+

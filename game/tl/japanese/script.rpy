@@ -490,3 +490,31 @@ translate japanese strings:
     old "Changing the test after it has been passed, so no answer is ever enough."
     new "合格した後で試験を変え、どんな答えも足りなくすること。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate japanese strings:
+
+    # game/script.rpy:307
+    old "Red Herring"
+    new "燻製ニシンの虚偽"
+
+    # game/script.rpy:307
+    old "(Change the Subject)"
+    new "（話をそらす）"
+
+    # game/script.rpy:307
+    old "Dragging in something else, so nobody notices the question was never answered."
+    new "別の話を持ち込み、問いに答えていないことに誰も気づかないようにすること。"
+
+    # game/script.rpy:314
+    old "Cherry Picking"
+    new "チェリーピッキング"
+
+    # game/script.rpy:314
+    old "(Only the Ripe Ones)"
+    new "（熟した実だけ）"
+
+    # game/script.rpy:314
+    old "Showing only the evidence that agrees, and hiding the rest."
+    new "都合のいい証拠だけを見せ、残りを隠すこと。"
+

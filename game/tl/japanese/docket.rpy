@@ -122,3 +122,27 @@ translate japanese strings:
     old "Reisen Udongein Inaba v. One Moon Princess"
     new "鈴仙・優曇華院・イナバ 対 月の姫一名"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate japanese strings:
+
+    # game/docket.rpy:75
+    old "CASE 10"
+    new "第十の事件"
+
+    # game/docket.rpy:75
+    old "Back by Dinner"
+    new "夕食までには"
+
+    # game/docket.rpy:75
+    old "The Higan Court v. One Immortal Arsonist"
+    new "彼岸法廷 対 不死の放火魔一名"
+
+    # game/docket.rpy:75
+    old "CASE 11"
+    new "第十一の事件"
+
+    # game/docket.rpy:75
+    old "Bunbunmaru News v. The Higan Court"
+    new "文々。新聞 対 彼岸法廷"
+

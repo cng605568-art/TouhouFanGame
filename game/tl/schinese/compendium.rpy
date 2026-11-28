@@ -275,3 +275,39 @@ translate schinese strings:
     old "You passed the test, but now there's a harder one. Then you're qualified."
     new "你通过了考验，但现在还有更难的。过了才算合格。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate schinese strings:
+
+    # game/compendium.rpy:15
+    old "Ask the question again. If the answer is about something else, that's the fish."
+    new "把问题再问一遍。如果回答说的是别的事，那就是那条鱼。"
+
+    # game/compendium.rpy:15
+    old "Ask what was left out. A handful of examples means nothing without the whole basket."
+    new "问问漏掉了什么。没有整个篮子，几个例子毫无意义。"
+
+    # game/compendium.rpy:37
+    old "Did I eat the last dumpling? Never mind that. Have you seen the moon tonight?"
+    new "我吃了最后一个团子吗？别管那个了。你看今晚的月亮了吗？"
+
+    # game/compendium.rpy:37
+    old "Yes, my homework is late. But think of all the fairies who never do homework."
+    new "是啊，我的作业迟交了。可想想那些从来不写作业的妖精吧。"
+
+    # game/compendium.rpy:37
+    old "Why is the shrine roof leaking? Let's talk about how hard I work instead."
+    new "神社的屋顶为什么漏雨？不如聊聊我有多辛苦吧。"
+
+    # game/compendium.rpy:37
+    old "Three customers loved the soup. Ignore the other forty who left."
+    new "三位客人很喜欢这汤。别管离开的另外四十位。"
+
+    # game/compendium.rpy:37
+    old "The almanac was right twice this year. I framed those pages and burned the rest."
+    new "今年历书说中了两次。我把那两页裱起来，把其余的烧了。"
+
+    # game/compendium.rpy:37
+    old "My review quotes the one kind line from her letter. The rest was complaints."
+    new "我的书评引用了她信里唯一一句好话。其余全是抱怨。"
+

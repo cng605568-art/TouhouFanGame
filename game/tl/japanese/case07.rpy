@@ -328,3 +328,179 @@ translate japanese strings:
     old "That doesn't tell us what Marisa actually said. Find her real words."
     new "それでは魔理沙が実際に何と言ったかはわかりません。本当の言葉を探しなさい。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case07.rpy:98
+translate japanese alice_doll_heckle_8ab6a0d4:
+
+    # alice "[heckle!t]"
+    alice "[heckle!t]"
+
+# game/case07.rpy:118
+translate japanese press_alice_thief_9908cae0:
+
+    # you "What does her borrowing have to do with your dolls?"
+    you "彼女の借り癖が、あなたの人形と何の関係があるのですか？"
+
+# game/case07.rpy:120
+translate japanese press_alice_thief_c53a41e8:
+
+    # alice "Everything. A thief's opinion is worthless."
+    alice "大ありよ。泥棒の意見なんて価値がないもの。"
+
+# game/case07.rpy:122
+translate japanese press_alice_thief_ac02b00d:
+
+    # eiki "A thief can still be right about a doll."
+    eiki "泥棒でも、人形については正しいことがあります。"
+
+# game/case07.rpy:126
+translate japanese press_alice_exact_96047bc0:
+
+    # you "Exactly? Word for word?"
+    you "そのまま？一字一句？"
+
+# game/case07.rpy:127
+translate japanese press_alice_exact_1b1412a9:
+
+    # alice "I have a perfect memory for insults. Every puppeteer does."
+    alice "侮辱に関しては完璧な記憶力があるの。人形遣いはみんなそうよ。"
+
+# game/case07.rpy:132
+translate japanese press_alice_3_ec96795c:
+
+    # alice "From her insult, obviously. I just told you what she said."
+    alice "あの子の侮辱からに決まってるでしょ。今言ったじゃない。"
+
+# game/case07.rpy:148
+translate japanese case7_0cb412bd:
+
+    # komachi "Defendant's here, boss. She brought a lawyer."
+    komachi "被告人が来ましたよ、四季様。弁護士同伴です。"
+
+# game/case07.rpy:186
+translate japanese case7_48a6246b:
+
+    # alice_t "Marisa steals books and lies about borrowing them. Nothing she says about my dolls can be trusted."
+    alice_t "魔理沙は本を盗んで、借りてるだけだって嘘をつく子よ。私の人形について何を言っても信用できないわ。"
+
+# game/case07.rpy:210
+translate japanese case7_cross_72281978:
+
+    # you "Marisa's habits don't decide whether her comment was fair. That's an attack on the speaker."
+    you "魔理沙の癖が、彼女の感想の公正さを決めるわけではありません。それは話し手への攻撃です。"
+
+# game/case07.rpy:212
+translate japanese case7_cross_ef44909b:
+
+    # eiki "Ad hominem. A thief can still be right about a doll. Sustained."
+    eiki "人身攻撃。泥棒でも人形については正しいことがあります。異議を認めます。"
+
+# game/case07.rpy:221
+translate japanese case7_cross_d9889fb6:
+
+    # alice "...My counsel objects. To me."
+    alice "……弁護人が異議を唱えているわ。私に。"
+
+# game/case07.rpy:222
+translate japanese case7_cross_c306bee0:
+
+    # alice "She says I should stop talking about Marisa, and quote Marisa instead."
+    alice "魔理沙の話をするのはやめて、魔理沙の言葉を引用しろって。"
+
+# game/case07.rpy:224
+translate japanese case7_cross_7fe434e1:
+
+    # eiki "Your counsel is wiser than you. A second testimony, then. Word for word."
+    eiki "あなたの弁護人はあなたより賢いですね。では二度目の証言を。一字一句そのままで。"
+
+# game/case07.rpy:236
+translate japanese case7_cross_1c0802c0:
+
+    # alice_t "Fine. My counsel insists I quote Marisa exactly. So I will."
+    alice_t "いいわ。弁護人が魔理沙の言葉をそのまま引用しろって言うから。そうするわよ。"
+
+# game/case07.rpy:237
+translate japanese case7_cross_edca5483:
+
+    # alice_t "She called my dolls worthless junk and said I should quit. So she deserved the string."
+    alice_t "あの子は私の人形を価値のないガラクタと呼んで、やめろと言ったの。だから糸で縛られて当然よ。"
+
+# game/case07.rpy:238
+translate japanese case7_cross_373ff126:
+
+    # alice_t "So I defended my life's work. Anyone would have."
+    alice_t "だから私は自分の生涯の作品を守ったの。誰だってそうするわ。"
+
+# game/case07.rpy:253
+translate japanese case7_cross2_d5efc309:
+
+    # eiki "Again. Her second story, from the top."
+    eiki "もう一度。二つ目の話を、最初から。"
+
+# game/case07.rpy:311
+translate japanese case7_breakthrough_e3d34dd7:
+
+    # komachi "...Her dolls caught her, boss. They're carrying her out. Gently."
+    komachi "……人形たちが受け止めましたよ、四季様。運んでいきます。そっと。"
+
+# game/case07.rpy:312
+translate japanese case7_breakthrough_de0525af:
+
+    # eiki "Show-off."
+    eiki "見せびらかしですね。"
+
+translate japanese strings:
+
+    # game/case07.rpy:17
+    old "Marisa steals books and lies about borrowing them. Nothing she says about my dolls can be trusted."
+    new "魔理沙は本を盗んで、借りてるだけだって嘘をつく子よ。私の人形について何を言っても信用できないわ。"
+
+    # game/case07.rpy:17
+    old "Not yet. She hasn't quoted Marisa at all. She's dismissing the speaker."
+    new "まだです。彼女は魔理沙の言葉を一言も引用していません。話し手を退けているのです。"
+
+    # game/case07.rpy:17
+    old "She isn't saying Marisa does it too. She's saying Marisa doesn't count, because of who Marisa is."
+    new "「あなたもでしょ」とは言っていません。魔理沙が誰であるかを理由に、魔理沙の言葉を数に入れないのです。"
+
+    # game/case07.rpy:17
+    old "No rule built from one example. Just a comment thrown out because of who made it."
+    new "一つの例から作った法則はありません。言った人が理由で感想が捨てられているだけです。"
+
+    # game/case07.rpy:17
+    old "Nothing is mistaken for a cause. She's judging the speaker instead of the words."
+    new "何かを原因と取り違えてはいません。言葉ではなく話し手を裁いているのです。"
+
+    # game/case07.rpy:49
+    old "Word for Word"
+    new "一字一句"
+
+    # game/case07.rpy:49
+    old "Fine. My counsel insists I quote Marisa exactly. So I will."
+    new "いいわ。弁護人が魔理沙の言葉をそのまま引用しろって言うから。そうするわよ。"
+
+    # game/case07.rpy:49
+    old "Quoting is allowed. Misquoting is the question. Read on."
+    new "引用は構いません。問題は誤った引用です。読み進めなさい。"
+
+    # game/case07.rpy:49
+    old "Defending your work isn't a fallacy. What she says she defended it from is."
+    new "自分の作品を守ることは誤謬ではありません。何から守ったと言っているかが問題です。"
+
+    # game/case07.rpy:87
+    old "My counsel says that was embarrassing."
+    new "弁護人いわく、今のは恥ずかしかったって。"
+
+    # game/case07.rpy:87
+    old "My counsel is laughing. Silently."
+    new "弁護人が笑ってるわ。声は出さずに。"
+
+    # game/case07.rpy:87
+    old "My counsel would like that struck from the record. And from your memory."
+    new "弁護人いわく、今のは記録から消してほしいって。あなたの記憶からも。"
+
+    # game/case07.rpy:87
+    old "My counsel asks whether the Junior Judge is new. ...She is? That explains it."
+    new "弁護人が、見習い判事は新人なのかって。……そうなの？道理で。"
+

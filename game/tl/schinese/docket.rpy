@@ -122,3 +122,27 @@ translate schinese strings:
     old "Reisen Udongein Inaba v. One Moon Princess"
     new "铃仙·优昙华院·因幡 诉 月之公主一名"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate schinese strings:
+
+    # game/docket.rpy:75
+    old "CASE 10"
+    new "第十案"
+
+    # game/docket.rpy:75
+    old "Back by Dinner"
+    new "晚饭前回来"
+
+    # game/docket.rpy:75
+    old "The Higan Court v. One Immortal Arsonist"
+    new "彼岸法庭 诉 不死纵火犯一名"
+
+    # game/docket.rpy:75
+    old "CASE 11"
+    new "第十一案"
+
+    # game/docket.rpy:75
+    old "Bunbunmaru News v. The Higan Court"
+    new "文文。新闻 诉 彼岸法庭"
+

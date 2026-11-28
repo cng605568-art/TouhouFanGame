@@ -408,3 +408,113 @@ translate japanese strings:
     old "That doesn't show what was agreed. Find the deal as it was first made."
     new "それでは何が約束されたかはわかりません。最初に交わされた約束を探しなさい。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case09.rpy:90
+translate japanese press_kaguya_3_e31802fb:
+
+    # kaguya "Ah, but finishing was never really the point. Let me rephrase."
+    kaguya "あら、終えることが目的だったわけじゃないの。言い直すわね。"
+
+# game/case09.rpy:92
+translate japanese press_kaguya_3_78409258:
+
+    # you "Earned properly how?"
+    you "きちんととは、どういうことですか？"
+
+# game/case09.rpy:94
+translate japanese press_kaguya_3_ad3f368d:
+
+    # kaguya "Oh, you'll see. Let me rephrase again."
+    kaguya "あら、すぐにわかるわ。もう一度言い直すわね。"
+
+# game/case09.rpy:96
+translate japanese press_kaguya_3_65bc0e33:
+
+    # you "The moon wasn't on the list. When did you add it?"
+    you "月はリストにありませんでした。いつ加えたのですか？"
+
+# game/case09.rpy:98
+translate japanese press_kaguya_3_156e1420:
+
+    # kaguya "This morning. After she finished the other five. Obviously."
+    kaguya "今朝よ。あの子が他の五つを終えた後。当然でしょう。"
+
+# game/case09.rpy:100
+translate japanese press_kaguya_3_0fe2b220:
+
+    # eiki "So the finish line moved the moment she reached it."
+    eiki "つまり、彼女がたどり着いた瞬間にゴールが動いたのですね。"
+
+# game/case09.rpy:108
+translate japanese case9_1a9632ff:
+
+    # komachi "Boss, the defendant sent word. She'll arrive when she feels like it."
+    komachi "四季様、被告人から伝言です。気が向いたら来るそうです。"
+
+# game/case09.rpy:129
+translate japanese case9_b7298928:
+
+    # eiki "And watch her testimony closely. With this one, it tends to change while you read it."
+    eiki "それと、彼女の証言をよく見ていなさい。この人の場合、読んでいる間に変わりがちです。"
+
+# game/case09.rpy:227
+translate japanese case9_breakthrough_5e869890:
+
+    # mokou "Fujiwara no Mokou. The Bunbunmaru says you lost. They printed it an hour before your verdict."
+    mokou "藤原妹紅だ。文々。新聞にお前が負けたって書いてあった。判決の一時間前に刷ってたぞ。"
+
+# game/case09.rpy:228
+translate japanese case9_breakthrough_293de786:
+
+    # mokou "Thought I'd help you lose some more."
+    mokou "もっと負けさせてやろうと思ってな。"
+
+# game/case09.rpy:260
+translate japanese case9_breakthrough_093112bf:
+
+    # komachi "That's the docket, boss."
+    komachi "これで事件記録は終わりです、四季様。"
+
+# game/case09.rpy:261
+translate japanese case9_breakthrough_eb865a48:
+
+    # eiki "Not quite. Keep the court open. They will be back by dinner."
+    eiki "まだです。法廷は開けておきなさい。夕食までには戻ってきますから。"
+
+# game/case09.rpy:262
+translate japanese case9_breakthrough_f1d6e2c2:
+
+    # komachi "...You're keeping the court open for dinner?"
+    komachi "……夕食のために法廷を開けておくんですか？"
+
+translate japanese strings:
+
+    # game/case09.rpy:19
+    old "I told Reisen she might take a week off. If she finished five chores. Roughly."
+    new "鈴仙には、一週間休んでもいいかもと言ったわ。五つの用事を終えたら。だいたい。"
+
+    # game/case09.rpy:19
+    old "A week off is a privilege. Privileges must be earned properly."
+    new "一週間の休みは特権よ。特権はきちんと勝ち取らなくちゃ。"
+
+    # game/case09.rpy:19
+    old "\"Five chores, then a week off.\""
+    new "「五つの用事の後、一週間の休み」"
+
+    # game/case09.rpy:19
+    old "Signed: Kaguya Houraisan."
+    new "署名：蓬莱山輝夜。"
+
+    # game/case09.rpy:19
+    old "All five ticked."
+    new "五つすべてに印。"
+
+    # game/case09.rpy:19
+    old "True, but that isn't where the finish line was drawn. Point to the deal itself."
+    new "その通りですが、そこはゴールが引かれた場所ではありません。約束そのものを指しなさい。"
+
+    # game/case09.rpy:19
+    old "Not yet. She's stalling, not moving anything. Press her and watch the line move."
+    new "まだです。彼女は引き延ばしているだけで、何も動かしていません。問いただして、線が動くのを見なさい。"
+

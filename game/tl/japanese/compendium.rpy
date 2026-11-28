@@ -275,3 +275,39 @@ translate japanese strings:
     old "You passed the test, but now there's a harder one. Then you're qualified."
     new "試験に合格した？でも次はもっと難しい試験だ。そうしたら資格をやろう。"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate japanese strings:
+
+    # game/compendium.rpy:15
+    old "Ask the question again. If the answer is about something else, that's the fish."
+    new "もう一度問いを繰り返そう。答えが別の話なら、それが燻製ニシンだ。"
+
+    # game/compendium.rpy:15
+    old "Ask what was left out. A handful of examples means nothing without the whole basket."
+    new "何が省かれたかを問おう。籠全体がなければ、一握りの例には何の意味もない。"
+
+    # game/compendium.rpy:37
+    old "Did I eat the last dumpling? Never mind that. Have you seen the moon tonight?"
+    new "最後の団子を食べたか？それより、今夜の月は見た？"
+
+    # game/compendium.rpy:37
+    old "Yes, my homework is late. But think of all the fairies who never do homework."
+    new "ええ、宿題は遅れてる。でも宿題を一度もしない妖精たちのことを考えてみて。"
+
+    # game/compendium.rpy:37
+    old "Why is the shrine roof leaking? Let's talk about how hard I work instead."
+    new "神社の屋根はなぜ雨漏りしてるのか？それより、私がどれだけ働いてるか話しましょう。"
+
+    # game/compendium.rpy:37
+    old "Three customers loved the soup. Ignore the other forty who left."
+    new "三人のお客はスープを気に入った。帰った残りの四十人は気にするな。"
+
+    # game/compendium.rpy:37
+    old "The almanac was right twice this year. I framed those pages and burned the rest."
+    new "今年、暦は二回当たった。その頁は額に入れて、残りは燃やした。"
+
+    # game/compendium.rpy:37
+    old "My review quotes the one kind line from her letter. The rest was complaints."
+    new "私の書評は、彼女の手紙の唯一の優しい一文を引用した。残りは苦情だった。"
+

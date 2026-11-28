@@ -364,3 +364,45 @@ translate schinese strings:
     old "UPHELD"
     new "上诉成立"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case05.rpy:102
+translate schinese press_eiki_3_2d7496fc:
+
+    # eiki "Because I reviewed it myself. Thoroughly."
+    eiki "因为我亲自复查过。非常彻底。"
+
+# game/case05.rpy:107
+translate schinese press_eiki_5_e1d1f3be:
+
+    # you "And who checked your review?"
+    you "那你的复查又是谁检查的？"
+
+# game/case05.rpy:109
+translate schinese press_eiki_5_bb171305:
+
+    # eiki "No one needed to. I did, and I am always right. Enter that as well."
+    eiki "不需要任何人。我检查过，而我永远正确。这句也记下来。"
+
+# game/case05.rpy:124
+translate schinese case5_bc9f0469:
+
+    # komachi "Boss, before you bang that thing. There's no defendant today."
+    komachi "四季大人，敲之前先听我说。今天没有被告。"
+
+# game/case05.rpy:128
+translate schinese case5_96cb1e84:
+
+    # eiki "There is always a defendant. Explain."
+    eiki "被告总是有的。说明一下。"
+
+translate schinese strings:
+
+    # game/case05.rpy:20
+    old "I reviewed that trial myself, page by page, and found no error in it."
+    new "我亲自逐页复查了那场审判，没有发现任何错误。"
+
+    # game/case05.rpy:20
+    old "Not a circle yet, Junior Judge. That's a review. Press her on who checked it."
+    new "还不是循环，见习法官。那是一次复查。追问她是谁检查的。"
+

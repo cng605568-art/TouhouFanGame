@@ -90,3 +90,39 @@ translate japanese strings:
     old "TESTIMONY UPDATED"
     new "TESTIMONY UPDATED"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+translate japanese strings:
+
+    # game/court.rpy:428
+    old "She's asleep, Junior Judge. Object when she can hear you."
+    new "彼女は眠っていますよ、見習い判事。聞こえる時に異議を唱えなさい。"
+
+    # game/court.rpy:448
+    old "Not yet. Keep pressing and watch what she does with it."
+    new "まだです。問いただし続けて、彼女がそれをどうするか見ていなさい。"
+
+    # game/court.rpy:487
+    old "A fair objection. A rule needs only one exception to fall. Find it."
+    new "妥当な異議です。法則を崩すには例外が一つあれば足ります。それを見つけなさい。"
+
+    # game/court.rpy:490
+    old "A fair objection. No single item proves it. Which two do, together?"
+    new "妥当な異議です。一つの品だけでは証明できません。どの二つなら、合わせて証明できますか？"
+
+    # game/court.rpy:505
+    old "That doesn't break her rule."
+    new "それでは彼女の法則は崩れません。"
+
+    # game/court.rpy:513
+    old "Those two don't prove it together."
+    new "その二つでは、合わせても証明になりません。"
+
+    # game/court.rpy:521
+    old "Good. Now show the court exactly where. Which part of it?"
+    new "よろしい。では法廷に正確な場所を示しなさい。どの部分ですか？"
+
+    # game/court.rpy:526
+    old "Right item. Wrong detail. Read it again."
+    new "品物は正しいが、細部が違います。もう一度読みなさい。"
+

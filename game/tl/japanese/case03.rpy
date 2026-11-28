@@ -292,3 +292,63 @@ translate japanese strings:
     old "NOT GUILTY"
     new "NOT GUILTY"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case03.rpy:68
+translate japanese press_sakuya_2_05717a1f:
+
+    # sakuya "And note the timing, Junior Judge. Put this in my testimony."
+    sakuya "それと時間に注目してください、見習い判事。これを私の証言に加えて。"
+
+# game/case03.rpy:72
+translate japanese press_sakuya_trap_1d9b9d12:
+
+    # you "Couldn't someone have come in from outside?"
+    you "外から誰かが入ってきた可能性は？"
+
+# game/case03.rpy:74
+translate japanese press_sakuya_trap_4dcf8bfb:
+
+    # sakuya "Through these halls? I make them longer when I'm annoyed. Nobody outside gets in that fast."
+    sakuya "この廊下を？機嫌が悪い時は長くしていますから。外の者があの速さで入るのは無理です。"
+
+# game/case03.rpy:76
+translate japanese press_sakuya_trap_f3a1f87b:
+
+    # eiki "That much is sound. Keep your objections for the parts that aren't."
+    eiki "そこは筋が通っています。異議は、通っていない所のために取っておきなさい。"
+
+# game/case03.rpy:92
+translate japanese case3_c840247a:
+
+    # komachi "Witness is already here, boss. She was here before me. Before you, even."
+    komachi "証人はもう来ていますよ、四季様。私より先に。四季様より先に、かも。"
+
+# game/case03.rpy:93
+translate japanese case3_a5042828:
+
+    # eiki "Head maids."
+    eiki "メイド長ですね。"
+
+# game/case03.rpy:97
+translate japanese case3_322c1d95:
+
+    # eiki "Court is in session. The defendant, Hong Meiling, stands accused of eating the mistress's pudding."
+    eiki "開廷します。被告人、紅美鈴は、お嬢様のプリンを食べた罪に問われています。"
+
+# game/case03.rpy:132
+translate japanese case3_0ce05c23:
+
+    # sakuya_t "Either Meiling ate it, or the mistress ate her own pudding. The mistress would never. So: Meiling."
+    sakuya_t "美鈴が食べたか、お嬢様がご自分のプリンを食べたか。お嬢様はなさいません。よって、美鈴です。"
+
+translate japanese strings:
+
+    # game/case03.rpy:15
+    old "Five minutes is too quick for anyone outside to reach the kitchen. So it was someone in the mansion."
+    new "五分では外の者は台所までたどり着けません。だから犯人は館の中の誰かです。"
+
+    # game/case03.rpy:15
+    old "That one holds. Five minutes is too short for an outsider. Her mistake is in who she counts as inside."
+    new "それは成り立っています。外部の者に五分は短すぎます。誤りは、彼女が誰を「中」に数えているかです。"
+

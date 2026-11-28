@@ -364,3 +364,45 @@ translate japanese strings:
     old "UPHELD"
     new "UPHELD"
 
+# TODO: Translation updated at 2026-11-28 10:08
+
+# game/case05.rpy:102
+translate japanese press_eiki_3_2d7496fc:
+
+    # eiki "Because I reviewed it myself. Thoroughly."
+    eiki "私が自ら見直したからです。徹底的に。"
+
+# game/case05.rpy:107
+translate japanese press_eiki_5_e1d1f3be:
+
+    # you "And who checked your review?"
+    you "では、その見直しは誰が確かめたのですか？"
+
+# game/case05.rpy:109
+translate japanese press_eiki_5_bb171305:
+
+    # eiki "No one needed to. I did, and I am always right. Enter that as well."
+    eiki "誰も必要ありません。私が確かめ、私は常に正しい。それも記録しなさい。"
+
+# game/case05.rpy:124
+translate japanese case5_bc9f0469:
+
+    # komachi "Boss, before you bang that thing. There's no defendant today."
+    komachi "四季様、それを叩く前に。今日は被告人がいません。"
+
+# game/case05.rpy:128
+translate japanese case5_96cb1e84:
+
+    # eiki "There is always a defendant. Explain."
+    eiki "被告人は必ずいます。説明しなさい。"
+
+translate japanese strings:
+
+    # game/case05.rpy:20
+    old "I reviewed that trial myself, page by page, and found no error in it."
+    new "私はあの裁判を自ら一頁ずつ見直し、誤りは一つも見つかりませんでした。"
+
+    # game/case05.rpy:20
+    old "Not a circle yet, Junior Judge. That's a review. Press her on who checked it."
+    new "まだ循環ではありませんよ、見習い判事。それは見直しです。誰が確かめたのか問いただしてください。"
+
