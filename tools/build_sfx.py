@@ -76,6 +76,11 @@ RECIPE = {
     "break_kaguya":    (-2,  1.8,  [("P", "reconfirm.wav", -3, 0, 0.75), ("N", "breakeffect2.wav", 0, 0.04)]), # treasures scatter
     "mokou_burst":     (-1,  1.6,  [("N", "big damage.wav", 0, 0), ("N", "destroyed.wav", -2, 0.02, 0.8),
                                     ("P", "slashC.wav", -3, 0.0)]),                                             # Mokou barges in
+    # Mokou lays into Kaguya: four quick hits, the last one heavy.
+    "mokou_pummel":    (-1,  1.9,  [("N", "playerhurt.wav", 0, 0.00), ("P", "slashA.wav", -4, 0.00),
+                                    ("N", "playerhurt.wav", -1, 0.28, 1.12), ("P", "slashB.wav", -4, 0.28),
+                                    ("N", "playerhurt.wav", 0, 0.56, 0.94), ("P", "slashD.wav", -4, 0.56),
+                                    ("N", "big damage.wav", 0, 0.86), ("N", "landingsound.wav", -3, 0.86, 0.8)]),
 
     # Text blips: built separately (one blip padded to a steady beat). Each
     # speaker has a pitch (audio.rpy): high and quick for fairies, low for
@@ -98,6 +103,7 @@ REVERB = {
     "break_eiki": (-12, 2.0),
     "break_kaguya": (-14, 1.6),
     "mokou_burst": (-15, 1.2),
+    "mokou_pummel": (-17, 1.0),
 }
 
 

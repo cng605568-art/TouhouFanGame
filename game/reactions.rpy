@@ -119,6 +119,14 @@ screen mokou_fire():
         add "gui/fx_flame.svg" at particle(1180, 330, dx, dy, rot, delay)
     timer 1.9 action Hide("mokou_fire")
 
+## The dust-up: stars and flames burst off Kaguya with each of Mokou's hits.
+screen mokou_scuffle():
+    zorder 35
+    for i, hit in enumerate((0.0, 0.28, 0.56, 0.86)):
+        for dx, dy, rot in ((-150, -150, -30), (170, -120, 35), (40, -210, 10), (190, 60, 20)):
+            add ("gui/fx_star.svg" if (i + dx) % 2 else "gui/fx_flame.svg") at particle(1120, 340, dx + 20 * i, dy, rot, hit)
+    timer 2.0 action Hide("mokou_scuffle")
+
 ## A reaction emote by the head of the fumo at centre stage.
 screen emote(kind):
     zorder 36
@@ -293,6 +301,46 @@ transform fumo_knocked:
         easeout 0.10 yoffset -40
         easein 0.20 yoffset 0
 
+## Mokou lays into Kaguya: four lunges in time with the "mokou_pummel" sound.
+transform mokou_pummel:
+    subpixel True
+    xanchor 0.5 yanchor 1.0 ypos FUMO_FEET xpos 700
+    yzoom 1.0 rotate None
+    block:
+        easeout 0.08 xpos 930
+        easein 0.20 xpos 780
+        repeat 3
+    easeout 0.09 xpos 960
+    easein 0.40 xpos 860
+    block:
+        ease 1.4 yzoom 1.012
+        ease 1.4 yzoom 1.0
+        repeat
+
+## ...and Kaguya takes every one of them.
+transform fumo_pummeled:
+    subpixel True
+    xanchor 0.5 yanchor 1.0 ypos FUMO_FEET xpos 1180 rotate 9
+    xoffset 0 yoffset 0
+    block:
+        pause 0.06
+        matrixcolor BrightnessMatrix(0.6)
+        easeout 0.06 xoffset 36 rotate 18
+        parallel:
+            linear 0.16 matrixcolor BrightnessMatrix(0.0)
+        parallel:
+            easein 0.16 xoffset 10 rotate 6
+        repeat 3
+    pause 0.08
+    matrixcolor BrightnessMatrix(0.8)
+    parallel:
+        linear 0.3 matrixcolor BrightnessMatrix(0.0)
+    parallel:
+        easeout 0.12 xoffset 90 rotate 70 yoffset -30
+        easein 0.25 yoffset 0
+    pause 0.2
+    matrixcolor BrightnessMatrix(0.0)
+
 ## Off they go: Mokou drags Kaguya out of the court, right.
 transform duo_exit(delay=0.0):
     subpixel True
@@ -326,7 +374,7 @@ transform lunatic_wobble:
 define BREAKDOWN_FUMO = { "cirno": fumo_frozen, "marisa": fumo_spin }
 
 ## Transforms the talk hop leaves alone (FumoHop in script.rpy).
-define FUMO_STAY = (fumo_frozen, fumo_spin, mokou_charge, fumo_knocked, duo_exit)
+define FUMO_STAY = (fumo_frozen, fumo_spin, mokou_charge, fumo_knocked, mokou_pummel, fumo_pummeled, duo_exit)
 
 ## Meiling's breakdown colours.
 define RAINBOW = [ "#FF5A5A", "#FFA43A", "#FFE04A", "#6BD66B", "#4AB8FF", "#8A6BFF", "#E46BFF" ]

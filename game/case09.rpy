@@ -215,6 +215,19 @@ label case9_breakthrough:
     mokou "Great. I'll take custody."
 
     window hide
+    $ sfx("mokou_pummel")
+    show mokou_fumo at mokou_pummel
+    show kaguya_fumo at fumo_pummeled
+    show screen mokou_scuffle
+    pause 0.86
+    camera at fire_flash
+    with vpunch
+    pause 0.6
+    window auto
+    kaguya "Ow! Ow! My face is priceless!"
+    mokou "So's this. Free of charge."
+
+    window hide
     show mokou_fumo at duo_exit(0.0)
     show kaguya_fumo at duo_exit(0.08)
     show fumo_shadow at shadow_gone

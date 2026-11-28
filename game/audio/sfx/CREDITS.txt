@@ -36,4 +36,5 @@ into which slot:
   break_reimu      clothB + destroyed                 (Petaldust + Nostalgiac Blues)
   break_kaguya     reconfirm, slowed, + breakeffect2, with reverb
   mokou_burst      big damage + destroyed + slashC
+  mokou_pummel     playerhurt x3 + slashA/B/D + big damage + landingsound
   blip_hi/up/dn/lo/deep  goodblip at each speaker's pitch (Nostalgiac Blues)
